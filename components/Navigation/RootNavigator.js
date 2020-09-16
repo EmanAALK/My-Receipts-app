@@ -11,6 +11,7 @@ import DrawerContent from "../DawerContenent";
 import Navigation from "./index";
 import authStore from "../../store/authStore";
 import HomeStackScreen from "./HomeStackScreen";
+import NotificationStackscreen from "./NotificationStackscreen";
 
 const Drawer = createDrawerNavigator();
 const Tab = createMaterialBottomTabNavigator();
@@ -46,12 +47,11 @@ const TabScreen = () => (
       }}
     />
     <Tab.Screen
-      name="notifications"
-      component={HomeStackScreen}
+      name="Notifications"
+      component={NotificationStackscreen}
       options={{
         backgroundColor: "grey",
-        tabBarLabel: "Home",
-
+        tabBarLabel: "notifications",
         tabBarIcon: ({ color }) => (
           <Icon name="ios-notifications" color={color} size={26} />
         ),

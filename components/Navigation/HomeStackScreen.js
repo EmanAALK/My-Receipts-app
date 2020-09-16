@@ -5,8 +5,10 @@ import { observer } from "mobx-react";
 import Icon from "react-native-vector-icons/Ionicons";
 
 // component
-import DrawerContent from "../DawerContenent";
-import Home from "../Home";
+import EditProfile from "../Profile";
+import FolderList from "../FolderList";
+import Notification from "../Notifications";
+
 const HomeStack = createStackNavigator();
 
 const HomeStackScreen = ({ navigation }) => (
@@ -25,10 +27,59 @@ const HomeStackScreen = ({ navigation }) => (
   >
     <HomeStack.Screen
       name="Home"
-      component={Home}
+      component={FolderList}
       options={{
         title: false,
 
+        headerLeft: () => (
+          <Icon.Button
+            name="ios-menu"
+            size={25}
+            backgroundColor="grey"
+            onPress={() => navigation.openDrawer()}
+          ></Icon.Button>
+        ),
+      }}
+    />
+
+    <HomeStack.Screen
+      name="Profile"
+      component={EditProfile}
+      options={{
+        title: false,
+        headerRight: () => (
+          <Icon
+            style={{ paddingRight: 10 }}
+            name="md-arrow-back"
+            size={25}
+            color="#fff"
+            onPress={() => navigation.goBack()}
+          ></Icon>
+        ),
+        headerLeft: () => (
+          <Icon.Button
+            name="ios-menu"
+            size={25}
+            backgroundColor="grey"
+            onPress={() => navigation.openDrawer()}
+          ></Icon.Button>
+        ),
+      }}
+    />
+    <HomeStack.Screen
+      name="Notification"
+      component={Notification}
+      options={{
+        title: false,
+        headerRight: () => (
+          <Icon
+            style={{ paddingRight: 10 }}
+            name="md-arrow-back"
+            size={25}
+            color="#fff"
+            onPress={() => navigation.goBack()}
+          ></Icon>
+        ),
         headerLeft: () => (
           <Icon.Button
             name="ios-menu"
