@@ -14,12 +14,12 @@ import {
   AuthOther,
 } from "./styles";
 
-const Signup = () => {
+const Signup = ({ navigation }) => {
   const [user, setUser] = useState({});
 
   const handleSubmit = async () => {
     await authStore.signup(user);
-    // if (authStore.user) navigation.replace("FolderList");
+    if (authStore.user) navigation.replace("Home");
   };
 
   return (
