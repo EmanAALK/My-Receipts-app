@@ -9,7 +9,7 @@ class ReceiptStore {
 
   fetchReceipts = async () => {
     try {
-      const res = await instance.get("/receipts");
+      const res = await instance.get("/receipt");
       this.receipts = res.data;
       this.loading = false;
     } catch (error) {
@@ -22,7 +22,7 @@ class ReceiptStore {
       const formData = new FormData();
       for (const key in updatedReceipt)
         formData.append(key, updatedReceipt[key]);
-      await instance.put(`/receipts/${updatedReceipt.id}`, formData);
+      await instance.put(`/receipt/${updatedReceipt.id}`, formData);
       const receipts = this.receipts.find(
         (receipt) => receipt.id === updatedReceipt.id
       );

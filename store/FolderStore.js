@@ -22,7 +22,7 @@ class FolderStore {
     try {
       const formData = new FormData();
       for (const key in newFolder) formData.append(key, newFolder[key]);
-      const res = await instance.post(`/folders`, formData);
+      const res = await instance.post(`/folder`, formData);
       this.folders.push({ ...res.data, receipts: [] }); //revise "receipts"
     } catch (error) {
       console.log("FolderStore -> createFolder -> error ", error);
@@ -33,7 +33,7 @@ class FolderStore {
     try {
       const formData = new FormData();
       for (const key in updatedFolder) formData.append(key, updatedFolder[key]);
-      await instance.put(`/folders/${updatedFolder.id}`, formData);
+      await instance.put(`/folder/${updatedFolder.id}`, formData);
       const folder = this.folders.find(
         (folder) => folder.id === updatedFolder.id
       );
@@ -45,7 +45,7 @@ class FolderStore {
 
   deleteFolder = async (folderId) => {
     try {
-      await instance.delete(`/folders/${folderId}`);
+      await instance.delete(`/folder/${folderId}`);
       this.folders = this.folders.filter((folder) => folder.id !== folderId);
     } catch (error) {
       console.log("FolderStore -> deleteFolder  -> error ", error);
