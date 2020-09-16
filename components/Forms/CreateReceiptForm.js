@@ -1,12 +1,14 @@
 import React, { useState } from "react";
 import { observer } from "mobx-react";
 import DatePicker from "react-native-datepicker";
-import { Button, Image, View, Platform } from "react-native";
+import { Button, Image, View, Platform, Text } from "react-native";
 import * as ImagePicker from "expo-image-picker";
 import * as Permissions from "expo-permissions";
 
 //Stores
-import receiptStore from "../../store/ReceiptStore";
+// import receiptStore from "../../store/ReceiptStore";
+import authStore from "../../store/authStore";
+import folderStore from "../../store/FolderStore";
 
 //Styles
 import {
@@ -16,9 +18,13 @@ import {
   FormButtonText,
   FormButton,
 } from "./styles";
+import RNPickerSelect from "react-native-picker-select";
+
+import FolderItem from "./FolderItem";
 
 const CreateReceiptForm = ({ navigation }) => {
   const [receipt, setReceipt] = useState({
+    folderId: "",
     name: "",
     price: "",
     date: "",
@@ -32,15 +38,22 @@ const CreateReceiptForm = ({ navigation }) => {
     let match = /\.(\w+)$/.exec(filename);
     let type = match ? `image/${match[1]}` : `image`;
 
-    await receiptStore.createReceipt({
-      ...receipt,
+    //   await receiptStore.createReceipt({
+    //     ...receipt,
 
-      image: { uri: localUri, name: filename, type },
-    });
-    navigation.replace("ReceiptList");
+    //     image: { uri: localUri, name: filename, type },
+    //   });
+    //   navigation.replace("ReceiptList");
   };
 
   const [image, setImage] = useState(null);
+
+  const folder = folderStore.folders.filter(
+    (folder) => folder.userId === authStore.user.id
+  );
+  const folderList = folder.map((folder) => (
+    <FolderItem folder={folder} key={folder.id} navigation={navigation} />
+  ));
 
   const pickImage = async () => {
     try {
@@ -63,88 +76,105 @@ const CreateReceiptForm = ({ navigation }) => {
   };
 
   return (
-    <FormContainer>
-      <FormTitle>Add Your Trip</FormTitle>
-      <FormTextInput
-        onChangeText={(name) => setReceipt({ ...receipt, name })}
-        placeholder="Receipt Name"
-        placeholderTextColor="#A6AEC1"
-      />
+    <>
+      {/* {pickImage} */}
+      <FormContainer>
+        <FormTitle>Add Your Trip</FormTitle>
 
-      <FormTextInput
-        onChangeText={(price) => setReceipt({ ...receipt, price })}
-        placeholder="Price"
-        placeholderTextColor="#A6AEC1"
-      />
+        {/* {image && (
+        <Image source={{ uri: image }} style={{ width: 200, height: 200 }} />
+      )} */}
 
-      <DatePicker
-        style={{ width: 255 }}
-        date={receipt.date}
-        mode="date"
-        placeholder="select date"
-        format="YYYY-MM-DD"
-        confirmBtnText="Confirm"
-        cancelBtnText="Cancel"
-        customStyles={{
-          dateIcon: {
-            position: "absolute",
-            left: 0,
-            top: 4,
-            marginRight: 4,
-            marginLeft: 0,
-            borderColor: "#cea146",
-          },
-          dateInput: {
-            marginLeft: 36,
-          },
-        }}
-        onDateChange={(date) => {
-          return setReceipt({ ...receipt, date });
-        }}
-      />
-      <DatePicker
-        style={{ width: 255 }}
-        date={receipt.Expdate}
-        mode="Expiration date"
-        placeholder="select date"
-        format="YYYY-MM-DD"
-        confirmBtnText="Confirm"
-        cancelBtnText="Cancel"
-        customStyles={{
-          dateIcon: {
-            position: "absolute",
-            left: 0,
-            top: 4,
-            marginRight: 4,
-            marginLeft: 0,
-            borderColor: "#cea146",
-          },
-          dateInput: {
-            marginLeft: 36,
-          },
-        }}
-        onDateChange={(Expdate) => {
-          return setReceipt({ ...receipt, Expdate });
-        }}
-      />
-      <View
-        style={{
-          flex: 1,
-          alignItems: "center",
-          justifyContent: "center",
-          color: "black",
-        }}
-      >
-        <Button title="Pick an image from camera roll" onPress={pickImage} />
-        {image && (
-          <Image source={{ uri: image }} style={{ width: 200, height: 200 }} />
-        )}
-      </View>
+        <RNPickerSelect
+          onValueChange={(value) => console.log(value)}
+          // onValueChange={(value) => setReceipt({ ...receipt, folderId })}
+          items={{ folderList }}
+          title="Select Folder"
+        />
+        <FormTextInput
+          onChangeText={(name) => setReceipt({ ...receipt, name })}
+          placeholder="Receipt Name"
+          placeholderTextColor="#A6AEC1"
+        />
 
-      <FormButton onPress={handleSubmit}>
-        <FormButtonText>Save Changes</FormButtonText>
-      </FormButton>
-    </FormContainer>
+        <FormTextInput
+          onChangeText={(price) => setReceipt({ ...receipt, price })}
+          placeholder="Price"
+          placeholderTextColor="#A6AEC1"
+        />
+
+        <DatePicker
+          style={{ width: 255 }}
+          date={receipt.date}
+          mode="date"
+          placeholder="select date"
+          format="YYYY-MM-DD"
+          confirmBtnText="Confirm"
+          cancelBtnText="Cancel"
+          customStyles={{
+            dateIcon: {
+              position: "absolute",
+              left: 0,
+              top: 4,
+              marginRight: 4,
+              marginLeft: 0,
+              borderColor: "#cea146",
+            },
+            dateInput: {
+              marginLeft: 36,
+            },
+          }}
+          onDateChange={(date) => {
+            return setReceipt({ ...receipt, date });
+          }}
+        />
+        <DatePicker
+          style={{ width: 255 }}
+          date={receipt.Expdate}
+          mode="Expiration date"
+          placeholder="select date"
+          format="YYYY-MM-DD"
+          confirmBtnText="Confirm"
+          cancelBtnText="Cancel"
+          customStyles={{
+            dateIcon: {
+              position: "absolute",
+              left: 0,
+              top: 4,
+              marginRight: 4,
+              marginLeft: 0,
+              borderColor: "#cea146",
+            },
+            dateInput: {
+              marginLeft: 36,
+            },
+          }}
+          onDateChange={(Expdate) => {
+            return setReceipt({ ...receipt, Expdate });
+          }}
+        />
+        <View
+          style={{
+            flex: 1,
+            alignItems: "center",
+            justifyContent: "center",
+            color: "black",
+          }}
+        >
+          <Button title="Pick an image from camera roll" onPress={pickImage} />
+          {image && (
+            <Image
+              source={{ uri: image }}
+              style={{ width: 200, height: 200 }}
+            />
+          )}
+        </View>
+
+        <FormButton onPress={handleSubmit}>
+          <FormButtonText>Save Changes</FormButtonText>
+        </FormButton>
+      </FormContainer>
+    </>
   );
 };
 

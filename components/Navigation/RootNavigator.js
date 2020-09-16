@@ -12,6 +12,7 @@ import Navigation from "./index";
 import authStore from "../../store/authStore";
 import HomeStackScreen from "./HomeStackScreen";
 import NotificationStackscreen from "./NotificationStackscreen";
+import AddReceiptStackScreen from "./AddReceiptStackscreen";
 
 const Drawer = createDrawerNavigator();
 const Tab = createMaterialBottomTabNavigator();
@@ -36,11 +37,10 @@ const TabScreen = () => (
     />
     <Tab.Screen
       name="AddReceipt"
-      component={HomeStackScreen}
+      component={AddReceiptStackScreen}
       options={{
         backgroundColor: "grey",
-        tabBarLabel: "Home",
-
+        tabBarLabel: "AddReceipt",
         tabBarIcon: ({ color }) => (
           <Icon name="md-camera" color={color} size={26} />
         ),

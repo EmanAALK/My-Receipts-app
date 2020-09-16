@@ -14,9 +14,11 @@ import authStore from "../../store/authStore";
 const FolderList = ({ navigation }) => {
   if (folderStore.loading) return <Spinner />;
 
-  const folderList = folderStore.folders.map((folder) => (
-    <FolderItem folder={folder} key={folder.id} navigation={navigation} />
-  ));
+  const folderList = folderStore.folders
+    .filter((folder) => folder.userId === authStore.user.id)
+    .map((folder) => (
+      <FolderItem folder={folder} key={folder.id} navigation={navigation} />
+    ));
 
   return <List>{folderList}</List>;
 };
