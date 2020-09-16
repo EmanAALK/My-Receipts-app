@@ -17,7 +17,7 @@ const UpdateFolderForm = ({ navigation, route }) => {
   const [folder, setFolder] = useState(oldFolder);
 
   const handleSubmit = async () => {
-    await folderStore.updateProfile(folder);
+    await folderStore.updateFolder(folder);
     navigation.goBack();
   };
 

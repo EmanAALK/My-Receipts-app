@@ -9,6 +9,10 @@ import EditProfile from "../Profile";
 import FolderList from "../FolderList";
 import Notification from "../Notifications";
 import CreateReceiptForm from "../Forms/CreateReceiptForm";
+import UpdateFolderForm from "../Forms/UpdateFolderForm";
+import CreateFolderForm from "../Forms/CreateFolderForm";
+import ReceiptList from "../ReceiptList";
+
 const HomeStack = createStackNavigator();
 
 const HomeStackScreen = ({ navigation }) => (
@@ -93,6 +97,79 @@ const HomeStackScreen = ({ navigation }) => (
     <HomeStack.Screen
       name="CreateReceiptForm"
       component={CreateReceiptForm}
+      options={{
+        title: false,
+        headerRight: () => (
+          <Icon
+            style={{ paddingRight: 10 }}
+            name="md-arrow-back"
+            size={25}
+            color="#fff"
+            onPress={() => navigation.goBack()}
+          ></Icon>
+        ),
+        headerLeft: () => (
+          <Icon.Button
+            name="ios-menu"
+            size={25}
+            backgroundColor="grey"
+            onPress={() => navigation.openDrawer()}
+          ></Icon.Button>
+        ),
+      }}
+    />
+
+    <HomeStack.Screen
+      name="UpdateFolderForm"
+      component={UpdateFolderForm}
+      options={{
+        title: false,
+        headerRight: () => (
+          <Icon
+            style={{ paddingRight: 10 }}
+            name="md-arrow-back"
+            size={25}
+            color="#fff"
+            onPress={() => navigation.goBack()}
+          ></Icon>
+        ),
+        headerLeft: () => (
+          <Icon.Button
+            name="ios-menu"
+            size={25}
+            backgroundColor="grey"
+            onPress={() => navigation.openDrawer()}
+          ></Icon.Button>
+        ),
+      }}
+    />
+    <HomeStack.Screen
+      name="CreateFolderForm"
+      component={CreateFolderForm}
+      options={{
+        title: false,
+        headerRight: () => (
+          <Icon
+            style={{ paddingRight: 10 }}
+            name="md-arrow-back"
+            size={25}
+            color="#fff"
+            onPress={() => navigation.goBack()}
+          ></Icon>
+        ),
+        headerLeft: () => (
+          <Icon.Button
+            name="ios-menu"
+            size={25}
+            backgroundColor="grey"
+            onPress={() => navigation.openDrawer()}
+          ></Icon.Button>
+        ),
+      }}
+    />
+    <HomeStack.Screen
+      name="ReceiptList"
+      component={ReceiptList}
       options={{
         title: false,
         headerRight: () => (

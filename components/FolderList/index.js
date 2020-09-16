@@ -20,7 +20,15 @@ const FolderList = ({ navigation }) => {
       <FolderItem folder={folder} key={folder.id} navigation={navigation} />
     ));
 
-  return <List>{folderList}</List>;
+  return (
+    <>
+      <Text onPress={() => navigation.navigate("CreateFolderForm")}>
+        + folder
+      </Text>
+
+      <List>{folderList}</List>
+    </>
+  );
 };
 
 export default observer(FolderList);
