@@ -23,7 +23,7 @@ const ReceiptList = ({ navigation }) => {
 
   return (
     <Content style={{ backgroundColor: "white" }}>
-      <List>{ReceiptList}</List>
+      <List>{receiptList}</List>
     </Content>
   );
 };
