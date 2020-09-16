@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { observer } from "mobx-react";
 import DatePicker from "react-native-datepicker";
-import { Button, Image, View, Platform } from "react-native";
+import { Button, Image, View, Platform, Picker } from "react-native";
 import * as ImagePicker from "expo-image-picker";
 import * as Permissions from "expo-permissions";
 
@@ -17,6 +17,7 @@ import {
   FormTextInput,
   FormButtonText,
   FormButton,
+  EditContainer,
 } from "./styles";
 import RNPickerSelect from "react-native-picker-select";
 
@@ -30,6 +31,9 @@ const CreateReceiptForm = ({ navigation }) => {
     Expdate: "",
     image: "",
   });
+  const handleCancel = async () => {
+    navigation.navigate("Home");
+  };
 
   const handleSubmit = async () => {
     let localUri = image;
@@ -50,11 +54,13 @@ const CreateReceiptForm = ({ navigation }) => {
   const folder = folderStore.folders.filter(
     (folder) => folder.userId === authStore.user.id
   );
-  console.log("folder", folder.length);
 
-  const folderList = folder.map((folder) => (
-    <FolderItem folder={folder} key={folder.id} navigation={navigation} />
-  ));
+  let name = [];
+  name = folder.map(function (i) {
+    return { labe: i.name };
+  });
+
+  console.log("Aaaaaaaa", name);
 
   const pickImage = async () => {
     try {
@@ -80,16 +86,32 @@ const CreateReceiptForm = ({ navigation }) => {
     <>
       {pickImage}
       <FormContainer>
-        <FormTitle>Add Your Trip</FormTitle>
+        <FormTitle>Add A Receipt</FormTitle>
 
         {/* {image && (
         <Image source={{ uri: image }} style={{ width: 200, height: 200 }} />
       )} */}
 
-        <RNPickerSelect
+        {/* <RNPickerSelect
           onValueChange={(value) => console.log(value)}
-          items={[{ label: "jj", value: "football" }]}
-        />
+          items={[{ label: "Hi", value: "hi" }]}
+        /> */}
+
+        <Picker
+          style={{ width: "100%" }}
+          mode="dropdown"
+          selectedValue={folder}
+          // onValueChange={handleChange("folder")}
+        >
+          {folder !== [] ? (
+            folder.map((item) => (
+              <Picker.Item label={item.name} value={item.id} />
+            ))
+          ) : (
+            <Picker.Item label="Loading..." value="0" />
+          )}
+        </Picker>
+
         <FormTextInput
           onChangeText={(name) => setReceipt({ ...receipt, name })}
           placeholder="Receipt Name"
@@ -169,9 +191,15 @@ const CreateReceiptForm = ({ navigation }) => {
           )}
         </View>
 
-        <FormButton onPress={handleSubmit}>
-          <FormButtonText>Save Changes</FormButtonText>
-        </FormButton>
+        <View style={{ flexDirection: "row" }}>
+          <FormButton onPress={handleSubmit}>
+            <FormButtonText>Save Changes</FormButtonText>
+          </FormButton>
+
+          <FormButton onPress={handleCancel}>
+            <FormButtonText>Cancel</FormButtonText>
+          </FormButton>
+        </View>
       </FormContainer>
     </>
   );
