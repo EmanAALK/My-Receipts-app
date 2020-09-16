@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { observer } from "mobx-react";
+import RootNavigator from "../../components/Navigation/RootNavigator";
 
 // Store
 import authStore from "../../store/authStore";
@@ -17,7 +18,7 @@ import * as Animatable from "react-native-animatable";
 import { Text } from "native-base";
 import { TouchableOpacity } from "react-native-gesture-handler";
 
-const Signin = () => {
+const Signin = ({ navigation }) => {
   const [user, setUser] = useState({
     username: "",
     password: "",
@@ -32,7 +33,7 @@ const Signin = () => {
     await authStore.signin(user);
 
     if (authStore.user) {
-      <Text>hello</Text>;
+      <RootNavigator />;
     } else {
       setIsValidUser(false);
     }

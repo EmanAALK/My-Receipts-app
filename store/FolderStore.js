@@ -1,6 +1,6 @@
 import { decorate, observable } from "mobx";
 import instance from "./instance";
-import authStore from "./AuthStore";
+import authStore from "./authStore";
 
 class FolderStore {
   folders = [];
