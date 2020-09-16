@@ -28,9 +28,9 @@ const DrawerContent = ({ navigation }) => {
                   <Icon name="account-outline" color="grey" size="25" />
                 )}
                 label="Profile"
-                // onPress={() => {
-                //   navigation.navigate("EditProfile");
-                // }}
+                onPress={() => {
+                  navigation.navigate("Profile");
+                }}
               />
             </Drawer.Section>
           </View>
@@ -61,7 +61,6 @@ const styles = StyleSheet.create({
     fontSize: 16,
     marginTop: 10,
     fontWeight: "bold",
-    color: "blue",
   },
 
   row: {

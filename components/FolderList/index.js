@@ -1,10 +1,16 @@
 import React from "react";
-import folderStore from "../../store/FolderStore";
-import FolderItem from "./FolderItem";
 import { observer } from "mobx-react";
-import { List, Spinner } from "native-base";
 
-// create a new nailshop
+// component
+import FolderItem from "./FolderItem";
+
+// Styling
+import { List, Spinner, Text } from "native-base";
+
+// store
+import folderStore from "../../store/FolderStore";
+import authStore from "../../store/authStore";
+
 const FolderList = ({ navigation }) => {
   if (folderStore.loading) return <Spinner />;
 

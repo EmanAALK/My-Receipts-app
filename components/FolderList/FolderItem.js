@@ -6,11 +6,8 @@ import folderStore from "../../store/FolderStore";
 
 //Styling
 import { Card } from "react-native-elements";
-import { IconStyled } from "../../styles";
+import { IconStyled } from "./styles";
 import { Row } from "native-base";
-
-//Image
-import defaultimage from "../../assets/defaultimage.png";
 
 const FolderItem = ({ folder, navigation }) => {
   return (
@@ -20,8 +17,7 @@ const FolderItem = ({ folder, navigation }) => {
       >
         {folder.name}
       </Card.Title>
-      <Card.Divider />
-      <Card.Image source={defaultimage} />
+      {/* <Card.Divider /> */}
 
       <Row style={{ alignContent: "center" }}>
         <IconStyled onPress={() => folderStore.deleteFolder(folder.id)}>

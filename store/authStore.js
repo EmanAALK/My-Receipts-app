@@ -55,10 +55,10 @@ class AuthStore {
   updateUser = async (updatedUser) => {
     try {
       const formData = new FormData();
+
       for (const key in updatedUser) formData.append(key, updatedUser[key]);
 
       const res = await instance.put(`/`, formData);
-      const user = this.users.find((user) => user.id === updatedUser.id);
 
       this.user = updatedUser;
     } catch (error) {
