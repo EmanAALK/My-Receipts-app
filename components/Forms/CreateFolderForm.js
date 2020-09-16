@@ -20,7 +20,7 @@ const CreateFolderForm = ({ navigation }) => {
 
   const handleSubmit = async () => {
     await folderStore.createFolder(folder);
-    navigation.replace("FolderList");
+    navigation.replace("Home");
   };
 
   return (

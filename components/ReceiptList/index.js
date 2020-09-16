@@ -5,18 +5,18 @@ import { observer } from "mobx-react";
 import ReceiptItem from "./ReceiptItem";
 
 //Stores
-import folderStore from "../../stores/FolderStore";
-import receiptStore from "../../stores/receiptStore";
+import folderStore from "../../store/FolderStore";
+import receiptStore from "../../store/ReceiptStore";
 
 //Styles
 import { Content, Spinner, List, Text, Image, Button } from "native-base";
 
-const ReceiptList = ({ navigation }) => {
+const ReceiptList = ({ navigation, route }) => {
   if (receiptStore.loading) return <Spinner />;
-  if (!folderStore.folder) return <Spinner />;
+  const { folder } = route.params;
 
   const receiptList = receiptStore.receipts
-    .filter((receipt) => folderStore.folder.id !== receipt.folderId)
+    .filter((receipt) => receipt.folder.id === folder.id)
     .map((receipt) => (
       <ReceiptItem receipt={receipt} key={receipt.id} navigation={navigation} />
     ));

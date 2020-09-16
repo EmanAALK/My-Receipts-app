@@ -11,20 +11,21 @@ const ReceiptItem = ({ receipt, navigation }) => {
   return (
     <ListItem
       onPress={() =>
-        navigation.navigate("Receipt Details", { receipt: receipt })
+        navigation.navigate("ReceiptDetails", { receipt: receipt })
       }
     >
       <Left>
         <Text>{receipt.name}</Text>
         <Text>{receipt.date}</Text>
+        <Text>{receipt.folderId}</Text>
       </Left>
       <>
         <Right>
-          <DeleteButtonStyled
+          {/* <DeleteButtonStyled
             onPress={() => receiptStore.deleteReceipt(receipt.id)}
           >
             Delete
-          </DeleteButtonStyled>
+          </DeleteButtonStyled> */}
         </Right>
       </>
     </ListItem>

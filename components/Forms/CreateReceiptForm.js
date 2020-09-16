@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { observer } from "mobx-react";
 import DatePicker from "react-native-datepicker";
-import { Button, Image, View, Platform, Text } from "react-native";
+import { Button, Image, View, Platform } from "react-native";
 import * as ImagePicker from "expo-image-picker";
 import * as Permissions from "expo-permissions";
 
@@ -24,7 +24,6 @@ import FolderItem from "./FolderItem";
 
 const CreateReceiptForm = ({ navigation }) => {
   const [receipt, setReceipt] = useState({
-    folderId: "",
     name: "",
     price: "",
     date: "",
@@ -51,6 +50,8 @@ const CreateReceiptForm = ({ navigation }) => {
   const folder = folderStore.folders.filter(
     (folder) => folder.userId === authStore.user.id
   );
+  console.log("folder", folder.length);
+
   const folderList = folder.map((folder) => (
     <FolderItem folder={folder} key={folder.id} navigation={navigation} />
   ));
@@ -77,7 +78,7 @@ const CreateReceiptForm = ({ navigation }) => {
 
   return (
     <>
-      {/* {pickImage} */}
+      {pickImage}
       <FormContainer>
         <FormTitle>Add Your Trip</FormTitle>
 
@@ -87,9 +88,7 @@ const CreateReceiptForm = ({ navigation }) => {
 
         <RNPickerSelect
           onValueChange={(value) => console.log(value)}
-          // onValueChange={(value) => setReceipt({ ...receipt, folderId })}
-          items={{ folderList }}
-          title="Select Folder"
+          items={[{ label: "jj", value: "football" }]}
         />
         <FormTextInput
           onChangeText={(name) => setReceipt({ ...receipt, name })}

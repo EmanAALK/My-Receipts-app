@@ -20,9 +20,12 @@ class FolderStore {
 
   createFolder = async (newFolder) => {
     try {
-      const formData = new FormData();
-      for (const key in newFolder) formData.append(key, newFolder[key]);
-      const res = await instance.post(`/folder`, formData);
+      //
+      // const formData = new FormData();
+      // for (const key in newFolder) formData.append(key, newFolder[key]);
+
+      const res = await instance.post(`/folder`, newFolder);
+
       this.folders.push({ ...res.data, receipts: [] }); //revise "receipts"
     } catch (error) {
       console.log("FolderStore -> createFolder -> error ", error);
