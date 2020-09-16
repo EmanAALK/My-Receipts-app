@@ -1,43 +1,55 @@
 import styled from "styled-components/native";
-import { Icon, Text, View } from "native-base";
+import { Icon, Text, View, Button } from "native-base";
 
 export const FormContainer = styled.View`
   flex: 1;
   align-self: stretch;
   justify-content: center;
   align-items: center;
-  background-color: #fff;
+  background-color: white;
   padding-right: 60px;
   padding-left: 60px;
 `;
 
+export const EditContainer = styled.View`
+  background-color: white;
+  padding-right: 10px;
+  padding-left: 10px;
+`;
+
 export const FormTitle = styled.Text`
-  color: #cea146;
-  font-size: 24px;
-  margin-bottom: 20px;
-  border-bottom-color: #000000;
+  color: black;
+  font-size: 18px;
+  border-bottom-color: black;
+  margin-top: 0px;
+  margin-bottom: 50px;
 `;
 
 export const FormTextInput = styled.TextInput`
   align-self: stretch;
   text-align: left;
-  height: 40px;
-  margin-bottom: 30px;
-  color: #000000;
-  border-bottom-color: #cea146;
-  border-bottom-width: 0.5px;
+  height: 20px;
+  margin-bottom: 15px;
+  color: black;
+  border-bottom-color: lightgrey;
+  border-bottom-width: 1px;
+  width: 350px;
+  padding-left: 10px;
+  margin-top: 8px;
 `;
 
 export const FormButton = styled.TouchableOpacity`
-  align-self: stretch;
+  padding: 10px;
+  background-color: lightgrey;
+  width: 150;
+  margin-right: 2px;
   align-items: center;
-  padding: 12px;
-  border-radius: 35px;
-  background-color: #cea146;
-  margin-top: 60px;
+
+  /* margin-bottom: 180px; */
 `;
 
 export const FormButtonText = styled.Text`
-  color: #ffffff;
+  color: #fcfdff;
+  font-weight: bold;
   font-size: 18px;
 `;

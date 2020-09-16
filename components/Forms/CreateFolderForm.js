@@ -12,6 +12,7 @@ import {
   FormButtonText,
   FormButton,
 } from "./styles";
+import { View } from "react-native-animatable";
 
 const CreateFolderForm = ({ navigation }) => {
   const [folder, setFolder] = useState({
@@ -23,6 +24,10 @@ const CreateFolderForm = ({ navigation }) => {
     navigation.replace("Home");
   };
 
+  const handleCancel = async () => {
+    navigation.replace("Home");
+  };
+
   return (
     <FormContainer>
       <FormTitle>Add A Folder</FormTitle>
@@ -31,10 +36,15 @@ const CreateFolderForm = ({ navigation }) => {
         placeholder="Folder Name"
         placeholderTextColor="#A6AEC1"
       />
+      <View style={{ flexDirection: "row" }}>
+        <FormButton onPress={handleSubmit}>
+          <FormButtonText>Save Changes</FormButtonText>
+        </FormButton>
 
-      <FormButton onPress={handleSubmit}>
-        <FormButtonText>Save Changes</FormButtonText>
-      </FormButton>
+        <FormButton onPress={handleCancel}>
+          <FormButtonText>Cancel</FormButtonText>
+        </FormButton>
+      </View>
     </FormContainer>
   );
 };
