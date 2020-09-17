@@ -1,9 +1,28 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { observer } from "mobx-react";
-import DatePicker from "react-native-datepicker";
-import { Button, Image, View, Platform, Picker } from "react-native";
+import {
+  Button,
+  Image,
+  Platform,
+  Picker,
+  View,
+  Text,
+  TouchableOpacity,
+} from "react-native";
+
+//Image Picker
 import * as ImagePicker from "expo-image-picker";
 import * as Permissions from "expo-permissions";
+
+//Camera
+import { Camera } from "expo-camera";
+
+//Date Picker
+import DatePicker from "react-native-datepicker";
+import RNPickerSelect from "react-native-picker-select";
+
+//Components
+import FolderItem from "./FolderItem";
 
 //Stores
 // import receiptStore from "../../store/ReceiptStore";
@@ -19,9 +38,6 @@ import {
   FormButton,
   EditContainer,
 } from "./styles";
-import RNPickerSelect from "react-native-picker-select";
-
-import FolderItem from "./FolderItem";
 
 const CreateReceiptForm = ({ navigation }) => {
   const [receipt, setReceipt] = useState({
@@ -35,6 +51,7 @@ const CreateReceiptForm = ({ navigation }) => {
     navigation.navigate("Home");
   };
 
+  //Album Access State
   const handleSubmit = async () => {
     let localUri = image;
     let filename = localUri.split("/").pop();
@@ -49,11 +66,19 @@ const CreateReceiptForm = ({ navigation }) => {
     //   navigation.replace("ReceiptList");
   };
 
-  const [image, setImage] = useState(null);
+
+  
 
   const folder = folderStore.folders
     .filter((folder) => folder.userId === authStore.user.id)
     .map((folder) => (folder = folder.name));
+
+//   let name = [];
+//   name = folder.map(function (i) {
+//     return { labe: i.name };
+//   });
+  //Image Picking
+  const [image, setImage] = useState(null);
 
   const pickImage = async () => {
     try {
@@ -75,6 +100,35 @@ const CreateReceiptForm = ({ navigation }) => {
     } catch (E) {}
   };
 
+  //Camera Access State
+  const [hasPermission, setHasPermission] = useState(null);
+  const [type, setType] = useState(Camera.Constants.Type.back);
+
+  useEffect(() => {
+    (async () => {
+      const { status } = await Camera.requestPermissionsAsync();
+      setHasPermission(status === "granted");
+    })();
+  }, []);
+
+  if (hasPermission === null) {
+    return <View />;
+  }
+  if (hasPermission === false) {
+    return <Text>No access to camera</Text>;
+  }
+
+  //Photo Snapping
+  const takePicture = async () => {
+    try {
+      const options = { quality: 0.5, base64: true };
+      const data = await camera.current.takePictureAsync(options);
+      console.log(data.uri, "<<<<<<<<<<<<<<<<<<<<<");
+    } catch (error) {
+      console.log(error, "ERROR");
+    }
+  };
+
   return (
     <>
       {pickImage}
@@ -90,42 +144,42 @@ const CreateReceiptForm = ({ navigation }) => {
           items={folder.map((name) => ({ label: name, value: name }))}
         />
 
-        {/* 
-        <Picker
-          style={{ width: "100%" }}
-          mode="dropdown"
-          selectedValue={folder}
-          // onValueChange={handleChange("folder")}
-        >
-          {folder !== [] ? (
-            folder.map((item) => (
-              <Picker.Item label={item.name} value={item.id} />
-            ))
-          ) : (
-            <Picker.Item label="Loading..." value="0" />
-          )}
-        </Picker> */}
+//         <Picker
+//           style={{ width: "100%" }}
+//           mode='dropdown'
+//           selectedValue={folder}
+//           // onValueChange={handleChange("folder")}
+//         >
+//           {folder !== [] ? (
+//             folder.map((item) => (
+//               <Picker.Item label={item.name} value={item.id} />
+//             ))
+//           ) : (
+//             <Picker.Item label='Loading...' value='0' />
+//           )}
+//         </Picker> */}
 
         <FormTextInput
           onChangeText={(name) => setReceipt({ ...receipt, name })}
-          placeholder="Receipt Name"
-          placeholderTextColor="#A6AEC1"
+          placeholder='Receipt Name'
+          placeholderTextColor='#A6AEC1'
         />
 
         <FormTextInput
           onChangeText={(price) => setReceipt({ ...receipt, price })}
-          placeholder="Price"
-          placeholderTextColor="#A6AEC1"
+          placeholder='Price'
+          placeholderTextColor='#A6AEC1'
         />
 
+        {/* Date */}
         <DatePicker
           style={{ width: 255 }}
           date={receipt.date}
-          mode="date"
-          placeholder="select date"
-          format="YYYY-MM-DD"
-          confirmBtnText="Confirm"
-          cancelBtnText="Cancel"
+          mode='date'
+          placeholder='select date'
+          format='YYYY-MM-DD'
+          confirmBtnText='Confirm'
+          cancelBtnText='Cancel'
           customStyles={{
             dateIcon: {
               position: "absolute",
@@ -146,11 +200,11 @@ const CreateReceiptForm = ({ navigation }) => {
         <DatePicker
           style={{ width: 255 }}
           date={receipt.Expdate}
-          mode="Expiration date"
-          placeholder="select date"
-          format="YYYY-MM-DD"
-          confirmBtnText="Confirm"
-          cancelBtnText="Cancel"
+          mode='Expiration date'
+          placeholder='select date'
+          format='YYYY-MM-DD'
+          confirmBtnText='Confirm'
+          cancelBtnText='Cancel'
           customStyles={{
             dateIcon: {
               position: "absolute",
@@ -168,6 +222,8 @@ const CreateReceiptForm = ({ navigation }) => {
             return setReceipt({ ...receipt, Expdate });
           }}
         />
+
+        {/* Image  */}
         <View
           style={{
             flex: 1,
@@ -176,7 +232,7 @@ const CreateReceiptForm = ({ navigation }) => {
             color: "black",
           }}
         >
-          <Button title="Pick an image from camera roll" onPress={pickImage} />
+          <Button title='Pick an image from camera roll' onPress={pickImage} />
           {image && (
             <Image
               source={{ uri: image }}
@@ -195,6 +251,40 @@ const CreateReceiptForm = ({ navigation }) => {
           </FormButton>
         </View>
       </FormContainer>
+
+      {/* Camera */}
+      <View style={{ flex: 1 }}>
+        <Camera style={{ flex: 1 }} type={type}>
+          <View
+            style={{
+              flex: 1,
+              backgroundColor: "transparent",
+              flexDirection: "row",
+            }}
+          >
+            <TouchableOpacity
+              style={{
+                flex: 0.1,
+                alignSelf: "flex-end",
+                alignItems: "center",
+              }}
+              style={styles.capture}
+              onPress={takePicture}
+              // onPress={() => {
+              //   setType(
+              //     type === Camera.Constants.Type.back
+              //       ? Camera.Constants.Type.front
+              //       : Camera.Constants.Type.back
+              //   );
+              // }}
+            >
+              <Text style={{ fontSize: 18, marginBottom: 10, color: "white" }}>
+                Flip
+              </Text>
+            </TouchableOpacity>
+          </View>
+        </Camera>
+      </View>
     </>
   );
 };

@@ -1,7 +1,5 @@
-import instance from "./instance";
-
-// Mobx
 import { decorate, observable } from "mobx";
+import instance from "./instance";
 
 class ReceiptStore {
   receipts = [];
@@ -17,6 +15,21 @@ class ReceiptStore {
     }
   };
 
+  createReceipt = async (newReceipt) => {
+    try {
+      // const formData = new FormData();
+      // for (const key in newReceipt) formData.append(key, newReceipt[key]);
+
+      const res = await instance.post(
+        `/${newReceipt.folderId}/receipt`,
+        formData
+      );
+      this.receipts.push({ ...res.data, items: [] });
+    } catch (error) {
+      console.log("ReceiptStore -> createReceipt -> error ", error);
+    }
+  };
+
   updateReceipt = async (updatedReceipt) => {
     try {
       const formData = new FormData();
@@ -29,6 +42,17 @@ class ReceiptStore {
       for (const key in updatedReceipt) receipts[key] = updatedReceipt[key];
     } catch (error) {
       console.log("ReceiptStore -> updateReceipt -> error", error);
+    }
+  };
+
+  deleteReceipt = async (receiptId) => {
+    try {
+      await instance.delete(`/receipt/${receiptId}`);
+      this.receipts = this.receipts.filter(
+        (receipt) => receipt.id !== receiptId
+      );
+    } catch (error) {
+      console.log("ReceiptStore -> deleteReceipt -> error ", error);
     }
   };
 }
