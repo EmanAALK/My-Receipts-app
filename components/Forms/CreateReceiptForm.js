@@ -66,16 +66,20 @@ const CreateReceiptForm = ({ navigation }) => {
     //   navigation.replace("ReceiptList");
   };
 
-  const folder = folderStore.folders.filter(
-    (folder) => folder.userId === authStore.user.id
-  );
 
-  let name = [];
-  name = folder.map(function (i) {
-    return { labe: i.name };
-  });
+  
+
+  const folder = folderStore.folders
+    .filter((folder) => folder.userId === authStore.user.id)
+    .map((folder) => (folder = folder.name));
+
+//   let name = [];
+//   name = folder.map(function (i) {
+//     return { labe: i.name };
+//   });
   //Image Picking
   const [image, setImage] = useState(null);
+
   const pickImage = async () => {
     try {
       if (Platform.OS !== "web") {
@@ -135,26 +139,25 @@ const CreateReceiptForm = ({ navigation }) => {
         <Image source={{ uri: image }} style={{ width: 200, height: 200 }} />
       )} */}
 
-        {/* <RNPickerSelect
+        <RNPickerSelect
           onValueChange={(value) => console.log(value)}
-          items={[{ label: "Hi", value: "hi" }]}
-        /> */}
+          items={folder.map((name) => ({ label: name, value: name }))}
+        />
 
-        {/* Folder */}
-        <Picker
-          style={{ width: "100%" }}
-          mode='dropdown'
-          selectedValue={folder}
-          // onValueChange={handleChange("folder")}
-        >
-          {folder !== [] ? (
-            folder.map((item) => (
-              <Picker.Item label={item.name} value={item.id} />
-            ))
-          ) : (
-            <Picker.Item label='Loading...' value='0' />
-          )}
-        </Picker>
+//         <Picker
+//           style={{ width: "100%" }}
+//           mode='dropdown'
+//           selectedValue={folder}
+//           // onValueChange={handleChange("folder")}
+//         >
+//           {folder !== [] ? (
+//             folder.map((item) => (
+//               <Picker.Item label={item.name} value={item.id} />
+//             ))
+//           ) : (
+//             <Picker.Item label='Loading...' value='0' />
+//           )}
+//         </Picker> */}
 
         <FormTextInput
           onChangeText={(name) => setReceipt({ ...receipt, name })}
