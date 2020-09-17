@@ -53,25 +53,26 @@ const Signup = ({ navigation }) => {
         placeholderTextColor='#A6AEC1'
         secureTextEntry={true}
       />
-
-      <LinearGradient
-        onPress={handleSubmit}
-        // Button Linear Gradient
-        colors={["#ffbf00", "#FFCC33", "#FFE085"]}
-        style={{
-          // start: ["-1", "-2"],
-          // end: ["-2", "-2"],
-          marginTop: 10,
-          marginBottom: 10,
-          padding: 14,
-          alignItems: "center",
-          borderRadius: 22,
-          alignSelf: "stretch",
-          alignItems: "center",
-        }}
-      >
-        <AuthButtonText>Sign up</AuthButtonText>
-      </LinearGradient>
+      <AuthButton onPress={handleSubmit}>
+        <LinearGradient
+          onPress={handleSubmit}
+          // Button Linear Gradient
+          colors={["#ffbf00", "#FFCC33", "#FFE085"]}
+          style={{
+            // start: ["-1", "-2"],
+            // end: ["-2", "-2"],
+            marginTop: 10,
+            marginBottom: 10,
+            padding: 14,
+            alignItems: "center",
+            borderRadius: 22,
+            alignSelf: "stretch",
+            alignItems: "center",
+          }}
+        >
+          <AuthButtonText>Sign up</AuthButtonText>
+        </LinearGradient>
+      </AuthButton>
 
       <AuthOther onPress={() => navigation.navigate("Signin")}>
         Click Here to Sign In!

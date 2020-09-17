@@ -30,10 +30,6 @@ export const AuthTextInput = styled.TextInput`
 export const AuthButton = styled.TouchableOpacity`
   align-self: stretch;
   align-items: center;
-  padding: 12px;
-  border-radius: 35px;
-  background-color: #ffbf00;
-  margin-top: 30px;
 `;
 
 export const AuthButtonText = styled.Text`
