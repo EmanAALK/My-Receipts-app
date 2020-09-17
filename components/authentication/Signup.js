@@ -63,9 +63,9 @@ const Signup = ({ navigation }) => {
           // end: ["-2", "-2"],
           marginTop: 10,
           marginBottom: 10,
-          padding: 16,
+          padding: 14,
           alignItems: "center",
-          borderRadius: 28,
+          borderRadius: 22,
           alignSelf: "stretch",
           alignItems: "center",
         }}
@@ -74,7 +74,7 @@ const Signup = ({ navigation }) => {
       </LinearGradient>
 
       <AuthOther onPress={() => navigation.navigate("Signin")}>
-        Click Here to Sign In
+        Click Here to Sign In!
       </AuthOther>
     </AuthContainer>
   );

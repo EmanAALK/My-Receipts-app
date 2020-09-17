@@ -71,9 +71,9 @@ const Signin = ({ navigation }) => {
           // end: ["-2", "-2"],
           marginTop: 10,
           marginBottom: 10,
-          padding: 16,
+          padding: 14,
           alignItems: "center",
-          borderRadius: 28,
+          borderRadius: 22,
           alignSelf: "stretch",
           alignItems: "center",
         }}
