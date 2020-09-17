@@ -51,16 +51,9 @@ const CreateReceiptForm = ({ navigation }) => {
 
   const [image, setImage] = useState(null);
 
-  const folder = folderStore.folders.filter(
-    (folder) => folder.userId === authStore.user.id
-  );
-
-  let name = [];
-  name = folder.map(function (i) {
-    return { labe: i.name };
-  });
-
-  console.log("Aaaaaaaa", name);
+  const folder = folderStore.folders
+    .filter((folder) => folder.userId === authStore.user.id)
+    .map((folder) => (folder = folder.name));
 
   const pickImage = async () => {
     try {
@@ -92,11 +85,12 @@ const CreateReceiptForm = ({ navigation }) => {
         <Image source={{ uri: image }} style={{ width: 200, height: 200 }} />
       )} */}
 
-        {/* <RNPickerSelect
+        <RNPickerSelect
           onValueChange={(value) => console.log(value)}
-          items={[{ label: "Hi", value: "hi" }]}
-        /> */}
+          items={folder.map((name) => ({ label: name, value: name }))}
+        />
 
+        {/* 
         <Picker
           style={{ width: "100%" }}
           mode="dropdown"
@@ -110,7 +104,7 @@ const CreateReceiptForm = ({ navigation }) => {
           ) : (
             <Picker.Item label="Loading..." value="0" />
           )}
-        </Picker>
+        </Picker> */}
 
         <FormTextInput
           onChangeText={(name) => setReceipt({ ...receipt, name })}
