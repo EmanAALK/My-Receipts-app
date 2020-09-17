@@ -62,24 +62,26 @@ const Signin = ({ navigation }) => {
       <TouchableOpacity onPress={toggleShowPass}>
         <Feather name={showPass ? "eye" : "eye-off"} color='grey' size={15} />
       </TouchableOpacity>
-      <LinearGradient
-        onPress={handleSubmit}
-        // Button Linear Gradient
-        colors={["#ffbf00", "#FFCC33", "#FFE085"]}
-        style={{
-          // start: ["-1", "-2"],
-          // end: ["-2", "-2"],
-          marginTop: 10,
-          marginBottom: 10,
-          padding: 16,
-          alignItems: "center",
-          borderRadius: 28,
-          alignSelf: "stretch",
-          alignItems: "center",
-        }}
-      >
-        <AuthButtonText>Sign In</AuthButtonText>
-      </LinearGradient>
+      <AuthButton onPress={handleSubmit}>
+        <LinearGradient
+          onPress={handleSubmit}
+          // Button Linear Gradient
+          colors={["#ffbf00", "#FFCC33", "#FFE085"]}
+          style={{
+            // start: ["-1", "-2"],
+            // end: ["-2", "-2"],
+            marginTop: 10,
+            marginBottom: 10,
+            padding: 14,
+            alignItems: "center",
+            borderRadius: 22,
+            alignSelf: "stretch",
+            alignItems: "center",
+          }}
+        >
+          <AuthButtonText>Sign In</AuthButtonText>
+        </LinearGradient>
+      </AuthButton>
       {isValidUser ? (
         <Text style={{ color: "green" }}> forget password </Text>
       ) : (

@@ -21,25 +21,21 @@ export const AuthTextInput = styled.TextInput`
   align-self: stretch;
   text-align: left;
   height: 40px;
-  margin-bottom: 30px;
+  margin-bottom: 20px;
   color: black;
   border-bottom-color: black;
-  border-bottom-width: 1px;
+  border-bottom-width: 0.25px;
 `;
 
 export const AuthButton = styled.TouchableOpacity`
   align-self: stretch;
   align-items: center;
-  padding: 12px;
-  border-radius: 35px;
-  background-color: #ffbf00;
-  margin-top: 30px;
 `;
 
 export const AuthButtonText = styled.Text`
   color: #ffffff;
   font-weight: bold;
-  font-size: 18px;
+  font-size: 14px;
 `;
 
 export const AuthOther = styled.Text`
