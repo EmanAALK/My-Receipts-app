@@ -1,4 +1,6 @@
 import React, { useState } from "react";
+import { observer } from "mobx-react";
+
 import { InputContainer, TextStyle } from "./styles";
 import { ButtonGroup } from "react-native-elements";
 import CalculateByFolder from "./CalculateByFolder";
@@ -11,7 +13,7 @@ const Calculation = ({ navigation }) => {
     setSelectedIndex(selectedIndex);
   };
   return (
-    <InputContainer>
+    <>
       <TextStyle>Receipts Calculator</TextStyle>
       <ButtonGroup
         onPress={updateIndex}
@@ -23,8 +25,8 @@ const Calculation = ({ navigation }) => {
       {selectedIndex === 0 && <CalculateByDate navigation={navigation} />}
 
       {selectedIndex === 1 && <CalculateByFolder navigation={navigation} />}
-    </InputContainer>
+    </>
   );
 };
 
-export default Calculation;
+export default observer(Calculation);
