@@ -12,6 +12,7 @@ import CreateReceiptForm from "../Forms/CreateReceiptForm";
 import UpdateFolderForm from "../Forms/UpdateFolderForm";
 import CreateFolderForm from "../Forms/CreateFolderForm";
 import ReceiptList from "../ReceiptList";
+import Calculation from "../Calculation";
 
 const HomeStack = createStackNavigator();
 
@@ -181,6 +182,22 @@ const HomeStackScreen = ({ navigation }) => (
             onPress={() => navigation.goBack()}
           ></Icon>
         ),
+        headerLeft: () => (
+          <Icon.Button
+            name="ios-menu"
+            size={25}
+            backgroundColor="grey"
+            onPress={() => navigation.openDrawer()}
+          ></Icon.Button>
+        ),
+      }}
+    />
+    <HomeStack.Screen
+      name="Calculation"
+      component={Calculation}
+      options={{
+        title: false,
+
         headerLeft: () => (
           <Icon.Button
             name="ios-menu"
