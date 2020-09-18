@@ -33,6 +33,15 @@ const DrawerContent = ({ navigation }) => {
                 }}
               />
             </Drawer.Section>
+            <Drawer.Section style={styles.drawerSection}>
+              <DrawerItem
+                icon={() => <Icon name="receipt" color="grey" size="25" />}
+                label="Receipts Calculator"
+                onPress={() => {
+                  navigation.navigate("Calculation");
+                }}
+              />
+            </Drawer.Section>
           </View>
         </DrawerContentScrollView>
 
