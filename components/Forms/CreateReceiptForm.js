@@ -74,6 +74,7 @@ const CreateReceiptForm = ({ navigation }) => {
   name = folder.map(function (i) {
     return { labe: i.name };
   });
+
   //Image Picking
   const [image, setImage] = useState(null);
   const pickImage = async () => {
@@ -96,7 +97,7 @@ const CreateReceiptForm = ({ navigation }) => {
     } catch (E) {}
   };
 
-  //Camera Access State
+  //Camera Access
   const [hasPermission, setHasPermission] = useState(null);
   const [type, setType] = useState(Camera.Constants.Type.back);
 
@@ -111,15 +112,24 @@ const CreateReceiptForm = ({ navigation }) => {
     return <View />;
   }
   if (hasPermission === false) {
-    return <Text>No access to camera</Text>;
+    return <Text>No access to your album</Text>;
   }
 
   //Photo Snapping
   const takePicture = async () => {
+    let camera;
+    <Camera
+      ref={(ref) => {
+        camera = ref;
+        console.log(camera);
+      }}
+    />;
     try {
-      const options = { quality: 0.5, base64: true };
-      const data = await camera.current.takePictureAsync(options);
-      console.log(data.uri, "<<<<<<<<<<<<<<<<<<<<<");
+      if (camera) {
+        const options = { quality: 0.5, base64: true };
+        let photo = await camera.takePictureAsync(options);
+        console.log(data.uri, "<<<<<<<<<<<<<<<<<<<<<");
+      }
     } catch (error) {
       console.log(error, "ERROR");
     }
@@ -265,18 +275,19 @@ const CreateReceiptForm = ({ navigation }) => {
                 alignSelf: "flex-end",
                 alignItems: "center",
               }}
-              style={styles.capture}
               onPress={takePicture}
-              // onPress={() => {
-              //   setType(
-              //     type === Camera.Constants.Type.back
-              //       ? Camera.Constants.Type.front
-              //       : Camera.Constants.Type.back
-              //   );
-              // }}
             >
-              <Text style={{ fontSize: 18, marginBottom: 10, color: "white" }}>
-                Flip
+              <Text
+                style={{
+                  fontSize: 40,
+                  fontWeight: "bold",
+                  marginBottom: 10,
+                  marginLeft: 8,
+                  alignItems: "center",
+                  color: "white",
+                }}
+              >
+                O
               </Text>
             </TouchableOpacity>
           </View>
