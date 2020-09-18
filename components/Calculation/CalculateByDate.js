@@ -22,8 +22,15 @@ const CalculateByDate = ({ navigation }) => {
     setSelectedIndex(selectedIndex);
   };
   return (
-    <InputContainer>
-      <View style={{ padding: 5, flexDirection: "row", marginTop: 30 }}>
+    <>
+      <View
+        style={{
+          padding: 5,
+          flexDirection: "row",
+          marginTop: 30,
+          alignSelf: "center",
+        }}
+      >
         <TextStyle>From : </TextStyle>
         <DatePicker
           style={{ width: 255 }}
@@ -51,7 +58,7 @@ const CalculateByDate = ({ navigation }) => {
           }}
         />
       </View>
-      <View style={{ padding: 5, flexDirection: "row" }}>
+      <View style={{ padding: 5, flexDirection: "row", alignSelf: "center" }}>
         <TextStyle>To : </TextStyle>
         <DatePicker
           style={{ width: 255, textalign: "left" }}
@@ -80,10 +87,10 @@ const CalculateByDate = ({ navigation }) => {
         />
       </View>
 
-      <View>
-        <Text>{total}</Text>
+      <View style={{ marginTop: 10, marginLeft: 10 }}>
+        <Text>Total Amount : {total} </Text>
       </View>
-    </InputContainer>
+    </>
   );
 };
 
