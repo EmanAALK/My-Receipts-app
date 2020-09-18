@@ -66,17 +66,23 @@ const CreateReceiptForm = ({ navigation }) => {
     //   navigation.replace("ReceiptList");
   };
 
-  const folder = folderStore.folders.filter(
-    (folder) => folder.userId === authStore.user.id
-  );
+  const folder = folderStore.folders
+    .filter((folder) => folder.userId === authStore.user.id)
+    .map((folder) => (folder = folder.name));
 
   let name = [];
   name = folder.map(function (i) {
     return { labe: i.name };
   });
 
+  //   let name = [];
+  //   name = folder.map(function (i) {
+  //     return { labe: i.name };
+  //   });
+
   //Image Picking
   const [image, setImage] = useState(null);
+
   const pickImage = async () => {
     try {
       if (Platform.OS !== "web") {
@@ -145,48 +151,33 @@ const CreateReceiptForm = ({ navigation }) => {
         <Image source={{ uri: image }} style={{ width: 200, height: 200 }} />
       )} */}
 
-        {/* <RNPickerSelect
-          onValueChange={(value) => console.log(value)}
-          items={[{ label: "Hi", value: "hi" }]}
-        /> */}
-
         {/* Folder */}
-        <Picker
-          style={{ width: "100%" }}
-          mode='dropdown'
-          selectedValue={folder}
-          // onValueChange={handleChange("folder")}
-        >
-          {folder !== [] ? (
-            folder.map((item) => (
-              <Picker.Item label={item.name} value={item.id} />
-            ))
-          ) : (
-            <Picker.Item label='Loading...' value='0' />
-          )}
-        </Picker>
+        <RNPickerSelect
+          onValueChange={(value) => console.log(value)}
+          items={folder.map((name) => ({ label: name, value: name }))}
+        />
 
         <FormTextInput
           onChangeText={(name) => setReceipt({ ...receipt, name })}
-          placeholder='Receipt Name'
-          placeholderTextColor='#A6AEC1'
+          placeholder="Receipt Name"
+          placeholderTextColor="#A6AEC1"
         />
 
         <FormTextInput
           onChangeText={(price) => setReceipt({ ...receipt, price })}
-          placeholder='Price'
-          placeholderTextColor='#A6AEC1'
+          placeholder="Price"
+          placeholderTextColor="#A6AEC1"
         />
 
         {/* Date */}
         <DatePicker
           style={{ width: 255 }}
           date={receipt.date}
-          mode='date'
-          placeholder='select date'
-          format='YYYY-MM-DD'
-          confirmBtnText='Confirm'
-          cancelBtnText='Cancel'
+          mode="date"
+          placeholder="select date"
+          format="YYYY-MM-DD"
+          confirmBtnText="Confirm"
+          cancelBtnText="Cancel"
           customStyles={{
             dateIcon: {
               position: "absolute",
@@ -207,11 +198,11 @@ const CreateReceiptForm = ({ navigation }) => {
         <DatePicker
           style={{ width: 255 }}
           date={receipt.Expdate}
-          mode='Expiration date'
-          placeholder='select date'
-          format='YYYY-MM-DD'
-          confirmBtnText='Confirm'
-          cancelBtnText='Cancel'
+          mode="Expiration date"
+          placeholder="select date"
+          format="YYYY-MM-DD"
+          confirmBtnText="Confirm"
+          cancelBtnText="Cancel"
           customStyles={{
             dateIcon: {
               position: "absolute",
@@ -239,7 +230,7 @@ const CreateReceiptForm = ({ navigation }) => {
             color: "black",
           }}
         >
-          <Button title='Pick an image from camera roll' onPress={pickImage} />
+          <Button title="Pick an image from camera roll" onPress={pickImage} />
           {image && (
             <Image
               source={{ uri: image }}
