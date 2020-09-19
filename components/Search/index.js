@@ -11,7 +11,9 @@ import { Row, Text, CardItem } from "native-base";
 import { View } from "react-native-animatable";
 import { FlatList, ScrollView } from "react-native";
 import { Card } from "react-native-paper";
-import Vector from "react-native-vector-icons/MaterialCommunityIcons";
+import Icon from "react-native-vector-icons/MaterialCommunityIcons";
+import DatePicker from "react-native-datepicker";
+import CalendarPicker from "react-native-calendar-picker";
 
 const Search = ({ navigation }) => {
   const [query, setQuery] = useState();
@@ -20,6 +22,7 @@ const Search = ({ navigation }) => {
     { label: "All", value: 0 },
     { label: "Folder", value: 1 },
     { label: "Receipt", value: 2 },
+    { label: "Date", value: 3 },
   ];
 
   const searchFolder = folderStore.folders.filter((folder) =>
@@ -63,15 +66,46 @@ const Search = ({ navigation }) => {
     <>
       <Row style={{ marginLeft: 4, marginRight: 12, marginBottom: 0 }}>
         <View style={{ width: "74%", height: 15 }}>
-          <SearchBar
-            placeholder="Type Here..."
-            lightTheme
-            onChangeText={handleSearch}
-            value={query}
-          />
+          {filter === 3 ? (
+            <DatePicker
+              style={{ width: 255, marginTop: 8 }}
+              // date={receipt.date}
+              mode="date"
+              placeholder="select date"
+              format="YYYY-MM-DD"
+              confirmBtnText="Confirm"
+              cancelBtnText="Cancel"
+              // maxDate={Date}
+              confirmBtnText="search"
+              customStyles={{
+                dateIcon: {
+                  position: "absolute",
+                  left: 0,
+                  top: 4,
+                  marginRight: 4,
+                  marginLeft: 0,
+                  borderColor: "#cea146",
+                },
+                dateInput: {
+                  marginLeft: 36,
+                },
+              }}
+              // onDateChange={(date) => {
+              //   return setReceipt({ ...receipt, date });
+              // }}
+            />
+          ) : (
+            <SearchBar
+              placeholder="Type Here..."
+              lightTheme
+              onChangeText={handleSearch}
+              value={query}
+              // style={{ backgroundColor: "white" }}
+            />
+          )}
         </View>
         <DropDownPicker
-          Icon={<Vector name="filter-variant" color="grey" size="25" />}
+          Icon={<Icon name="filter-variant" color="grey" size="25" />}
           items={items}
           labelStyle={{
             fontSize: 14,

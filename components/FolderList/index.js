@@ -11,6 +11,7 @@ import { ButtonGroup } from "react-native-elements";
 // store
 import folderStore from "../../store/FolderStore";
 import authStore from "../../store/authStore";
+import Icon from "react-native-vector-icons/AntDesign";
 
 const FolderList = ({ navigation }) => {
   if (folderStore.loading) return <Spinner />;
@@ -28,7 +29,12 @@ const FolderList = ({ navigation }) => {
     <>
       <ButtonGroup
         onPress={updateIndex}
-        buttons={[`search`, `+Folder`]}
+        buttons={[
+          <Text>
+            <Icon name="search1" color="grey" size="25" />
+          </Text>,
+          `+Folder`,
+        ]}
         containerStyle={{ height: 30, marginTop: 10 }}
         selectedButtonStyle={{ backgroundColor: "grey" }}
       />

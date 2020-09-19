@@ -32,7 +32,7 @@ const CalculateByFolder = ({ navigation }) => {
   ));
 
   const receipt = receiptStore.receipts.filter((receipt) =>
-    filterFolder.find((filter) => receipt.folderId === filter.id)
+    filterFolder.find((filter) => receipt.folder.id === filter.id)
   );
 
   const amount = receipt.map((receipt) => (total = total + receipt.price));
@@ -56,7 +56,7 @@ const CalculateByFolder = ({ navigation }) => {
             width: 230,
           }}
           style={{
-            backgroundColor: "#fafafa",
+            backgroundColor: "white",
             paddingVertical: 0,
           }}
           itemStyle={{
@@ -76,7 +76,7 @@ const CalculateByFolder = ({ navigation }) => {
             data={["Total Amount", total]}
             style={{
               height: 30,
-              backgroundColor: "#f1f8ff",
+              backgroundColor: "#eddcd2",
               marginTop: 20,
             }}
             textStyle={{ marginLeft: 30, color: "red" }}

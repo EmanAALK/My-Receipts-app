@@ -7,6 +7,7 @@ import Icon from "react-native-vector-icons/Ionicons";
 // component
 import CreateReceiptForm from "../Forms/CreateReceiptForm";
 const AddReceiptStack = createStackNavigator();
+const color = "#e2cfc4";
 
 const AddReceiptStackScreen = ({ navigation }) => (
   <AddReceiptStack.Navigator
@@ -14,7 +15,7 @@ const AddReceiptStackScreen = ({ navigation }) => (
     screenOptions={{
       headerTintColor: "#fff",
       headerStyle: {
-        backgroundColor: "grey",
+        backgroundColor: color,
         height: 55,
       },
       headerTitleStyle: {
@@ -32,7 +33,7 @@ const AddReceiptStackScreen = ({ navigation }) => (
           <Icon.Button
             name="ios-menu"
             size={25}
-            backgroundColor="grey"
+            backgroundColor={color}
             onPress={() => navigation.openDrawer()}
           ></Icon.Button>
         ),

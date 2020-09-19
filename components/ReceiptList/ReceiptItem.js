@@ -21,11 +21,11 @@ const ReceiptItem = ({ receipt, navigation }) => {
       </Left>
       <>
         <Right>
-          <DeleteButtonStyled
+          {/* <DeleteButtonStyled
             onPress={() => receiptStore.deleteReceipt(receipt.id)}
           >
             Delete
-          </DeleteButtonStyled>
+          </DeleteButtonStyled> */}
         </Right>
       </>
     </ListItem>
