@@ -12,8 +12,9 @@ import { Text } from "native-base";
 const ReceiptItem = ({ folder, navigation }) => {
   let total = 0;
   const receipt = receiptStore.receipts.filter(
-    (receipt) => receipt.folderId === folder.id
+    (receipt) => receipt.folder.id === folder.id
   );
+
   const amount = receipt.map((receipt) => (total = total + receipt.price));
 
   const renderItem = ({ item }) => {
@@ -23,7 +24,7 @@ const ReceiptItem = ({ folder, navigation }) => {
           data={[item.name, item.price]}
           style={{
             height: 30,
-            backgroundColor: "#f1f8ff",
+            backgroundColor: "white",
           }}
           textStyle={{ marginLeft: 30 }}
         />
@@ -39,7 +40,7 @@ const ReceiptItem = ({ folder, navigation }) => {
           data={["Store", "price"]}
           style={{
             height: 30,
-            backgroundColor: "#f1f8ff",
+            backgroundColor: "white",
           }}
           textStyle={{ marginLeft: 30, color: "red" }}
         />
@@ -55,7 +56,7 @@ const ReceiptItem = ({ folder, navigation }) => {
           data={["Total", total]}
           style={{
             height: 30,
-            backgroundColor: "#f1f8ff",
+            backgroundColor: "white",
           }}
           textStyle={{ marginLeft: 30, color: "red" }}
         />

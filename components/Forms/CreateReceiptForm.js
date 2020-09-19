@@ -143,7 +143,7 @@ const CreateReceiptForm = ({ navigation }) => {
 
   return (
     <>
-      {pickImage}
+      {/* {pickImage} */}
       <FormContainer>
         <FormTitle>Add A Receipt</FormTitle>
 
@@ -230,13 +230,13 @@ const CreateReceiptForm = ({ navigation }) => {
             color: "black",
           }}
         >
-          <Button title="Pick an image from camera roll" onPress={pickImage} />
+          {/* <Button title="Pick an image from camera roll" onPress={pickImage} />
           {image && (
             <Image
               source={{ uri: image }}
               style={{ width: 200, height: 200 }}
             />
-          )}
+          )} */}
         </View>
 
         <View style={{ flexDirection: "row" }}>
@@ -251,7 +251,7 @@ const CreateReceiptForm = ({ navigation }) => {
       </FormContainer>
 
       {/* Camera */}
-      <View style={{ flex: 1 }}>
+      {/* <View style={{ flex: 1 }}>
         <Camera style={{ flex: 1 }} type={type}>
           <View
             style={{
@@ -282,8 +282,8 @@ const CreateReceiptForm = ({ navigation }) => {
               </Text>
             </TouchableOpacity>
           </View>
-        </Camera>
-      </View>
+        </Camera> */}
+      {/* </View> */}
     </>
   );
 };
