@@ -2,3 +2,7 @@
 1- AMBER: #ffbf00
 2- SUNGLOW: #FFCC33 
 3- JASMINE: #FFE085
+
+//Pressing types 
+1- onLongPress
+2- onPressOut
