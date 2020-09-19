@@ -27,8 +27,9 @@ const TabScreen = () => (
       name="Home"
       component={HomeStackScreen}
       options={{
+        title: false,
+
         backgroundColor: "grey",
-        tabBarLabel: "Home",
 
         tabBarIcon: ({ color }) => (
           <Icon name="ios-home" color={color} size={26} />
@@ -39,8 +40,8 @@ const TabScreen = () => (
       name="AddReceipt"
       component={AddReceiptStackScreen}
       options={{
+        title: false,
         backgroundColor: "grey",
-        tabBarLabel: "AddReceipt",
         tabBarIcon: ({ color }) => (
           <Icon name="md-camera" color={color} size={26} />
         ),
@@ -50,8 +51,9 @@ const TabScreen = () => (
       name="Notifications"
       component={NotificationStackscreen}
       options={{
+        title: false,
+
         backgroundColor: "grey",
-        tabBarLabel: "notifications",
         tabBarIcon: ({ color }) => (
           <Icon name="ios-notifications" color={color} size={26} />
         ),
