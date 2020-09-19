@@ -13,7 +13,7 @@ import UpdateFolderForm from "../Forms/UpdateFolderForm";
 import CreateFolderForm from "../Forms/CreateFolderForm";
 import ReceiptList from "../ReceiptList";
 import Calculation from "../Calculation";
-
+import Search from "../Search";
 const HomeStack = createStackNavigator();
 
 const HomeStackScreen = ({ navigation }) => (
@@ -198,6 +198,30 @@ const HomeStackScreen = ({ navigation }) => (
       options={{
         title: false,
 
+        headerLeft: () => (
+          <Icon.Button
+            name="ios-menu"
+            size={25}
+            backgroundColor="grey"
+            onPress={() => navigation.openDrawer()}
+          ></Icon.Button>
+        ),
+      }}
+    />
+    <HomeStack.Screen
+      name="Search"
+      component={Search}
+      options={{
+        title: false,
+        headerRight: () => (
+          <Icon
+            style={{ paddingRight: 10 }}
+            name="md-arrow-back"
+            size={25}
+            color="#fff"
+            onPress={() => navigation.goBack()}
+          ></Icon>
+        ),
         headerLeft: () => (
           <Icon.Button
             name="ios-menu"
