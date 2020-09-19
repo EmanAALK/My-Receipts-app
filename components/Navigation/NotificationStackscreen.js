@@ -11,12 +11,13 @@ const NotificationStack = createStackNavigator();
 
 const NotificationStackScreen = ({ navigation }) => (
   <NotificationStack.Navigator
-    initialRouteName="Notification"
+    initialRouteName='Notification'
     screenOptions={{
       headerTintColor: "#fff",
+      backgroundColor: "white",
       headerStyle: {
-        backgroundColor: "grey",
-        height: 55,
+        backgroundColor: "white",
+        height: 90,
       },
       headerTitleStyle: {
         fontWeight: "bold",
@@ -24,16 +25,17 @@ const NotificationStackScreen = ({ navigation }) => (
     }}
   >
     <NotificationStack.Screen
-      name="Notification"
+      name='Notification'
       component={Notification}
       options={{
         title: false,
 
         headerLeft: () => (
           <Icon.Button
-            name="ios-menu"
+            name='ios-menu'
             size={25}
-            backgroundColor="grey"
+            color={"lightgray"}
+            backgroundColor='white'
             onPress={() => navigation.openDrawer()}
           ></Icon.Button>
         ),

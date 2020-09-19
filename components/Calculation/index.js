@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { InputContainer, TextStyle } from "./styles";
+import { InputContainer, TextStyle, PageTitle } from "./styles";
 import { ButtonGroup } from "react-native-elements";
 import CalculateByFolder from "./CalculateByFolder";
 import CalculateByDate from "./CalculateByDate";
@@ -12,13 +12,13 @@ const Calculation = ({ navigation }) => {
   };
   return (
     <InputContainer>
-      <TextStyle>Receipts Calculator</TextStyle>
+      <PageTitle> Calculate Your Receipts </PageTitle>
       <ButtonGroup
         onPress={updateIndex}
         selectedIndex={selectedIndex}
         buttons={[`By Date`, `By Folder`]}
         containerStyle={{ height: 30, marginTop: 10 }}
-        selectedButtonStyle={{ backgroundColor: "grey" }}
+        selectedButtonStyle={{ backgroundColor: "#ffbf00" }}
       />
       {selectedIndex === 0 && <CalculateByDate navigation={navigation} />}
 

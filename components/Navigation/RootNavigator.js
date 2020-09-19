@@ -19,41 +19,44 @@ const Tab = createMaterialBottomTabNavigator();
 
 const TabScreen = () => (
   <Tab.Navigator
-    initialRouteName="Home"
-    activeColor="white"
-    barStyle={{ backgroundColor: "grey" }}
+    initialRouteName='Home'
+    activeColor='#ffbf00'
+    barStyle={{ backgroundColor: "white" }}
   >
     <Tab.Screen
-      name="Home"
+      name='Home'
       component={HomeStackScreen}
       options={{
-        backgroundColor: "grey",
-        tabBarLabel: "Home",
+        backgroundColor: "white",
+        // tabBarLabel: "Home",
+        showLabel: false,
 
         tabBarIcon: ({ color }) => (
-          <Icon name="ios-home" color={color} size={26} />
+          <Icon name='ios-home' color={color} size={26} />
         ),
       }}
     />
     <Tab.Screen
-      name="AddReceipt"
+      name='AddReceipt'
       component={AddReceiptStackScreen}
       options={{
-        backgroundColor: "grey",
-        tabBarLabel: "AddReceipt",
+        backgroundColor: "white",
+        // tabBarLabel: "AddReceipt",
+        showLabel: false,
         tabBarIcon: ({ color }) => (
-          <Icon name="md-camera" color={color} size={26} />
+          <Icon name='md-camera' color={color} size={26} />
         ),
       }}
     />
     <Tab.Screen
-      name="Notifications"
+      name='Notifications'
       component={NotificationStackscreen}
       options={{
-        backgroundColor: "grey",
-        tabBarLabel: "notifications",
+        backgroundColor: "white",
+        // tabBarLabel: "notifications",
+        showLabel: false,
         tabBarIcon: ({ color }) => (
-          <Icon name="ios-notifications" color={color} size={26} />
+          <Icon name='ios-notifications' color={color} size={26} />
         ),
       }}
     />
@@ -67,7 +70,7 @@ const RootNavigator = () => {
         <Drawer.Navigator
           drawerContent={(props) => <DrawerContent {...props} />}
         >
-          <Drawer.Screen name="HomeTab" component={TabScreen} />
+          <Drawer.Screen name='HomeTab' component={TabScreen} />
         </Drawer.Navigator>
       ) : (
         <Navigation />

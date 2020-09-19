@@ -10,29 +10,32 @@ const AddReceiptStack = createStackNavigator();
 
 const AddReceiptStackScreen = ({ navigation }) => (
   <AddReceiptStack.Navigator
-    initialRouteName="AddReceipt"
+    initialRouteName='AddReceipt'
+    // title={false}
     screenOptions={{
-      headerTintColor: "#fff",
+      headerTintColor: "white",
       headerStyle: {
-        backgroundColor: "grey",
-        height: 55,
+        backgroundColor: "white",
+        height: 90,
       },
       headerTitleStyle: {
         fontWeight: "bold",
       },
+      backgroundColor: "white",
     }}
   >
     <AddReceiptStack.Screen
-      name="CreateReceiptForm"
+      name='CreateReceiptForm'
       component={CreateReceiptForm}
       options={{
         title: false,
 
         headerLeft: () => (
           <Icon.Button
-            name="ios-menu"
+            name='ios-menu'
             size={25}
-            backgroundColor="grey"
+            color={"lightgray"}
+            backgroundColor='white'
             onPress={() => navigation.openDrawer()}
           ></Icon.Button>
         ),
