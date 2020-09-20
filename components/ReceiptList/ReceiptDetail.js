@@ -6,11 +6,15 @@ import {
   ListItem,
   Left,
   Content,
+  Text,
   List,
   View,
   Thumbnail,
   Image,
 } from "native-base";
+
+//Store
+import folderStore from "../../store/FolderStore";
 
 const ReceiptDetail = ({ route, navigation }) => {
   const { receipt } = route.params;
@@ -32,10 +36,10 @@ const ReceiptDetail = ({ route, navigation }) => {
         </Left>
         <Left>
           <View>
-            <Thumbnail
+            {/* <Thumbnail
               style={{ marginBottom: 1, marginRight: 1 }}
               source={receipt.image ? { uri: receipt.image } : defaultReceipt}
-            />
+            /> */}
           </View>
           <Text> Receipt Name: </Text>
           <Text> {receipt.name} </Text>
@@ -44,7 +48,7 @@ const ReceiptDetail = ({ route, navigation }) => {
           <Text>Adding Date: </Text>
           <Text>{receipt.date}</Text>
           <Text>Adding Date: </Text>
-          <Text>{receipt.date}</Text>
+          <Text>{receipt.Expdate}</Text>
         </Left>
         <Left></Left>
       </List>
