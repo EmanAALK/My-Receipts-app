@@ -5,32 +5,50 @@ import { observer } from "mobx-react";
 import folderStore from "../../store/FolderStore";
 
 //Styling
-import { Card } from "react-native-elements";
+import { Card, List } from "react-native-paper";
 import { IconStyled } from "./styles";
-import { Row, Text } from "native-base";
+import { Body, CardItem, Left, Right, Row, Text } from "native-base";
 import { View } from "react-native-animatable";
+import Icon from "react-native-vector-icons/Feather";
+import { Alert } from "react-native";
 
 const FolderItem = ({ folder, navigation }) => {
+  const deleteAlert = () => {
+    Alert.alert("Delete", "Are you sure you want to delete this folder?", [
+      {
+        text: "Cancel",
+        style: "cancel",
+      },
+      { text: "OK", onPress: () => folderStore.deleteFolder(folder.id) },
+    ]);
+  };
   return (
-    <Card>
-      <Card.Title
-        onPress={() => navigation.navigate("ReceiptList", { folder: folder })}
-      >
-        {folder.name}
-      </Card.Title>
-      <Card.Divider />
-      <View style={{ flexDirection: "row" }}>
-        <IconStyled onPress={() => folderStore.deleteFolder(folder.id)}>
-          <IconStyled type="Fontisto" name="trash" />
-        </IconStyled>
-        <IconStyled
-          onPress={() =>
-            navigation.navigate("UpdateFolderForm", { oldFolder: folder })
-          }
-        >
-          <IconStyled type="MaterialIcons" name="update" />
-        </IconStyled>
-      </View>
+    <Card style={{ marginTop: 5, width: "94%", alignSelf: "center" }}>
+      <CardItem>
+        <Left>
+          <Text
+            onPress={() =>
+              navigation.navigate("ReceiptList", { folder: folder })
+            }
+          >
+            {folder.name}
+          </Text>
+        </Left>
+        <Body></Body>
+        {!folder.defaultFolder && (
+          <Right style={{ flexDirection: "row" }}>
+            <Icon onPress={deleteAlert} name="trash-2" size="15" color="red" />
+
+            <Icon
+              onPress={() =>
+                navigation.navigate("UpdateFolderForm", { oldFolder: folder })
+              }
+              name="edit-2"
+              size="15"
+            />
+          </Right>
+        )}
+      </CardItem>
     </Card>
   );
 };

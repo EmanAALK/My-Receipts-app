@@ -13,22 +13,26 @@ import authStore from "../../store/authStore";
 import HomeStackScreen from "./HomeStackScreen";
 import NotificationStackscreen from "./NotificationStackscreen";
 import AddReceiptStackScreen from "./AddReceiptStackscreen";
+import { LinearGradient } from "expo-linear-gradient";
 
 const Drawer = createDrawerNavigator();
 const Tab = createMaterialBottomTabNavigator();
-
+const color = "#e2cfc4";
 const TabScreen = () => (
   <Tab.Navigator
     initialRouteName="Home"
     activeColor="white"
-    barStyle={{ backgroundColor: "grey" }}
+    barStyle={{
+      backgroundColor: color,
+    }}
   >
     <Tab.Screen
       name="Home"
       component={HomeStackScreen}
       options={{
-        backgroundColor: "grey",
-        tabBarLabel: "Home",
+        title: false,
+
+        backgroundColor: color,
 
         tabBarIcon: ({ color }) => (
           <Icon name="ios-home" color={color} size={26} />
@@ -39,8 +43,8 @@ const TabScreen = () => (
       name="AddReceipt"
       component={AddReceiptStackScreen}
       options={{
-        backgroundColor: "grey",
-        tabBarLabel: "AddReceipt",
+        title: false,
+        backgroundColor: color,
         tabBarIcon: ({ color }) => (
           <Icon name="md-camera" color={color} size={26} />
         ),
@@ -50,8 +54,9 @@ const TabScreen = () => (
       name="Notifications"
       component={NotificationStackscreen}
       options={{
-        backgroundColor: "grey",
-        tabBarLabel: "notifications",
+        title: false,
+
+        backgroundColor: color,
         tabBarIcon: ({ color }) => (
           <Icon name="ios-notifications" color={color} size={26} />
         ),
