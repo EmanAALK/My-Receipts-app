@@ -2,19 +2,13 @@ import React from "react";
 import { observer } from "mobx-react";
 
 //Styles
-import {
-  ListItem,
-  Left,
-  Content,
-  Text,
-  List,
-  View,
-  Thumbnail,
-  Image,
-} from "native-base";
+import { View, Text, Driver, Title } from "react-native";
+import { Content, Card, ListItem, Button, Icon } from "react-native-elements";
 
 //Store
 import folderStore from "../../store/FolderStore";
+
+import moment from "moment";
 
 const ReceiptDetail = ({ route, navigation }) => {
   const { receipt } = route.params;
@@ -23,36 +17,21 @@ const ReceiptDetail = ({ route, navigation }) => {
   );
 
   return (
-    <Content style={{ backgroundColor: "white", marginTop: 20 }}>
-      <List>
-        <Left>
-          <Text
-            transparent
-            light
-            onPress={() =>
-              navigation.navigate("Receipts List", { folder: folder })
-            }
-          ></Text>
-        </Left>
-        <Left>
-          <View>
-            {/* <Thumbnail
-              style={{ marginBottom: 1, marginRight: 1 }}
-              source={receipt.image ? { uri: receipt.image } : defaultReceipt}
-            /> */}
-          </View>
-          <Text> Receipt Name: </Text>
-          <Text> {receipt.name} </Text>
-        </Left>
-        <Left>
-          <Text>Adding Date: </Text>
-          <Text>{receipt.date}</Text>
-          <Text>Adding Date: </Text>
-          <Text>{receipt.Expdate}</Text>
-        </Left>
-        <Left></Left>
-      </List>
-    </Content>
+    <Card>
+      <Card.Title>{receipt.name}</Card.Title>
+      <Card.Divider />
+      {/* <Card.Image source={{ uri: receipt.image }} /> */}
+      <Text style={{ marginBottom: 10 }}> Created at: {receipt.createdAt}</Text>
+      <Text style={{ marginBottom: 10 }}>
+        {" "}
+        Date of purchase: {receipt.date}
+      </Text>
+      <Text style={{ marginBottom: 10 }}>
+        {" "}
+        Expiration Date: {receipt.Expdate}
+      </Text>
+      <Text style={{ marginBottom: 10 }}> Price: {receipt.price}</Text>
+    </Card>
   );
 };
 
