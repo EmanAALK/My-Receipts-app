@@ -10,6 +10,7 @@ import receiptStore from "../../store/ReceiptStore";
 
 //Styles
 import { Content, Spinner, List, Text, Image, Button } from "native-base";
+import Notifications from "../Notifications";
 
 const ReceiptList = ({ navigation, route }) => {
   if (receiptStore.loading) return <Spinner />;
