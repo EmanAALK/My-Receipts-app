@@ -12,9 +12,11 @@ import CreateReceiptForm from "../Forms/CreateReceiptForm";
 import UpdateFolderForm from "../Forms/UpdateFolderForm";
 import CreateFolderForm from "../Forms/CreateFolderForm";
 import ReceiptList from "../ReceiptList";
+import ReceiptDetail from "../ReceiptList/ReceiptDetail";
 import Calculation from "../Calculation";
-
+import Search from "../Search";
 const HomeStack = createStackNavigator();
+const color = "#e2cfc4";
 
 const HomeStackScreen = ({ navigation }) => (
   <HomeStack.Navigator
@@ -25,6 +27,8 @@ const HomeStackScreen = ({ navigation }) => (
       headerStyle: {
         backgroundColor: "#ffbf00",
         height: 100,
+        backgroundColor: color,
+        height: 55,
       },
       headerTitleStyle: {
         fontWeight: "bold",
@@ -43,6 +47,24 @@ const HomeStackScreen = ({ navigation }) => (
             size={25}
             color={"white"}
             backgroundColor='transparent'
+            backgroundColor={color}
+            onPress={() => navigation.openDrawer()}
+          ></Icon.Button>
+        ),
+      }}
+    />
+
+    <HomeStack.Screen
+      name="ReceiptDetail"
+      component={ReceiptDetail}
+      options={{
+        title: false,
+
+        headerLeft: () => (
+          <Icon.Button
+            name="ios-menu"
+            size={25}
+            backgroundColor="grey"
             onPress={() => navigation.openDrawer()}
           ></Icon.Button>
         ),
@@ -69,6 +91,7 @@ const HomeStackScreen = ({ navigation }) => (
             size={25}
             color={"lightgray"}
             backgroundColor='white'
+            backgroundColor={color}
             onPress={() => navigation.openDrawer()}
           ></Icon.Button>
         ),
@@ -95,6 +118,7 @@ const HomeStackScreen = ({ navigation }) => (
             size={25}
             color={"lightgray"}
             backgroundColor='transparent'
+            backgroundColor={color}
             onPress={() => navigation.openDrawer()}
           ></Icon.Button>
         ),
@@ -120,6 +144,7 @@ const HomeStackScreen = ({ navigation }) => (
             name='ios-menu'
             size={25}
             backgroundColor='transparent'
+            backgroundColor={color}
             onPress={() => navigation.openDrawer()}
           ></Icon.Button>
         ),
@@ -145,6 +170,7 @@ const HomeStackScreen = ({ navigation }) => (
             name='ios-menu'
             size={25}
             backgroundColor='transparent'
+            backgroundColor={color}
             onPress={() => navigation.openDrawer()}
           ></Icon.Button>
         ),
@@ -170,6 +196,7 @@ const HomeStackScreen = ({ navigation }) => (
             name='ios-menu'
             size={25}
             backgroundColor='transparent'
+            backgroundColor={color}
             onPress={() => navigation.openDrawer()}
           ></Icon.Button>
         ),
@@ -195,6 +222,7 @@ const HomeStackScreen = ({ navigation }) => (
             name='ios-menu'
             size={25}
             backgroundColor='transparent'
+            backgroundColor={color}
             onPress={() => navigation.openDrawer()}
           ></Icon.Button>
         ),
@@ -211,6 +239,31 @@ const HomeStackScreen = ({ navigation }) => (
             name='ios-menu'
             size={25}
             backgroundColor='transparent'
+            backgroundColor={color}
+            onPress={() => navigation.openDrawer()}
+          ></Icon.Button>
+        ),
+      }}
+    />
+    <HomeStack.Screen
+      name="Search"
+      component={Search}
+      options={{
+        title: false,
+        headerRight: () => (
+          <Icon
+            style={{ paddingRight: 10 }}
+            name="md-arrow-back"
+            size={25}
+            color="#fff"
+            onPress={() => navigation.goBack()}
+          ></Icon>
+        ),
+        headerLeft: () => (
+          <Icon.Button
+            name="ios-menu"
+            size={25}
+            backgroundColor={color}
             onPress={() => navigation.openDrawer()}
           ></Icon.Button>
         ),

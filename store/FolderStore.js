@@ -12,6 +12,10 @@ class FolderStore {
       const response = await instance.get("/folder");
       console.log("FolderStore -> fetchFolder -> error", response); // test to see where data come from
       this.folders = response.data;
+      this.folders = this.folders.sort((a, b) =>
+        a.defaultFolder < b.defaultFolder ? 1 : -1
+      );
+
       this.loading = false;
     } catch (error) {
       console.error("FolderStore -> fetchFolder -> error", error);

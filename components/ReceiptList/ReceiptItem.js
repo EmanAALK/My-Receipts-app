@@ -10,14 +10,12 @@ import { ListItem, Left, Right, Text, View, Button } from "native-base";
 const ReceiptItem = ({ receipt, navigation }) => {
   return (
     <ListItem
-      onPress={() =>
-        navigation.navigate("ReceiptDetails", { receipt: receipt })
-      }
+      onPress={() => navigation.navigate("ReceiptDetail", { receipt: receipt })}
     >
       <Left>
         <Text>{receipt.name}</Text>
         <Text>{receipt.date}</Text>
-        <Text>{receipt.folderId}</Text>
+        <Text>{receipt.price}</Text>
       </Left>
       <>
         <Right>

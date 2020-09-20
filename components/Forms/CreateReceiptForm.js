@@ -198,6 +198,7 @@ const CreateReceiptForm = ({ navigation }) => {
     <>
       <CameraModal />
       {pickImage}
+      {/* {pickImage} */}
       <FormContainer>
         <FormTitle>Add A Receipt</FormTitle>
 
@@ -275,6 +276,61 @@ const CreateReceiptForm = ({ navigation }) => {
           }}
         />
 
+        <View style={{ flexDirection: "row" }}>
+          {/* Date */}
+          <DatePicker
+            style={{ width: 255 }}
+            date={receipt.date}
+            mode="date"
+            placeholder="select date"
+            format="YYYY-MM-DD"
+            confirmBtnText="Confirm"
+            cancelBtnText="Cancel"
+            customStyles={{
+              dateIcon: {
+                position: "absolute",
+                left: 0,
+                top: 4,
+                marginRight: 4,
+                marginLeft: 0,
+                borderColor: "#cea146",
+              },
+              dateInput: {
+                marginLeft: 36,
+              },
+            }}
+            onDateChange={(date) => {
+              return setReceipt({ ...receipt, date });
+            }}
+          />
+        </View>
+        <View style={{ flexDirection: "row" }}>
+          <DatePicker
+            style={{ width: 255 }}
+            date={receipt.Expdate}
+            mode="Expiration date"
+            placeholder="select expiration date"
+            format="YYYY-MM-DD"
+            confirmBtnText="Confirm"
+            cancelBtnText="Cancel"
+            customStyles={{
+              dateIcon: {
+                position: "absolute",
+                left: 0,
+                top: 4,
+                marginRight: 4,
+                marginLeft: 0,
+                borderColor: "#cea146",
+              },
+              dateInput: {
+                marginLeft: 36,
+              },
+            }}
+            onDateChange={(Expdate) => {
+              return setReceipt({ ...receipt, Expdate });
+            }}
+          />
+        </View>
         {/* Image  */}
         <View
           style={{
@@ -284,13 +340,15 @@ const CreateReceiptForm = ({ navigation }) => {
             color: "black",
           }}
         >
+
           <Button title='Pick an image from camera roll' onPress={pickImage} />
+          {/* <Button title="Pick an image from camera roll" onPress={pickImage} />
           {image && (
             <Image
               source={{ uri: image }}
               style={{ width: 200, height: 200 }}
             />
-          )}
+          )} */}
         </View>
 
         <View style={{ flexDirection: "row" }}>
@@ -321,6 +379,43 @@ const CreateReceiptForm = ({ navigation }) => {
           {!isPreview && renderCaptureControl()}
         </View>
       </SafeAreaView>
+
+      {/* <View style={{ flex: 1 }}>
+        <Camera style={{ flex: 1 }} type={type}>
+          <View
+            style={{
+              flex: 1,
+              backgroundColor: "transparent",
+              flexDirection: "row",
+            }}
+          >
+            <TouchableOpacity
+              style={{
+                flex: 0.1,
+                alignSelf: "flex-end",
+                alignItems: "center",
+              }}
+
+              // style={styles.capture}
+
+              onPress={takePicture}
+            >
+              <Text
+                style={{
+                  fontSize: 40,
+                  fontWeight: "bold",
+                  marginBottom: 10,
+                  marginLeft: 8,
+                  alignItems: "center",
+                  color: "white",
+                }}
+              >
+                O
+              </Text>
+            </TouchableOpacity>
+          </View>
+        </Camera> */}
+      {/* </View> */}
     </>
   );
 };

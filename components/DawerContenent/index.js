@@ -107,9 +107,11 @@ const styles = StyleSheet.create({
     marginTop: 15,
   },
   bottomDrawerSection: {
-    marginBottom: 15,
+    marginBottom: 10,
     borderTopColor: "#f4f4f4",
     borderTopWidth: 1,
+    height: 50,
+    backgroundColor: "#e2cfc4",
   },
   preference: {
     flexDirection: "row",

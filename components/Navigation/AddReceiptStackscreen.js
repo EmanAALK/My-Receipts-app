@@ -9,6 +9,7 @@ import CreateReceiptForm from "../Forms/CreateReceiptForm";
 import CameraModal from "../Modals/CameraModal";
 
 const AddReceiptStack = createStackNavigator();
+const color = "#e2cfc4";
 
 const AddReceiptStackScreen = ({ navigation }) => (
   <AddReceiptStack.Navigator
@@ -20,6 +21,8 @@ const AddReceiptStackScreen = ({ navigation }) => (
       headerStyle: {
         backgroundColor: "white",
         height: 100,
+        backgroundColor: color,
+        height: 55,
       },
       headerTitleStyle: {
         fontWeight: "bold",
@@ -39,6 +42,7 @@ const AddReceiptStackScreen = ({ navigation }) => (
             size={25}
             color={"gray"}
             backgroundColor='transparent'
+            backgroundColor={color}
             onPress={() => navigation.openDrawer()}
           ></Icon.Button>
         ),
