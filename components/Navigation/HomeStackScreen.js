@@ -23,8 +23,8 @@ const HomeStackScreen = ({ navigation }) => (
       headerTintColor: "white",
       backgroundColor: "white",
       headerStyle: {
-        backgroundColor: "white",
-        height: 90,
+        backgroundColor: "#ffbf00",
+        height: 100,
       },
       headerTitleStyle: {
         fontWeight: "bold",
@@ -41,8 +41,8 @@ const HomeStackScreen = ({ navigation }) => (
           <Icon.Button
             name='ios-menu'
             size={25}
-            color={"lightgray"}
-            backgroundColor='white'
+            color={"white"}
+            backgroundColor='transparent'
             onPress={() => navigation.openDrawer()}
           ></Icon.Button>
         ),
@@ -85,7 +85,7 @@ const HomeStackScreen = ({ navigation }) => (
             name='md-arrow-back'
             size={25}
             color='white'
-            backgroundColor='white'
+            backgroundColor='transparent'
             onPress={() => navigation.goBack()}
           ></Icon>
         ),
@@ -94,7 +94,7 @@ const HomeStackScreen = ({ navigation }) => (
             name='ios-menu'
             size={25}
             color={"lightgray"}
-            backgroundColor='white'
+            backgroundColor='transparent'
             onPress={() => navigation.openDrawer()}
           ></Icon.Button>
         ),
@@ -110,7 +110,7 @@ const HomeStackScreen = ({ navigation }) => (
             style={{ paddingRight: 10 }}
             name='md-arrow-back'
             size={25}
-            backgroundColor='white'
+            backgroundColor='transparent'
             color='white'
             onPress={() => navigation.goBack()}
           ></Icon>
@@ -119,7 +119,7 @@ const HomeStackScreen = ({ navigation }) => (
           <Icon.Button
             name='ios-menu'
             size={25}
-            backgroundColor='white'
+            backgroundColor='transparent'
             onPress={() => navigation.openDrawer()}
           ></Icon.Button>
         ),
@@ -144,7 +144,7 @@ const HomeStackScreen = ({ navigation }) => (
           <Icon.Button
             name='ios-menu'
             size={25}
-            backgroundColor='grey'
+            backgroundColor='transparent'
             onPress={() => navigation.openDrawer()}
           ></Icon.Button>
         ),
@@ -160,6 +160,7 @@ const HomeStackScreen = ({ navigation }) => (
             style={{ paddingRight: 10 }}
             name='md-arrow-back'
             size={25}
+            backgroundColor='transparent'
             color='#fff'
             onPress={() => navigation.goBack()}
           ></Icon>
@@ -168,7 +169,7 @@ const HomeStackScreen = ({ navigation }) => (
           <Icon.Button
             name='ios-menu'
             size={25}
-            backgroundColor='grey'
+            backgroundColor='transparent'
             onPress={() => navigation.openDrawer()}
           ></Icon.Button>
         ),
@@ -185,6 +186,7 @@ const HomeStackScreen = ({ navigation }) => (
             name='md-arrow-back'
             size={25}
             color='#fff'
+            backgroundColor='transparent'
             onPress={() => navigation.goBack()}
           ></Icon>
         ),
@@ -192,7 +194,7 @@ const HomeStackScreen = ({ navigation }) => (
           <Icon.Button
             name='ios-menu'
             size={25}
-            backgroundColor='grey'
+            backgroundColor='transparent'
             onPress={() => navigation.openDrawer()}
           ></Icon.Button>
         ),
@@ -208,7 +210,7 @@ const HomeStackScreen = ({ navigation }) => (
           <Icon.Button
             name='ios-menu'
             size={25}
-            backgroundColor='grey'
+            backgroundColor='transparent'
             onPress={() => navigation.openDrawer()}
           ></Icon.Button>
         ),

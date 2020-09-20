@@ -19,7 +19,7 @@ import * as Permissions from "expo-permissions";
 
 //Camera
 import { Camera } from "expo-camera";
-import { Video } from "expo-av";
+// import { Video } from "expo-av";
 
 //Date Picker
 import DatePicker from "react-native-datepicker";
@@ -27,6 +27,7 @@ import RNPickerSelect from "react-native-picker-select";
 
 //Components
 import FolderItem from "./FolderItem";
+import CameraModal from "../Modals/CameraModal";
 
 //Stores
 // import receiptStore from "../../store/ReceiptStore";
@@ -43,6 +44,7 @@ import {
   EditContainer,
 } from "./styles";
 
+//Variables Declaration
 const WINDOW_HEIGHT = Dimensions.get("window").height;
 const closeButtonSize = Math.floor(WINDOW_HEIGHT * 0.032);
 const captureSize = Math.floor(WINDOW_HEIGHT * 0.09);
@@ -194,6 +196,7 @@ const CreateReceiptForm = ({ navigation }) => {
 
   return (
     <>
+      <CameraModal />
       {pickImage}
       <FormContainer>
         <FormTitle>Add A Receipt</FormTitle>
@@ -310,7 +313,7 @@ const CreateReceiptForm = ({ navigation }) => {
           flashMode={Camera.Constants.FlashMode.on}
           onCameraReady={onCameraReady}
           onMountError={(error) => {
-            console.log("cammera error", error);
+            console.log("camera error", error);
           }}
         />
         <View style={styles.container}>
