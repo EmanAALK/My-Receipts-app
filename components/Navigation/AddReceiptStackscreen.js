@@ -6,6 +6,8 @@ import Icon from "react-native-vector-icons/Ionicons";
 
 // component
 import CreateReceiptForm from "../Forms/CreateReceiptForm";
+import CameraModal from "../Modals/CameraModal";
+
 const AddReceiptStack = createStackNavigator();
 
 const AddReceiptStackScreen = ({ navigation }) => (
@@ -14,9 +16,10 @@ const AddReceiptStackScreen = ({ navigation }) => (
     // title={false}
     screenOptions={{
       headerTintColor: "white",
+      backgroundColor: "white",
       headerStyle: {
         backgroundColor: "white",
-        height: 90,
+        height: 100,
       },
       headerTitleStyle: {
         fontWeight: "bold",
@@ -25,8 +28,8 @@ const AddReceiptStackScreen = ({ navigation }) => (
     }}
   >
     <AddReceiptStack.Screen
-      name='CreateReceiptForm'
-      component={CreateReceiptForm}
+      name='CameraModal'
+      component={CameraModal}
       options={{
         title: false,
 
@@ -34,8 +37,8 @@ const AddReceiptStackScreen = ({ navigation }) => (
           <Icon.Button
             name='ios-menu'
             size={25}
-            color={"lightgray"}
-            backgroundColor='white'
+            color={"gray"}
+            backgroundColor='transparent'
             onPress={() => navigation.openDrawer()}
           ></Icon.Button>
         ),
