@@ -1,10 +1,16 @@
 import React, { useState } from "react";
-import { View, StyleSheet } from "react-native";
-import { DrawerContentScrollView, DrawerItem } from "@react-navigation/drawer";
-import { Title, Drawer } from "react-native-paper";
-import Icon from "react-native-vector-icons/MaterialCommunityIcons";
-import authStore from "../../store/authStore";
 import { observer } from "mobx-react";
+
+//Drawer
+import { Title, Drawer } from "react-native-paper";
+import { DrawerContentScrollView, DrawerItem } from "@react-navigation/drawer";
+
+//Styling
+import { View, StyleSheet } from "react-native";
+import Icon from "react-native-vector-icons/MaterialCommunityIcons";
+
+//Stores
+import authStore from "../../store/authStore";
 
 const DrawerContent = ({ navigation }) => {
   user = authStore.user;
@@ -14,10 +20,22 @@ const DrawerContent = ({ navigation }) => {
       <View style={{ flex: 1 }}>
         <DrawerContentScrollView>
           <View style={styles.drawerContent}>
-            <Drawer.Section style={styles.drawerSection}>
+            <Drawer.Section
+              style={
+                (styles.drawerSection,
+                { height: 90, backgroundColor: "#ffbf00" })
+              }
+            >
               <View style={styles.userInfoSection}>
                 <View style={{ flexDirection: "column", marginLeft: 15 }}>
-                  <Title style={styles.title}>{user.username}</Title>
+                  <Title
+                    style={
+                      (styles.title,
+                      { color: "white", marginTop: 20, marginBottom: 20 })
+                    }
+                  >
+                    {user.username}
+                  </Title>
                 </View>
               </View>
             </Drawer.Section>
@@ -25,9 +43,9 @@ const DrawerContent = ({ navigation }) => {
             <Drawer.Section style={styles.drawerSection}>
               <DrawerItem
                 icon={() => (
-                  <Icon name="account-outline" color="grey" size="25" />
+                  <Icon name='account-outline' color='grey' size='25' />
                 )}
-                label="Profile"
+                label='Profile'
                 onPress={() => {
                   navigation.navigate("Profile");
                 }}
@@ -35,8 +53,8 @@ const DrawerContent = ({ navigation }) => {
             </Drawer.Section>
             <Drawer.Section style={styles.drawerSection}>
               <DrawerItem
-                icon={() => <Icon name="receipt" color="grey" size="25" />}
-                label="Receipts Calculator"
+                icon={() => <Icon name='receipt' color='grey' size='25' />}
+                label='Receipts Calculator'
                 onPress={() => {
                   navigation.navigate("Calculation");
                 }}
@@ -47,8 +65,8 @@ const DrawerContent = ({ navigation }) => {
 
         <Drawer.Section style={styles.bottomDrawerSection}>
           <DrawerItem
-            icon={() => <Icon name="exit-to-app" size="25" />}
-            label="Sign Out"
+            icon={() => <Icon name='exit-to-app' size='25' />}
+            label='Sign Out'
             onPress={() => {
               authStore.signout();
             }}
@@ -59,6 +77,8 @@ const DrawerContent = ({ navigation }) => {
   );
 };
 export default observer(DrawerContent);
+
+//Drawer Styling
 const styles = StyleSheet.create({
   drawerContent: {
     flex: 1,

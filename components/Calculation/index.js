@@ -1,8 +1,11 @@
 import React, { useState } from "react";
 import { observer } from "mobx-react";
 
-import { InputContainer, TextStyle } from "./styles";
+//Styling
+import { InputContainer, TextStyle, PageTitle } from "./styles";
 import { ButtonGroup } from "react-native-elements";
+
+//Calculater
 import CalculateByFolder from "./CalculateByFolder";
 import CalculateByDate from "./CalculateByDate";
 
@@ -13,6 +16,8 @@ const Calculation = ({ navigation }) => {
     setSelectedIndex(selectedIndex);
   };
   return (
+    <InputContainer>
+      <PageTitle> Calculate Your Receipts </PageTitle>
     <>
       <TextStyle>Receipts Calculator</TextStyle>
       <ButtonGroup
@@ -20,7 +25,7 @@ const Calculation = ({ navigation }) => {
         selectedIndex={selectedIndex}
         buttons={[`By Date`, `By Folder`]}
         containerStyle={{ height: 30, marginTop: 10 }}
-        selectedButtonStyle={{ backgroundColor: "grey" }}
+        selectedButtonStyle={{ backgroundColor: "#ffbf00" }}
       />
       {selectedIndex === 0 && <CalculateByDate navigation={navigation} />}
 
