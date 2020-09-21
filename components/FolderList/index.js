@@ -31,9 +31,9 @@ const FolderList = ({ navigation }) => {
         onPress={updateIndex}
         buttons={[
           <Text>
-            <Icon name="search1" color="grey" size="25" />
+            <Icon name='search1' color='grey' size='25' />
           </Text>,
-          `+Folder`,
+          `Add Folder`,
         ]}
         containerStyle={{ height: 30, marginTop: 10 }}
         selectedButtonStyle={{ backgroundColor: "grey" }}

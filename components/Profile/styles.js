@@ -36,23 +36,25 @@ export const AuthTextInput = styled.TextInput`
   margin-bottom: 15px;
   color: black;
   border-bottom-color: lightgrey;
-  border-bottom-width: 1px;
+  border-bottom-width: 0.25px;
   width: 350px;
   padding-left: 10px;
   margin-top: 8px;
 `;
 export const AuthButton = styled.TouchableOpacity`
   padding: 10px;
-  background-color: lightgrey;
+  background-color: #fff;
+  border: lightgray;
+  border-radius: 25;
   width: 150;
+  margin-top: 40;
   margin-right: 2px;
   align-items: center;
 
   /* margin-bottom: 180px; */
 `;
 export const AuthButtonText = styled.Text`
-  color: #fcfdff;
-  font-weight: bold;
+  color: #ffbf00;
   font-size: 18px;
 `;
 export const AuthOther = styled.Text`

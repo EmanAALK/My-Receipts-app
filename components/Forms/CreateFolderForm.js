@@ -30,11 +30,11 @@ const CreateFolderForm = ({ navigation }) => {
 
   return (
     <FormContainer>
-      <FormTitle>Add A Folder</FormTitle>
+      <FormTitle>New Folder</FormTitle>
       <FormTextInput
         onChangeText={(name) => setFolder({ ...folder, name })}
-        placeholder="Folder Name"
-        placeholderTextColor="#A6AEC1"
+        placeholder='Folder Name'
+        placeholderTextColor='#A6AEC1'
       />
       <View style={{ flexDirection: "row" }}>
         <FormButton onPress={handleSubmit}>
