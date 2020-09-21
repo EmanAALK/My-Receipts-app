@@ -39,8 +39,7 @@ const CreateFolderForm = ({ navigation }) => {
   return (
     // testing
     <FormContainer>
-
-      <>
+      {/* <>
         <View
           style={{
             padding: 5,
@@ -61,7 +60,7 @@ const CreateFolderForm = ({ navigation }) => {
         >
           <Text onPress={handleCancelTwo}>Warranty</Text>
         </View>
-      </>
+      </> */}
       {isSelected === false ? (
         <>
           <FormTitle>Add A Folder</FormTitle>
@@ -99,7 +98,6 @@ const CreateFolderForm = ({ navigation }) => {
           </View>
         </>
       )}
-
     </FormContainer>
   );
 };
