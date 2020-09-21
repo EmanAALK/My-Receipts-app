@@ -6,7 +6,7 @@ import folderStore from "../../store/FolderStore";
 import authStore from "../../store/authStore";
 
 //Styling
-import { View } from "native-base";
+import { View, Text } from "native-base";
 import { InputContainer, TextStyle, Total } from "./styles";
 
 //Pickers
@@ -70,12 +70,12 @@ const CalculateByDate = ({ navigation }) => {
           <TextStyle>To : </TextStyle>
           <DatePicker
             style={{ width: 255, textAlign: "left", marginLeft: 10 }}
-            date=''
-            mode='date'
-            placeholder='select date'
-            format='YYYY-MM-DD'
-            confirmBtnText='Confirm'
-            cancelBtnText='Cancel'
+            date=""
+            mode="date"
+            placeholder="select date"
+            format="YYYY-MM-DD"
+            confirmBtnText="Confirm"
+            cancelBtnText="Cancel"
             date=""
             mode="date"
             placeholder="select date"
