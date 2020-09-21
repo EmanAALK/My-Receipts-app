@@ -17,17 +17,14 @@ import { LinearGradient } from "expo-linear-gradient";
 
 const Drawer = createDrawerNavigator();
 const Tab = createMaterialBottomTabNavigator();
+
 const color = "#e2cfc4";
 const TabScreen = () => (
   <Tab.Navigator
     initialRouteName='Home'
     activeColor='#ffbf00'
     barStyle={{ backgroundColor: "white" }}
-    initialRouteName="Home"
-    activeColor="white"
-    barStyle={{
-      backgroundColor: color,
-    }}
+    initialRouteName='Home'
   >
     <Tab.Screen
       name='Home'
@@ -53,7 +50,7 @@ const TabScreen = () => (
         // tabBarLabel: "AddReceipt",
         showLabel: false,
         title: false,
-        backgroundColor: color,
+        backgroundColor: "color",
         tabBarIcon: ({ color }) => (
           <Icon name='md-camera' color={color} size={26} />
         ),

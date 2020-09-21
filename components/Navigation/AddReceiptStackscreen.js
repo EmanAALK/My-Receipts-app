@@ -21,8 +21,6 @@ const AddReceiptStackScreen = ({ navigation }) => (
       headerStyle: {
         backgroundColor: "white",
         height: 100,
-        backgroundColor: color,
-        height: 55,
       },
       headerTitleStyle: {
         fontWeight: "bold",
@@ -31,8 +29,8 @@ const AddReceiptStackScreen = ({ navigation }) => (
     }}
   >
     <AddReceiptStack.Screen
-      name='CameraModal'
-      component={CameraModal}
+      name='CreateReceiptForm'
+      component={CreateReceiptForm}
       options={{
         title: false,
 
@@ -42,7 +40,6 @@ const AddReceiptStackScreen = ({ navigation }) => (
             size={25}
             color={"gray"}
             backgroundColor='transparent'
-            backgroundColor={color}
             onPress={() => navigation.openDrawer()}
           ></Icon.Button>
         ),

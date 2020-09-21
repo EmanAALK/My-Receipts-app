@@ -39,6 +39,7 @@ const CreateFolderForm = ({ navigation }) => {
   return (
     // testing
     <FormContainer>
+
       <>
         <View
           style={{
@@ -98,6 +99,7 @@ const CreateFolderForm = ({ navigation }) => {
           </View>
         </>
       )}
+
     </FormContainer>
   );
 };
