@@ -10,7 +10,6 @@ import receiptStore from "../../store/ReceiptStore";
 
 //Styles
 import { Content, Spinner, List, Text, Image, Button } from "native-base";
-import Notifications from "../Notifications";
 
 const ReceiptList = ({ navigation, route }) => {
   if (receiptStore.loading) return <Spinner />;
@@ -19,7 +18,13 @@ const ReceiptList = ({ navigation, route }) => {
   const receiptList = receiptStore.receipts
     .filter((receipt) => receipt.folder.id === folder.id)
     .map((receipt) => (
-      <ReceiptItem receipt={receipt} key={receipt.id} navigation={navigation} />
+      <>
+        <ReceiptItem
+          receipt={receipt}
+          key={receipt.id}
+          navigation={navigation}
+        />
+      </>
     ));
 
   return (

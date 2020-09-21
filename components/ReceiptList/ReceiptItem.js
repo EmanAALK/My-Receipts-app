@@ -14,8 +14,6 @@ const ReceiptItem = ({ receipt, navigation }) => {
     >
       <Left>
         <Text>{receipt.name}</Text>
-        <Text>{receipt.date}</Text>
-        <Text>{receipt.price}</Text>
       </Left>
       <>
         <Right>

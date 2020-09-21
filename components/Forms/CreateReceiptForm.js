@@ -236,25 +236,25 @@ const CreateReceiptForm = ({ navigation }) => {
 
         <FormTextInput
           onChangeText={(name) => setReceipt({ ...receipt, name })}
-          placeholder='Receipt Name'
-          placeholderTextColor='#A6AEC1'
+          placeholder="Receipt Name"
+          placeholderTextColor="#A6AEC1"
         />
 
         <FormTextInput
           onChangeText={(price) => setReceipt({ ...receipt, price })}
-          placeholder='Price'
-          placeholderTextColor='#A6AEC1'
+          placeholder="Price"
+          placeholderTextColor="#A6AEC1"
         />
 
         {/* Date */}
         <DatePicker
           style={{ width: 255 }}
           date={receipt.date}
-          mode='date'
-          placeholder='select date'
-          format='YYYY-MM-DD'
-          confirmBtnText='Confirm'
-          cancelBtnText='Cancel'
+          mode="date"
+          placeholder="select date"
+          format="YYYY-MM-DD"
+          confirmBtnText="Confirm"
+          cancelBtnText="Cancel"
           customStyles={{
             dateIcon: {
               position: "absolute",
@@ -275,11 +275,11 @@ const CreateReceiptForm = ({ navigation }) => {
         <DatePicker
           style={{ width: 255 }}
           date={receipt.Expdate}
-          mode='Expiration date'
-          placeholder='select date'
-          format='YYYY-MM-DD'
-          confirmBtnText='Confirm'
-          cancelBtnText='Cancel'
+          mode="Expiration date"
+          placeholder="select date"
+          format="YYYY-MM-DD"
+          confirmBtnText="Confirm"
+          cancelBtnText="Cancel"
           customStyles={{
             dateIcon: {
               position: "absolute",
@@ -353,6 +353,32 @@ const CreateReceiptForm = ({ navigation }) => {
             }}
           />
         </View>
+        <DatePicker
+          style={{ width: 255 }}
+          date={receipt.Expdate}
+          mode="date"
+          placeholder="select expiration date"
+          format="YYYY-MM-DD"
+          confirmBtnText="Confirm"
+          cancelBtnText="Cancel"
+          customStyles={{
+            dateIcon: {
+              position: "absolute",
+              left: 0,
+              top: 4,
+              marginRight: 4,
+              marginLeft: 0,
+              borderColor: "#cea146",
+            },
+            dateInput: {
+              marginLeft: 36,
+            },
+          }}
+          onDateChange={(date) => {
+            return setReceipt({ ...receipt, Expdate });
+          }}
+        />
+
         {/* Image  */}
         <View
           style={{
@@ -363,6 +389,7 @@ const CreateReceiptForm = ({ navigation }) => {
           }}
         >
           <Button title='Pick an image from camera roll' onPress={pickImage} />
+          <Button title="Pick an image from camera roll" onPress={pickImage} />
           {/* <Button title="Pick an image from camera roll" onPress={pickImage} />
           {image && (
             <Image

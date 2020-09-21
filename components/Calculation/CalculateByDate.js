@@ -40,12 +40,12 @@ const CalculateByDate = ({ navigation }) => {
         <TextStyle>From : </TextStyle>
         <DatePicker
           style={{ width: 255 }}
-          date=''
-          mode='date'
-          placeholder='select date'
-          format='YYYY-MM-DD'
-          confirmBtnText='Confirm'
-          cancelBtnText='Cancel'
+          date=""
+          mode="date"
+          placeholder="select date"
+          format="YYYY-MM-DD"
+          confirmBtnText="Confirm"
+          cancelBtnText="Cancel"
           customStyles={{
             dateIcon: {
               position: "absolute",
@@ -76,6 +76,12 @@ const CalculateByDate = ({ navigation }) => {
             format='YYYY-MM-DD'
             confirmBtnText='Confirm'
             cancelBtnText='Cancel'
+            date=""
+            mode="date"
+            placeholder="select date"
+            format="YYYY-MM-DD"
+            confirmBtnText="Confirm"
+            cancelBtnText="Cancel"
             customStyles={{
               dateIcon: {
                 position: "absolute",

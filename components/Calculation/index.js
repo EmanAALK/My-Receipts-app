@@ -19,6 +19,9 @@ const Calculation = ({ navigation }) => {
     <>
       <InputContainer>
         <PageTitle> Calculate Your Receipts </PageTitle>
+    <InputContainer>
+      <PageTitle> Calculate Your Receipts </PageTitle>
+      <>
         <TextStyle>Receipts Calculator</TextStyle>
         <ButtonGroup
           onPress={updateIndex}
@@ -32,6 +35,8 @@ const Calculation = ({ navigation }) => {
         {selectedIndex === 1 && <CalculateByFolder navigation={navigation} />}
       </InputContainer>
     </>
+      </>
+    </InputContainer>
   );
 };
 
