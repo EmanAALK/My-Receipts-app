@@ -134,13 +134,35 @@ const CreateReceiptForm = ({ navigation }) => {
   const takePicture = async () => {
     if (cameraRef.current) {
       const options = { quality: 0.5, base64: true, skipProcessing: true };
-      const data = await cameraRef.current.takePictureAsync(options);
+      const data = await cameraRef.current.takePictureAsync(
+        options,
+        onPictureSaved
+      );
       const source = data.uri;
       if (source) {
         await cameraRef.current.pausePreview();
         setIsPreview(true);
         console.log("picture source", source);
       }
+    }
+  };
+
+  const onPictureSaved = async (photo) => {
+    setState({ image: photo });
+  };
+
+  //Save to Camera roll
+  const saveToCameraRollAsync = async () => {
+    try {
+      let result = await captureRef({
+        format: "png",
+      });
+
+      let saveResult = await CameraRoll.saveToCameraRoll(result, "photo");
+      console.log(saveResult);
+      setState({ cameraRollUri: saveResult });
+    } catch (snapshotError) {
+      console.error(snapshotError);
     }
   };
 
@@ -281,11 +303,11 @@ const CreateReceiptForm = ({ navigation }) => {
           <DatePicker
             style={{ width: 255 }}
             date={receipt.date}
-            mode="date"
-            placeholder="select date"
-            format="YYYY-MM-DD"
-            confirmBtnText="Confirm"
-            cancelBtnText="Cancel"
+            mode='date'
+            placeholder='select date'
+            format='YYYY-MM-DD'
+            confirmBtnText='Confirm'
+            cancelBtnText='Cancel'
             customStyles={{
               dateIcon: {
                 position: "absolute",
@@ -308,11 +330,11 @@ const CreateReceiptForm = ({ navigation }) => {
           <DatePicker
             style={{ width: 255 }}
             date={receipt.Expdate}
-            mode="Expiration date"
-            placeholder="select expiration date"
-            format="YYYY-MM-DD"
-            confirmBtnText="Confirm"
-            cancelBtnText="Cancel"
+            mode='Expiration date'
+            placeholder='select expiration date'
+            format='YYYY-MM-DD'
+            confirmBtnText='Confirm'
+            cancelBtnText='Cancel'
             customStyles={{
               dateIcon: {
                 position: "absolute",
@@ -340,7 +362,6 @@ const CreateReceiptForm = ({ navigation }) => {
             color: "black",
           }}
         >
-
           <Button title='Pick an image from camera roll' onPress={pickImage} />
           {/* <Button title="Pick an image from camera roll" onPress={pickImage} />
           {image && (
@@ -377,45 +398,9 @@ const CreateReceiptForm = ({ navigation }) => {
         <View style={styles.container}>
           {isPreview && renderCancelPreviewButton()}
           {!isPreview && renderCaptureControl()}
+          {saveToCameraRollAsync()}
         </View>
       </SafeAreaView>
-
-      {/* <View style={{ flex: 1 }}>
-        <Camera style={{ flex: 1 }} type={type}>
-          <View
-            style={{
-              flex: 1,
-              backgroundColor: "transparent",
-              flexDirection: "row",
-            }}
-          >
-            <TouchableOpacity
-              style={{
-                flex: 0.1,
-                alignSelf: "flex-end",
-                alignItems: "center",
-              }}
-
-              // style={styles.capture}
-
-              onPress={takePicture}
-            >
-              <Text
-                style={{
-                  fontSize: 40,
-                  fontWeight: "bold",
-                  marginBottom: 10,
-                  marginLeft: 8,
-                  alignItems: "center",
-                  color: "white",
-                }}
-              >
-                O
-              </Text>
-            </TouchableOpacity>
-          </View>
-        </Camera> */}
-      {/* </View> */}
     </>
   );
 };
