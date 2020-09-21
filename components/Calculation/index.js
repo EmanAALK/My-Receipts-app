@@ -16,6 +16,9 @@ const Calculation = ({ navigation }) => {
     setSelectedIndex(selectedIndex);
   };
   return (
+    <>
+      <InputContainer>
+        <PageTitle> Calculate Your Receipts </PageTitle>
     <InputContainer>
       <PageTitle> Calculate Your Receipts </PageTitle>
       <>
@@ -30,6 +33,8 @@ const Calculation = ({ navigation }) => {
         {selectedIndex === 0 && <CalculateByDate navigation={navigation} />}
 
         {selectedIndex === 1 && <CalculateByFolder navigation={navigation} />}
+      </InputContainer>
+    </>
       </>
     </InputContainer>
   );

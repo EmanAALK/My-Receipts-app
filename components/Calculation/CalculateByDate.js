@@ -70,6 +70,12 @@ const CalculateByDate = ({ navigation }) => {
           <TextStyle>To : </TextStyle>
           <DatePicker
             style={{ width: 255, textAlign: "left", marginLeft: 10 }}
+            date=''
+            mode='date'
+            placeholder='select date'
+            format='YYYY-MM-DD'
+            confirmBtnText='Confirm'
+            cancelBtnText='Cancel'
             date=""
             mode="date"
             placeholder="select date"
