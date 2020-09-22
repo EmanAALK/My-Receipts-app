@@ -11,7 +11,7 @@ import {
   View,
 } from "react-native";
 
-const CameraModal = () => {
+const CameraModal = ({ navigation }) => {
   const [modalVisible, setModalVisible] = useState(false);
   return (
     <View style={styles.centeredView}>
@@ -25,7 +25,15 @@ const CameraModal = () => {
       >
         <View style={styles.centeredView}>
           <View style={styles.modalView}>
-            <Text style={styles.modalText}>Hello World!</Text>
+            <Text style={styles.modalText}>
+              <Text onPress={() => navigation.navigate("CameraScreen")}>
+                Choose an image from camera roll{" "}
+              </Text>
+              <Text onPress={() => navigation.navigate("PhotoPicker")}>
+                Take an image by camera
+              </Text>
+            </Text>
+            <Text style={styles.textStyle}>Take an image by camera</Text>
 
             <TouchableHighlight
               style={{ ...styles.openButton, backgroundColor: "#2196F3" }}
