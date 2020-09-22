@@ -11,9 +11,11 @@ import { Text } from "native-base";
 
 const ReceiptItem = ({ folder, navigation }) => {
   let total = 0;
+  // not gonna keep adding snakes...
   const receipt = receiptStore.receipts.filter(
     (receipt) => receipt.folder.id === folder.id
   );
+  // not being used
   const amount = receipt.map((receipt) => (total = total + receipt.price));
 
   const renderItem = ({ item }) => {

@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState } from "react"; // unused import
 import { observer } from "mobx-react";
 
 //Drawer
@@ -12,7 +12,13 @@ import Icon from "react-native-vector-icons/MaterialCommunityIcons";
 //Stores
 import authStore from "../../store/authStore";
 
+/**
+ * "DawerContenent" != "DrawerContent"
+ */
+
 const DrawerContent = ({ navigation }) => {
+  // this can't be working...
+  // you're missing the `const`
   user = authStore.user;
 
   return (
@@ -23,7 +29,7 @@ const DrawerContent = ({ navigation }) => {
             <Drawer.Section
               style={
                 (styles.drawerSection,
-                { height: 90, backgroundColor: "#ffbf00" })
+                  { height: 90, backgroundColor: "#ffbf00" })
               }
             >
               <View style={styles.userInfoSection}>
@@ -31,7 +37,7 @@ const DrawerContent = ({ navigation }) => {
                   <Title
                     style={
                       (styles.title,
-                      { color: "white", marginTop: 20, marginBottom: 20 })
+                        { color: "white", marginTop: 20, marginBottom: 20 })
                     }
                   >
                     {user.username}

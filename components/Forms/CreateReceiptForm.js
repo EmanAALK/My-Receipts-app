@@ -1,6 +1,6 @@
-import React, { useState, useRef, useEffect } from "react";
+import React, { useState, useRef, useEffect } from "react"; // unused import
 import { observer } from "mobx-react";
-import { Button, Image, Platform, Picker, View } from "react-native";
+import { Button, Image, Platform, Picker, View } from "react-native"; // unused import
 
 //Image Picker
 import * as ImagePicker from "expo-image-picker";
@@ -11,8 +11,8 @@ import DatePicker from "react-native-datepicker";
 import RNPickerSelect from "react-native-picker-select";
 
 //Components
-import FolderItem from "./FolderItem";
-import CameraModal from "../Modals/CameraModal";
+import FolderItem from "./FolderItem"; // unused import
+import CameraModal from "../Modals/CameraModal"; // unused import
 
 //Stores
 import receiptStore from "../../store/ReceiptStore";
@@ -26,8 +26,13 @@ import {
   FormTextInput,
   FormButtonText,
   FormButton,
-  EditContainer,
+  EditContainer, // unused import
 } from "./styles";
+
+/**
+ * This component is too large
+ * see if you can split it up
+ */
 
 const CreateReceiptForm = ({ route, navigation }) => {
   const { photo } = route.params;
@@ -63,6 +68,7 @@ const CreateReceiptForm = ({ route, navigation }) => {
 
   let name = [];
   name = folder.map(function (i) {
+    // did you mean label?
     return { labe: i.name };
   });
 
@@ -86,7 +92,7 @@ const CreateReceiptForm = ({ route, navigation }) => {
       if (!result.cancelled) {
         setImage(result.uri);
       }
-    } catch (E) {}
+    } catch (E) { }
   };
 
   return (

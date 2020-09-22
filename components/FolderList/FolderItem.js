@@ -6,9 +6,9 @@ import folderStore from "../../store/FolderStore";
 
 //Styling
 import { Card, List } from "react-native-paper";
-import { IconStyled } from "./styles";
+import { IconStyled } from "./styles"; // unused import
 import { Body, CardItem, Left, Right, Row, Text } from "native-base";
-import { View } from "react-native-animatable";
+import { View } from "react-native-animatable"; // unused import
 import Icon from "react-native-vector-icons/Feather";
 import { Alert } from "react-native";
 

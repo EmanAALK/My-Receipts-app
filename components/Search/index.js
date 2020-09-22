@@ -6,7 +6,7 @@ import folderStore from "../../store/FolderStore";
 import DropDownPicker from "react-native-dropdown-picker";
 import ReceiptStore from "../../store/ReceiptStore";
 // Styling
-import { Left, Right, Row } from "native-base";
+import { Left, Right, Row } from "native-base"; // unused import
 import { View } from "react-native-animatable";
 import { ScrollView } from "react-native";
 import DatePicker from "react-native-datepicker";
@@ -72,15 +72,15 @@ const Search = ({ navigation }) => {
             }}
           />
         ) : (
-          <View style={{ width: "95%", height: 15 }}>
-            <SearchBar
-              placeholder='Type Here...'
-              lightTheme
-              onChangeText={handleSearch}
-              value={query}
-            />
-          </View>
-        )}
+            <View style={{ width: "95%", height: 15 }}>
+              <SearchBar
+                placeholder='Type Here...'
+                lightTheme
+                onChangeText={handleSearch}
+                value={query}
+              />
+            </View>
+          )}
       </View>
 
       <DropDownPicker

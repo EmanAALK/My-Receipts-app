@@ -5,12 +5,12 @@ import { observer } from "mobx-react";
 import Icon from "react-native-vector-icons/Ionicons";
 
 // component
-import CreateReceiptForm from "../Forms/CreateReceiptForm";
-import CameraModal from "../Modals/CameraModal";
+import CreateReceiptForm from "../Forms/CreateReceiptForm"; // unused import
+import CameraModal from "../Modals/CameraModal"; // unused import
 import CameraScreen from "../CameraFeature/CameraScreen";
 
 const AddReceiptStack = createStackNavigator();
-const color = "#e2cfc4";
+const color = "#e2cfc4"; // unused const
 
 const AddReceiptStackScreen = ({ navigation }) => (
   <AddReceiptStack.Navigator

@@ -13,7 +13,7 @@ import {
   FormButton,
 } from "./styles";
 
-import { Text, View } from "react-native";
+import { Text, View } from "react-native"; // unused import
 
 const CreateFolderForm = ({ navigation }) => {
   const [folder, setFolder] = useState({
@@ -31,6 +31,7 @@ const CreateFolderForm = ({ navigation }) => {
 
   const [isSelected, setSelection] = useState(false);
 
+  // unused method
   const handleCancelTwo = async () => {
     setSelection(!isSelected);
   };
@@ -59,6 +60,8 @@ const CreateFolderForm = ({ navigation }) => {
           <Text onPress={handleCancelTwo}>Warranty</Text>
         </View>
       </> */}
+      {/* it's cleaner to switch this condition
+      make it {isSelected ? ...} then switch the JSX blocks */}
       {isSelected === false ? (
         <>
           <FormTitle>Add A Folder</FormTitle>
@@ -78,24 +81,24 @@ const CreateFolderForm = ({ navigation }) => {
           </View>
         </>
       ) : (
-        <>
-          <FormTitle>Add A Folder Two</FormTitle>
-          <FormTextInput
-            onChangeText={(name) => setFolder({ ...folder, name })}
-            placeholder='Folder Name'
-            placeholderTextColor='#A6AEC1'
-          />
-          <View style={{ flexDirection: "row" }}>
-            <FormButton onPress={handleSubmit}>
-              <FormButtonText>Save Changes</FormButtonText>
-            </FormButton>
+          <>
+            <FormTitle>Add A Folder Two</FormTitle>
+            <FormTextInput
+              onChangeText={(name) => setFolder({ ...folder, name })}
+              placeholder='Folder Name'
+              placeholderTextColor='#A6AEC1'
+            />
+            <View style={{ flexDirection: "row" }}>
+              <FormButton onPress={handleSubmit}>
+                <FormButtonText>Save Changes</FormButtonText>
+              </FormButton>
 
-            <FormButton onPress={handleCancel}>
-              <FormButtonText>Cancel</FormButtonText>
-            </FormButton>
-          </View>
-        </>
-      )}
+              <FormButton onPress={handleCancel}>
+                <FormButtonText>Cancel</FormButtonText>
+              </FormButton>
+            </View>
+          </>
+        )}
     </FormContainer>
   );
 };

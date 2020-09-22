@@ -2,13 +2,14 @@ import React from "react";
 import { observer } from "mobx-react";
 
 //Components
-import CreateReceiptForm from "../Forms/CreateReceiptForm";
+import CreateReceiptForm from "../Forms/CreateReceiptForm"; // unused import
 
 //Styling
-import { StyleSheet, Text, View, Image } from "react-native";
+import { StyleSheet, Text, View, Image } from "react-native"; // unused import
 
 const CameraPhoto = ({ route, navigation }) => {
   const { photo } = route.params;
+  // remove commented code
   //   navigation.navigate("CreateReceiptForm");
 
   return (

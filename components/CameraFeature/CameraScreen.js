@@ -1,16 +1,18 @@
 //Eman is super happy the camera worked!
+// Mshary is glad to hear that!😁
+// Mshary also thinks this is kind of cheesy!
 
-import React, { useState, useRef, useEffect } from "react";
+import React, { useState, useRef, useEffect } from "react"; // unused import
 import { observer } from "mobx-react";
 
 //Camera
 import { Camera } from "expo-camera";
-import { captureRef } from "react-native-view-shot";
+import { captureRef } from "react-native-view-shot"; // unused import
 // import { Video } from "expo-av";
 
 //Components
-import CameraPhoto from "./CameraPhoto";
-import CreateReceiptForm from "../Forms/CreateReceiptForm";
+import CameraPhoto from "./CameraPhoto"; // unused import
+import CreateReceiptForm from "../Forms/CreateReceiptForm"; // unused import
 
 import {
   View,
@@ -26,9 +28,13 @@ const WINDOW_HEIGHT = Dimensions.get("window").height;
 const closeButtonSize = Math.floor(WINDOW_HEIGHT * 0.032);
 const captureSize = Math.floor(WINDOW_HEIGHT * 0.09);
 
+/**
+ * Remove all commented unused code.
+ */
+
 const CameraScreen = ({ navigation }) => {
   //Camera Access
-  const [hasPermission, setHasPermission] = useState(null); //Access Permision
+  const [hasPermission, setHasPermission] = useState(null); //Access Permision <-- Permission misspelled
   const [cameraType, setCameraType] = useState(Camera.Constants.Type.back);
   const [isCameraReady, setIsCameraReady] = useState(false);
   const [isPreview, setIsPreview] = useState(false);
@@ -65,6 +71,7 @@ const CameraScreen = ({ navigation }) => {
   const onCameraReady = () => {
     setIsCameraReady(true);
   };
+  // unused method
   const takePicture = async () => {
     if (cameraRef.current) {
       const options = { quality: 0.5, base64: true, skipProcessing: true };
@@ -76,13 +83,14 @@ const CameraScreen = ({ navigation }) => {
       if (source) {
         await cameraRef.current.pausePreview();
         setIsPreview(true);
-        console.log("picture source", source);
+        console.log("picture source", source); // also remove all console logs
         saveToCameraRollAsync();
       }
     }
   };
 
   //Camera Flipping
+  // unused method
   const switchCamera = () => {
     if (isPreview) {
       return;
@@ -170,7 +178,7 @@ const CameraScreen = ({ navigation }) => {
         onMountError={(error) => {
           console.log("camera error", error);
         }}
-        // autoFocus
+      // autoFocus
       />
       <View style={styles.container}>
         {isPreview && renderCancelPreviewButton()}

@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import FolderItem from "./FolderItem";
+import FolderItem from "./FolderItem"; // unused import
 
 //Stores
 import receiptStore from "../../store/ReceiptStore";
@@ -10,13 +10,18 @@ import authStore from "../../store/authStore";
 
 import { View, Text, Right, Body, Left, Card, CardItem } from "native-base";
 
-import { InputContainer, TextStyle, Total } from "./styles";
-import { Table, Row } from "react-native-table-component";
+import { InputContainer, TextStyle, Total } from "./styles"; // unused import
+import { Table, Row } from "react-native-table-component"; // unused import
 
 //Pickers
 import DatePicker from "react-native-datepicker";
 
-const CalculateByDate = ({ navigation }) => {
+/**
+ * this component is too large and seems to be doing too much.
+ * break it down into smaller components.
+ */
+
+const CalculateByDate = ({ navigation }) => { // unused navigation
   const [fromDate, setFromDate] = useState();
   const [toDate, setToDate] = useState();
 
@@ -26,10 +31,13 @@ const CalculateByDate = ({ navigation }) => {
     (folder) => folder.userId === authStore.user.id
   );
 
+  // receiptSSSSSSSSS 🐍
   const receipt = receiptStore.receipts.filter((receipt) =>
     folder.find((filter) => receipt.folder.id === filter.id)
   );
 
+  // the .map() below needs to use curly brackets if you'll have lines of code other
+  // than the return value.
   const receiptList = receipt
     .filter((receipt) => receipt.date >= fromDate && receipt.date <= toDate)
     .map(
@@ -88,6 +96,7 @@ const CalculateByDate = ({ navigation }) => {
               borderWidth: 0.25,
             },
           }}
+          // you can simplify this by just passing the setFromDate function itself
           onDateChange={(date) => {
             setFromDate(date);
           }}

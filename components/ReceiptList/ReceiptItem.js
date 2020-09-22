@@ -5,8 +5,8 @@ import { observer } from "mobx-react";
 import receiptStore from "../../store/ReceiptStore";
 
 //Styling
-import { ListItem, Left, Right, Text, View, Button } from "native-base";
-import { Card } from "react-native-paper";
+import { ListItem, Left, Right, Text, View, Button } from "native-base"; // unused import
+import { Card } from "react-native-paper"; // unused import
 
 const ReceiptItem = ({ receipt, navigation }) => {
   return (

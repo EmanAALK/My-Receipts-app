@@ -2,16 +2,17 @@ import React from "react";
 import { observer } from "mobx-react";
 
 //Styles
-import { View, Text, Driver, Title, Image } from "react-native";
-import { Content, Card, ListItem, Button, Icon } from "react-native-elements";
+import { View, Text, Driver, Title, Image } from "react-native"; // unused import
+import { Content, Card, ListItem, Button, Icon } from "react-native-elements"; // unused import
 
 //Store
 import folderStore from "../../store/FolderStore";
 
-import moment from "moment";
+import moment from "moment"; // unused import
 
 const ReceiptDetail = ({ route, navigation }) => {
   const { receipt } = route.params;
+  // unused const
   const folder = folderStore.folders.find(
     (folder) => folder.userId === receipt.folderId
   );

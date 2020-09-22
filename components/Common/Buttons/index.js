@@ -1,0 +1,1 @@
+// the common folder is a good practice, it's used in real life projects.

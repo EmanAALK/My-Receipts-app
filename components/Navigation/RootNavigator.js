@@ -13,12 +13,15 @@ import authStore from "../../store/authStore";
 import HomeStackScreen from "./HomeStackScreen";
 import NotificationStackscreen from "./NotificationStackscreen";
 import AddReceiptStackScreen from "./AddReceiptStackscreen";
-import { LinearGradient } from "expo-linear-gradient";
+import { LinearGradient } from "expo-linear-gradient"; // unused import
 import receiptStore from "../../store/ReceiptStore";
 const Drawer = createDrawerNavigator();
 const Tab = createMaterialBottomTabNavigator();
 
 const color = "#e2cfc4";
+
+// make this file as the index.js
+// and move the navigator in index.js to Navigation.js
 
 const TabScreen = () => (
   <Tab.Navigator
@@ -87,8 +90,8 @@ const RootNavigator = () => {
           <Drawer.Screen name='HomeTab' component={TabScreen} />
         </Drawer.Navigator>
       ) : (
-        <Navigation />
-      )}
+          <Navigation />
+        )}
     </>
   );
 };

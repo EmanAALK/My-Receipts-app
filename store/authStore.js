@@ -19,7 +19,7 @@ class AuthStore {
   signup = async (userData) => {
     try {
       const res = await instance.post("/signup", userData);
-      this.setUser(res.data.token); // await
+      this.setUser(res.data.token); // await <--
     } catch (error) {
       console.log("AuthStore -> signup -> error", error);
     }
@@ -45,7 +45,7 @@ class AuthStore {
     if (token) {
       const decodedToken = decode(token);
       if (Date.now() < decodedToken.exp) {
-        this.setUser(token); // await
+        this.setUser(token); // await <--
       } else {
         this.signout();
       }
@@ -58,6 +58,7 @@ class AuthStore {
 
       for (const key in updatedUser) formData.append(key, updatedUser[key]);
 
+      // res not being used, no need to store in const
       const res = await instance.put(`/`, formData);
 
       this.user = updatedUser;

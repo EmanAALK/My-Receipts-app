@@ -5,11 +5,11 @@ import { observer } from "mobx-react";
 import ReceiptItem from "./ReceiptItem";
 
 //Stores
-import folderStore from "../../store/FolderStore";
+import folderStore from "../../store/FolderStore"; // unused import
 import receiptStore from "../../store/ReceiptStore";
 
 //Styles
-import { Content, Spinner, List, Text, Image, Button } from "native-base";
+import { Content, Spinner, List, Text, Image, Button } from "native-base"; // unused import
 
 const ReceiptList = ({ navigation, route }) => {
   if (receiptStore.loading) return <Spinner />;

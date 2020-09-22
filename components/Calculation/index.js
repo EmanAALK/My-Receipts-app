@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { observer } from "mobx-react";
 
 //Styling
-import { InputContainer, TextStyle, PageTitle } from "./styles";
+import { InputContainer, TextStyle, PageTitle } from "./styles"; // unused import
 import { ButtonGroup } from "react-native-elements";
 
 //Calculater

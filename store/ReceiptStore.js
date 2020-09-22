@@ -1,6 +1,8 @@
 import { decorate, observable } from "mobx";
 import instance from "./instance";
 
+// filename should be camelCase
+
 class ReceiptStore {
   receipts = [];
   loading = true;

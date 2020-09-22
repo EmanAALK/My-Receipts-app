@@ -1,8 +1,8 @@
 import React, { useState } from "react";
 import { observer } from "mobx-react";
 
-import { Text, View } from "native-base";
-import { InputContainer, TextStyle } from "./styles";
+import { Text, View } from "native-base"; // unused import
+import { InputContainer, TextStyle } from "./styles"; // unused import
 import receiptStore from "../../store/ReceiptStore";
 import folderStore from "../../store/FolderStore";
 import authStore from "../../store/authStore";
@@ -10,19 +10,24 @@ import DropDownPicker from "react-native-dropdown-picker";
 import FolderItem from "./FolderItem";
 import { ScrollView } from "react-native";
 import { Table, Row } from "react-native-table-component";
-import { Card } from "react-native-paper";
+import { Card } from "react-native-paper"; // unused import
 
 const CalculateByFolder = ({ navigation }) => {
   const [filter, setFilter] = useState([]);
   let total = 0;
 
+  // 🐍
   const folder = folderStore.folders.filter(
     (folder) => folder.userId === authStore.user.id
   );
 
+  // can be const
   let items = folder.map((item) => ({ label: item.name, value: item.id }));
   items.push({ label: "All Folders", value: 0 });
 
+  // const
+  // name is a bit confusing
+  // doesn't tell me what this contains or what it's used for
   let filterFolder = folder.filter((folder) =>
     filter.find((filter) => folder.id === filter)
   );
@@ -32,10 +37,12 @@ const CalculateByFolder = ({ navigation }) => {
     <FolderItem folder={folder} key={folder.id} navigation={navigation} />
   ));
 
+  // 🐍
   const receipt = receiptStore.receipts.filter((receipt) =>
     filterFolder.find((filter) => receipt.folder.id === filter.id)
   );
 
+  // not being used
   const amount = receipt.map((receipt) => (total = total + receipt.price));
   return (
     <>
@@ -71,6 +78,7 @@ const CalculateByFolder = ({ navigation }) => {
         ></DropDownPicker>
 
         {folderList}
+        {/* the condition below can be simplified to `{filter.length && ...}` */}
         {filter !== [] && (
           <Table borderStyle={{ borderWidth: 1, borderColor: "lightgrey" }}>
             <Row

@@ -3,14 +3,15 @@ import { observer } from "mobx-react";
 import moment from "moment";
 // Styling
 import { Card } from "react-native-paper";
-import { List, Spinner, Text, ListItem } from "native-base";
-import { Body, CardItem, Left, Right, Row } from "native-base";
+import { List, Spinner, Text, ListItem } from "native-base"; // unused import
+import { Body, CardItem, Left, Right, Row } from "native-base"; // unused import
 // store
 import receiptStore from "../store/ReceiptStore";
-import folderStore from "../store/FolderStore";
+import folderStore from "../store/FolderStore"; // unused import
 import authStore from "../store/authStore";
 import { View } from "react-native-animatable";
-import NotificationStackscreen from "../components/Navigation/NotificationStackscreen";
+import NotificationStackscreen from "../components/Navigation/NotificationStackscreen"; // unused import
+
 const Notifications = ({ navigation }) => {
   if (receiptStore.loading) return <Spinner />;
 

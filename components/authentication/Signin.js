@@ -37,6 +37,9 @@ const Signin = ({ navigation }) => {
     await authStore.signin(user);
 
     if (authStore.user) {
+      // this line doesn't work like you expect.
+      // JSX only gets rendered when you return it from the component function itself
+      // it doesn't do anything if you write it line this in a method.
       <RootNavigator />;
     } else {
       setIsValidUser(false);
@@ -68,7 +71,7 @@ const Signin = ({ navigation }) => {
           // Button Linear Gradient
           colors={["#ffbf00", "#FFCC33", "#FFE085"]}
           style={{
-            // start: ["-1", "-2"],
+            // start: ["-1", "-2"], remove this if youre not gonna use it
             // end: ["-2", "-2"],
             marginTop: 10,
             marginBottom: 10,
@@ -85,10 +88,10 @@ const Signin = ({ navigation }) => {
       {isValidUser ? (
         <Text style={{ color: "green" }}> forget password </Text>
       ) : (
-        <Animatable.View animation='fadeInLeft' duration={400}>
-          <Text style={{ color: "red" }}>Invalid username or password </Text>
-        </Animatable.View>
-      )}
+          <Animatable.View animation='fadeInLeft' duration={400}>
+            <Text style={{ color: "red" }}>Invalid username or password </Text>
+          </Animatable.View>
+        )}
       <AuthOther onPress={() => navigation.navigate("Signup")}>
         Click Here to Register!
       </AuthOther>
