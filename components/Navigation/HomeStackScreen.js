@@ -14,6 +14,8 @@ import CreateFolderForm from "../Forms/CreateFolderForm";
 import ReceiptList from "../ReceiptList";
 import ReceiptDetail from "../ReceiptList/ReceiptDetail";
 import Calculation from "../Calculation";
+import CameraScreen from "../CameraFeature/CameraScreen";
+import CameraPhoto from "../CameraFeature/CameraPhoto";
 import Search from "../Search";
 
 const HomeStack = createStackNavigator();
@@ -239,6 +241,56 @@ const HomeStackScreen = ({ navigation }) => (
     <HomeStack.Screen
       name='Search'
       component={Search}
+      options={{
+        title: false,
+        headerRight: () => (
+          <Icon
+            style={{ paddingRight: 10 }}
+            name='md-arrow-back'
+            size={25}
+            color='#fff'
+            onPress={() => navigation.goBack()}
+          ></Icon>
+        ),
+        headerLeft: () => (
+          <Icon.Button
+            name='ios-menu'
+            size={25}
+            backgroundColor='transparent'
+            onPress={() => navigation.openDrawer()}
+          ></Icon.Button>
+        ),
+      }}
+    />
+
+    <HomeStack.Screen
+      name='CameraScreen'
+      component={CameraScreen}
+      options={{
+        title: false,
+        headerRight: () => (
+          <Icon
+            style={{ paddingRight: 10 }}
+            name='md-arrow-back'
+            size={25}
+            color='#fff'
+            onPress={() => navigation.goBack()}
+          ></Icon>
+        ),
+        headerLeft: () => (
+          <Icon.Button
+            name='ios-menu'
+            size={25}
+            backgroundColor='transparent'
+            onPress={() => navigation.openDrawer()}
+          ></Icon.Button>
+        ),
+      }}
+    />
+
+    <HomeStack.Screen
+      name='CameraPhoto'
+      component={CameraPhoto}
       options={{
         title: false,
         headerRight: () => (

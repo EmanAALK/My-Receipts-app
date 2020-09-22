@@ -7,6 +7,7 @@ import Icon from "react-native-vector-icons/Ionicons";
 // component
 import CreateReceiptForm from "../Forms/CreateReceiptForm";
 import CameraModal from "../Modals/CameraModal";
+import CameraScreen from "../CameraFeature/CameraScreen";
 
 const AddReceiptStack = createStackNavigator();
 const color = "#e2cfc4";
@@ -29,8 +30,8 @@ const AddReceiptStackScreen = ({ navigation }) => (
     }}
   >
     <AddReceiptStack.Screen
-      name='CreateReceiptForm'
-      component={CreateReceiptForm}
+      name='CameraScreen'
+      component={CameraScreen}
       options={{
         title: false,
 
