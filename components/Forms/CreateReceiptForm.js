@@ -580,7 +580,7 @@ const CreateReceiptForm = ({ navigation }) => {
 
       image: { uri: localUri, name: filename, type },
     });
-    navigation.replace("Home");
+    navigation.goBack();
   };
 
   //Album Access State
