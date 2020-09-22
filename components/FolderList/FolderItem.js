@@ -7,11 +7,11 @@ import folderStore from "../../store/FolderStore";
 //Styling
 import { Card, List } from "react-native-paper";
 import { IconStyled } from "./styles";
-import { Body, CardItem, Left, Right, Row, Text } from "native-base";
+import { Body, CardItem, Left, Right, Row, Text, Thumbnail } from "native-base";
 import { View } from "react-native-animatable";
 import Icon from "react-native-vector-icons/Feather";
 import { Alert } from "react-native";
-
+import defaultimage from "../../assets/defaultimageFolder2.png";
 const FolderItem = ({ folder, navigation }) => {
   const deleteAlert = () => {
     Alert.alert("Delete", "Are you sure you want to delete this folder?", [
@@ -26,6 +26,14 @@ const FolderItem = ({ folder, navigation }) => {
     <Card style={{ marginTop: 5, width: "94%", alignSelf: "center" }}>
       <CardItem>
         <Left>
+          <Thumbnail
+            style={{
+              marginBottom: 5,
+              marginRight: 16,
+              textAligin: "center",
+            }}
+            source={defaultimage}
+          />
           <Text
             onPress={() =>
               navigation.navigate("ReceiptList", { folder: folder })
@@ -37,14 +45,14 @@ const FolderItem = ({ folder, navigation }) => {
         <Body></Body>
         {!folder.defaultFolder && (
           <Right style={{ flexDirection: "row" }}>
-            <Icon onPress={deleteAlert} name='trash-2' size='15' color='red' />
+            <Icon onPress={deleteAlert} name="trash-2" size="15" color="red" />
 
             <Icon
               onPress={() =>
                 navigation.navigate("UpdateFolderForm", { oldFolder: folder })
               }
-              name='edit-2'
-              size='15'
+              name="edit-2"
+              size="15"
             />
           </Right>
         )}
