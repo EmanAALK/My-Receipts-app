@@ -806,7 +806,6 @@ const CreateReceiptForm = ({ navigation }) => {
           placeholderTextColor="#A6AEC1"
         />
 
-        {/* Date */}
         <DatePicker
           style={{ width: 255 }}
           date={receipt.date}
@@ -833,31 +832,36 @@ const CreateReceiptForm = ({ navigation }) => {
           }}
         />
 
-        <DatePicker
-          style={{ width: 255 }}
-          date={receipt.Expdate}
-          mode="date"
-          placeholder="select expiration date"
-          format="YYYY-MM-DD"
-          confirmBtnText="Confirm"
-          cancelBtnText="Cancel"
-          customStyles={{
-            dateIcon: {
-              position: "absolute",
-              left: 0,
-              top: 4,
-              marginRight: 4,
-              marginLeft: 0,
-              borderColor: "#cea146",
-            },
-            dateInput: {
-              marginLeft: 36,
-            },
-          }}
-          onDateChange={(Expdate) => {
-            return setReceipt({ ...receipt, Expdate });
-          }}
-        />
+
+        <View style={{ flexDirection: "row" }}>
+          <DatePicker
+            style={{ width: 255 }}
+            date={receipt.Expdate}
+            mode="date"
+            placeholder="select expiration date"
+            format="YYYY-MM-DD"
+            confirmBtnText="Confirm"
+            cancelBtnText="Cancel"
+            customStyles={{
+              dateIcon: {
+                position: "absolute",
+                left: 0,
+                top: 4,
+                marginRight: 4,
+                marginLeft: 0,
+                borderColor: "#cea146",
+              },
+              dateInput: {
+                marginLeft: 36,
+              },
+            }}
+            onDateChange={(Expdate) => {
+              return setReceipt({ ...receipt, Expdate });
+            }}
+          />
+        </View>
+
+       
 
         {/* Image  */}
         <View

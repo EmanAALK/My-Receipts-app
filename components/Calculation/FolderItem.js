@@ -14,7 +14,6 @@ const ReceiptItem = ({ folder, navigation }) => {
   const receipt = receiptStore.receipts.filter(
     (receipt) => receipt.folder.id === folder.id
   );
-
   const amount = receipt.map((receipt) => (total = total + receipt.price));
 
   const renderItem = ({ item }) => {
@@ -42,7 +41,7 @@ const ReceiptItem = ({ folder, navigation }) => {
             height: 30,
             backgroundColor: "white",
           }}
-          textStyle={{ marginLeft: 30, color: "red" }}
+          textStyle={{ marginLeft: 30, color: "blue" }}
         />
       </Table>
       <FlatList
@@ -58,7 +57,7 @@ const ReceiptItem = ({ folder, navigation }) => {
             height: 30,
             backgroundColor: "white",
           }}
-          textStyle={{ marginLeft: 30, color: "red" }}
+          textStyle={{ marginLeft: 30, color: "blue" }}
         />
       </Table>
     </>
