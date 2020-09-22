@@ -254,6 +254,7 @@ const HomeStackScreen = ({ navigation }) => (
           <Icon.Button
             name='ios-menu'
             size={25}
+            backgroundColor='transparent'
             onPress={() => navigation.openDrawer()}
           ></Icon.Button>
         ),

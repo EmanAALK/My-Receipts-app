@@ -15,7 +15,7 @@ import Icon from "react-native-vector-icons/AntDesign";
 
 const FolderList = ({ navigation }) => {
   if (folderStore.loading) return <Spinner />;
-  const [selectedIndex, setSelectedIndex] = useState(0);
+  const [selectedIndex, setSelectedIndex] = useState("");
 
   const folderList = folderStore.folders
     .filter((folder) => folder.userId === authStore.user.id)

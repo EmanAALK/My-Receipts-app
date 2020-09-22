@@ -12,7 +12,8 @@ import {
   FormButtonText,
   FormButton,
 } from "./styles";
-import { View } from "react-native-animatable";
+
+import { Text, View } from "react-native";
 
 const CreateFolderForm = ({ navigation }) => {
   const [folder, setFolder] = useState({
@@ -28,23 +29,73 @@ const CreateFolderForm = ({ navigation }) => {
     navigation.replace("Home");
   };
 
-  return (
-    <FormContainer>
-      <FormTitle>New Folder</FormTitle>
-      <FormTextInput
-        onChangeText={(name) => setFolder({ ...folder, name })}
-        placeholder='Folder Name'
-        placeholderTextColor='#A6AEC1'
-      />
-      <View style={{ flexDirection: "row" }}>
-        <FormButton onPress={handleSubmit}>
-          <FormButtonText>Save Changes</FormButtonText>
-        </FormButton>
+  const [isSelected, setSelection] = useState(false);
 
-        <FormButton onPress={handleCancel}>
-          <FormButtonText>Cancel</FormButtonText>
-        </FormButton>
-      </View>
+  const handleCancelTwo = async () => {
+    setSelection(!isSelected);
+  };
+  // console.log(isSelected);
+
+  return (
+    // testing
+    <FormContainer>
+      {/* <>
+        <View
+          style={{
+            padding: 5,
+            flexDirection: "row",
+            alignSelf: "center",
+          }}
+        >
+          <Text onPress={handleCancelTwo}>Receipt</Text>
+        </View>
+        <View
+          style={{
+            padding: 5,
+            flexDirection: "row",
+            alignSelf: "center",
+          }}
+        >
+          <Text onPress={handleCancelTwo}>Warranty</Text>
+        </View>
+      </> */}
+      {isSelected === false ? (
+        <>
+          <FormTitle>Add A Folder</FormTitle>
+          <FormTextInput
+            onChangeText={(name) => setFolder({ ...folder, name })}
+            placeholder='Folder Name'
+            placeholderTextColor='#A6AEC1'
+          />
+          <View style={{ flexDirection: "row" }}>
+            <FormButton onPress={handleSubmit}>
+              <FormButtonText>Save Changes</FormButtonText>
+            </FormButton>
+
+            <FormButton onPress={handleCancel}>
+              <FormButtonText>Cancel</FormButtonText>
+            </FormButton>
+          </View>
+        </>
+      ) : (
+        <>
+          <FormTitle>Add A Folder Two</FormTitle>
+          <FormTextInput
+            onChangeText={(name) => setFolder({ ...folder, name })}
+            placeholder='Folder Name'
+            placeholderTextColor='#A6AEC1'
+          />
+          <View style={{ flexDirection: "row" }}>
+            <FormButton onPress={handleSubmit}>
+              <FormButtonText>Save Changes</FormButtonText>
+            </FormButton>
+
+            <FormButton onPress={handleCancel}>
+              <FormButtonText>Cancel</FormButtonText>
+            </FormButton>
+          </View>
+        </>
+      )}
     </FormContainer>
   );
 };

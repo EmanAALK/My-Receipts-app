@@ -4,7 +4,7 @@ import { createMaterialBottomTabNavigator } from "@react-navigation/material-bot
 import { observer } from "mobx-react";
 
 import Icon from "react-native-vector-icons/Ionicons";
-
+import { Badge } from "react-native-elements";
 // component
 import DrawerContent from "../DawerContenent";
 
@@ -14,11 +14,12 @@ import HomeStackScreen from "./HomeStackScreen";
 import NotificationStackscreen from "./NotificationStackscreen";
 import AddReceiptStackScreen from "./AddReceiptStackscreen";
 import { LinearGradient } from "expo-linear-gradient";
-
+import receiptStore from "../../store/ReceiptStore";
 const Drawer = createDrawerNavigator();
 const Tab = createMaterialBottomTabNavigator();
 
 const color = "#e2cfc4";
+
 const TabScreen = () => (
   <Tab.Navigator
     initialRouteName='Home'
@@ -66,7 +67,10 @@ const TabScreen = () => (
         title: false,
         backgroundColor: color,
         tabBarIcon: ({ color }) => (
-          <Icon name='ios-notifications' color={color} size={26} />
+          <>
+            <Badge value={receiptStore.expiredLength} status='error' />
+            <Icon name='ios-notifications' color={color} size={26} />
+          </>
         ),
       }}
     />
