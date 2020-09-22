@@ -14,9 +14,12 @@ import CreateFolderForm from "../Forms/CreateFolderForm";
 import ReceiptList from "../ReceiptList";
 import ReceiptDetail from "../ReceiptList/ReceiptDetail";
 import Calculation from "../Calculation";
+import Search from "../Search";
+
+//Camera Feature
 import CameraScreen from "../CameraFeature/CameraScreen";
 import CameraPhoto from "../CameraFeature/CameraPhoto";
-import Search from "../Search";
+import PhotoPicker from "../CameraFeature/PhotoPicker";
 
 const HomeStack = createStackNavigator();
 
@@ -291,6 +294,30 @@ const HomeStackScreen = ({ navigation }) => (
     <HomeStack.Screen
       name='CameraPhoto'
       component={CameraPhoto}
+      options={{
+        title: false,
+        headerRight: () => (
+          <Icon
+            style={{ paddingRight: 10 }}
+            name='md-arrow-back'
+            size={25}
+            color='#fff'
+            onPress={() => navigation.goBack()}
+          ></Icon>
+        ),
+        headerLeft: () => (
+          <Icon.Button
+            name='ios-menu'
+            size={25}
+            backgroundColor='transparent'
+            onPress={() => navigation.openDrawer()}
+          ></Icon.Button>
+        ),
+      }}
+    />
+    <HomeStack.Screen
+      name='PhotoPicker'
+      component={PhotoPicker}
       options={{
         title: false,
         headerRight: () => (

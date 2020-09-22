@@ -2,10 +2,6 @@ import React, { useState, useRef, useEffect } from "react";
 import { observer } from "mobx-react";
 import { Button, Image, Platform, Picker, View } from "react-native";
 
-//Image Picker
-import * as ImagePicker from "expo-image-picker";
-import * as Permissions from "expo-permissions";
-
 //Date Picker
 import DatePicker from "react-native-datepicker";
 import RNPickerSelect from "react-native-picker-select";
@@ -38,11 +34,8 @@ const CreateReceiptForm = ({ route, navigation }) => {
     Expdate: "",
     image: "",
   });
-  const handleCancel = async () => {
-    navigation.navigate("Home");
-  };
 
-  //Album Access State
+  //Handle Submit Function
   const handleSubmit = async () => {
     let localUri = image;
     let filename = localUri.split("/").pop();
@@ -66,32 +59,12 @@ const CreateReceiptForm = ({ route, navigation }) => {
     return { labe: i.name };
   });
 
-  //Image Picking
-  const [image, setImage] = useState(null);
-
-  const pickImage = async () => {
-    try {
-      if (Platform.OS !== "web") {
-        const { status } = await Permissions.askAsync(Permissions.CAMERA_ROLL);
-        if (status !== "granted") {
-          alert("Sorry, we need camera roll permissions to make this work!");
-        }
-      }
-      let result = await ImagePicker.launchImageLibraryAsync({
-        mediaTypes: ImagePicker.MediaTypeOptions.All,
-        allowsEditing: true,
-        aspect: [4, 3],
-        quality: 1,
-      });
-      if (!result.cancelled) {
-        setImage(result.uri);
-      }
-    } catch (E) {}
+  const handleCancel = async () => {
+    navigation.navigate("Home");
   };
 
   return (
     <>
-      {/* {pickImage} */}
       <FormContainer>
         <FormTitle>Add Receipt</FormTitle>
 
@@ -169,33 +142,7 @@ const CreateReceiptForm = ({ route, navigation }) => {
           />
         </View>
 
-        {/* Image  */}
-
-        <View
-          style={{
-            flex: 1,
-            alignItems: "center",
-            justifyContent: "center",
-            color: "black",
-          }}
-        >
-          <Button title='Pick an image from camera roll' onPress={pickImage} />
-          {image && (
-            <Image
-              source={{ uri: image }}
-              style={{ width: 200, height: 200 }}
-            />
-          )}
-        </View>
-        <View
-          style={{ flex: 1, alignItems: "center", justifyContent: "center" }}
-        >
-          <Image
-            source={{ uri: photo.uri }}
-            style={{ width: 280, height: 480 }}
-          />
-        </View>
-
+        {/* Save/Cancel Buttons */}
         <View style={{ flexDirection: "row" }}>
           <FormButton onPress={handleSubmit}>
             <FormButtonText>Save Changes</FormButtonText>
@@ -204,6 +151,14 @@ const CreateReceiptForm = ({ route, navigation }) => {
           <FormButton onPress={handleCancel}>
             <FormButtonText>Cancel</FormButtonText>
           </FormButton>
+        </View>
+        <View
+          style={{ flex: 1, alignItems: "center", justifyContent: "center" }}
+        >
+          <Image
+            source={{ uri: photo.uri }}
+            style={{ width: 280, height: 480 }}
+          />
         </View>
       </FormContainer>
     </>

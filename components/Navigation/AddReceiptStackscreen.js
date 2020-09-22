@@ -2,12 +2,14 @@ import React from "react";
 import { createStackNavigator } from "@react-navigation/stack";
 import { observer } from "mobx-react";
 
+//Styling
 import Icon from "react-native-vector-icons/Ionicons";
 
 // component
 import CreateReceiptForm from "../Forms/CreateReceiptForm";
 import CameraModal from "../Modals/CameraModal";
 import CameraScreen from "../CameraFeature/CameraScreen";
+import PhotoPicker from "../CameraFeature/PhotoPicker";
 
 const AddReceiptStack = createStackNavigator();
 const color = "#e2cfc4";
@@ -30,8 +32,8 @@ const AddReceiptStackScreen = ({ navigation }) => (
     }}
   >
     <AddReceiptStack.Screen
-      name='CameraScreen'
-      component={CameraScreen}
+      name='CameraModal'
+      component={CameraModal}
       options={{
         title: false,
 
