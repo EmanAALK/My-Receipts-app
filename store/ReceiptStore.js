@@ -17,14 +17,15 @@ class ReceiptStore {
 
   createReceipt = async (newReceipt) => {
     try {
-      // const formData = new FormData();
-      // for (const key in newReceipt) formData.append(key, newReceipt[key]);
+      const formData = new FormData();
+      for (const key in newReceipt) formData.append(key, newReceipt[key]);
+      console.log(",,,,,,,newReceipt", formData);
 
       const res = await instance.post(
-        `/${newReceipt.folderId}/receipt`,
+        `/folder/${newReceipt.folderId}/receipt`,
         formData
       );
-      this.receipts.push({ ...res.data, items: [] });
+      this.receipts.push(res.data);
     } catch (error) {
       console.log("ReceiptStore -> createReceipt -> error ", error);
     }
