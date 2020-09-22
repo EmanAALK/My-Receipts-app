@@ -10,6 +10,7 @@ import DropDownPicker from "react-native-dropdown-picker";
 import FolderItem from "./FolderItem";
 import { ScrollView } from "react-native";
 import { Table, Row } from "react-native-table-component";
+import { Card } from "react-native-paper";
 
 const CalculateByFolder = ({ navigation }) => {
   const [filter, setFilter] = useState([]);
@@ -36,11 +37,10 @@ const CalculateByFolder = ({ navigation }) => {
   );
 
   const amount = receipt.map((receipt) => (total = total + receipt.price));
-
   return (
-    <ScrollView>
-      <View style={{ flexDirection: "row", alignSelf: "center" }}>
-        <TextStyle>Folder :</TextStyle>
+    <>
+      <ScrollView>
+        <Text style={{ marginTop: 10, marginLeft: 30 }}>Folder :</Text>
 
         <DropDownPicker
           multiple={true}
@@ -52,8 +52,10 @@ const CalculateByFolder = ({ navigation }) => {
           }}
           containerStyle={{
             height: 35,
-            marginTop: 10,
-            width: 230,
+            marginTop: -25,
+            marginLeft: 15,
+            width: 200,
+            alignSelf: "center",
           }}
           style={{
             backgroundColor: "white",
@@ -67,23 +69,23 @@ const CalculateByFolder = ({ navigation }) => {
           dropDownStyle={{ backgroundColor: "#fafafa" }}
           onChangeItem={(item) => setFilter(item)}
         ></DropDownPicker>
-      </View>
 
-      {folderList}
-      {filter !== [] && (
-        <Table borderStyle={{ borderWidth: 1, borderColor: "lightgrey" }}>
-          <Row
-            data={["Total Amount", total]}
-            style={{
-              height: 30,
-              backgroundColor: "#eddcd2",
-              marginTop: 20,
-            }}
-            textStyle={{ marginLeft: 30, color: "red" }}
-          />
-        </Table>
-      )}
-    </ScrollView>
+        {folderList}
+        {filter !== [] && (
+          <Table borderStyle={{ borderWidth: 1, borderColor: "lightgrey" }}>
+            <Row
+              data={["Total Amount", total]}
+              style={{
+                height: 30,
+                // backgroundColor: "#FFCC22 ",
+                marginTop: 20,
+              }}
+              textStyle={{ marginLeft: 30, color: "red" }}
+            />
+          </Table>
+        )}
+      </ScrollView>
+    </>
   );
 };
 
