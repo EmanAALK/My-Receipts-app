@@ -37,14 +37,14 @@ const FolderItem = ({ folder, navigation }) => {
         <Body></Body>
         {!folder.defaultFolder && (
           <Right style={{ flexDirection: "row" }}>
-            <Icon onPress={deleteAlert} name="trash-2" size="15" color="red" />
+            <Icon onPress={deleteAlert} name='trash-2' size='15' color='red' />
 
             <Icon
               onPress={() =>
                 navigation.navigate("UpdateFolderForm", { oldFolder: folder })
               }
-              name="edit-2"
-              size="15"
+              name='edit-2'
+              size='15'
             />
           </Right>
         )}

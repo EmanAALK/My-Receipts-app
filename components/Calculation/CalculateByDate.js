@@ -69,11 +69,11 @@ const CalculateByDate = ({ navigation }) => {
           showIcon={false}
           style={{ width: 255, marginTop: 5 }}
           date={fromDate}
-          mode="date"
-          placeholder="select date"
-          format="YYYY-MM-DD"
-          confirmBtnText="Confirm"
-          cancelBtnText="Cancel"
+          mode='date'
+          placeholder='select date'
+          format='YYYY-MM-DD'
+          confirmBtnText='Confirm'
+          cancelBtnText='Cancel'
           customStyles={{
             dateIcon: {
               position: "absolute",
@@ -94,7 +94,6 @@ const CalculateByDate = ({ navigation }) => {
         />
       </View>
 
-
       <View
         style={{
           padding: 5,
@@ -108,16 +107,16 @@ const CalculateByDate = ({ navigation }) => {
           showIcon={false}
           style={{ width: 255, textAlign: "left", marginLeft: 10 }}
           date={toDate}
-          mode="date"
-          placeholder="select date"
-          format="YYYY-MM-DD"
-          confirmBtnText="Confirm"
-          cancelBtnText="Cancel"
-          mode="date"
-          placeholder="select date"
-          format="YYYY-MM-DD"
-          confirmBtnText="Confirm"
-          cancelBtnText="Cancel"
+          mode='date'
+          placeholder='select date'
+          format='YYYY-MM-DD'
+          confirmBtnText='Confirm'
+          cancelBtnText='Cancel'
+          mode='date'
+          placeholder='select date'
+          format='YYYY-MM-DD'
+          confirmBtnText='Confirm'
+          cancelBtnText='Cancel'
           customStyles={{
             dateIcon: {
               position: "absolute",
@@ -137,7 +136,6 @@ const CalculateByDate = ({ navigation }) => {
             setToDate(date);
           }}
         />
-
       </View>
       {receiptList}
       {toDate && (

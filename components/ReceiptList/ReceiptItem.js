@@ -6,6 +6,7 @@ import receiptStore from "../../store/ReceiptStore";
 
 //Styling
 import { ListItem, Left, Right, Text, View, Button } from "native-base";
+import { Card } from "react-native-paper";
 
 const ReceiptItem = ({ receipt, navigation }) => {
   return (
@@ -17,11 +18,11 @@ const ReceiptItem = ({ receipt, navigation }) => {
       </Left>
       <>
         <Right>
-          {/* <DeleteButtonStyled
+          <DeleteButtonStyled
             onPress={() => receiptStore.deleteReceipt(receipt.id)}
           >
             Delete
-          </DeleteButtonStyled> */}
+          </DeleteButtonStyled>
         </Right>
       </>
     </ListItem>

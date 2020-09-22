@@ -65,7 +65,7 @@ const CalculateByFolder = ({ navigation }) => {
             justifyContent: "flex-start",
           }}
           multiple={true}
-          multipleText="%d items have been selected."
+          multipleText='%d items have been selected.'
           dropDownStyle={{ backgroundColor: "#fafafa" }}
           onChangeItem={(item) => setFilter(item)}
         ></DropDownPicker>

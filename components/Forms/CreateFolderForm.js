@@ -44,7 +44,6 @@ const CreateFolderForm = ({ navigation }) => {
           style={{
             padding: 5,
             flexDirection: "row",
-
             alignSelf: "center",
           }}
         >
@@ -54,7 +53,6 @@ const CreateFolderForm = ({ navigation }) => {
           style={{
             padding: 5,
             flexDirection: "row",
-
             alignSelf: "center",
           }}
         >
@@ -66,8 +64,8 @@ const CreateFolderForm = ({ navigation }) => {
           <FormTitle>Add A Folder</FormTitle>
           <FormTextInput
             onChangeText={(name) => setFolder({ ...folder, name })}
-            placeholder="Folder Name"
-            placeholderTextColor="#A6AEC1"
+            placeholder='Folder Name'
+            placeholderTextColor='#A6AEC1'
           />
           <View style={{ flexDirection: "row" }}>
             <FormButton onPress={handleSubmit}>
@@ -84,8 +82,8 @@ const CreateFolderForm = ({ navigation }) => {
           <FormTitle>Add A Folder Two</FormTitle>
           <FormTextInput
             onChangeText={(name) => setFolder({ ...folder, name })}
-            placeholder="Folder Name"
-            placeholderTextColor="#A6AEC1"
+            placeholder='Folder Name'
+            placeholderTextColor='#A6AEC1'
           />
           <View style={{ flexDirection: "row" }}>
             <FormButton onPress={handleSubmit}>

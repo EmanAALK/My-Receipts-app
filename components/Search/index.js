@@ -48,12 +48,12 @@ const Search = ({ navigation }) => {
           <DatePicker
             style={{ width: 255, marginTop: 8 }}
             date={date}
-            mode="date"
-            placeholder="select date"
-            format="YYYY-MM-DD"
-            confirmBtnText="Confirm"
-            cancelBtnText="Cancel"
-            confirmBtnText="search"
+            mode='date'
+            placeholder='select date'
+            format='YYYY-MM-DD'
+            confirmBtnText='Confirm'
+            cancelBtnText='Cancel'
+            confirmBtnText='search'
             customStyles={{
               dateIcon: {
                 position: "absolute",
@@ -74,7 +74,7 @@ const Search = ({ navigation }) => {
         ) : (
           <View style={{ width: "95%", height: 15 }}>
             <SearchBar
-              placeholder="Type Here..."
+              placeholder='Type Here...'
               lightTheme
               onChangeText={handleSearch}
               value={query}

@@ -15,7 +15,6 @@ const ReceiptDetail = ({ route, navigation }) => {
   const folder = folderStore.folders.find(
     (folder) => folder.userId === receipt.folderId
   );
-  console.log(",,,,,receipt.image", receipt.image);
   return (
     <>
       <Card>
