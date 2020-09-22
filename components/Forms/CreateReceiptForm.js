@@ -19,6 +19,7 @@ import * as Permissions from "expo-permissions";
 
 //Camera
 import { Camera } from "expo-camera";
+import { captureRef } from "react-native-view-shot";
 // import { Video } from "expo-av";
 
 //Date Picker
@@ -114,117 +115,114 @@ const CreateReceiptForm = ({ navigation }) => {
   };
 
   //Camera Access
-  // const [hasPermission, setHasPermission] = useState(null);
-  // const [cameraType, setCameraType] = useState(Camera.Constants.Type.back);
-  // const [isCameraReady, setIsCameraReady] = useState(false);
-  // const [isPreview, setIsPreview] = useState(false);
-  // const cameraRef = useRef();
+  const [hasPermission, setHasPermission] = useState(null); //Access Permision
+  const [cameraType, setCameraType] = useState(Camera.Constants.Type.back);
+  const [isCameraReady, setIsCameraReady] = useState(false);
+  const [isPreview, setIsPreview] = useState(false);
+  const cameraRef = useRef();
+  const [container, setContainer] = useState(null);
 
-  // useEffect(() => {
-  //   (async () => {
-  //     const { status } = await Camera.requestPermissionsAsync();
-  //     setHasPermission(status === "granted");
-  //   })();
-  // }, []);
-
-  //Photo Snapping
-  // const onCameraReady = () => {
-  //   setIsCameraReady(true);
-  // };
-  // const takePicture = async () => {
-  //   if (cameraRef.current) {
-  //     const options = { quality: 0.5, base64: true, skipProcessing: true };
-  //     const data = await cameraRef.current.takePictureAsync(
-  //       options,
-  //       onPictureSaved
-  //     );
-  //     const source = data.uri;
-  //     if (source) {
-  //       await cameraRef.current.pausePreview();
-  //       setIsPreview(true);
-  //       console.log("picture source", source);
-  //     }
-  //   }
-  // };
-
-  // const onPictureSaved = async (photo) => {
-  //   setState({ image: photo });
-  // };
+  useEffect(() => {
+    (async () => {
+      const { status } = await Camera.requestPermissionsAsync();
+      setHasPermission(status === "granted");
+    })();
+  }, []);
 
   //Save to Camera roll
-  // const saveToCameraRollAsync = async () => {
-  //   try {
-  //     let result = await captureRef({
-  //       format: "png",
-  //     });
+  const saveToCameraRollAsync = async () => {
+    try {
+      let result = await captureRef(container, { format: "png" });
 
-  //     let saveResult = await CameraRoll.saveToCameraRoll(result, "photo");
-  //     console.log(saveResult);
-  //     setState({ cameraRollUri: saveResult });
-  //   } catch (snapshotError) {
-  //     console.error(snapshotError);
-  //   }
-  // };
+      let saveResult = await CameraRoll.saveToCameraRoll(result, "photo");
+      console.log(saveResult);
+      setState({ cameraRollUri: saveResult });
+    } catch (snapshotError) {
+      console.error(snapshotError);
+    }
+  };
+
+  //Photo Snapping
+
+  const onPictureSaved = async (photo) => {
+    setState({ image: photo });
+  };
+
+  const onCameraReady = () => {
+    setIsCameraReady(true);
+  };
+  const takePicture = async () => {
+    if (cameraRef.current) {
+      const options = { quality: 0.5, base64: true, skipProcessing: true };
+      const data = await cameraRef.current.takePictureAsync(
+        options,
+        onPictureSaved
+      );
+      const source = data.uri;
+      if (source) {
+        await cameraRef.current.pausePreview();
+        setIsPreview(true);
+        console.log("picture source", source);
+        saveToCameraRollAsync();
+      }
+    }
+  };
 
   //Camera Flipping
-  // const switchCamera = () => {
-  //   if (isPreview) {
-  //     return;
-  //   }
-  //   setCameraType((prevCameraType) =>
-  //     prevCameraType === Camera.Constants.Type.back
-  //       ? Camera.Constants.Type.front
-  //       : Camera.Constants.Type.back
-  //   );
-  // };
+  const switchCamera = () => {
+    if (isPreview) {
+      return;
+    }
+    setCameraType((prevCameraType) =>
+      prevCameraType === Camera.Constants.Type.back
+        ? Camera.Constants.Type.front
+        : Camera.Constants.Type.back
+    );
+  };
 
   //Cancel Captured Photo
-  // const cancelPreview = async () => {
-  //   await cameraRef.current.resumePreview();
-  //   setIsPreview(false);
-  //   setVideoSource(null);
-  // };
+  const cancelPreview = async () => {
+    await cameraRef.current.resumePreview();
+    setIsPreview(false);
+    setVideoSource(null);
+  };
 
-  // const renderCancelPreviewButton = () => (
-  //   <TouchableOpacity onPress={cancelPreview} style={styles.closeButton}>
-  //     <View style={[styles.closeCross, { transform: [{ rotate: "45deg" }] }]} />
-  //     <View
-  //       style={[styles.closeCross, { transform: [{ rotate: "-45deg" }] }]}
-  //     />
-  //   </TouchableOpacity>
-  // );
+  const renderCancelPreviewButton = () => (
+    <TouchableOpacity onPress={cancelPreview} style={styles.closeButton}>
+      <View style={[styles.closeCross, { transform: [{ rotate: "45deg" }] }]} />
+      <View
+        style={[styles.closeCross, { transform: [{ rotate: "-45deg" }] }]}
+      />
+    </TouchableOpacity>
+  );
 
   //Photo Capturing Controller
-  // const renderCaptureControl = () => (
-  //   <View style={styles.control}>
-  //     <TouchableOpacity disabled={!isCameraReady} onPress={switchCamera}>
-  //       <Text style={styles.text}>{"Flip"}</Text>
-  //     </TouchableOpacity>
-  //     <TouchableOpacity
-  //       activeOpacity={0.7}
-  //       disabled={!isCameraReady}
-  //       onPress={takePicture}
-  //       style={styles.capture}
-  //     />
-  //   </View>
-  // );
+  const renderCaptureControl = () => (
+    <View style={styles.control}>
+      <TouchableOpacity disabled={!isCameraReady} onPress={switchCamera}>
+        <Text style={styles.text}>{"Flip"}</Text>
+      </TouchableOpacity>
+      <TouchableOpacity
+        activeOpacity={0.7}
+        disabled={!isCameraReady}
+        onPress={takePicture}
+        style={styles.capture}
+      />
+    </View>
+  );
 
-  // if (hasPermission === null) {
-  //   return <View />;
-  // }
-  // if (hasPermission === false) {
-  //   return <Text>No access to your album</Text>;
-  // }
+  if (hasPermission === null) {
+    return <View />;
+  }
+  if (hasPermission === false) {
+    return <Text>No access to your album</Text>;
+  }
 
   return (
     <>
       {/* {pickImage} */}
       <FormContainer>
-        <FormTitle>Add A Receipt</FormTitle>
-
-        {/* {image && (
-        <Image source={{ uri: image }} style={{ width: 200, height: 200 }} />
-      )} */}
+        <FormTitle>Add Receipt</FormTitle>
 
         {/* Folder */}
         <RNPickerSelect
@@ -245,59 +243,7 @@ const CreateReceiptForm = ({ navigation }) => {
         />
 
         {/* Date */}
-        <DatePicker
-          style={{ width: 255 }}
-          date={receipt.date}
-          mode='date'
-          placeholder='select date'
-          format='YYYY-MM-DD'
-          confirmBtnText='Confirm'
-          cancelBtnText='Cancel'
-          customStyles={{
-            dateIcon: {
-              position: "absolute",
-              left: 0,
-              top: 4,
-              marginRight: 4,
-              marginLeft: 0,
-              borderColor: "#cea146",
-            },
-            dateInput: {
-              marginLeft: 36,
-            },
-          }}
-          onDateChange={(date) => {
-            return setReceipt({ ...receipt, date });
-          }}
-        />
-        <DatePicker
-          style={{ width: 255 }}
-          date={receipt.Expdate}
-          mode='Expiration date'
-          placeholder='select date'
-          format='YYYY-MM-DD'
-          confirmBtnText='Confirm'
-          cancelBtnText='Cancel'
-          customStyles={{
-            dateIcon: {
-              position: "absolute",
-              left: 0,
-              top: 4,
-              marginRight: 4,
-              marginLeft: 0,
-              borderColor: "#cea146",
-            },
-            dateInput: {
-              marginLeft: 36,
-            },
-          }}
-          onDateChange={(Expdate) => {
-            return setReceipt({ ...receipt, Expdate });
-          }}
-        />
-
         <View style={{ flexDirection: "row" }}>
-          {/* Date */}
           <DatePicker
             style={{ width: 255 }}
             date={receipt.date}
@@ -351,31 +297,6 @@ const CreateReceiptForm = ({ navigation }) => {
             }}
           />
         </View>
-        <DatePicker
-          style={{ width: 255 }}
-          date={receipt.Expdate}
-          mode='date'
-          placeholder='select expiration date'
-          format='YYYY-MM-DD'
-          confirmBtnText='Confirm'
-          cancelBtnText='Cancel'
-          customStyles={{
-            dateIcon: {
-              position: "absolute",
-              left: 0,
-              top: 4,
-              marginRight: 4,
-              marginLeft: 0,
-              borderColor: "#cea146",
-            },
-            dateInput: {
-              marginLeft: 36,
-            },
-          }}
-          onDateChange={(date) => {
-            return setReceipt({ ...receipt, Expdate });
-          }}
-        />
 
         {/* Image  */}
         <View
@@ -405,14 +326,9 @@ const CreateReceiptForm = ({ navigation }) => {
           </FormButton>
         </View>
       </FormContainer>
-    </>
-  );
-};
-{
-  /* Camera */
-}
-{
-  /* <SafeAreaView style={styles.container}>
+      {/* Camera */}
+
+      <SafeAreaView style={styles.container}>
         <Camera
           ref={cameraRef}
           style={styles.container}
@@ -426,15 +342,19 @@ const CreateReceiptForm = ({ navigation }) => {
         <View style={styles.container}>
           {isPreview && renderCancelPreviewButton()}
           {!isPreview && renderCaptureControl()}
-          {saveToCameraRollAsync()}
         </View>
+        {/* <View
+          ref={(view) => {
+            setContainer = view;
+          }}
+        /> */}
       </SafeAreaView>
-    </> */
-}
+    </>
+  );
+};
 
 //Camera Screen Styling
-{
-  /* const styles = StyleSheet.create({
+const styles = StyleSheet.create({
   container: {
     ...StyleSheet.absoluteFillObject,
   },
@@ -500,7 +420,6 @@ const CreateReceiptForm = ({ navigation }) => {
   text: {
     color: "#fff",
   },
-}); */
-}
+});
 
 export default observer(CreateReceiptForm);
