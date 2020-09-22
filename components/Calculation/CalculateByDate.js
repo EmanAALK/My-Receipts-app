@@ -7,7 +7,9 @@ import folderStore from "../../store/FolderStore";
 import authStore from "../../store/authStore";
 
 //Styling
+
 import { View, Text, Right, Body, Left, Card, CardItem } from "native-base";
+
 import { InputContainer, TextStyle, Total } from "./styles";
 import { Table, Row } from "react-native-table-component";
 
@@ -92,6 +94,7 @@ const CalculateByDate = ({ navigation }) => {
         />
       </View>
 
+
       <View
         style={{
           padding: 5,
@@ -134,6 +137,7 @@ const CalculateByDate = ({ navigation }) => {
             setToDate(date);
           }}
         />
+
       </View>
       {receiptList}
       {toDate && (
