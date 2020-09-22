@@ -18,13 +18,11 @@ const Notifications = ({ navigation }) => {
   const receiptList = receiptStore.receipts.filter(
     (receipt) => receipt.folder.userId === authStore.user.id
   );
-  // console.log("Expiration Date", receiptList);
 
   //date today + 7 days
   const dateBeforeWeek = moment(
     new Date(Date.now() + 8 * 24 * 60 * 60 * 1000)
   ).format("YYYY-MM-DD");
-  // console.log("check today date + 7 days", dateBeforeWeek);
 
   //if today date + 7 days === expiration date? show on notification screen
   const isExpired = receiptList
@@ -49,9 +47,6 @@ const Notifications = ({ navigation }) => {
         </Card>
       </>
     ));
-  // console.log("check 7", isExpired7);
-  receiptStore.expiredLength = isExpired.length;
-  console.log("check", receiptStore.expiredLength);
 
   return (
     <View style={{ marginTop: 30, marginBottom: 30 }}>

@@ -12,11 +12,10 @@ class FolderStore {
       const response = await instance.get("/folder");
       console.log("FolderStore -> fetchFolder -> error", response); // test to see where data come from
       this.folders = response.data;
+      loading = false;
       this.folders = this.folders.sort((a, b) =>
         a.defaultFolder < b.defaultFolder ? 1 : -1
       );
-
-      this.loading = false;
     } catch (error) {
       console.error("FolderStore -> fetchFolder -> error", error);
     }
@@ -38,9 +37,9 @@ class FolderStore {
 
   updateFolder = async (updatedFolder) => {
     try {
-      const formData = new FormData();
-      for (const key in updatedFolder) formData.append(key, updatedFolder[key]);
-      await instance.put(`/folder/${updatedFolder.id}`, formData);
+      // const formData = new FormData();
+      // for (const key in updatedFolder) formData.append(key, updatedFolder[key]);
+      await instance.put(`/folder/${updatedFolder.id}`, updatedFolder);
       const folder = this.folders.find(
         (folder) => folder.id === updatedFolder.id
       );

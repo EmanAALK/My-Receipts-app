@@ -1,6 +1,7 @@
-import { decorate, observable } from "mobx";
+import { decorate, observable, computed } from "mobx";
 import instance from "./instance";
-
+import moment from "moment";
+import authStore from "./authStore";
 class ReceiptStore {
   receipts = [];
   loading = true;
@@ -56,11 +57,25 @@ class ReceiptStore {
       console.log("ReceiptStore -> deleteReceipt -> error ", error);
     }
   };
+
+  get totalExpiredReceipt() {
+    const dateBeforeWeek = moment(
+      new Date(Date.now() + 8 * 24 * 60 * 60 * 1000)
+    ).format("YYYY-MM-DD");
+
+    const totalExpired = receiptStore.receipts
+      .filter((receipt) => receipt.folder.userId === authStore.user.id) //get receipt of this user
+      .filter((receipt) => receipt.Expdate < dateBeforeWeek); //get receipt that is less than dateBeforeWeek
+    const totalExpiredLength = totalExpired.length;
+
+    return totalExpiredLength;
+  }
 }
 
 decorate(ReceiptStore, {
   receipts: observable,
   loading: observable,
+  totalExpiredReceipt: computed,
 });
 
 const receiptStore = new ReceiptStore();
