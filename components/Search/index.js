@@ -12,6 +12,7 @@ import { ScrollView } from "react-native";
 import DatePicker from "react-native-datepicker";
 import SearchByFolder from "./SearchByFolder";
 import SearchByReceipt from "./SearchByReceipt";
+import authStore from "../../store/authStore";
 
 const Search = ({ navigation }) => {
   const [query, setQuery] = useState();
@@ -25,10 +26,12 @@ const Search = ({ navigation }) => {
   ];
 
   const searchDate = ReceiptStore.receipts.filter(
-    (receipt) => receipt.date === date || receipt.Expdate === date
+    (receipt) => receipt.date === date || receipt.expDate === date
   );
-
-  const searchFolder = folderStore.folders.filter((folder) =>
+  const folder = folderStore.folders.filter(
+    (folder) => folder.userId === authStore.user.id
+  );
+  const searchFolder = folder.filter((folder) =>
     folder.name.toLowerCase().includes(query)
   );
 
@@ -48,12 +51,12 @@ const Search = ({ navigation }) => {
           <DatePicker
             style={{ width: 255, marginTop: 8 }}
             date={date}
-            mode='date'
-            placeholder='select date'
-            format='YYYY-MM-DD'
-            confirmBtnText='Confirm'
-            cancelBtnText='Cancel'
-            confirmBtnText='search'
+            mode="date"
+            placeholder="select date"
+            format="YYYY-MM-DD"
+            confirmBtnText="Confirm"
+            cancelBtnText="Cancel"
+            confirmBtnText="search"
             customStyles={{
               dateIcon: {
                 position: "absolute",
@@ -74,7 +77,7 @@ const Search = ({ navigation }) => {
         ) : (
           <View style={{ width: "95%", height: 15 }}>
             <SearchBar
-              placeholder='Type Here...'
+              placeholder="Type Here..."
               lightTheme
               onChangeText={handleSearch}
               value={query}
@@ -85,6 +88,9 @@ const Search = ({ navigation }) => {
 
       <DropDownPicker
         automaticallyAdjustContentInsets={false}
+        style={{
+          paddingVertical: 0,
+        }}
         items={items}
         labelStyle={{
           fontSize: 14,

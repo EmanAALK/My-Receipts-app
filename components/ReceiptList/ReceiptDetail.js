@@ -13,7 +13,7 @@ import moment from "moment";
 const ReceiptDetail = ({ route, navigation }) => {
   const { receipt } = route.params;
   const folder = folderStore.folders.find(
-    (folder) => folder.userId === receipt.folderId
+    (folder) => folder.id === receipt.folderId
   );
   return (
     <>
@@ -28,7 +28,7 @@ const ReceiptDetail = ({ route, navigation }) => {
           Date of purchase: {receipt.date}
         </Text>
         <Text style={{ marginBottom: 10 }}>
-          Expiration Date: {receipt.Expdate}
+          Expiration Date: {receipt.expDate}
         </Text>
         <Text style={{ marginBottom: 10 }}> Price: {receipt.price}</Text>
       </Card>

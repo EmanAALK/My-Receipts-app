@@ -1,7 +1,7 @@
 import React from "react";
 import { createStackNavigator } from "@react-navigation/stack";
 import { observer } from "mobx-react";
-
+// styles
 import Icon from "react-native-vector-icons/Ionicons";
 
 // component
@@ -9,11 +9,13 @@ import Notification from "../Notifications";
 
 const NotificationStack = createStackNavigator();
 
+const color = "#427aa1";
+
 const NotificationStackScreen = ({ navigation }) => (
   <NotificationStack.Navigator
-    initialRouteName='Notification'
+    initialRouteName="Notification"
     screenOptions={{
-      headerTintColor: "#fff",
+      headerTintColor: "white",
       backgroundColor: "white",
       headerStyle: {
         backgroundColor: "white",
@@ -25,14 +27,14 @@ const NotificationStackScreen = ({ navigation }) => (
     }}
   >
     <NotificationStack.Screen
-      name='Notification'
+      name="Notification"
       component={Notification}
       options={{
-        title: false,
+        // title: false,
 
         headerLeft: () => (
           <Icon.Button
-            name='ios-menu'
+            name="ios-menu"
             size={25}
             color={"#E0E0E0"}
             backgroundColor='white'
