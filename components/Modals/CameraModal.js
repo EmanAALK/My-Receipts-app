@@ -1,6 +1,9 @@
 import React, { useState } from "react";
 import { observer } from "mobx-react";
 
+//Components
+import CameraScreen from "../CameraFeature/CameraScreen";
+
 //Styling
 import {
   Alert,
@@ -26,10 +29,10 @@ const CameraModal = ({ navigation }) => {
         <View style={styles.centeredView}>
           <View style={styles.modalView}>
             <Text style={styles.modalText}>
-              <Text onPress={() => navigation.navigate("CameraScreen")}>
+              <Text onPress={() => navigation.navigate("PhotoPicker")}>
                 Choose an image from camera roll{" "}
               </Text>
-              <Text onPress={() => navigation.navigate("PhotoPicker")}>
+              <Text onPress={() => navigation.navigate("CameraScreen")}>
                 Take an image by camera
               </Text>
             </Text>
