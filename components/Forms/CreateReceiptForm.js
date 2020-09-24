@@ -551,12 +551,14 @@ import {
   EditContainer,
 } from "./styles";
 
+
 //Variables Declaration
 const WINDOW_HEIGHT = Dimensions.get("window").height;
 const closeButtonSize = Math.floor(WINDOW_HEIGHT * 0.032);
 const captureSize = Math.floor(WINDOW_HEIGHT * 0.09);
 
 const CreateReceiptForm = ({ navigation }) => {
+
   const [receipt, setReceipt] = useState({
     name: "",
     folderId: "",
@@ -887,6 +889,20 @@ const CreateReceiptForm = ({ navigation }) => {
             <FormButtonText>Cancel</FormButtonText>
           </FormButton>
         </View>
+
+//         <View
+//           style={{ flex: 1, alignItems: "center", justifyContent: "center" }}
+//         >
+//           {/* <Image
+//             // source={{ uri: photo.uri }}
+//             style={{ width: 280, height: 480 }}
+//           /> */}
+//           <Image
+//             source={{ uri: image }}
+//             style={{ width: 280, height: 480 }}
+//           ></Image>
+//         </View>
+
       </FormContainer>
     </>
   );

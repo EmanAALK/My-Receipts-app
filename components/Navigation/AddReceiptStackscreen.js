@@ -31,8 +31,10 @@ const AddReceiptStackScreen = ({ navigation }) => (
     }}
   >
     <AddReceiptStack.Screen
+
       name="CameraModal"
       component={CameraModal}
+
       options={{
         title: false,
 
