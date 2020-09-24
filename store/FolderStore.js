@@ -9,10 +9,11 @@ class FolderStore {
   fetchFolder = async () => {
     //error handler
     try {
-      const response = await instance.get("/folder");
+      const response = await instance.get("/folders");
       console.log("FolderStore -> fetchFolder -> error", response); // test to see where data come from
       this.folders = response.data;
-      loading = false;
+      this.loading = false;
+
       this.folders = this.folders.sort((a, b) =>
         a.defaultFolder < b.defaultFolder ? 1 : -1
       );
@@ -27,7 +28,7 @@ class FolderStore {
       // const formData = new FormData();
       // for (const key in newFolder) formData.append(key, newFolder[key]);
 
-      const res = await instance.post(`/folder`, newFolder);
+      const res = await instance.post(`/folders`, newFolder);
 
       this.folders.push({ ...res.data, receipts: [] }); //revise "receipts"
     } catch (error) {
@@ -39,7 +40,7 @@ class FolderStore {
     try {
       // const formData = new FormData();
       // for (const key in updatedFolder) formData.append(key, updatedFolder[key]);
-      await instance.put(`/folder/${updatedFolder.id}`, updatedFolder);
+      await instance.put(`/folders/${updatedFolder.id}`, updatedFolder);
       const folder = this.folders.find(
         (folder) => folder.id === updatedFolder.id
       );
@@ -51,7 +52,7 @@ class FolderStore {
 
   deleteFolder = async (folderId) => {
     try {
-      await instance.delete(`/folder/${folderId}`);
+      await instance.delete(`/folders/${folderId}`);
       this.folders = this.folders.filter((folder) => folder.id !== folderId);
     } catch (error) {
       console.log("FolderStore -> deleteFolder  -> error ", error);

@@ -1,5 +1,4 @@
 import React, { useState } from "react";
-import FolderItem from "./FolderItem";
 
 //Stores
 import receiptStore from "../../store/ReceiptStore";
@@ -9,9 +8,7 @@ import authStore from "../../store/authStore";
 //Styling
 
 import { View, Text, Right, Body, Left, Card, CardItem } from "native-base";
-
-import { InputContainer, TextStyle, Total } from "./styles";
-import { Table, Row } from "react-native-table-component";
+import { TextStyle } from "./styles";
 
 //Pickers
 import DatePicker from "react-native-datepicker";
@@ -69,20 +66,12 @@ const CalculateByDate = ({ navigation }) => {
           showIcon={false}
           style={{ width: 255, marginTop: 5 }}
           date={fromDate}
-          mode='date'
-          placeholder='select date'
-          format='YYYY-MM-DD'
-          confirmBtnText='Confirm'
-          cancelBtnText='Cancel'
+          mode="date"
+          placeholder="select date"
+          format="YYYY-MM-DD"
+          confirmBtnText="Confirm"
+          cancelBtnText="Cancel"
           customStyles={{
-            dateIcon: {
-              position: "absolute",
-              left: 0,
-              top: 4,
-              marginRight: 4,
-              marginLeft: 0,
-              borderColor: "#cea146",
-            },
             dateInput: {
               marginLeft: 5,
               borderWidth: 0.25,
@@ -107,26 +96,17 @@ const CalculateByDate = ({ navigation }) => {
           showIcon={false}
           style={{ width: 255, textAlign: "left", marginLeft: 10 }}
           date={toDate}
-          mode='date'
-          placeholder='select date'
-          format='YYYY-MM-DD'
-          confirmBtnText='Confirm'
-          cancelBtnText='Cancel'
-          mode='date'
-          placeholder='select date'
-          format='YYYY-MM-DD'
-          confirmBtnText='Confirm'
-          cancelBtnText='Cancel'
+          mode="date"
+          placeholder="select date"
+          format="YYYY-MM-DD"
+          confirmBtnText="Confirm"
+          cancelBtnText="Cancel"
+          mode="date"
+          placeholder="select date"
+          format="YYYY-MM-DD"
+          confirmBtnText="Confirm"
+          cancelBtnText="Cancel"
           customStyles={{
-            dateIcon: {
-              position: "absolute",
-              left: 0,
-              top: 4,
-              marginRight: 4,
-              marginLeft: 0,
-              borderColor: "#cea146",
-              borderWidth: 0.25,
-            },
             dateInput: {
               marginLeft: 5,
               borderWidth: 0.25,

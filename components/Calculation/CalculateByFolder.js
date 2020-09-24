@@ -1,8 +1,8 @@
 import React, { useState } from "react";
 import { observer } from "mobx-react";
 
-import { Text, View } from "native-base";
-import { InputContainer, TextStyle } from "./styles";
+import { Text } from "native-base";
+
 import receiptStore from "../../store/ReceiptStore";
 import folderStore from "../../store/FolderStore";
 import authStore from "../../store/authStore";
@@ -10,7 +10,6 @@ import DropDownPicker from "react-native-dropdown-picker";
 import FolderItem from "./FolderItem";
 import { ScrollView } from "react-native";
 import { Table, Row } from "react-native-table-component";
-import { Card } from "react-native-paper";
 
 const CalculateByFolder = ({ navigation }) => {
   const [filter, setFilter] = useState([]);
@@ -65,7 +64,7 @@ const CalculateByFolder = ({ navigation }) => {
             justifyContent: "flex-start",
           }}
           multiple={true}
-          multipleText='%d items have been selected.'
+          multipleText="%d items have been selected."
           dropDownStyle={{ backgroundColor: "#fafafa" }}
           onChangeItem={(item) => setFilter(item)}
         ></DropDownPicker>

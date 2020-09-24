@@ -47,20 +47,24 @@ const Signin = ({ navigation }) => {
       <AuthTitle>Welcome!</AuthTitle>
       <AuthTextInput
         onChangeText={(username) => setUser({ ...user, username })}
-        placeholder='Username'
-        placeholderTextColor='#A6AEC1'
-        autoCapitalize='none'
+        placeholder="Username"
+        placeholderTextColor="#A6AEC1"
+        autoCapitalize="none"
         value={user.username}
       />
       <AuthTextInput
         onChangeText={(password) => setUser({ ...user, password })}
-        placeholder='Password'
-        placeholderTextColor='#A6AEC1'
+        placeholder="Password"
+        placeholderTextColor="#A6AEC1"
         secureTextEntry={showPass ? false : true}
         value={user.password}
       />
       <TouchableOpacity onPress={toggleShowPass}>
-        <Feather name={showPass ? "eye" : "eye-off"} color='grey' size={15} />
+        {showPass ? (
+          <Feather name="eye" color="grey" size={15} />
+        ) : (
+          <Feather name="eye-off" color="grey" size={15} />
+        )}
       </TouchableOpacity>
       <AuthButton onPress={handleSubmit}>
         <LinearGradient
@@ -68,8 +72,6 @@ const Signin = ({ navigation }) => {
           // Button Linear Gradient
           colors={["#ffbf00", "#FFCC33", "#FFE085"]}
           style={{
-            // start: ["-1", "-2"],
-            // end: ["-2", "-2"],
             marginTop: 10,
             marginBottom: 10,
             padding: 14,
@@ -85,7 +87,7 @@ const Signin = ({ navigation }) => {
       {isValidUser ? (
         <Text style={{ color: "green" }}> forget password </Text>
       ) : (
-        <Animatable.View animation='fadeInLeft' duration={400}>
+        <Animatable.View animation="fadeInLeft" duration={400}>
           <Text style={{ color: "red" }}>Invalid username or password </Text>
         </Animatable.View>
       )}

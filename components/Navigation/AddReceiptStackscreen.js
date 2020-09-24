@@ -4,26 +4,25 @@ import { observer } from "mobx-react";
 
 //Styling
 import Icon from "react-native-vector-icons/Ionicons";
-
+import PhotoPicker from "../CameraFeature/PhotoPicker";
 // component
 import CreateReceiptForm from "../Forms/CreateReceiptForm";
 import CameraModal from "../Modals/CameraModal";
 import CameraScreen from "../CameraFeature/CameraScreen";
-import PhotoPicker from "../CameraFeature/PhotoPicker";
 
 const AddReceiptStack = createStackNavigator();
-const color = "#e2cfc4";
+const color = "#ffbf00";
 
 const AddReceiptStackScreen = ({ navigation }) => (
   <AddReceiptStack.Navigator
-    initialRouteName='AddReceipt'
-    // title={false}
+    initialRouteName="AddReceipt"
+    title={false}
     screenOptions={{
       headerTintColor: "white",
       backgroundColor: "white",
       headerStyle: {
-        backgroundColor: "white",
-        height: 100,
+        backgroundColor: color,
+        height: 60,
       },
       headerTitleStyle: {
         fontWeight: "bold",
@@ -32,17 +31,19 @@ const AddReceiptStackScreen = ({ navigation }) => (
     }}
   >
     <AddReceiptStack.Screen
-      name='CameraScreen'
-      component={CameraScreen}
+
+      name="CameraModal"
+      component={CameraModal}
+
       options={{
         title: false,
 
         headerLeft: () => (
           <Icon.Button
-            name='ios-menu'
+            name="ios-menu"
             size={25}
-            color={"gray"}
-            backgroundColor='transparent'
+            color="white"
+            backgroundColor={color}
             onPress={() => navigation.openDrawer()}
           ></Icon.Button>
         ),
