@@ -11,6 +11,11 @@ import CameraModal from "../Modals/CameraModal";
 import CameraScreen from "../CameraFeature/CameraScreen";
 
 const AddReceiptStack = createStackNavigator();
+
+const AddReceiptStackScreen = ({ navigation }) => (
+  <AddReceiptStack.Navigator
+    initialRouteName='AddReceipt'
+
 const color = "#ffbf00";
 
 const AddReceiptStackScreen = ({ navigation }) => (
@@ -21,6 +26,8 @@ const AddReceiptStackScreen = ({ navigation }) => (
       headerTintColor: "white",
       backgroundColor: "white",
       headerStyle: {
+        backgroundColor: "white",
+        height: 90,
         backgroundColor: color,
         height: 60,
       },
@@ -42,6 +49,8 @@ const AddReceiptStackScreen = ({ navigation }) => (
           <Icon.Button
             name="ios-menu"
             size={25}
+            color={"#E0E0E0"}
+            backgroundColor='transparent'
             color="white"
             backgroundColor={color}
             onPress={() => navigation.openDrawer()}

@@ -8,6 +8,7 @@ import Icon from "react-native-vector-icons/Ionicons";
 import Notification from "../Notifications";
 
 const NotificationStack = createStackNavigator();
+
 const color = "#427aa1";
 
 const NotificationStackScreen = ({ navigation }) => (
@@ -19,8 +20,6 @@ const NotificationStackScreen = ({ navigation }) => (
       headerStyle: {
         backgroundColor: "white",
         height: 90,
-        backgroundColor: color,
-        height: 60,
       },
       headerTitleStyle: {
         fontWeight: "bold",
@@ -37,8 +36,8 @@ const NotificationStackScreen = ({ navigation }) => (
           <Icon.Button
             name="ios-menu"
             size={25}
-            color="white"
-            backgroundColor={color}
+            color={"#E0E0E0"}
+            backgroundColor='white'
             onPress={() => navigation.openDrawer()}
           ></Icon.Button>
         ),

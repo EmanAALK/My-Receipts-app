@@ -31,8 +31,11 @@ const PhotoPicker = ({ navigation }) => {
         aspect: [4, 3],
         quality: 1,
       });
+
       if (!result.cancelled) {
         setImage(result.uri);
+        console.log("Hellow");
+        // navigation.navigate("CreateReceiptForm", { image: photo.uri });
         navigation.navigate("CreateReceiptForm", { image });
       }
     } catch (E) {}

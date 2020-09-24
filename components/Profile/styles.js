@@ -3,7 +3,7 @@ import { Icon, Button } from "native-base";
 
 export const TextStyle = styled.Text`
   color: navy;
-  font-size: 24;
+  font-size: 24px;
   text-align: center;
   padding-top: 20px;
 `;
@@ -35,24 +35,22 @@ export const AuthTextInput = styled.TextInput`
   height: 20px;
   margin-bottom: 15px;
   color: black;
-  border-bottom-color: lightgrey;
+  border-bottom-color: black;
   border-bottom-width: 0.25px;
-  width: 350px;
-  padding-left: 10px;
+  width: 300px;
   margin-top: 8px;
 `;
 export const AuthButton = styled.TouchableOpacity`
   padding: 10px;
   background-color: #fff;
   border: lightgray;
-  border-radius: 25;
-  width: 150;
-  margin-top: 40;
+  border-radius: 25px;
+  width: 150px;
+  margin-top: 40px;
   margin-right: 2px;
   align-items: center;
-
-  /* margin-bottom: 180px; */
 `;
+
 export const AuthButtonText = styled.Text`
   color: #ffbf00;
   font-size: 18px;
@@ -65,10 +63,10 @@ export const TrashIcon = styled(Icon)`
   color: red;
 `;
 export const SmallText = styled.Text`
-  font-size: 10;
+  font-size: 10px;
   font-weight: bold;
   color: black;
-  margin-left: 10;
+  margin-left: 10px;
   padding-top: 15;
 `;
 export const LabelTitle = styled.Text`
