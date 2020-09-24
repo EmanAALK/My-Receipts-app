@@ -68,10 +68,11 @@ class ReceiptStore {
       new Date(Date.now() + 8 * 24 * 60 * 60 * 1000)
     ).format("YYYY-MM-DD");
 
-    const totalExpired = this.receipts
+    const totalExpired = receiptStore.receipts
       .filter((receipt) => receipt.folder.userId === authStore.user.id) //get receipt of this user
       .filter((receipt) => receipt.expDate < dateBeforeWeek); //get receipt that is less than dateBeforeWeek
     const totalExpiredLength = totalExpired.length;
+    console.log("check", totalExpiredLength);
     return totalExpiredLength;
   }
 }

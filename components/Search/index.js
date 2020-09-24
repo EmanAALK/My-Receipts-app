@@ -26,7 +26,7 @@ const Search = ({ navigation }) => {
   ];
 
   const searchDate = ReceiptStore.receipts.filter(
-    (receipt) => receipt.date === date || receipt.Expdate === date
+    (receipt) => receipt.date === date || receipt.expDate === date
   );
   const folder = folderStore.folders.filter(
     (folder) => folder.userId === authStore.user.id
