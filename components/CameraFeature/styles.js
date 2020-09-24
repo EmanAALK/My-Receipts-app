@@ -6,7 +6,7 @@ export const ConfirmButton = styled.TouchableOpacity`
   border: lightgray;
   border-radius: 25;
   width: 150;
-  margin-top: 40;
+  margin-top: 10;
   margin-right: 2px;
   align-items: center;
 `;

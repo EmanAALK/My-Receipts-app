@@ -31,9 +31,9 @@ export const FormTextInput = styled.TextInput`
   height: 20px;
   margin-bottom: 15px;
   color: black;
-  border-bottom-color: lightgrey;
+  border-bottom-color: black;
   border-bottom-width: 0.25px;
-  width: 250px;
+  width: 300px;
   padding-right: 10px;
   margin-top: 8px;
 `;
@@ -42,9 +42,9 @@ export const FormButton = styled.TouchableOpacity`
   padding: 10px;
   background-color: #fff;
   border: lightgray;
-  border-radius: 25;
-  width: 150;
-  margin-top: 40;
+  border-radius: 25px;
+  width: 150px;
+  margin-top: 20px;
   margin-right: 2px;
   align-items: center;
 
