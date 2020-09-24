@@ -17,8 +17,16 @@ const FolderList = ({ navigation }) => {
   // if (folderStore.loading) return <Spinner />;
   const [selectedIndex, setSelectedIndex] = useState("");
 
-  const folderList = folderStore.folders
+  const PinList = folderStore.folders
     .filter((folder) => folder.userId === authStore.user.id)
+    .filter((folder) => folder.pin == true)
+    .map((folder) => (
+      <FolderItem folder={folder} key={folder.id} navigation={navigation} />
+    ));
+
+  const UnPinList = folderStore.folders
+    .filter((folder) => folder.userId === authStore.user.id)
+    .filter((folder) => folder.pin == false)
     .map((folder) => (
       <FolderItem folder={folder} key={folder.id} navigation={navigation} />
     ));
@@ -41,7 +49,8 @@ const FolderList = ({ navigation }) => {
       {selectedIndex === 0 && navigation.navigate("Search")}
       {selectedIndex === 1 && navigation.navigate("CreateFolderForm")}
 
-      <List>{folderList}</List>
+      <List>{PinList}</List>
+      <List>{UnPinList}</List>
     </>
   );
 };
