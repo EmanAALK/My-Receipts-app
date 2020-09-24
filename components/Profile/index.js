@@ -13,7 +13,6 @@ import {
   AuthButtonText,
   EditContainer,
 } from "./styles";
-
 import { View } from "react-native-animatable";
 import { Text } from "native-base";
 

@@ -5,6 +5,7 @@ import Axios from "axios";
 
 //Storage
 import AsyncStorage from "@react-native-community/async-storage";
+import folderStore from "./FolderStore";
 
 class AuthStore {
   user = null;
@@ -20,6 +21,7 @@ class AuthStore {
     try {
       const res = await instance.post("/signup", userData);
       this.setUser(res.data.token); // await
+      folderStore.folders.push(res.data.defaultFolder);
     } catch (error) {
       console.log("AuthStore -> signup -> error", error);
     }
