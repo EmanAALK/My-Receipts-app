@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import { observer } from "mobx-react";
 
 //Drawer
@@ -8,6 +8,8 @@ import { DrawerContentScrollView, DrawerItem } from "@react-navigation/drawer";
 //Styling
 import { View, StyleSheet } from "react-native";
 import Icon from "react-native-vector-icons/MaterialCommunityIcons";
+import IconBack from "react-native-vector-icons/Ionicons";
+import Entypo from "react-native-vector-icons/Entypo";
 
 //Stores
 import authStore from "../../store/authStore";
@@ -43,9 +45,9 @@ const DrawerContent = ({ navigation }) => {
             <Drawer.Section style={styles.drawerSection}>
               <DrawerItem
                 icon={() => (
-                  <Icon name='account-outline' color='grey' size='25' />
+                  <Icon name="account-outline" color="grey" size={25} />
                 )}
-                label='Profile'
+                label="Profile"
                 onPress={() => {
                   navigation.navigate("Profile");
                 }}
@@ -53,10 +55,19 @@ const DrawerContent = ({ navigation }) => {
             </Drawer.Section>
             <Drawer.Section style={styles.drawerSection}>
               <DrawerItem
-                icon={() => <Icon name='receipt' color='grey' size='25' />}
-                label='Receipts Calculator'
+                icon={() => <Icon name="receipt" color="grey" size={25} />}
+                label="Receipts Calculator"
                 onPress={() => {
                   navigation.navigate("Calculation");
+                }}
+              />
+            </Drawer.Section>
+            <Drawer.Section style={styles.drawerSection}>
+              <DrawerItem
+                icon={() => <Entypo name="folder" size={20} color="grey" />}
+                label="Archive Folder"
+                onPress={() => {
+                  navigation.navigate("ArchiveReceipt");
                 }}
               />
             </Drawer.Section>
@@ -65,8 +76,8 @@ const DrawerContent = ({ navigation }) => {
 
         <Drawer.Section style={styles.bottomDrawerSection}>
           <DrawerItem
-            icon={() => <Icon name='exit-to-app' size='25' />}
-            label='Sign Out'
+            icon={() => <Icon name="exit-to-app" size={25} />}
+            label="Sign Out"
             onPress={() => {
               authStore.signout();
             }}
@@ -111,7 +122,7 @@ const styles = StyleSheet.create({
     borderTopColor: "#f4f4f4",
     borderTopWidth: 1,
     height: 50,
-    backgroundColor: "#e2cfc4",
+    // backgroundColor: "lightgrey",
   },
   preference: {
     flexDirection: "row",

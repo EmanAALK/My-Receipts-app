@@ -3,22 +3,23 @@ import { createDrawerNavigator } from "@react-navigation/drawer";
 import { createMaterialBottomTabNavigator } from "@react-navigation/material-bottom-tabs";
 import { observer } from "mobx-react";
 
+// styles
 import Icon from "react-native-vector-icons/Ionicons";
 import { Badge } from "react-native-elements";
+import { LinearGradient } from "expo-linear-gradient";
+
 // component
 import DrawerContent from "../DawerContenent";
-
 import Navigation from "./index";
 import authStore from "../../store/authStore";
 import HomeStackScreen from "./HomeStackScreen";
 import NotificationStackscreen from "./NotificationStackscreen";
 import AddReceiptStackScreen from "./AddReceiptStackscreen";
-import { LinearGradient } from "expo-linear-gradient";
 import receiptStore from "../../store/ReceiptStore";
 
 const Drawer = createDrawerNavigator();
 const Tab = createMaterialBottomTabNavigator();
-const color = "#e2cfc4";
+const color = "#427aa1";
 
 const TabScreen = observer(() => (
   <Tab.Navigator
@@ -51,7 +52,7 @@ const TabScreen = observer(() => (
         // tabBarLabel: "AddReceipt",
         showLabel: false,
         title: false,
-        backgroundColor: "color",
+        backgroundColor: color,
         tabBarIcon: ({ color }) => (
           <Icon name="md-camera" color={color} size={26} />
         ),

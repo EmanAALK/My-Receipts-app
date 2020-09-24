@@ -6,9 +6,9 @@ import { Text, CardItem } from "native-base";
 import { View } from "react-native-animatable";
 import { FlatList } from "react-native";
 import { Card } from "react-native-paper";
+import AntDesign from "react-native-vector-icons/AntDesign";
 
 const Search = ({ navigation, searchFolder }) => {
-  console.log(".....SearchByFolder", searchFolder);
   const renderItem = ({ item }) => {
     return (
       <Card
@@ -27,6 +27,12 @@ const Search = ({ navigation, searchFolder }) => {
             paddingLeft: 30,
           }}
         >
+          <AntDesign
+            style={{ paddingRight: 10 }}
+            name="folderopen"
+            size={20}
+            color="#ffbf00"
+          />
           <Text
             onPress={() => navigation.navigate("ReceiptList", { folder: item })}
           >
