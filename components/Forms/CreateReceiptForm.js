@@ -26,7 +26,8 @@ import {
 } from "./styles";
 
 const CreateReceiptForm = ({ route, navigation }) => {
-  const { photo } = route.params;
+  const { image } = route.params;
+
   const [receipt, setReceipt] = useState({
     name: "",
     price: "",
@@ -155,10 +156,14 @@ const CreateReceiptForm = ({ route, navigation }) => {
         <View
           style={{ flex: 1, alignItems: "center", justifyContent: "center" }}
         >
-          <Image
-            source={{ uri: photo.uri }}
+          {/* <Image
+            // source={{ uri: photo.uri }}
             style={{ width: 280, height: 480 }}
-          />
+          /> */}
+          <Image
+            source={{ uri: image }}
+            style={{ width: 280, height: 480 }}
+          ></Image>
         </View>
       </FormContainer>
     </>
