@@ -27,7 +27,7 @@ import {
 
 const CreateReceiptForm = ({ route, navigation }) => {
   const { image } = route.params;
-
+  console.log("create receipt form");
   const [receipt, setReceipt] = useState({
     name: "",
     price: "",
@@ -48,7 +48,7 @@ const CreateReceiptForm = ({ route, navigation }) => {
 
       image: { uri: localUri, name: filename, type },
     });
-    navigation.replace("ReceiptList");
+    navigation.replace("ReceiptList", { name }); //What key to give it?
   };
 
   const folder = folderStore.folders
@@ -83,7 +83,7 @@ const CreateReceiptForm = ({ route, navigation }) => {
 
         <FormTextInput
           onChangeText={(price) => setReceipt({ ...receipt, price })}
-          placeholder='Price'
+          placeholder='Receipt Price'
           placeholderTextColor='#A6AEC1'
         />
 
@@ -143,6 +143,16 @@ const CreateReceiptForm = ({ route, navigation }) => {
           />
         </View>
 
+        <View
+          style={{ flex: 1, alignItems: "center", justifyContent: "center" }}
+        >
+          {/* Image */}
+          <Image
+            source={{ uri: image }}
+            style={{ width: 160, height: 260 }}
+          ></Image>
+        </View>
+
         {/* Save/Cancel Buttons */}
         <View style={{ flexDirection: "row" }}>
           <FormButton onPress={handleSubmit}>
@@ -152,18 +162,6 @@ const CreateReceiptForm = ({ route, navigation }) => {
           <FormButton onPress={handleCancel}>
             <FormButtonText>Cancel</FormButtonText>
           </FormButton>
-        </View>
-        <View
-          style={{ flex: 1, alignItems: "center", justifyContent: "center" }}
-        >
-          {/* <Image
-            // source={{ uri: photo.uri }}
-            style={{ width: 280, height: 480 }}
-          /> */}
-          <Image
-            source={{ uri: image }}
-            style={{ width: 280, height: 480 }}
-          ></Image>
         </View>
       </FormContainer>
     </>

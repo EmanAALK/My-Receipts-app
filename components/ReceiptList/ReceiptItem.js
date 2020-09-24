@@ -17,6 +17,15 @@ import {
 import { Card } from "react-native-paper";
 import defaultimage from "../../assets/defaultimage.png";
 const ReceiptItem = ({ receipt, navigation }) => {
+  const deleteAlert = () => {
+    Alert.alert("Delete", "Are you sure you want to delete this receipt?", [
+      {
+        text: "Cancel",
+        style: "cancel",
+      },
+      { text: "OK", onPress: () => receiptStore.deleteReceipt(receipt.id) },
+    ]);
+  };
   return (
     <ListItem
       onPress={() => navigation.navigate("ReceiptDetail", { receipt: receipt })}
@@ -31,13 +40,16 @@ const ReceiptItem = ({ receipt, navigation }) => {
         <Text>{receipt.name}</Text>
       </Left>
       <>
-        {/* <Right>
+        <Right>
+          <DeleteButtonStyled onPress={deleteAlert}>Delete</DeleteButtonStyled>
           <DeleteButtonStyled
-            onPress={() => receiptStore.deleteReceipt(receipt.id)}
+            onPress={() =>
+              navigation.navigate("UpdateReceiptForm", { oldReceipt: receipt })
+            }
           >
-            Delete
+            Update
           </DeleteButtonStyled>
-        </Right> */}
+        </Right>
       </>
     </ListItem>
   );

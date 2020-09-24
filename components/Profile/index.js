@@ -30,14 +30,14 @@ const EditProfile = ({ navigation }) => {
 
   return (
     <AuthContainer>
-      <AuthTitle>Edit Profile</AuthTitle>
+      <AuthTitle>Edit Your Profile</AuthTitle>
       <EditContainer>
         <Text note>Username </Text>
         <View style={{ flexDirection: "row" }}>
           <AuthTextInput
             onChangeText={(username) => setUser({ ..._user, username })}
             // placeholder="username"
-            placeholderTextColor="#A6AEC1"
+            placeholderTextColor='#A6AEC1'
             value={_user.username}
           />
         </View>
@@ -46,7 +46,7 @@ const EditProfile = ({ navigation }) => {
           <AuthTextInput
             onChangeText={(firstName) => setUser({ ..._user, firstName })}
             // placeholder="firstName"
-            placeholderTextColor="#A6AEC1"
+            placeholderTextColor='#A6AEC1'
             value={_user.firstName}
           />
         </View>
@@ -55,7 +55,7 @@ const EditProfile = ({ navigation }) => {
           <AuthTextInput
             onChangeText={(lastName) => setUser({ ..._user, lastName })}
             // placeholder="lastName"
-            placeholderTextColor="#A6AEC1"
+            placeholderTextColor='#A6AEC1'
             value={_user.lastName}
           />
         </View>
@@ -64,7 +64,7 @@ const EditProfile = ({ navigation }) => {
           <AuthTextInput
             onChangeText={(email) => setUser({ ..._user, email })}
             // placeholder="email"
-            placeholderTextColor="#A6AEC1"
+            placeholderTextColor='#A6AEC1'
             value={_user.email}
           />
         </View>

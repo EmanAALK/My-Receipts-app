@@ -31,7 +31,6 @@ const CameraScreen = ({ navigation }) => {
   const [cameraType, setCameraType] = useState(Camera.Constants.Type.back);
   const [isCameraReady, setIsCameraReady] = useState(false);
   const [isPreview, setIsPreview] = useState(false);
-  //   const cameraRef = useRef();
   const [cameraRef, setCameraRef] = useState(null);
 
   useEffect(() => {
@@ -43,22 +42,6 @@ const CameraScreen = ({ navigation }) => {
 
   const onCameraReady = () => {
     setIsCameraReady(true);
-  };
-  const takePicture = async () => {
-    if (cameraRef.current) {
-      const options = { quality: 0.5, base64: true, skipProcessing: true };
-      const data = await cameraRef.current.takePictureAsync(
-        options,
-        onPictureSaved
-      );
-      const source = data.uri;
-      if (source) {
-        await cameraRef.current.pausePreview();
-        setIsPreview(true);
-        console.log("picture source", source);
-        saveToCameraRollAsync();
-      }
-    }
   };
 
   //Cancel Captured Photo
@@ -130,7 +113,6 @@ const CameraScreen = ({ navigation }) => {
         ref={(ref) => {
           setCameraRef(ref);
         }}
-        // ref={cameraRef}
         style={styles.container}
         type={cameraType}
         flashMode={Camera.Constants.FlashMode.on}
@@ -143,7 +125,7 @@ const CameraScreen = ({ navigation }) => {
         {isPreview && renderCancelPreviewButton()}
         {!isPreview && renderCaptureControl()}
       </View>
-      <PhotoPicker />
+      <PhotoPicker navigation={navigation} />
     </SafeAreaView>
   );
 };
