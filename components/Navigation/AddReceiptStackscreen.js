@@ -12,12 +12,7 @@ import CameraScreen from "../CameraFeature/CameraScreen";
 
 const AddReceiptStack = createStackNavigator();
 
-const AddReceiptStackScreen = ({ navigation }) => (
-  <AddReceiptStack.Navigator
-    initialRouteName='AddReceipt'
-
 const color = "#ffbf00";
-
 const AddReceiptStackScreen = ({ navigation }) => (
   <AddReceiptStack.Navigator
     initialRouteName="AddReceipt"
@@ -38,10 +33,8 @@ const AddReceiptStackScreen = ({ navigation }) => (
     }}
   >
     <AddReceiptStack.Screen
-
       name="CameraModal"
       component={CameraModal}
-
       options={{
         title: false,
 
@@ -50,7 +43,7 @@ const AddReceiptStackScreen = ({ navigation }) => (
             name="ios-menu"
             size={25}
             color={"#E0E0E0"}
-            backgroundColor='transparent'
+            backgroundColor="transparent"
             color="white"
             backgroundColor={color}
             onPress={() => navigation.openDrawer()}

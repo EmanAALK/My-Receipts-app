@@ -28,7 +28,9 @@ import RNPickerSelect from "react-native-picker-select";
 
 const ReceiptItem = ({ receipt, navigation, multipul }) => {
   const [isChecked, setIsChecked] = useState(multipul);
-
+  const [updatedReceipt, setUpdatedReceipt] = useState(receipt);
+  const [move, setMove] = useState(false);
+  console.log(",,,,multipul", multipul);
   const handleChecked = () => {
     setIsChecked(!isChecked);
 
@@ -40,14 +42,6 @@ const ReceiptItem = ({ receipt, navigation, multipul }) => {
       );
   };
 
-
-
-
-
-  const deleteAlert = () => {
-    Alert.alert("Delete", "Are you sure you want to delete this receipt?", [
-  const [updatedReceipt, setUpdatedReceipt] = useState(receipt);
-  const [move, setMove] = useState(false);
   let menu = null;
   const folder = folderStore.folders.filter(
     (folder) => folder.userId === authStore.user.id
@@ -89,7 +83,7 @@ const ReceiptItem = ({ receipt, navigation, multipul }) => {
       },
       { text: "OK", onPress: () => receiptStore.deleteReceipt(receipt.id) },
     ]);
-
+  };
   return (
     <ListItem
       onPress={() => navigation.navigate("ReceiptDetail", { receipt: receipt })}
@@ -99,78 +93,45 @@ const ReceiptItem = ({ receipt, navigation, multipul }) => {
           checkedIcon="dot-circle-o"
           checkedColor="grey"
           uncheckedIcon="circle-o"
+          size={15}
           checked={isChecked}
           onPress={handleChecked}
           value={false}
         />
       )}
-
-      <Thumbnail
-        style={{ marginBottom: 5, marginRight: 16, textAligin: "center" }}
-        source={defaultimage}
-      />
-
       <Left>
-        <Text>{receipt.name}</Text>
+        <Icon name="receipt" size={25} color="lightgrey" />
+        <Text style={{ paddingLeft: 20 }}>{receipt.name}</Text>
       </Left>
 
-
-//       <>
-//         <Right>
-//           <DeleteButtonStyled onPress={deleteAlert}>Delete</DeleteButtonStyled>
-//           <DeleteButtonStyled
-//             onPress={() =>
-//               navigation.navigate("UpdateReceiptForm", { oldReceipt: receipt })
-//             }
-//           >
-//             Update
-//           </DeleteButtonStyled>
-//         </Right>
-//       </>
-
-    </ListItem>
-    <>
-      <ListItem
-        onPress={() =>
-          navigation.navigate("ReceiptDetail", { receipt: receipt })
+      <Menu
+        ref={setMenuRef}
+        button={
+          <Text style={{ fontWeight: "bold" }} onPress={showMenu}>
+            ...
+          </Text>
         }
       >
-        <>
-          <Left>
-            <Icon name="receipt" size={25} color="lightgrey" />
-            <Text style={{ paddingLeft: 20 }}>{receipt.name}</Text>
-          </Left>
+        <MenuItem onPress={handleSubmit}>
+          {receipt.archive ? "unArchive" : "Archive"}
+        </MenuItem>
+        <MenuItem onPress={() => setMove(!move)}>Move</MenuItem>
+        {move && (
+          <RNPickerSelect
+            // onValueChange={(folderId) =>
+            //   setUpdatedReceipt({ ...updatedReceipt, folderId })
+            // }
+            onValueChange={(folderId) => handleMove(folderId)}
+            items={folder.map((folder) => ({
+              label: folder.name,
+              value: folder.id,
+            }))}
+          />
+        )}
 
-          <Menu
-            ref={setMenuRef}
-            button={
-              <Text style={{ fontWeight: "bold" }} onPress={showMenu}>
-                ...
-              </Text>
-            }
-          >
-            <MenuItem onPress={handleSubmit}>
-              {receipt.archive ? "unArchive" : "Archive"}
-            </MenuItem>
-            <MenuItem onPress={() => setMove(!move)}>Move</MenuItem>
-            {move && (
-              <RNPickerSelect
-                // onValueChange={(folderId) =>
-                //   setUpdatedReceipt({ ...updatedReceipt, folderId })
-                // }
-                onValueChange={(folderId) => handleMove(folderId)}
-                items={folder.map((folder) => ({
-                  label: folder.name,
-                  value: folder.id,
-                }))}
-              />
-            )}
-
-            <MenuItem onPress={deleteAlert}>Delete</MenuItem>
-          </Menu>
-        </>
-      </ListItem>
-    </>
+        <MenuItem onPress={deleteAlert}>Delete</MenuItem>
+      </Menu>
+    </ListItem>
   );
 };
 
