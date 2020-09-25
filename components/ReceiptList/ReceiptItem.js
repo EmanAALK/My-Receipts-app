@@ -16,6 +16,8 @@ import {
   // Button,
   Thumbnail,
 } from "native-base";
+
+import { CheckBox } from "react-native-elements";
 import { Card, Divider, Button } from "react-native-paper";
 import defaultimage from "../../assets/defaultimage.png";
 import Icon from "react-native-vector-icons/MaterialCommunityIcons";
@@ -24,7 +26,24 @@ import { Alert } from "react-native";
 import Menu, { MenuItem, MenuDivider } from "react-native-material-menu";
 import RNPickerSelect from "react-native-picker-select";
 
-const ReceiptItem = ({ receipt, navigation }) => {
+const ReceiptItem = ({ receipt, navigation, multipul }) => {
+  const [isChecked, setIsChecked] = useState(multipul);
+
+  const handleChecked = () => {
+    setIsChecked(!isChecked);
+
+    if (!isChecked) {
+      receiptStore.selectedReceipts.push(receipt);
+    } else
+      receiptStore.selectedReceipts = receiptStore.selectedReceipts.filter(
+        (item) => item.id !== receipt.id
+      );
+  };
+
+
+
+
+
   const deleteAlert = () => {
     Alert.alert("Delete", "Are you sure you want to delete this receipt?", [
   const [updatedReceipt, setUpdatedReceipt] = useState(receipt);
@@ -70,32 +89,45 @@ const ReceiptItem = ({ receipt, navigation }) => {
       },
       { text: "OK", onPress: () => receiptStore.deleteReceipt(receipt.id) },
     ]);
-  };
+
   return (
     <ListItem
       onPress={() => navigation.navigate("ReceiptDetail", { receipt: receipt })}
     >
-      <Left>
-        <Thumbnail
-          style={{ marginBottom: 5, marginRight: 16, textAligin: "center" }}
-          source={defaultimage}
+      {multipul && (
+        <CheckBox
+          checkedIcon="dot-circle-o"
+          checkedColor="grey"
+          uncheckedIcon="circle-o"
+          checked={isChecked}
+          onPress={handleChecked}
+          value={false}
         />
-      </Left>
+      )}
+
+      <Thumbnail
+        style={{ marginBottom: 5, marginRight: 16, textAligin: "center" }}
+        source={defaultimage}
+      />
+
       <Left>
         <Text>{receipt.name}</Text>
       </Left>
-      <>
-        <Right>
-          <DeleteButtonStyled onPress={deleteAlert}>Delete</DeleteButtonStyled>
-          <DeleteButtonStyled
-            onPress={() =>
-              navigation.navigate("UpdateReceiptForm", { oldReceipt: receipt })
-            }
-          >
-            Update
-          </DeleteButtonStyled>
-        </Right>
-      </>
+
+
+//       <>
+//         <Right>
+//           <DeleteButtonStyled onPress={deleteAlert}>Delete</DeleteButtonStyled>
+//           <DeleteButtonStyled
+//             onPress={() =>
+//               navigation.navigate("UpdateReceiptForm", { oldReceipt: receipt })
+//             }
+//           >
+//             Update
+//           </DeleteButtonStyled>
+//         </Right>
+//       </>
+
     </ListItem>
     <>
       <ListItem
