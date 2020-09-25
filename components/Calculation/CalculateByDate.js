@@ -15,6 +15,7 @@ import { Table, Row } from "react-native-table-component";
 
 //Pickers
 import DatePicker from "react-native-datepicker";
+import { ScrollView } from "react-native";
 
 const CalculateByDate = ({ navigation }) => {
   const [fromDate, setFromDate] = useState();
@@ -56,102 +57,104 @@ const CalculateByDate = ({ navigation }) => {
 
   return (
     <>
-      <View
-        style={{
-          padding: 5,
-          flexDirection: "row",
-          marginTop: 5,
-          alignSelf: "center",
-        }}
-      >
-        <TextStyle>From : </TextStyle>
-        <DatePicker
-          showIcon={false}
-          style={{ width: 255, marginTop: 5 }}
-          date={fromDate}
-          mode='date'
-          placeholder='select date'
-          format='YYYY-MM-DD'
-          confirmBtnText='Confirm'
-          cancelBtnText='Cancel'
-          customStyles={{
-            dateIcon: {
-              position: "absolute",
-              left: 0,
-              top: 4,
-              marginRight: 4,
-              marginLeft: 0,
-              borderColor: "#cea146",
-            },
-            dateInput: {
-              marginLeft: 5,
-              borderWidth: 0.25,
-            },
+      <ScrollView>
+        <View
+          style={{
+            padding: 5,
+            flexDirection: "row",
+            marginTop: 5,
+            alignSelf: "center",
           }}
-          onDateChange={(date) => {
-            setFromDate(date);
-          }}
-        />
-      </View>
+        >
+          <TextStyle>From : </TextStyle>
+          <DatePicker
+            showIcon={false}
+            style={{ width: 255, marginTop: 5 }}
+            date={fromDate}
+            mode="date"
+            placeholder="select date"
+            format="YYYY-MM-DD"
+            confirmBtnText="Confirm"
+            cancelBtnText="Cancel"
+            customStyles={{
+              dateIcon: {
+                position: "absolute",
+                left: 0,
+                top: 4,
+                marginRight: 4,
+                marginLeft: 0,
+                borderColor: "#cea146",
+              },
+              dateInput: {
+                marginLeft: 5,
+                borderWidth: 0.25,
+              },
+            }}
+            onDateChange={(date) => {
+              setFromDate(date);
+            }}
+          />
+        </View>
 
-      <View
-        style={{
-          padding: 5,
-          flexDirection: "row",
-          alignSelf: "center",
-        }}
-      >
-        <TextStyle> To : </TextStyle>
-
-        <DatePicker
-          showIcon={false}
-          style={{ width: 255, textAlign: "left", marginLeft: 10 }}
-          date={toDate}
-          mode='date'
-          placeholder='select date'
-          format='YYYY-MM-DD'
-          confirmBtnText='Confirm'
-          cancelBtnText='Cancel'
-          mode='date'
-          placeholder='select date'
-          format='YYYY-MM-DD'
-          confirmBtnText='Confirm'
-          cancelBtnText='Cancel'
-          customStyles={{
-            dateIcon: {
-              position: "absolute",
-              left: 0,
-              top: 4,
-              marginRight: 4,
-              marginLeft: 0,
-              borderColor: "#cea146",
-              borderWidth: 0.25,
-            },
-            dateInput: {
-              marginLeft: 5,
-              borderWidth: 0.25,
-            },
+        <View
+          style={{
+            padding: 5,
+            flexDirection: "row",
+            alignSelf: "center",
           }}
-          onDateChange={(date) => {
-            setToDate(date);
-          }}
-        />
-      </View>
-      {receiptList}
-      {toDate && (
-        <Card>
-          <CardItem>
-            <Left>
-              <Text style={{ color: "red" }}>Total Amount</Text>
-            </Left>
-            <Body></Body>
+        >
+          <TextStyle> To : </TextStyle>
 
-            <Right>
-              <Text style={{ color: "red" }}>{total}</Text>
-            </Right>
-          </CardItem>
-        </Card>
-      )}
+          <DatePicker
+            showIcon={false}
+            style={{ width: 255, textAlign: "left", marginLeft: 10 }}
+            date={toDate}
+            mode="date"
+            placeholder="select date"
+            format="YYYY-MM-DD"
+            confirmBtnText="Confirm"
+            cancelBtnText="Cancel"
+            mode="date"
+            placeholder="select date"
+            format="YYYY-MM-DD"
+            confirmBtnText="Confirm"
+            cancelBtnText="Cancel"
+            customStyles={{
+              dateIcon: {
+                position: "absolute",
+                left: 0,
+                top: 4,
+                marginRight: 4,
+                marginLeft: 0,
+                borderColor: "#cea146",
+                borderWidth: 0.25,
+              },
+              dateInput: {
+                marginLeft: 5,
+                borderWidth: 0.25,
+              },
+            }}
+            onDateChange={(date) => {
+              setToDate(date);
+            }}
+          />
+        </View>
+        {receiptList}
+        {toDate && (
+          <Card>
+            <CardItem>
+              <Left>
+                <Text style={{ color: "red" }}>Total Amount</Text>
+              </Left>
+              <Body></Body>
+
+              <Right>
+                <Text style={{ color: "red" }}>{total}</Text>
+              </Right>
+            </CardItem>
+          </Card>
+        )}
+      </ScrollView>
     </>
   );
 };

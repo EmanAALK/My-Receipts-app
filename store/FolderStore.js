@@ -9,7 +9,7 @@ class FolderStore {
   fetchFolder = async () => {
     //error handler
     try {
-      const response = await instance.get("/folder");
+      const response = await instance.get("/folders");
       console.log("FolderStore -> fetchFolder -> error", response); // test to see where data come from
       this.folders = response.data;
       loading = false;
@@ -39,7 +39,7 @@ class FolderStore {
     try {
       // const formData = new FormData();
       // for (const key in updatedFolder) formData.append(key, updatedFolder[key]);
-      await instance.put(`/folder/${updatedFolder.id}`, updatedFolder);
+      await instance.put(`/folders/${updatedFolder.id}`, updatedFolder);
       const folder = this.folders.find(
         (folder) => folder.id === updatedFolder.id
       );
@@ -51,7 +51,7 @@ class FolderStore {
 
   deleteFolder = async (folderId) => {
     try {
-      await instance.delete(`/folder/${folderId}`);
+      await instance.delete(`/folders/${folderId}`);
       this.folders = this.folders.filter((folder) => folder.id !== folderId);
     } catch (error) {
       console.log("FolderStore -> deleteFolder  -> error ", error);
