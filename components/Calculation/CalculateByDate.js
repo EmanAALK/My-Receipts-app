@@ -1,5 +1,4 @@
 import React, { useState } from "react";
-import FolderItem from "./FolderItem";
 
 //Stores
 import receiptStore from "../../store/ReceiptStore";
@@ -9,9 +8,7 @@ import authStore from "../../store/authStore";
 //Styling
 
 import { View, Text, Right, Body, Left, Card, CardItem } from "native-base";
-
-import { InputContainer, TextStyle, Total } from "./styles";
-import { Table, Row } from "react-native-table-component";
+import { TextStyle } from "./styles";
 
 //Pickers
 import DatePicker from "react-native-datepicker";
@@ -57,6 +54,7 @@ const CalculateByDate = ({ navigation }) => {
 
   return (
     <>
+
       <ScrollView>
         <View
           style={{
@@ -64,6 +62,7 @@ const CalculateByDate = ({ navigation }) => {
             flexDirection: "row",
             marginTop: 5,
             alignSelf: "center",
+
           }}
         >
           <TextStyle>From : </TextStyle>
@@ -102,9 +101,9 @@ const CalculateByDate = ({ navigation }) => {
             flexDirection: "row",
             alignSelf: "center",
           }}
+
         >
           <TextStyle> To : </TextStyle>
-
           <DatePicker
             showIcon={false}
             style={{ width: 255, textAlign: "left", marginLeft: 10 }}
@@ -155,6 +154,8 @@ const CalculateByDate = ({ navigation }) => {
           </Card>
         )}
       </ScrollView>
+
+
     </>
   );
 };

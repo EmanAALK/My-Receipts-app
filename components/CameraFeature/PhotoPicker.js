@@ -1,10 +1,17 @@
 import React, { useState, useRef, useEffect } from "react";
 import { observer } from "mobx-react";
-import { Button, Image, Platform, Picker, View } from "react-native";
+
+//Styling
+import { Button, Image, Platform, Picker, View, Text } from "react-native";
+import { ConfirmButton, ConfirmButtonText } from "./styles";
+import Icon from "react-native-vector-icons/FontAwesome";
 
 //Image Picker
 import * as ImagePicker from "expo-image-picker";
 import * as Permissions from "expo-permissions";
+
+//Components
+import CameraScreen from "./CameraScreen";
 
 const PhotoPicker = ({ navigation }) => {
   //Image Picking
@@ -24,28 +31,26 @@ const PhotoPicker = ({ navigation }) => {
         aspect: [4, 3],
         quality: 1,
       });
+
       if (!result.cancelled) {
         setImage(result.uri);
+        console.log("Hellow");
+        // navigation.navigate("CreateReceiptForm", { image: photo.uri });
+        navigation.navigate("CreateReceiptForm", { image });
       }
     } catch (E) {}
   };
 
   return (
-    /* {pickImage} */
     <>
-      <View
-        style={{
-          flex: 1,
-          alignItems: "center",
-          justifyContent: "center",
-          color: "black",
-        }}
-      >
-        <Button title='Pick an image from camera roll' onPress={pickImage} />
-        {image && (
-          <Image source={{ uri: image }} style={{ width: 200, height: 200 }} />
-        )}
-      </View>
+      <Icon
+        name='photo'
+        styles={{ marginTop: 100 }}
+        size={40}
+        color={"gray"}
+        backgroundColor='transparent'
+        onPress={pickImage}
+      ></Icon>
     </>
   );
 };

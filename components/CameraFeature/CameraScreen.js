@@ -6,12 +6,11 @@ import { observer } from "mobx-react";
 //Camera
 import { Camera } from "expo-camera";
 import { captureRef } from "react-native-view-shot";
-// import { Video } from "expo-av";
 
 //Components
-import CameraPhoto from "./CameraPhoto";
-import CreateReceiptForm from "../Forms/CreateReceiptForm";
+import PhotoPicker from "./PhotoPicker";
 
+//Styling
 import {
   View,
   Text,
@@ -32,9 +31,7 @@ const CameraScreen = ({ navigation }) => {
   const [cameraType, setCameraType] = useState(Camera.Constants.Type.back);
   const [isCameraReady, setIsCameraReady] = useState(false);
   const [isPreview, setIsPreview] = useState(false);
-  //   const cameraRef = useRef();
   const [cameraRef, setCameraRef] = useState(null);
-  //   const [container, setContainer] = useState(null);
 
   useEffect(() => {
     (async () => {
@@ -43,55 +40,8 @@ const CameraScreen = ({ navigation }) => {
     })();
   }, []);
 
-  //Save to Camera roll
-  //   const saveToCameraRollAsync = async () => {
-  //     try {
-  //       let result = await captureRef(container, { format: "png" });
-
-  //       let saveResult = await CameraRoll.saveToCameraRoll(result, "photo");
-  //       console.log(saveResult);
-  //       setState({ cameraRollUri: saveResult });
-  //     } catch (snapshotError) {
-  //       console.error(snapshotError);
-  //     }
-  //   };
-
-  //Photo Snapping
-
-  //   const onPictureSaved = async (photo) => {
-  //     setState({ image: photo });
-  //   };
-
   const onCameraReady = () => {
     setIsCameraReady(true);
-  };
-  const takePicture = async () => {
-    if (cameraRef.current) {
-      const options = { quality: 0.5, base64: true, skipProcessing: true };
-      const data = await cameraRef.current.takePictureAsync(
-        options,
-        onPictureSaved
-      );
-      const source = data.uri;
-      if (source) {
-        await cameraRef.current.pausePreview();
-        setIsPreview(true);
-        console.log("picture source", source);
-        saveToCameraRollAsync();
-      }
-    }
-  };
-
-  //Camera Flipping
-  const switchCamera = () => {
-    if (isPreview) {
-      return;
-    }
-    setCameraType((prevCameraType) =>
-      prevCameraType === Camera.Constants.Type.back
-        ? Camera.Constants.Type.front
-        : Camera.Constants.Type.back
-    );
   };
 
   //Cancel Captured Photo
@@ -120,7 +70,7 @@ const CameraScreen = ({ navigation }) => {
           if (cameraRef) {
             let photo = await cameraRef.takePictureAsync("photo");
             console.log("photo", photo);
-            navigation.navigate("CreateReceiptForm", { photo: photo });
+            navigation.navigate("CreateReceiptForm", { image: photo.uri });
           }
         }}
         style={{
@@ -157,12 +107,12 @@ const CameraScreen = ({ navigation }) => {
 
   return (
     /* Camera */
+
     <SafeAreaView style={styles.container}>
       <Camera
         ref={(ref) => {
           setCameraRef(ref);
         }}
-        // ref={cameraRef}
         style={styles.container}
         type={cameraType}
         flashMode={Camera.Constants.FlashMode.on}
@@ -170,12 +120,12 @@ const CameraScreen = ({ navigation }) => {
         onMountError={(error) => {
           console.log("camera error", error);
         }}
-        // autoFocus
       />
       <View style={styles.container}>
         {isPreview && renderCancelPreviewButton()}
         {!isPreview && renderCaptureControl()}
       </View>
+      <PhotoPicker navigation={navigation} />
     </SafeAreaView>
   );
 };

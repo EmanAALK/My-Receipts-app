@@ -10,5 +10,4 @@ export const FolderItemStyled = styled.Text`
 
 export const IconStyled = styled(Icon)`
   color: #000000;
-  margin-right: 2px;
 `;

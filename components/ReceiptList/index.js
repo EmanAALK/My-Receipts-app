@@ -7,6 +7,7 @@ import ReceiptItem from "./ReceiptItem";
 //Stores
 import folderStore from "../../store/FolderStore";
 import receiptStore from "../../store/ReceiptStore";
+import authStore from "../../store/authStore";
 
 //Styles
 import {
@@ -27,6 +28,8 @@ const ReceiptList = ({ navigation, route }) => {
 
   if (receiptStore.loading) return <Spinner />;
   const { folder } = route.params;
+  let receiptList = [];
+
 
   const receiptList = receiptStore.receipts
     .filter((receipt) => receipt.folder.id === folder.id)
@@ -40,6 +43,38 @@ const ReceiptList = ({ navigation, route }) => {
         />
       </>
     ));
+
+  if (folder.name === "archive Folder") {
+    const receipt = receiptStore.receipts.filter(
+      (receipt) => receipt.folder.userId === authStore.user.id
+    );
+
+    receiptList = receipt
+      .filter((item) => item.archive)
+      .map((receipt) => (
+        <>
+          <ReceiptItem
+            receipt={receipt}
+            key={receipt.id}
+            navigation={navigation}
+          />
+        </>
+      ));
+  } else {
+    receiptList = receiptStore.receipts
+      .filter((receipt) => receipt.folder.id === folder.id)
+      .filter((item) => !item.archive)
+      .map((receipt) => (
+        <>
+          <ReceiptItem
+            receipt={receipt}
+            key={receipt.id}
+            navigation={navigation}
+          />
+        </>
+      ));
+  }
+
 
   const deleteReceipt = () => {
     // console.log(

@@ -26,7 +26,7 @@ const Notifications = ({ navigation }) => {
 
   //if today date + 7 days === expiration date? show on notification screen
   const isExpired = receiptList
-    .filter((receipt) => receipt.Expdate < dateBeforeWeek)
+    .filter((receipt) => receipt.expDate < dateBeforeWeek)
     .map((receipt) => (
       <>
         <Card style={{ marginTop: 5, width: "94%", alignSelf: "center" }}>
@@ -40,14 +40,13 @@ const Notifications = ({ navigation }) => {
                 {receipt.name}
               </Text>
               <Right>
-                <Text note>{receipt.Expdate}</Text>
+                <Text note>{receipt.expDate}</Text>
               </Right>
             </Left>
           </CardItem>
         </Card>
       </>
     ));
-
   return (
     <View style={{ marginTop: 30, marginBottom: 30 }}>
       <Text> Warranty/ies that will expire within 7 days: </Text>

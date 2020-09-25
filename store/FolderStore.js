@@ -12,7 +12,8 @@ class FolderStore {
       const response = await instance.get("/folders");
       console.log("FolderStore -> fetchFolder -> error", response); // test to see where data come from
       this.folders = response.data;
-      loading = false;
+      this.loading = false;
+
       this.folders = this.folders.sort((a, b) =>
         a.defaultFolder < b.defaultFolder ? 1 : -1
       );
@@ -27,7 +28,7 @@ class FolderStore {
       // const formData = new FormData();
       // for (const key in newFolder) formData.append(key, newFolder[key]);
 
-      const res = await instance.post(`/folder`, newFolder);
+      const res = await instance.post(`/folders`, newFolder);
 
       this.folders.push({ ...res.data, receipts: [] }); //revise "receipts"
     } catch (error) {

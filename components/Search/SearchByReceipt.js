@@ -6,6 +6,7 @@ import { Text, CardItem } from "native-base";
 import { View } from "react-native-animatable";
 import { FlatList } from "react-native";
 import { Card } from "react-native-paper";
+import Icon from "react-native-vector-icons/MaterialCommunityIcons";
 
 const Search = ({ navigation, searchReceipt }) => {
   const renderItem = ({ item }) => {
@@ -26,6 +27,12 @@ const Search = ({ navigation, searchReceipt }) => {
             paddingLeft: 30,
           }}
         >
+          <Icon
+            style={{ paddingRight: 10 }}
+            name="receipt"
+            size={20}
+            color="lightgrey"
+          />
           <Text
             onPress={() =>
               navigation.navigate("ReceiptDetail", { receipt: item })

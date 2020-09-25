@@ -2,6 +2,7 @@ import { decorate, observable, computed } from "mobx";
 import instance from "./instance";
 import moment from "moment";
 import authStore from "./authStore";
+import folderStore from "./FolderStore";
 class ReceiptStore {
   receipts = [];
   selectedReceipts = [];
@@ -11,6 +12,8 @@ class ReceiptStore {
     try {
       const res = await instance.get("/receipts");
       this.receipts = res.data;
+      this.receipts = this.receipts.sort((a, b) => (a.date < b.date ? 1 : -1));
+
       this.loading = false;
     } catch (error) {
       console.log(error);
@@ -24,7 +27,9 @@ class ReceiptStore {
       console.log(",,,,,,,newReceipt", formData);
 
       const res = await instance.post(
+
         `/folders/${newReceipt.folderId}/receipts`,
+
         formData
       );
       this.receipts.push(res.data);
@@ -38,11 +43,14 @@ class ReceiptStore {
       const formData = new FormData();
       for (const key in updatedReceipt)
         formData.append(key, updatedReceipt[key]);
-      await instance.put(`/receipts/${updatedReceipt.id}`, formData);
-      const receipts = this.receipts.find(
+
+
+      await instance.put(`/receipts/${updatedReceipt.id}`, updatedReceipt);
+      const receipt = this.receipts.find(
+
         (receipt) => receipt.id === updatedReceipt.id
       );
-      for (const key in updatedReceipt) receipts[key] = updatedReceipt[key];
+      for (const key in updatedReceipt) receipt[key] = updatedReceipt[key];
     } catch (error) {
       console.log("ReceiptStore -> updateReceipt -> error", error);
     }
@@ -67,9 +75,9 @@ class ReceiptStore {
 
     const totalExpired = receiptStore.receipts
       .filter((receipt) => receipt.folder.userId === authStore.user.id) //get receipt of this user
-      .filter((receipt) => receipt.Expdate < dateBeforeWeek); //get receipt that is less than dateBeforeWeek
+      .filter((receipt) => receipt.expDate < dateBeforeWeek); //get receipt that is less than dateBeforeWeek
     const totalExpiredLength = totalExpired.length;
-
+    console.log("check", totalExpiredLength);
     return totalExpiredLength;
   }
 }
