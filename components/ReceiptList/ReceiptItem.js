@@ -100,11 +100,7 @@ const ReceiptItem = ({ receipt, navigation, multipul }) => {
           </Text>
         }
       >
-        <MenuItem
-          onPress={() =>
-            navigation.navigate("UpdateReceiptForm", { receipt: receipt })
-          }
-        >
+        <MenuItem onPress={handleSubmit}>
           {receipt.archive ? "unArchive" : "Archive"}
         </MenuItem>
 
