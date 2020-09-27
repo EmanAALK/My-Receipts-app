@@ -116,22 +116,24 @@ const FolderItem = ({ folder, navigation }) => {
             onPress={handleChange}
           />
         )}
-        <Menu
-          ref={setMenuRef}
-          style={{ width: 90, marginLeft: 15 }}
-          button={
-            <Text style={{ fontWeight: "bold" }} onPress={showMenu}>
-              ...
-            </Text>
-          }
-        >
-          <MenuItem onPress={handleChange}>
-            {folder.pin ? "Unpin" : "Pin"}
-          </MenuItem>
-          <MenuItem onPress={handleEdit}>rename</MenuItem>
+        {!folder.defaultFolder && (
+          <Menu
+            ref={setMenuRef}
+            style={{ width: 90, marginLeft: 15 }}
+            button={
+              <Text style={{ fontWeight: "bold" }} onPress={showMenu}>
+                ...
+              </Text>
+            }
+          >
+            <MenuItem onPress={handleChange}>
+              {folder.pin ? "Unpin" : "Pin"}
+            </MenuItem>
+            <MenuItem onPress={handleEdit}>rename</MenuItem>
 
-          <MenuItem onPress={deleteAlert}>Delete</MenuItem>
-        </Menu>
+            <MenuItem onPress={deleteAlert}>Delete</MenuItem>
+          </Menu>
+        )}
       </CardItem>
     </Card>
   );
