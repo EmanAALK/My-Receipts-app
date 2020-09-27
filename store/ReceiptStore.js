@@ -5,6 +5,7 @@ import authStore from "./authStore";
 import folderStore from "./FolderStore";
 class ReceiptStore {
   receipts = [];
+  selectedReceipts = [];
   loading = true;
 
   fetchReceipts = async () => {
@@ -26,8 +27,10 @@ class ReceiptStore {
       // console.log(",,,,,,,newReceipt", formData);
 
       const res = await instance.post(
+
         `/folders/${newReceipt.folderId}/receipts`,
         newReceipt
+
       );
       this.receipts.push(res.data);
     } catch (error) {
@@ -41,9 +44,10 @@ class ReceiptStore {
       for (const key in updatedReceipt)
         formData.append(key, updatedReceipt[key]);
 
-      await instance.put(`/receipts/${updatedReceipt.id}`, updatedReceipt);
 
+      await instance.put(`/receipts/${updatedReceipt.id}`, updatedReceipt);
       const receipt = this.receipts.find(
+
         (receipt) => receipt.id === updatedReceipt.id
       );
       for (const key in updatedReceipt) receipt[key] = updatedReceipt[key];
@@ -53,6 +57,7 @@ class ReceiptStore {
   };
 
   deleteReceipt = async (receiptId) => {
+    console.log(".....receiptId", receiptId);
     try {
       await instance.delete(`/receipts/${receiptId}`);
       this.receipts = this.receipts.filter(
@@ -80,6 +85,7 @@ class ReceiptStore {
 decorate(ReceiptStore, {
   receipts: observable,
   loading: observable,
+  selectedReceipts: observable,
   totalExpiredReceipt: computed,
 });
 

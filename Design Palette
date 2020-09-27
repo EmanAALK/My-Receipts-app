@@ -1,6 +1,5 @@
 //Background Colors
 1- AMBER: #ffbf00
-
 2- SUNGLOW: #FFCC33 
 3- JASMINE: #FFE085
 
@@ -8,7 +7,24 @@
 1- onLongPress
 2- onPressOut
 
-//Sizing
-1- Input Text Border: 0.25px
-2- 
+//Forms
+*Input Text Border*
+1-Width
+2- border-bottom-width: 0.25px
+3- Color: Black
 3- 
+
+
+//Header
+1- height: 90
+2- backgroundColor: "white"
+        
+//Icons
+1- ios-menu: #E0E0E0
+2- or you wan this? #EBEBEB
+
+
+//TabBar
+1- BackgroundColor: white
+2- Icons Color: #C2C2C2
+3- Icons Active Color: AMBER #ffbf00

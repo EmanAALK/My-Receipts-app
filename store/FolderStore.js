@@ -4,6 +4,8 @@ import authStore from "./authStore";
 
 class FolderStore {
   folders = [];
+  selectedFolders = [];
+
   loading = true;
 
   fetchFolder = async () => {
@@ -13,7 +15,6 @@ class FolderStore {
       console.log("FolderStore -> fetchFolder -> error", response); // test to see where data come from
       this.folders = response.data;
       this.loading = false;
-
       this.folders = this.folders.sort((a, b) =>
         a.defaultFolder < b.defaultFolder ? 1 : -1
       );
@@ -63,6 +64,7 @@ class FolderStore {
 decorate(FolderStore, {
   folders: observable,
   loading: observable,
+  selectedFolders: observable,
 });
 
 const folderStore = new FolderStore();

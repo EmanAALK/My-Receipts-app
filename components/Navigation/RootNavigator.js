@@ -16,6 +16,7 @@ import HomeStackScreen from "./HomeStackScreen";
 import NotificationStackscreen from "./NotificationStackscreen";
 import AddReceiptStackScreen from "./AddReceiptStackscreen";
 import receiptStore from "../../store/ReceiptStore";
+import styled from "styled-components";
 
 const Drawer = createDrawerNavigator();
 const Tab = createMaterialBottomTabNavigator();
@@ -25,7 +26,7 @@ const TabScreen = observer(() => (
   <Tab.Navigator
     initialRouteName="Home"
     activeColor="#ffbf00"
-    barStyle={{ backgroundColor: "white" }}
+    barStyle={{ backgroundColor: "white", height: 70 }}
     initialRouteName="Home"
   >
     <Tab.Screen
@@ -33,14 +34,11 @@ const TabScreen = observer(() => (
       component={HomeStackScreen}
       options={{
         backgroundColor: "white",
-        // tabBarLabel: "Home",
         showLabel: false,
         title: false,
 
-        backgroundColor: color,
-
         tabBarIcon: ({ color }) => (
-          <Icon name="ios-home" color={color} size={26} />
+          <Icon name="ios-home" color={"#C2C2C2"} size={26} />
         ),
       }}
     />
@@ -49,12 +47,12 @@ const TabScreen = observer(() => (
       component={AddReceiptStackScreen}
       options={{
         backgroundColor: "white",
-        // tabBarLabel: "AddReceipt",
         showLabel: false,
         title: false,
         backgroundColor: color,
+
         tabBarIcon: ({ color }) => (
-          <Icon name="md-camera" color={color} size={26} />
+          <Icon name="md-camera" color={"#C2C2C2"} size={26} />
         ),
       }}
     />
@@ -63,14 +61,16 @@ const TabScreen = observer(() => (
       component={NotificationStackscreen}
       options={{
         backgroundColor: "white",
-        // tabBarLabel: "notifications",
         showLabel: false,
         title: false,
-        backgroundColor: color,
         tabBarIcon: ({ color }) => (
           <>
-            <Badge value={receiptStore.totalExpiredReceipt} status="error" />
-            <Icon name="ios-notifications" color={color} size={26} />
+            <Badge
+              badgeStyle={{ marginLeft: 25 }}
+              value={receiptStore.totalExpiredReceipt}
+              status="error"
+            />
+            <Icon name="ios-notifications" color={"#C2C2C2"} size={26} />
           </>
         ),
       }}
