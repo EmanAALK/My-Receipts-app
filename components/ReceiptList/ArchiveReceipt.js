@@ -14,6 +14,7 @@ import { Content, Spinner, List, Text, Image, Button } from "native-base";
 
 const ReceiptList = ({ navigation }) => {
   if (receiptStore.loading) return <Spinner />;
+  if (folderStore.loading) return <Spinner />;
 
   const receipt = receiptStore.receipts.filter(
     (receipt) => receipt.folder.userId === authStore.user.id

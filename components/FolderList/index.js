@@ -1,73 +1,47 @@
 import React, { useState } from "react";
 import { observer } from "mobx-react";
-
 // component
-import FolderItem from "./FolderItem";
+ import FolderItem from "./FolderItem";
 
-// Styling
-import { List, Spinner, Text } from "native-base";
-import { ButtonGroup } from "react-native-elements";
+ // Styling
+ import { List, Spinner, Text } from "native-base";
+ import { ButtonGroup } from "react-native-elements";
+ import { List, Spinner, Text, View, ListItem } from "native-base";
+ import { Alert } from "react-native";
+ import { PageTitle } from "./styles";
 
-// store
-import folderStore from "../../store/FolderStore";
-import authStore from "../../store/authStore";
-import Icon from "react-native-vector-icons/AntDesign";
-import { Alert } from "react-native";
+ // store
+ import folderStore from "../../store/FolderStore";
+ import authStore from "../../store/authStore";
 
-const FolderList = ({ navigation }) => {
-  if (folderStore.loading) return <Spinner />;
+ //Icons
+ import Icon from "react-native-vector-icons/AntDesign";
+ import { Alert } from "react-native";
+ import AntDesign from "react-native-vector-icons/AntDesign";
 
-  // const [multipul, setMultipul] = useState(false);
+ const FolderList = ({ navigation }) => {
+   if (folderStore.loading) return <Spinner />;
+ @@ -66,6 +69,18 @@ const FolderList = ({ navigation }) => {
 
-  const PinList = folderStore.folders
-    .filter((folder) => folder.userId === authStore.user.id)
-    .filter((folder) => folder.pin == true || folder.defaultFolder === true)
-    .map((folder) => (
-      <FolderItem folder={folder} key={folder.id} navigation={navigation} />
-    ));
+   return (
+     <>
 
-  const UnPinList = folderStore.folders
-    .filter((folder) => folder.userId === authStore.user.id)
-    .filter((folder) => folder.pin == false && !folder.defaultFolder)
-    .map((folder) => (
-      <FolderItem
-        folder={folder}
-        key={folder.id}
-        navigation={navigation}
-        // multipul={multipul}
-      />
-    ));
-  const deleteReceipt = () => {
-    folderStore.selectedFolders.map((folder) => {
-      folderStore.deleteFolder(folder.id);
-    });
-  };
-  // const handleDelete = () => {
-  //   setMultipul(!multipul);
+       <View style={{ flexDirection: "row" }}>
+         <PageTitle>My Folders</PageTitle>
+         <AntDesign
+           onPress={() => navigation.navigate("CreateFolderForm")}
+           name='addfolder'
+           size={25}
+           color='#ffbf00'
+           style={{ marginTop: 20, marginBottom: 20, marginLeft: 170 }}
+         />
+       </View>
 
-  //   if (multipul && folderStore.selectedFolders.length !== 0) {
-  //     Alert.alert("Delete", "Are you sure you want to delete this folder?", [
-  //       {
-  //         text: "Cancel",
-  //         style: "cancel",
-  //       },
-  //       {
-  //         text: "OK",
-  //         onPress: () => {
-  //           deleteReceipt();
-  //         },
-  //       },
-  //     ]);
-  //   } else folderStore.selectedFolders = [];
-  // };
-
-  return (
-    <>
-      {/* <Text style={{ marginLeft: 300 }} onPress={handleDelete}>
-        {multipul && folderStore.selectedFolders.length > 0
-          ? "Delete"
+       <Text style={{ marginLeft: 300 }} onPress={handleDelete}>
+         {multipul && folderStore.selectedFolders.length > 0
+           ? "Delete"
           : "Select"}
-      </Text> */}
+      </Text>
       <ButtonGroup
         buttons={[
           <Text onPress={() => navigation.navigate("CreateFolderForm")}>
@@ -85,11 +59,9 @@ const FolderList = ({ navigation }) => {
         containerStyle={{ height: 30, marginTop: 10 }}
         selectedButtonStyle={{ backgroundColor: "grey" }}
       />
-
       <List>{PinList}</List>
       <List>{UnPinList}</List>
     </>
   );
 };
-
 export default observer(FolderList);

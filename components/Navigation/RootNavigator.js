@@ -4,11 +4,13 @@ import { createMaterialBottomTabNavigator } from "@react-navigation/material-bot
 import { observer } from "mobx-react";
 
 // styles
-import Icon from "react-native-vector-icons/Ionicons";
+import styled from "styled-components";
 import { Badge } from "react-native-elements";
+import { StyleSheet } from "react-native";
 import { LinearGradient } from "expo-linear-gradient";
 
 // component
+import Search from "../Search/index";
 import DrawerContent from "../DawerContenent";
 import Navigation from "./index";
 import authStore from "../../store/authStore";
@@ -16,20 +18,30 @@ import HomeStackScreen from "./HomeStackScreen";
 import NotificationStackscreen from "./NotificationStackscreen";
 import AddReceiptStackScreen from "./AddReceiptStackscreen";
 import receiptStore from "../../store/ReceiptStore";
-import styled from "styled-components";
+
+//Icons
+import SimpleLineIcons from "react-native-vector-icons/SimpleLineIcons";
+import MaterialCommunityIcons from "react-native-vector-icons/MaterialCommunityIcons";
+import AntDesign from "react-native-vector-icons/AntDesign";
+import Ionicons from "react-native-vector-icons/Ionicons";
 
 const Drawer = createDrawerNavigator();
 const Tab = createMaterialBottomTabNavigator();
-const color = "#427aa1";
+// const color = "#427aa1";
 const a = 1;
 // const [count, setCount] = useState(0);
 // const handleCancel = async () => {
 //   setCount(count + 1);
 // };
+
+const color = "#C2C2C2";
+
+
 const TabScreen = observer(() => (
   <Tab.Navigator
-    initialRouteName="Home"
-    activeColor="#ffbf00"
+    initialRouteName='Home'
+    color='#C3C3C3'
+    activeColor='#ffbf00'
     barStyle={{ backgroundColor: "white", height: 70 }}
     initialRouteName="Home"
   >
@@ -39,27 +51,57 @@ const TabScreen = observer(() => (
       options={{
         backgroundColor: "white",
         showLabel: false,
-        title: false,
+        title: "Home",
 
         tabBarIcon: ({ color }) => (
+          // <Icon name='ios-home' activeColor='#ffbf00' color={color} size={26} />
+          <SimpleLineIcons
+            name='home'
+            activeColor='#ffbf00'
+            color={color}
+            size={23}
+          />
           <Icon name="ios-home" color={"#C2C2C2"} size={26} />
         ),
       }}
     />
+
+    <Tab.Screen
+      name='Search'
+      component={Search}
+      options={{
+        backgroundColor: "white",
+        showLabel: "Search",
+        title: "Search",
+        tabBarIcon: ({ color }) => (
+          <>
+            <AntDesign name='search1' color={color} size={23} />
+          </>
+        ),
+      }}
+    />
+
     <Tab.Screen
       name="AddReceipt"
       component={AddReceiptStackScreen}
       options={{
         backgroundColor: "white",
-        showLabel: false,
-        title: false,
+        showLabel: "New Receipt",
+        title: "New Receipt",
         backgroundColor: color,
 
         tabBarIcon: ({ color }) => (
+          <MaterialCommunityIcons
+            name='camera-plus-outline'
+            color={color}
+            size={23}
+          />
           <Icon name="md-camera" color={"#C2C2C2"} size={26} />
+
         ),
       }}
     />
+
 
     {a == 1 ? (
       <Tab.Screen
@@ -101,6 +143,7 @@ const TabScreen = observer(() => (
               name="ios-notifications"
               color={"#C2C2C2"}
               size={26}
+
             />
           ),
         }}
@@ -124,3 +167,19 @@ const RootNavigator = () => {
   );
 };
 export default observer(RootNavigator);
+
+const styles = StyleSheet.create({
+  badge: {
+    borderRadius: 9,
+    height: 18,
+    minWidth: 0,
+    width: 18,
+  },
+  badgeContainer: {
+    position: "absolute",
+  },
+  badgeText: {
+    fontSize: 10,
+    paddingHorizontal: 0,
+  },
+});

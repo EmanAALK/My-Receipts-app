@@ -6,18 +6,24 @@ import folderStore from "../../store/FolderStore";
 import authStore from "../../store/authStore";
 
 //Styling
-import { Card, List, TextInput } from "react-native-paper";
-import { IconStyled } from "./styles";
-import { Body, CardItem, Left, Right, Row, Text, Thumbnail } from "native-base";
 import { View } from "react-native-animatable";
-import Icon from "react-native-vector-icons/AntDesign";
-import Entypo from "react-native-vector-icons/Entypo";
+import { Alert, ShadowStyleIOS } from "react-native";
+import { IconStyled, BorderView } from "./styles";
+import { Body, Left, Right, Text, ListItem } from "native-base";
+import { Card, List, TextInput } from "react-native-paper";
 import Menu, { MenuItem, MenuDivider } from "react-native-material-menu";
-import { Alert } from "react-native";
+import { Body, CardItem, Left, Right, Row, Text, Thumbnail } from "native-base";
 import defaultimage from "../../assets/defaultimageFolder2.png";
 import { CheckBox } from "react-native-elements";
 
+
+//Icons
+import Icon from "react-native-vector-icons/Feather";
+import Icon from "react-native-vector-icons/AntDesign";
+import Entypo from "react-native-vector-icons/Entypo";
 import AntDesign from "react-native-vector-icons/AntDesign";
+
+
 const color = "#ffbf00";
 
 const FolderItem = ({ folder, navigation, multipul }) => {
@@ -77,6 +83,7 @@ const FolderItem = ({ folder, navigation, multipul }) => {
     ]);
   };
 
+
   const maxAlert = () => {
     {
       folder.pin === false
@@ -90,11 +97,63 @@ const FolderItem = ({ folder, navigation, multipul }) => {
     }
   };
 
+
   const handleChange = async () => {
     await folderStore.updateFolder({ ...folder, pin: !folder.pin });
   };
 
   return (
+
+    <ListItem
+      style={{ backgroundColor: "white", marginRight: 14, marginLeft: 14 }}
+    >
+      <Left>
+        {folder.defaultFolder ? (
+          <AntDesign
+            name='folder1'
+            size={20}
+            color='#ffbf00'
+            style={{ marginLeft: 10 }}
+          />
+        ) : (
+          <AntDesign
+            name='folder1'
+            size={20}
+            color='#ffbf00'
+            style={{ marginLeft: 10 }}
+          />
+        )}
+        <Text
+          style={{ marginLeft: 10 }}
+          onPress={() => navigation.navigate("ReceiptList", { folder: folder })}
+        >
+          {folder.name}
+        </Text>
+      </Left>
+
+      {!folder.defaultFolder && (
+        <Right style={{ flexDirection: "row" }}>
+          <Icon
+            onPress={deleteAlert}
+            name='trash-2'
+            fontSize={15}
+            color='red'
+          />
+
+          <Icon
+            onPress={() =>
+              navigation.navigate("UpdateFolderForm", { oldFolder: folder })
+            }
+            name='edit-2'
+            fontSize={15}
+          />
+          <IconStyled onPress={handleChange}>
+            <IconStyled type='AntDesign' name='pushpino' size='5' />
+          </IconStyled>
+        </Right>
+      )}
+    </ListItem>
+
     <Card style={{ marginTop: 5, width: "94%", alignSelf: "center" }}>
       <CardItem>
         <Left>
@@ -185,6 +244,7 @@ const FolderItem = ({ folder, navigation, multipul }) => {
         )}
       </CardItem>
     </Card>
+
   );
 };
 

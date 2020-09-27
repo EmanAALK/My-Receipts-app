@@ -19,22 +19,28 @@ class ReceiptStore {
       console.log(error);
     }
   };
+createReceipt = async (newReceipt) => {
+     try {
 
-  createReceipt = async (newReceipt) => {
-    try {
-      console.log("check new receipt", newReceipt);
-      const formData = new FormData();
-      for (const key in newReceipt) formData.append(key, newReceipt[key]);
-      const res = await instance.post(
-        `/folders/${newReceipt.folderId}/receipts`,
-        formData
-      );
+       console.log(",,,,,,,newReceipt", newReceipt);
+       const formData = new FormData();
+       for (const key in newReceipt) formData.append(key, newReceipt[key]);
+       console.log(",,,,,,,formData", formData);
 
-      this.receipts.push(res.data);
+
+       const res = await instance.post(
+         `/folders/${newReceipt.folderId}/receipts`,
+         formData
+
+       );
+       const newreceipt = { ...res.data, folder: { userId: authStore.user.id } };
+       this.receipts.push(newreceipt);
+      console.log(",,,,,,,res.data", res.data);
     } catch (error) {
       console.log("ReceiptStore -> createReceipt -> error ", error);
     }
   };
+  
 
   updateReceipt = async (updatedReceipt) => {
     try {
