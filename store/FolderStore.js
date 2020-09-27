@@ -4,6 +4,8 @@ import authStore from "./authStore";
 
 class FolderStore {
   folders = [];
+  selectedFolders = [];
+
   loading = true;
 
   fetchFolder = async () => {
@@ -62,6 +64,7 @@ class FolderStore {
 decorate(FolderStore, {
   folders: observable,
   loading: observable,
+  selectedFolders: observable,
 });
 
 const folderStore = new FolderStore();

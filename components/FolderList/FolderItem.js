@@ -14,14 +14,26 @@ import Entypo from "react-native-vector-icons/Entypo";
 import Menu, { MenuItem, MenuDivider } from "react-native-material-menu";
 import { Alert } from "react-native";
 import defaultimage from "../../assets/defaultimageFolder2.png";
+import { CheckBox } from "react-native-elements";
 
 import AntDesign from "react-native-vector-icons/AntDesign";
 const color = "#ffbf00";
 
-const FolderItem = ({ folder, navigation }) => {
+const FolderItem = ({ folder, navigation, multipul }) => {
+  const [isChecked, setIsChecked] = useState(multipul);
   const [pin, setPin] = useState(pin);
   const [edit, setEdit] = useState(false);
   const [updatedFolder, setUpdatedFolder] = useState(folder);
+
+  const handleChecked = () => {
+    setIsChecked(!isChecked);
+    if (!isChecked) {
+      folderStore.selectedFolders.push(folder);
+    } else
+      folderStore.selectedFolders = folderStore.selectedFolders.filter(
+        (item) => item.id !== folder.id
+      );
+  };
 
   let menu = null;
 
@@ -68,11 +80,23 @@ const FolderItem = ({ folder, navigation }) => {
     <Card style={{ marginTop: 5, width: "94%", alignSelf: "center" }}>
       <CardItem>
         <Left>
+          {multipul && (
+            <CheckBox
+              checkedIcon="dot-circle-o"
+              checkedColor="grey"
+              uncheckedIcon="circle-o"
+              size={15}
+              checked={isChecked}
+              onPress={handleChecked}
+              value={false}
+            />
+          )}
           {folder.defaultFolder ? (
             <Entypo name="folder" size={20} color="#ffbf00" />
           ) : (
             <AntDesign name="folderopen" size={20} color="#ffbf00" />
           )}
+
           {edit ? (
             <>
               <TextInput
@@ -116,22 +140,24 @@ const FolderItem = ({ folder, navigation }) => {
             onPress={handleChange}
           />
         )}
-        <Menu
-          ref={setMenuRef}
-          style={{ width: 90, marginLeft: 15 }}
-          button={
-            <Text style={{ fontWeight: "bold" }} onPress={showMenu}>
-              ...
-            </Text>
-          }
-        >
-          <MenuItem onPress={handleChange}>
-            {folder.pin ? "Unpin" : "Pin"}
-          </MenuItem>
-          <MenuItem onPress={handleEdit}>rename</MenuItem>
+        {!folder.defaultFolder && (
+          <Menu
+            ref={setMenuRef}
+            style={{ width: 90, marginLeft: 15 }}
+            button={
+              <Text style={{ fontWeight: "bold" }} onPress={showMenu}>
+                ...
+              </Text>
+            }
+          >
+            <MenuItem onPress={handleChange}>
+              {folder.pin ? "Unpin" : "Pin"}
+            </MenuItem>
+            <MenuItem onPress={handleEdit}>rename</MenuItem>
 
-          <MenuItem onPress={deleteAlert}>Delete</MenuItem>
-        </Menu>
+            <MenuItem onPress={deleteAlert}>Delete</MenuItem>
+          </Menu>
+        )}
       </CardItem>
     </Card>
   );
