@@ -56,22 +56,10 @@ const ReceiptItem = ({ receipt, navigation, multipul }) => {
   const handleSubmit = async () => {
     menu.hide();
 
-    setUpdatedReceipt({
+    await receiptStore.updateReceipt({
       ...updatedReceipt,
       archive: !updatedReceipt.archive,
     });
-
-    await receiptStore.updateReceipt(updatedReceipt);
-  };
-  const handleMove = async (folderId) => {
-    // menu.hide();
-    setUpdatedReceipt({
-      ...updatedReceipt,
-      folderId,
-    });
-    console.log(",,,,,setUpdatedReceipt", setUpdatedReceipt);
-
-    await receiptStore.updateReceipt(updatedReceipt);
   };
 
   const deleteAlert = () => {
@@ -112,22 +100,13 @@ const ReceiptItem = ({ receipt, navigation, multipul }) => {
           </Text>
         }
       >
-        <MenuItem onPress={handleSubmit}>
+        <MenuItem
+          onPress={() =>
+            navigation.navigate("UpdateReceiptForm", { receipt: receipt })
+          }
+        >
           {receipt.archive ? "unArchive" : "Archive"}
         </MenuItem>
-        <MenuItem onPress={() => setMove(!move)}>Move</MenuItem>
-        {move && (
-          <RNPickerSelect
-            // onValueChange={(folderId) =>
-            //   setUpdatedReceipt({ ...updatedReceipt, folderId })
-            // }
-            onValueChange={(folderId) => handleMove(folderId)}
-            items={folder.map((folder) => ({
-              label: folder.name,
-              value: folder.id,
-            }))}
-          />
-        )}
 
         <MenuItem onPress={deleteAlert}>Delete</MenuItem>
       </Menu>

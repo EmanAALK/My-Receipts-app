@@ -18,14 +18,14 @@ const FolderList = ({ navigation }) => {
 
   const PinList = folderStore.folders
     .filter((folder) => folder.userId === authStore.user.id)
-    .filter((folder) => folder.pin == true)
+    .filter((folder) => folder.pin == true || folder.defaultFolder === true)
     .map((folder) => (
       <FolderItem folder={folder} key={folder.id} navigation={navigation} />
     ));
 
   const UnPinList = folderStore.folders
     .filter((folder) => folder.userId === authStore.user.id)
-    .filter((folder) => folder.pin == false)
+    .filter((folder) => folder.pin == false && !folder.defaultFolder)
     .map((folder) => (
       <FolderItem folder={folder} key={folder.id} navigation={navigation} />
     ));
