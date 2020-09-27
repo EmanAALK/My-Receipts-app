@@ -1,20 +1,16 @@
 import React, { useState, useRef, useEffect } from "react";
 import { observer } from "mobx-react";
 import { Button, Image, Platform, Picker, View } from "react-native";
-
 //Date Picker
 import DatePicker from "react-native-datepicker";
 import RNPickerSelect from "react-native-picker-select";
-
 //Components
 import FolderItem from "./FolderItem";
 import CameraModal from "../Modals/CameraModal";
-
 //Stores
 import receiptStore from "../../store/ReceiptStore";
 import authStore from "../../store/authStore";
 import folderStore from "../../store/FolderStore";
-
 //Styles
 import {
   FormContainer,
@@ -24,12 +20,9 @@ import {
   FormButton,
   EditContainer,
 } from "./styles";
-
 const CreateReceiptForm = ({ route, navigation }) => {
   const { image } = route.params;
-
   console.log(".....image", image);
-
   const [receipt, setReceipt] = useState({
     name: "",
     price: "",
@@ -39,37 +32,32 @@ const CreateReceiptForm = ({ route, navigation }) => {
     folderId: "",
   });
   //Handle Submit Function
-
   const handleSubmit = async () => {
     let localUri = image;
     let filename = localUri.split("/").pop();
     let match = /\.(\w+)$/.exec(filename);
     let type = match ? `image/${match[1]}` : `image`;
-
     console.log("........receipt.", receipt);
     await receiptStore.createReceipt({
       ...receipt,
       image: { uri: localUri, name: filename, type },
-    });
+     });
 
-    navigation.navigate("Home"); //What key to give it?
+     navigation.navigate("Home"); //What key to give it?
 
 
-  };
+   };
 
-  const folder = folderStore.folders.filter(
+   const folder = folderStore.folders.filter(
     (folder) => folder.userId === authStore.user.id
   );
-
   const handleCancel = async () => {
     navigation.navigate("Home");
   };
-
   return (
     <>
       <FormContainer>
         <FormTitle>Add Receipt</FormTitle>
-
         {/* Folder */}
         <RNPickerSelect
           onValueChange={(folderId) => setReceipt({ ...receipt, folderId })}
@@ -78,19 +66,16 @@ const CreateReceiptForm = ({ route, navigation }) => {
             value: folder.id,
           }))}
         />
-
         <FormTextInput
           onChangeText={(name) => setReceipt({ ...receipt, name })}
           placeholder="Receipt Name"
           placeholderTextColor="#A6AEC1"
         />
-
         <FormTextInput
           onChangeText={(price) => setReceipt({ ...receipt, price })}
           placeholder="Receipt Price"
           placeholderTextColor="#A6AEC1"
         />
-
         {/* Date */}
         <View style={{ flexDirection: "row" }}>
           <DatePicker
@@ -146,7 +131,6 @@ const CreateReceiptForm = ({ route, navigation }) => {
             }}
           />
         </View>
-
         <View
           style={{ flex: 1, alignItems: "center", justifyContent: "center" }}
         >
@@ -156,22 +140,19 @@ const CreateReceiptForm = ({ route, navigation }) => {
             style={{ width: 160, height: 260 }}
           ></Image>
         </View>
-
         {/* Save/Cancel Buttons */}
         <View style={{ flexDirection: "row" }}>
           <FormButton onPress={handleSubmit}>
             <FormButtonText>Save Changes</FormButtonText>
           </FormButton>
-
           <FormButton onPress={handleCancel}>
             <FormButtonText>Cancel</FormButtonText>
           </FormButton>
         </View>
       </FormContainer>
     </>
-  );
-};
+   );
+ };
 
 
-export default observer(CreateReceiptForm);
-
+ export default observer(CreateReceiptForm);
