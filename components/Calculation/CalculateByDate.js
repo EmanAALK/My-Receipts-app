@@ -25,6 +25,9 @@ import DatePicker from "react-native-datepicker";
 import { ScrollView } from "react-native";
 
 const CalculateByDate = ({ navigation }) => {
+  if (receiptStore.loading) return <Spinner />;
+  if (foldertStore.loading) return <Spinner />;
+
   const [fromDate, setFromDate] = useState();
   const [toDate, setToDate] = useState();
 
@@ -64,6 +67,8 @@ const CalculateByDate = ({ navigation }) => {
 
   return (
     <>
+
+
       <List style={{ backgroundColor: "white" }}>
         <View
           style={{
@@ -124,6 +129,7 @@ const CalculateByDate = ({ navigation }) => {
             cancelBtnText='Cancel'
             customStyles={{
 
+
       <ScrollView>
         <View
           style={{
@@ -131,7 +137,6 @@ const CalculateByDate = ({ navigation }) => {
             flexDirection: "row",
             marginTop: 5,
             alignSelf: "center",
-
           }}
         >
           <TextStyle>From : </TextStyle>
@@ -170,7 +175,6 @@ const CalculateByDate = ({ navigation }) => {
             flexDirection: "row",
             alignSelf: "center",
           }}
-
         >
           <TextStyle> To : </TextStyle>
           <DatePicker

@@ -22,21 +22,19 @@ class ReceiptStore {
 
   createReceipt = async (newReceipt) => {
     try {
-      // const formData = new FormData();
-      // for (const key in newReceipt) formData.append(key, newReceipt[key]);
 
       console.log(",,,,,,,newReceipt", newReceipt);
+      const formData = new FormData();
+      for (const key in newReceipt) formData.append(key, newReceipt[key]);
+     
 
       const res = await instance.post(
         `/folders/${newReceipt.folderId}/receipts`,
-        newReceipt
 
-      const res = await instance.post(
-
-        `/folders/${newReceipt.folderId}/receipts`,
-        newReceipt
       );
-      this.receipts.push(res.data);
+      const newreceipt = { ...res.data, folder: { userId: authStore.user.id } };
+      this.receipts.push(newreceipt);
+      console.log(",,,,,,,res.data", res.data);
     } catch (error) {
       console.log("ReceiptStore -> createReceipt -> error ", error);
     }
@@ -48,10 +46,8 @@ class ReceiptStore {
       for (const key in updatedReceipt)
         formData.append(key, updatedReceipt[key]);
 
-
       await instance.put(`/receipts/${updatedReceipt.id}`, updatedReceipt);
       const receipt = this.receipts.find(
-
         (receipt) => receipt.id === updatedReceipt.id
       );
       for (const key in updatedReceipt) receipt[key] = updatedReceipt[key];

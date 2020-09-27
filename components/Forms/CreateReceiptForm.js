@@ -27,41 +27,39 @@ import {
 
 const CreateReceiptForm = ({ route, navigation }) => {
   const { image } = route.params;
-  console.log("create receipt form");
+
+  console.log(".....image", image);
+
   const [receipt, setReceipt] = useState({
     name: "",
     price: "",
     date: "",
-    Expdate: "",
+    expDate: "",
     image: "",
+    folderId: "",
   });
-
   //Handle Submit Function
+
   const handleSubmit = async () => {
     let localUri = image;
     let filename = localUri.split("/").pop();
     let match = /\.(\w+)$/.exec(filename);
     let type = match ? `image/${match[1]}` : `image`;
 
+    console.log("........receipt.", receipt);
     await receiptStore.createReceipt({
       ...receipt,
-
       image: { uri: localUri, name: filename, type },
     });
 
     navigation.navigate("Home"); //What key to give it?
-//     navigation.replace("ReceiptList", { name }); //What key to give it?
+
 
   };
 
-  const folder = folderStore.folders
-    .filter((folder) => folder.userId === authStore.user.id)
-    .map((folder) => (folder = folder.name));
-
-  let name = [];
-  name = folder.map(function (i) {
-    return { labe: i.name };
-  });
+  const folder = folderStore.folders.filter(
+    (folder) => folder.userId === authStore.user.id
+  );
 
   const handleCancel = async () => {
     navigation.navigate("Home");
@@ -74,22 +72,23 @@ const CreateReceiptForm = ({ route, navigation }) => {
 
         {/* Folder */}
         <RNPickerSelect
-          onValueChange={(value) => console.log(value)}
-          items={folder.map((name) => ({ label: name, value: name }))}
+          onValueChange={(folderId) => setReceipt({ ...receipt, folderId })}
+          items={folder.map((folder) => ({
+            label: folder.name,
+            value: folder.id,
+          }))}
         />
 
         <FormTextInput
           onChangeText={(name) => setReceipt({ ...receipt, name })}
-          placeholder='Receipt Name'
-          placeholderTextColor='#A6AEC1'
-
+          placeholder="Receipt Name"
+          placeholderTextColor="#A6AEC1"
         />
 
         <FormTextInput
           onChangeText={(price) => setReceipt({ ...receipt, price })}
-          placeholder='Receipt Price'
-          placeholderTextColor='#A6AEC1'
-
+          placeholder="Receipt Price"
+          placeholderTextColor="#A6AEC1"
         />
 
         {/* Date */}
@@ -97,12 +96,11 @@ const CreateReceiptForm = ({ route, navigation }) => {
           <DatePicker
             style={{ width: 255 }}
             date={receipt.date}
-            mode='date'
-            placeholder='select date'
-            format='YYYY-MM-DD'
-            confirmBtnText='Confirm'
-            cancelBtnText='Cancel'
-
+            mode="date"
+            placeholder="select date"
+            format="YYYY-MM-DD"
+            confirmBtnText="Confirm"
+            cancelBtnText="Cancel"
             customStyles={{
               dateIcon: {
                 position: "absolute",
@@ -124,13 +122,12 @@ const CreateReceiptForm = ({ route, navigation }) => {
         <View style={{ flexDirection: "row" }}>
           <DatePicker
             style={{ width: 255 }}
-            date={receipt.Expdate}
-
-            mode='Expiration date'
-            placeholder='select expiration date'
-            format='YYYY-MM-DD'
-            confirmBtnText='Confirm'
-            cancelBtnText='Cancel'
+            date={receipt.expDate}
+            mode="date"
+            placeholder="select date"
+            format="YYYY-MM-DD"
+            confirmBtnText="Confirm"
+            cancelBtnText="Cancel"
             customStyles={{
               dateIcon: {
                 position: "absolute",
@@ -144,8 +141,8 @@ const CreateReceiptForm = ({ route, navigation }) => {
                 marginLeft: 36,
               },
             }}
-            onDateChange={(Expdate) => {
-              return setReceipt({ ...receipt, Expdate });
+            onDateChange={(expDate) => {
+              return setReceipt({ ...receipt, expDate });
             }}
           />
         </View>
@@ -175,4 +172,6 @@ const CreateReceiptForm = ({ route, navigation }) => {
   );
 };
 
+
 export default observer(CreateReceiptForm);
+

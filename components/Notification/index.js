@@ -9,12 +9,14 @@ import { View } from "react-native-animatable";
 // Store
 import receiptStore from "../store/ReceiptStore";
 import authStore from "../store/authStore";
+import folderStore from "../store/folderStore";
 
 // Component
 import NotificationItem from "./NotificationItem";
 
 const NotificationList = ({ navigation }) => {
   if (receiptStore.loading) return <Spinner />;
+  if (folderStore.loading) return <Spinner />;
 
   // get all expiration dates of receipts (objects)
   const receiptList = receiptStore.receipts.filter(

@@ -24,13 +24,14 @@ import Icon from "react-native-vector-icons/Feather";
 import { Alert } from "react-native";
 
 const ReceiptList = ({ navigation, route }) => {
+  if (receiptStore.loading) return <Spinner />;
+
   const [multipul, setMultipul] = useState(false);
 
-  if (receiptStore.loading) return <Spinner />;
   const { folder } = route.params;
 
   const receiptList = receiptStore.receipts
-    .filter((receipt) => receipt.folder.id === folder.id)
+    .filter((receipt) => receipt.folderId === folder.id)
     .filter((item) => !item.archive)
     .map((receipt) => (
       <>
