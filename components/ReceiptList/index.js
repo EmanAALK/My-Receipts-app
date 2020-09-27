@@ -71,7 +71,9 @@ const ReceiptList = ({ navigation, route }) => {
   return (
     <>
       <Text style={{ marginLeft: 300 }} onPress={handleDelete}>
-        {multipul ? "Delete" : "Select"}
+        {multipul && receiptStore.selectedReceipts.length > 0
+          ? "Delete"
+          : "Select"}
       </Text>
 
       <Content style={{ backgroundColor: "white" }}>
