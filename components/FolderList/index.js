@@ -15,7 +15,7 @@ import Icon from "react-native-vector-icons/AntDesign";
 
 const FolderList = ({ navigation }) => {
   if (folderStore.loading) return <Spinner />;
-
+  // const PinList = new Array(2);
   const PinList = folderStore.folders
     .filter((folder) => folder.userId === authStore.user.id)
     .filter((folder) => folder.pin == true)
@@ -23,6 +23,8 @@ const FolderList = ({ navigation }) => {
       <FolderItem folder={folder} key={folder.id} navigation={navigation} />
     ));
 
+  // console.log("list", PinList);
+  // console.log("length", PinList.length);
   const UnPinList = folderStore.folders
     .filter((folder) => folder.userId === authStore.user.id)
     .filter((folder) => folder.pin == false)

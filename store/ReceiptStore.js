@@ -21,13 +21,13 @@ class ReceiptStore {
 
   createReceipt = async (newReceipt) => {
     try {
-      const formData = new FormData();
-      for (const key in newReceipt) formData.append(key, newReceipt[key]);
-      console.log(",,,,,,,newReceipt", formData);
+      // const formData = new FormData();
+      // for (const key in newReceipt) formData.append(key, newReceipt[key]);
+      // console.log(",,,,,,,newReceipt", formData);
 
       const res = await instance.post(
-        `/folder/${newReceipt.folderId}/receipts`,
-        formData
+        `/folders/${newReceipt.folderId}/receipts`,
+        newReceipt
       );
       this.receipts.push(res.data);
     } catch (error) {
@@ -72,7 +72,7 @@ class ReceiptStore {
       .filter((receipt) => receipt.folder.userId === authStore.user.id) //get receipt of this user
       .filter((receipt) => receipt.expDate < dateBeforeWeek); //get receipt that is less than dateBeforeWeek
     const totalExpiredLength = totalExpired.length;
-    console.log("check", totalExpiredLength);
+
     return totalExpiredLength;
   }
 }

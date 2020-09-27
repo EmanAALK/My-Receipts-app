@@ -31,9 +31,11 @@ const PhotoPicker = ({ navigation }) => {
         aspect: [4, 3],
         quality: 1,
       });
+
       if (!result.cancelled) {
         setImage(result.uri);
-        navigation.navigate("CreateReceiptForm", { image });
+        console.log("Hellow");
+        navigation.navigate("CreateReceiptForm", { image: result.uri });
       }
     } catch (E) {}
   };
@@ -41,11 +43,11 @@ const PhotoPicker = ({ navigation }) => {
   return (
     <>
       <Icon
-        name='photo'
+        name="photo"
         styles={{ marginTop: 100 }}
         size={40}
         color={"gray"}
-        backgroundColor='transparent'
+        backgroundColor="transparent"
         onPress={pickImage}
       ></Icon>
     </>

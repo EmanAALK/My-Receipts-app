@@ -3,11 +3,20 @@ import { observer } from "mobx-react";
 
 //Stores
 import folderStore from "../../store/FolderStore";
-
+import authStore from "../../store/authStore";
 //Styling
 import { Card, List } from "react-native-paper";
 import { IconStyled } from "./styles";
-import { Body, CardItem, Left, Right, Row, Text, Thumbnail } from "native-base";
+import {
+  Body,
+  CardItem,
+  Left,
+  Right,
+  Row,
+  Text,
+  Thumbnail,
+  TouchableHighlight,
+} from "native-base";
 import { View } from "react-native-animatable";
 import Icon from "react-native-vector-icons/Feather";
 import Entypo from "react-native-vector-icons/Entypo";
@@ -17,9 +26,29 @@ import defaultimage from "../../assets/defaultimageFolder2.png";
 
 import AntDesign from "react-native-vector-icons/AntDesign";
 
-
 const FolderItem = ({ folder, navigation }) => {
   const [pin, setPin] = useState(pin);
+
+  const PinList = folderStore.folders
+    .filter((folder) => folder.userId === authStore.user.id)
+    .filter((folder) => folder.pin == true);
+
+  const handleChange = async () => {
+    await folderStore.updateFolder({ ...folder, pin: !folder.pin });
+  };
+  const maxAlert = () => {
+    {
+      folder.pin === false
+        ? Alert.alert("Alert", "You can pin 2 folders only", [
+            {
+              text: "Ok",
+              style: "ok",
+            },
+          ])
+        : folderStore.updateFolder({ ...folder, pin: !folder.pin });
+    }
+  };
+
   const deleteAlert = () => {
     Alert.alert("Delete", "Are you sure you want to delete this folder?", [
       {
@@ -29,12 +58,6 @@ const FolderItem = ({ folder, navigation }) => {
       { text: "OK", onPress: () => folderStore.deleteFolder(folder.id) },
     ]);
   };
-
-
-  const handleChange = async () => {
-    await folderStore.updateFolder({ ...folder, pin: !folder.pin });
-  };
-
   return (
     <Card style={{ marginTop: 5, width: "94%", alignSelf: "center" }}>
       <CardItem>
@@ -69,9 +92,15 @@ const FolderItem = ({ folder, navigation }) => {
               name="edit-2"
               fontSize={15}
             />
-            <IconStyled onPress={handleChange}>
-              <IconStyled type="AntDesign" name="pushpino" size="5" />
-            </IconStyled>
+            {PinList.length <= 1 ? (
+              <IconStyled onPress={handleChange}>
+                <IconStyled type="AntDesign" name="pushpino" size="5" />
+              </IconStyled>
+            ) : (
+              <IconStyled onPress={maxAlert}>
+                <IconStyled type="AntDesign" name="pushpino" size="5" />
+              </IconStyled>
+            )}
           </Right>
         )}
       </CardItem>
