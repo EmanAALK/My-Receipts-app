@@ -3,6 +3,7 @@ import { observer } from "mobx-react";
 
 //Stores
 import folderStore from "../../store/FolderStore";
+import authStore from "../../store/authStore";
 
 //Styling
 import { Card, List, TextInput } from "react-native-paper";
@@ -25,10 +26,10 @@ const FolderItem = ({ folder, navigation, multipul }) => {
   const [edit, setEdit] = useState(false);
   const [updatedFolder, setUpdatedFolder] = useState(folder);
 
-    const PinList = folderStore.folders
+  const PinList = folderStore.folders
     .filter((folder) => folder.userId === authStore.user.id)
     .filter((folder) => folder.pin == true);
-  
+  console.log("length", PinList.length);
   const handleChecked = () => {
     setIsChecked(!isChecked);
     if (!isChecked) {
@@ -75,8 +76,8 @@ const FolderItem = ({ folder, navigation, multipul }) => {
       },
     ]);
   };
-  
-    const maxAlert = () => {
+
+  const maxAlert = () => {
     {
       folder.pin === false
         ? Alert.alert("Alert", "You can pin 2 folders only", [
@@ -88,7 +89,6 @@ const FolderItem = ({ folder, navigation, multipul }) => {
         : folderStore.updateFolder({ ...folder, pin: !folder.pin });
     }
   };
-
 
   const handleChange = async () => {
     await folderStore.updateFolder({ ...folder, pin: !folder.pin });
@@ -158,6 +158,7 @@ const FolderItem = ({ folder, navigation, multipul }) => {
             onPress={handleChange}
           />
         )}
+
         {!folder.defaultFolder && (
           <Menu
             ref={setMenuRef}
@@ -168,9 +169,15 @@ const FolderItem = ({ folder, navigation, multipul }) => {
               </Text>
             }
           >
-            <MenuItem onPress={handleChange}>
-              {folder.pin ? "Unpin" : "Pin"}
-            </MenuItem>
+            {PinList.length <= 1 ? (
+              <MenuItem onPress={handleChange}>
+                {folder.pin ? "Unpin" : "Pin"}
+              </MenuItem>
+            ) : (
+              <MenuItem onPress={maxAlert}>
+                {folder.pin ? "Unpin" : "Pin"}
+              </MenuItem>
+            )}
             <MenuItem onPress={handleEdit}>rename</MenuItem>
 
             <MenuItem onPress={deleteAlert}>Delete</MenuItem>
