@@ -12,9 +12,11 @@ import CameraScreen from "../CameraFeature/CameraScreen";
 
 const AddReceiptStack = createStackNavigator();
 
+const color = "#ffbf00";
+
 const AddReceiptStackScreen = ({ navigation }) => (
   <AddReceiptStack.Navigator
-    initialRouteName='AddReceipt'
+    initialRouteName="AddReceipt"
     title={false}
     screenOptions={{
       headerTintColor: "white",
@@ -22,6 +24,7 @@ const AddReceiptStackScreen = ({ navigation }) => (
       headerStyle: {
         backgroundColor: "white",
         height: 80,
+    
       },
       headerTitleStyle: {
         fontWeight: "bold",

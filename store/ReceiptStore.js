@@ -5,6 +5,7 @@ import authStore from "./authStore";
 import folderStore from "./FolderStore";
 class ReceiptStore {
   receipts = [];
+  selectedReceipts = [];
   loading = true;
 
   fetchReceipts = async () => {
@@ -23,9 +24,15 @@ class ReceiptStore {
     try {
       // const formData = new FormData();
       // for (const key in newReceipt) formData.append(key, newReceipt[key]);
+
       console.log(",,,,,,,newReceipt", newReceipt);
 
       const res = await instance.post(
+        `/folders/${newReceipt.folderId}/receipts`,
+        newReceipt
+
+      const res = await instance.post(
+
         `/folders/${newReceipt.folderId}/receipts`,
         newReceipt
       );
@@ -41,9 +48,10 @@ class ReceiptStore {
       for (const key in updatedReceipt)
         formData.append(key, updatedReceipt[key]);
 
-      await instance.put(`/receipts/${updatedReceipt.id}`, updatedReceipt);
 
+      await instance.put(`/receipts/${updatedReceipt.id}`, updatedReceipt);
       const receipt = this.receipts.find(
+
         (receipt) => receipt.id === updatedReceipt.id
       );
       for (const key in updatedReceipt) receipt[key] = updatedReceipt[key];
@@ -53,6 +61,7 @@ class ReceiptStore {
   };
 
   deleteReceipt = async (receiptId) => {
+    console.log(".....receiptId", receiptId);
     try {
       await instance.delete(`/receipts/${receiptId}`);
       this.receipts = this.receipts.filter(
@@ -72,7 +81,7 @@ class ReceiptStore {
       .filter((receipt) => receipt.folder.userId === authStore.user.id) //get receipt of this user
       .filter((receipt) => receipt.expDate < dateBeforeWeek); //get receipt that is less than dateBeforeWeek
     const totalExpiredLength = totalExpired.length;
-    console.log("check", totalExpiredLength);
+
     return totalExpiredLength;
   }
 }
@@ -80,6 +89,7 @@ class ReceiptStore {
 decorate(ReceiptStore, {
   receipts: observable,
   loading: observable,
+  selectedReceipts: observable,
   totalExpiredReceipt: computed,
 });
 

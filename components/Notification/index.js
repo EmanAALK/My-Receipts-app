@@ -3,16 +3,17 @@ import { observer } from "mobx-react";
 import moment from "moment";
 
 // Styling
-import { Card } from "react-native-paper";
 import { List, Spinner, Text } from "native-base";
-import { CardItem, Left, Right } from "native-base";
 import { View } from "react-native-animatable";
 
-// store
+// Store
 import receiptStore from "../store/ReceiptStore";
 import authStore from "../store/authStore";
 
-const Notifications = ({ navigation }) => {
+// Component
+import NotificationItem from "./NotificationItem";
+
+const NotificationList = ({ navigation }) => {
   if (receiptStore.loading) return <Spinner />;
 
   // get all expiration dates of receipts (objects)
@@ -29,24 +30,11 @@ const Notifications = ({ navigation }) => {
   const isExpired = receiptList
     .filter((receipt) => receipt.expDate < dateBeforeWeek)
     .map((receipt) => (
-      <>
-        <Card style={{ marginTop: 5, width: "94%", alignSelf: "center" }}>
-          <CardItem>
-            <Left>
-              <Text
-                onPress={() =>
-                  navigation.navigate("ReceiptDetail", { receipt: receipt })
-                }
-              >
-                {receipt.name}
-              </Text>
-              <Right>
-                <Text note>{receipt.expDate}</Text>
-              </Right>
-            </Left>
-          </CardItem>
-        </Card>
-      </>
+      <NotificationItem
+        receipt={receipt}
+        key={receipt.id}
+        navigation={navigation}
+      />
     ));
   return (
     <View style={{ marginTop: 30, marginBottom: 30 }}>
@@ -57,4 +45,4 @@ const Notifications = ({ navigation }) => {
   );
 };
 
-export default observer(Notifications);
+export default observer(NotificationList);

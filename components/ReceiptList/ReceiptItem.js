@@ -16,6 +16,8 @@ import {
   // Button,
   Thumbnail,
 } from "native-base";
+
+import { CheckBox } from "react-native-elements";
 import { Card, Divider, Button } from "react-native-paper";
 import defaultimage from "../../assets/defaultimage.png";
 import Icon from "react-native-vector-icons/MaterialCommunityIcons";
@@ -24,9 +26,23 @@ import { Alert } from "react-native";
 import Menu, { MenuItem, MenuDivider } from "react-native-material-menu";
 import RNPickerSelect from "react-native-picker-select";
 
-const ReceiptItem = ({ receipt, navigation }) => {
+
+const ReceiptItem = ({ receipt, navigation, multipul }) => {
+  const [isChecked, setIsChecked] = useState(multipul);
   const [updatedReceipt, setUpdatedReceipt] = useState(receipt);
   const [move, setMove] = useState(false);
+  console.log(",,,,multipul", multipul);
+  const handleChecked = () => {
+    setIsChecked(!isChecked);
+
+    if (!isChecked) {
+      receiptStore.selectedReceipts.push(receipt);
+    } else
+      receiptStore.selectedReceipts = receiptStore.selectedReceipts.filter(
+        (item) => item.id !== receipt.id
+      );
+  };
+
   let menu = null;
   const folder = folderStore.folders.filter(
     (folder) => folder.userId === authStore.user.id
@@ -41,22 +57,10 @@ const ReceiptItem = ({ receipt, navigation }) => {
   const handleSubmit = async () => {
     menu.hide();
 
-    setUpdatedReceipt({
+    await receiptStore.updateReceipt({
       ...updatedReceipt,
       archive: !updatedReceipt.archive,
     });
-
-    await receiptStore.updateReceipt(updatedReceipt);
-  };
-  const handleMove = async (folderId) => {
-    // menu.hide();
-    setUpdatedReceipt({
-      ...updatedReceipt,
-      folderId,
-    });
-    console.log(",,,,,setUpdatedReceipt", setUpdatedReceipt);
-
-    await receiptStore.updateReceipt(updatedReceipt);
   };
 
   const deleteAlert = () => {
@@ -81,37 +85,40 @@ const ReceiptItem = ({ receipt, navigation }) => {
             <Icon name='receipt' size={25} color='lightgrey' />
             <Text style={{ paddingLeft: 20 }}>{receipt.name}</Text>
           </Left>
+    <ListItem
+      onPress={() => navigation.navigate("ReceiptDetail", { receipt: receipt })}
+    >
+      {multipul && (
+        <CheckBox
+          checkedIcon="dot-circle-o"
+          checkedColor="grey"
+          uncheckedIcon="circle-o"
+          size={15}
+          checked={isChecked}
+          onPress={handleChecked}
+          value={false}
+        />
+      )}
+      <Left>
+        <Icon name="receipt" size={25} color="lightgrey" />
+        <Text style={{ paddingLeft: 20 }}>{receipt.name}</Text>
+      </Left>
 
-          <Menu
-            ref={setMenuRef}
-            button={
-              <Text style={{ fontWeight: "bold" }} onPress={showMenu}>
-                ...
-              </Text>
-            }
-          >
-            <MenuItem onPress={handleSubmit}>
-              {receipt.archive ? "unArchive" : "Archive"}
-            </MenuItem>
-            <MenuItem onPress={() => setMove(!move)}>Move</MenuItem>
-            {move && (
-              <RNPickerSelect
-                // onValueChange={(folderId) =>
-                //   setUpdatedReceipt({ ...updatedReceipt, folderId })
-                // }
-                onValueChange={(folderId) => handleMove(folderId)}
-                items={folder.map((folder) => ({
-                  label: folder.name,
-                  value: folder.id,
-                }))}
-              />
-            )}
+      <Menu
+        ref={setMenuRef}
+        button={
+          <Text style={{ fontWeight: "bold" }} onPress={showMenu}>
+            ...
+          </Text>
+        }
+      >
+        <MenuItem onPress={handleSubmit}>
+          {receipt.archive ? "unArchive" : "Archive"}
+        </MenuItem>
 
-            <MenuItem onPress={deleteAlert}>Delete</MenuItem>
-          </Menu>
-        </>
-      </ListItem>
-    </>
+        <MenuItem onPress={deleteAlert}>Delete</MenuItem>
+      </Menu>
+    </ListItem>
   );
 };
 

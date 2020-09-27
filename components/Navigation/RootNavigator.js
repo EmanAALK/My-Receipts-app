@@ -4,11 +4,13 @@ import { createMaterialBottomTabNavigator } from "@react-navigation/material-bot
 import { observer } from "mobx-react";
 
 // styles
+import styled from "styled-components";
 import { Badge } from "react-native-elements";
 import { StyleSheet } from "react-native";
 import { LinearGradient } from "expo-linear-gradient";
 
 // component
+import Search from "../Search/index";
 import DrawerContent from "../DawerContenent";
 import Navigation from "./index";
 import authStore from "../../store/authStore";
@@ -16,7 +18,6 @@ import HomeStackScreen from "./HomeStackScreen";
 import NotificationStackscreen from "./NotificationStackscreen";
 import AddReceiptStackScreen from "./AddReceiptStackscreen";
 import receiptStore from "../../store/ReceiptStore";
-import Search from "../Search/index";
 
 //Icons
 import SimpleLineIcons from "react-native-vector-icons/SimpleLineIcons";
@@ -34,10 +35,10 @@ const TabScreen = observer(() => (
     color='#C3C3C3'
     activeColor='#ffbf00'
     barStyle={{ backgroundColor: "white", height: 70 }}
-    initialRouteName='Home'
+    initialRouteName="Home"
   >
     <Tab.Screen
-      name='Home'
+      name="Home"
       component={HomeStackScreen}
       options={{
         backgroundColor: "white",
@@ -52,6 +53,7 @@ const TabScreen = observer(() => (
             color={color}
             size={23}
           />
+          <Icon name="ios-home" color={"#C2C2C2"} size={26} />
         ),
       }}
     />
@@ -72,24 +74,27 @@ const TabScreen = observer(() => (
     />
 
     <Tab.Screen
-      name='AddReceipt'
+      name="AddReceipt"
       component={AddReceiptStackScreen}
       options={{
         backgroundColor: "white",
         showLabel: "New Receipt",
         title: "New Receipt",
         backgroundColor: color,
+
         tabBarIcon: ({ color }) => (
           <MaterialCommunityIcons
             name='camera-plus-outline'
             color={color}
             size={23}
           />
+          <Icon name="md-camera" color={"#C2C2C2"} size={26} />
+
         ),
       }}
     />
     <Tab.Screen
-      name='Notifications'
+      name="Notifications"
       component={NotificationStackscreen}
       options={{
         backgroundColor: "white",
@@ -107,6 +112,11 @@ const TabScreen = observer(() => (
               color={color}
               size={23}
             />
+              badgeStyle={{ marginLeft: 25 }}
+              value={receiptStore.totalExpiredReceipt}
+              status="error"
+            />
+            <Icon name="ios-notifications" color={"#C2C2C2"} size={26} />
           </>
         ),
       }}
@@ -120,7 +130,7 @@ const RootNavigator = () => {
         <Drawer.Navigator
           drawerContent={(props) => <DrawerContent {...props} />}
         >
-          <Drawer.Screen name='HomeTab' component={TabScreen} />
+          <Drawer.Screen name="HomeTab" component={TabScreen} />
         </Drawer.Navigator>
       ) : (
         <Navigation />
