@@ -2,8 +2,10 @@ import React from "react";
 import { createStackNavigator } from "@react-navigation/stack";
 import { observer } from "mobx-react";
 
-// styles
+//Icons
+import AntDesign from "react-native-vector-icons/AntDesign";
 import Icon from "react-native-vector-icons/Ionicons";
+import FontAwesome5 from "react-native-vector-icons/FontAwesome5";
 
 // component
 import EditProfile from "../Profile";
@@ -17,25 +19,27 @@ import ReceiptDetail from "../ReceiptList/ReceiptDetail";
 import Calculation from "../Calculation";
 import Search from "../Search";
 import ArchiveReceipt from "../ReceiptList/ArchiveReceipt";
+
 //Camera Feature
 import CameraScreen from "../CameraFeature/CameraScreen";
 import CameraPhoto from "../CameraFeature/CameraPhoto";
 import PhotoPicker from "../CameraFeature/PhotoPicker";
 
 const HomeStack = createStackNavigator();
-const color = "#ffbf00";
+
+const color = "white";
+const iconsColor = "#C2C2C2";
 
 const HomeStackScreen = ({ navigation }) => (
   <HomeStack.Navigator
-    initialRouteName="Home"
+    initialRouteName='Home'
+    Title='Home'
     screenOptions={{
       headerTintColor: "white",
       backgroundColor: "white",
       headerStyle: {
-        backgroundColor: "white",
-        height: 90,
+        height: 85,
         backgroundColor: color,
-        height: 60,
       },
       headerTitleStyle: {
         fontWeight: "bold",
@@ -43,39 +47,48 @@ const HomeStackScreen = ({ navigation }) => (
     }}
   >
     <HomeStack.Screen
-      name="Home"
+      name='Home'
       component={FolderList}
       screenOptions={{
         backgroundColor: "white",
       }}
       options={{
         backgroundColor: "white",
-        title: false,
-
+        title: true,
         headerLeft: () => (
           <Icon.Button
-            name="ios-menu"
+            name='ios-menu'
             size={25}
-            color={"#E0E0E0"}
+            color={iconsColor}
             backgroundColor='transparent'
             activeColor='transparent'
             onPress={() => navigation.openDrawer()}
           ></Icon.Button>
         ),
+        headerRight: () => (
+          <AntDesign.Button
+            name='addfolder'
+            size={25}
+            color='#ffbf00'
+            backgroundColor='transparent'
+            activeColor='transparent'
+            onPress={() => navigation.navigate("CreateFolderForm")}
+          ></AntDesign.Button>
+        ),
       }}
     />
 
     <HomeStack.Screen
-      name="ReceiptDetail"
+      name='ReceiptDetail'
       component={ReceiptDetail}
       options={{
         title: false,
 
         headerLeft: () => (
           <Icon.Button
-            name="ios-menu"
+            name='ios-menu'
             size={25}
-            color={"#E0E0E0"}
+            color={iconsColor}
             backgroundColor='transparent'
             onPress={() => navigation.openDrawer()}
           ></Icon.Button>
@@ -84,14 +97,14 @@ const HomeStackScreen = ({ navigation }) => (
     />
 
     <HomeStack.Screen
-      name="Profile"
+      name='Profile'
       component={EditProfile}
       options={{
         title: false,
         headerRight: () => (
           <Icon
             style={{ paddingRight: 10 }}
-            name="md-arrow-back"
+            name='md-arrow-back'
             size={25}
             color='#E0E0E0'
             onPress={() => navigation.goBack()}
@@ -99,9 +112,9 @@ const HomeStackScreen = ({ navigation }) => (
         ),
         headerLeft: () => (
           <Icon.Button
-            name="ios-menu"
+            name='ios-menu'
             size={25}
-            color={"#E0E0E0"}
+            color={iconsColor}
             backgroundColor='white'
             onPress={() => navigation.openDrawer()}
           ></Icon.Button>
@@ -109,14 +122,14 @@ const HomeStackScreen = ({ navigation }) => (
       }}
     />
     <HomeStack.Screen
-      name="Notification"
+      name='Notification'
       component={Notification}
       options={{
         title: false,
         headerRight: () => (
           <Icon
             style={{ paddingRight: 10 }}
-            name="md-arrow-back"
+            name='md-arrow-back'
             size={25}
             color='#E0E0E0'
             backgroundColor='transparent'
@@ -125,9 +138,9 @@ const HomeStackScreen = ({ navigation }) => (
         ),
         headerLeft: () => (
           <Icon.Button
-            name="ios-menu"
+            name='ios-menu'
             size={25}
-            color={"#E0E0E0"}
+            color={iconsColor}
             backgroundColor='transparent'
             onPress={() => navigation.openDrawer()}
           ></Icon.Button>
@@ -135,25 +148,25 @@ const HomeStackScreen = ({ navigation }) => (
       }}
     />
     <HomeStack.Screen
-      name="CreateReceiptForm"
+      name='CreateReceiptForm'
       component={CreateReceiptForm}
       options={{
         title: false,
         headerRight: () => (
           <Icon
             style={{ paddingRight: 10 }}
-            name="md-arrow-back"
+            name='md-arrow-back'
             size={25}
             backgroundColor='transparent'
-            color={"#E0E0E0"}
+            color={iconsColor}
             onPress={() => navigation.goBack()}
           ></Icon>
         ),
         headerLeft: () => (
           <Icon.Button
-            name="ios-menu"
+            name='ios-menu'
             size={25}
-            color={"#E0E0E0"}
+            color={iconsColor}
             backgroundColor='transparent'
             onPress={() => navigation.openDrawer()}
           ></Icon.Button>
@@ -162,24 +175,24 @@ const HomeStackScreen = ({ navigation }) => (
     />
 
     <HomeStack.Screen
-      name="UpdateFolderForm"
+      name='UpdateFolderForm'
       component={UpdateFolderForm}
       options={{
         title: false,
         headerRight: () => (
           <Icon
             style={{ paddingRight: 10 }}
-            name="md-arrow-back"
+            name='md-arrow-back'
             size={25}
-            color={"#E0E0E0"}
+            color={iconsColor}
             onPress={() => navigation.goBack()}
           ></Icon>
         ),
         headerLeft: () => (
           <Icon.Button
-            name="ios-menu"
+            name='ios-menu'
             size={25}
-            color={"#E0E0E0"}
+            color={iconsColor}
             backgroundColor='transparent'
             onPress={() => navigation.openDrawer()}
           ></Icon.Button>
@@ -187,25 +200,25 @@ const HomeStackScreen = ({ navigation }) => (
       }}
     />
     <HomeStack.Screen
-      name="CreateFolderForm"
+      name='CreateFolderForm'
       component={CreateFolderForm}
       options={{
         title: false,
         headerRight: () => (
           <Icon
             style={{ paddingRight: 10 }}
-            name="md-arrow-back"
+            name='md-arrow-back'
             size={25}
-            color={"#EBEBEB"}
+            color={iconsColor}
             backgroundColor='transparent'
             onPress={() => navigation.goBack()}
           ></Icon>
         ),
         headerLeft: () => (
           <Icon.Button
-            name="ios-menu"
+            name='ios-menu'
             size={25}
-            color={"#EBEBEB"}
+            color={iconsColor}
             backgroundColor='transparent'
             onPress={() => navigation.openDrawer()}
           ></Icon.Button>
@@ -213,25 +226,25 @@ const HomeStackScreen = ({ navigation }) => (
       }}
     />
     <HomeStack.Screen
-      name="ReceiptList"
+      name='ReceiptList'
       component={ReceiptList}
       options={{
         title: false,
         headerRight: () => (
           <Icon
             style={{ paddingRight: 10 }}
-            name="md-arrow-back"
+            name='md-arrow-back'
             size={25}
-            color={"#EBEBEB"}
+            color={iconsColor}
             backgroundColor='transparent'
             onPress={() => navigation.goBack()}
           ></Icon>
         ),
         headerLeft: () => (
           <Icon.Button
-            name="ios-menu"
+            name='ios-menu'
             size={25}
-            color={"#EBEBEB"}
+            color={iconsColor}
             backgroundColor='transparent'
             onPress={() => navigation.openDrawer()}
           ></Icon.Button>
@@ -239,14 +252,14 @@ const HomeStackScreen = ({ navigation }) => (
       }}
     />
     <HomeStack.Screen
-      name="Calculation"
+      name='Calculation'
       component={Calculation}
       options={{
         title: false,
 
         headerLeft: () => (
           <Icon.Button
-            name="ios-menu"
+            name='ios-menu'
             size={25}
             color={"#EBEBEB"}
             backgroundColor='transparent'
@@ -256,14 +269,15 @@ const HomeStackScreen = ({ navigation }) => (
       }}
     />
     <HomeStack.Screen
-      name="Search"
+      name='Search'
       component={Search}
       options={{
+        backgroundColor: "white",
         title: false,
         headerRight: () => (
           <Icon
             style={{ paddingRight: 10 }}
-            name="md-arrow-back"
+            name='ios-arrow-back-circle'
             size={25}
             color={"#EBEBEB"}
             onPress={() => navigation.goBack()}
@@ -271,7 +285,7 @@ const HomeStackScreen = ({ navigation }) => (
         ),
         headerLeft: () => (
           <Icon.Button
-            name="ios-menu"
+            name='ios-menu'
             size={25}
             color={"#EBEBEB"}
             backgroundColor='transparent'
@@ -282,14 +296,14 @@ const HomeStackScreen = ({ navigation }) => (
     />
 
     <HomeStack.Screen
-      name="CameraScreen"
+      name='CameraScreen'
       component={CameraScreen}
       options={{
         title: false,
         headerRight: () => (
           <Icon
             style={{ paddingRight: 10 }}
-            name="md-arrow-back"
+            name='md-arrow-back'
             size={25}
             color={"#EBEBEB"}
             onPress={() => navigation.goBack()}
@@ -297,7 +311,7 @@ const HomeStackScreen = ({ navigation }) => (
         ),
         headerLeft: () => (
           <Icon.Button
-            name="ios-menu"
+            name='ios-menu'
             size={25}
             color={"#EBEBEB"}
             backgroundColor='transparent'
@@ -308,14 +322,14 @@ const HomeStackScreen = ({ navigation }) => (
     />
 
     <HomeStack.Screen
-      name="CameraPhoto"
+      name='CameraPhoto'
       component={CameraPhoto}
       options={{
         title: false,
         headerRight: () => (
           <Icon
             style={{ paddingRight: 10 }}
-            name="md-arrow-back"
+            name='md-arrow-back'
             size={25}
             color={"#E0E0E0"}
             onPress={() => navigation.goBack()}
@@ -323,7 +337,7 @@ const HomeStackScreen = ({ navigation }) => (
         ),
         headerLeft: () => (
           <Icon.Button
-            name="ios-menu"
+            name='ios-menu'
             size={25}
             color={"#E0E0E0"}
             backgroundColor='transparent'
@@ -333,38 +347,38 @@ const HomeStackScreen = ({ navigation }) => (
       }}
     />
     <HomeStack.Screen
-      name="PhotoPicker"
+      name='PhotoPicker'
       component={PhotoPicker}
       options={{
         title: false,
         headerRight: () => (
           <Icon
             style={{ paddingRight: 10 }}
-            name="md-arrow-back"
+            name='md-arrow-back'
             size={25}
-            color="#fff"
+            color='#fff'
             onPress={() => navigation.goBack()}
           ></Icon>
         ),
         headerLeft: () => (
           <Icon.Button
-            name="ios-menu"
+            name='ios-menu'
             size={25}
-            backgroundColor="transparent"
+            backgroundColor='transparent'
             onPress={() => navigation.openDrawer()}
           ></Icon.Button>
         ),
       }}
     />
     <HomeStack.Screen
-      name="ArchiveReceipt"
+      name='ArchiveReceipt'
       component={ArchiveReceipt}
       options={{
         title: false,
         headerRight: () => (
           <Icon
             style={{ paddingRight: 10 }}
-            name="md-arrow-back"
+            name='md-arrow-back'
             size={25}
             color={"#E0E0E0"}
             onPress={() => navigation.goBack()}
@@ -372,7 +386,7 @@ const HomeStackScreen = ({ navigation }) => (
         ),
         headerLeft: () => (
           <Icon.Button
-            name="ios-menu"
+            name='ios-menu'
             size={25}
             color={"#E0E0E0"}
             backgroundColor='transparent'

@@ -17,10 +17,10 @@ import {
   AuthOther,
 } from "./styles";
 import Feather from "react-native-vector-icons/Feather";
-import { LinearGradient } from "expo-linear-gradient";
-import { Text } from "native-base";
-import * as Animatable from "react-native-animatable";
 import { TouchableOpacity } from "react-native-gesture-handler";
+import { LinearGradient } from "expo-linear-gradient";
+import * as Animatable from "react-native-animatable";
+import { Text } from "native-base";
 
 const Signin = ({ navigation }) => {
   const [user, setUser] = useState({
@@ -47,25 +47,26 @@ const Signin = ({ navigation }) => {
       <AuthTitle>Welcome!</AuthTitle>
       <AuthTextInput
         onChangeText={(username) => setUser({ ...user, username })}
-        placeholder="Username"
-        placeholderTextColor="#A6AEC1"
-        autoCapitalize="none"
+        placeholder='Username'
+        placeholderTextColor='#A6AEC1'
+        autoCapitalize='none'
         value={user.username}
       />
       <AuthTextInput
         onChangeText={(password) => setUser({ ...user, password })}
-        placeholder="Password"
-        placeholderTextColor="#A6AEC1"
+        placeholder='Password'
+        placeholderTextColor='#A6AEC1'
         secureTextEntry={showPass ? false : true}
         value={user.password}
       />
       <TouchableOpacity onPress={toggleShowPass}>
         {showPass ? (
-          <Feather name="eye" color="grey" size={15} />
+          <Feather name='eye' color='grey' size={15} />
         ) : (
-          <Feather name="eye-off" color="grey" size={15} />
+          <Feather name='eye-off' color='grey' size={15} />
         )}
       </TouchableOpacity>
+
       <AuthButton onPress={handleSubmit}>
         <LinearGradient
           onPress={handleSubmit}
@@ -84,10 +85,11 @@ const Signin = ({ navigation }) => {
           <AuthButtonText>Sign In</AuthButtonText>
         </LinearGradient>
       </AuthButton>
+
       {isValidUser ? (
         <Text style={{ color: "green" }}> forget password </Text>
       ) : (
-        <Animatable.View animation="fadeInLeft" duration={400}>
+        <Animatable.View animation='fadeInLeft' duration={400}>
           <Text style={{ color: "red" }}>Invalid username or password </Text>
         </Animatable.View>
       )}

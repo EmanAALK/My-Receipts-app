@@ -24,13 +24,17 @@ class ReceiptStore {
     try {
       // const formData = new FormData();
       // for (const key in newReceipt) formData.append(key, newReceipt[key]);
-      // console.log(",,,,,,,newReceipt", formData);
+
+      console.log(",,,,,,,newReceipt", newReceipt);
+
+      const res = await instance.post(
+        `/folders/${newReceipt.folderId}/receipts`,
+        newReceipt
 
       const res = await instance.post(
 
         `/folders/${newReceipt.folderId}/receipts`,
         newReceipt
-
       );
       this.receipts.push(res.data);
     } catch (error) {
