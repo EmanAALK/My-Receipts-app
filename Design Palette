@@ -16,12 +16,13 @@
 
 
 //Header
-1- height: 90
+1- height: 85
 2- backgroundColor: "white"
         
 //Icons
 1- ios-menu: #E0E0E0
 2- or you wan this? #EBEBEB
+3- Drawer Icons: #5C5C5C
 
 
 //TabBar

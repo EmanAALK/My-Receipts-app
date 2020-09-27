@@ -25,8 +25,6 @@ import Menu, { MenuItem, MenuDivider } from "react-native-material-menu";
 import RNPickerSelect from "react-native-picker-select";
 
 const ReceiptItem = ({ receipt, navigation }) => {
-  const deleteAlert = () => {
-    Alert.alert("Delete", "Are you sure you want to delete this receipt?", [
   const [updatedReceipt, setUpdatedReceipt] = useState(receipt);
   const [move, setMove] = useState(false);
   let menu = null;
@@ -72,31 +70,6 @@ const ReceiptItem = ({ receipt, navigation }) => {
     ]);
   };
   return (
-    <ListItem
-      onPress={() => navigation.navigate("ReceiptDetail", { receipt: receipt })}
-    >
-      <Left>
-        <Thumbnail
-          style={{ marginBottom: 5, marginRight: 16, textAligin: "center" }}
-          source={defaultimage}
-        />
-      </Left>
-      <Left>
-        <Text>{receipt.name}</Text>
-      </Left>
-      <>
-        <Right>
-          <DeleteButtonStyled onPress={deleteAlert}>Delete</DeleteButtonStyled>
-          <DeleteButtonStyled
-            onPress={() =>
-              navigation.navigate("UpdateReceiptForm", { oldReceipt: receipt })
-            }
-          >
-            Update
-          </DeleteButtonStyled>
-        </Right>
-      </>
-    </ListItem>
     <>
       <ListItem
         onPress={() =>
@@ -105,7 +78,7 @@ const ReceiptItem = ({ receipt, navigation }) => {
       >
         <>
           <Left>
-            <Icon name="receipt" size={25} color="lightgrey" />
+            <Icon name='receipt' size={25} color='lightgrey' />
             <Text style={{ paddingLeft: 20 }}>{receipt.name}</Text>
           </Left>
 

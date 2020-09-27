@@ -20,7 +20,7 @@ const ReceiptDetail = ({ route, navigation }) => {
       <Card>
         <Card.Title>{receipt.name}</Card.Title>
         <Card.Divider />
-        <Card.Image source={receipt.image} />
+        <Card.Image source={{ uri: receipt.image }} />
         <Text style={{ marginBottom: 10 }}>
           Created at: {receipt.createdAt}
         </Text>

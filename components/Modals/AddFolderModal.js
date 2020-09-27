@@ -3,7 +3,8 @@ import { observer } from "mobx-react";
 
 //Stores
 import folderStore from "../../store/FolderStore";
-//Styles
+
+//Styling
 import {
   FormContainer,
   FormTitle,
@@ -11,10 +12,18 @@ import {
   FormButtonText,
   FormButton,
 } from "./styles";
+import {
+  Alert,
+  Modal,
+  StyleSheet,
+  Text,
+  TouchableHighlight,
+  View,
+} from "react-native";
+import { Text, View } from "react-native";
 
-import { View } from "react-native-animatable";
-
-const UpdateFolderForm = ({ navigation, route }) => {
+const CreateFolderModal = ({ navigation, route }) => {
+  const [modalVisible, setModalVisible] = useState(false);
   const { oldFolder } = route.params;
   const [folder, setFolder] = useState(oldFolder);
 
@@ -29,7 +38,7 @@ const UpdateFolderForm = ({ navigation, route }) => {
 
   return (
     <FormContainer>
-      <FormTitle>Update The Folder </FormTitle>
+      <FormTitle>ِEdit Folder </FormTitle>
       <FormTextInput
         onChangeText={(name) => setFolder({ ...folder, name })}
         placeholder='Folder Name'
@@ -48,4 +57,5 @@ const UpdateFolderForm = ({ navigation, route }) => {
     </FormContainer>
   );
 };
-export default observer(UpdateFolderForm);
+
+export default observer(CreateFolderModal);

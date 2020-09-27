@@ -5,13 +5,15 @@ import { observer } from "mobx-react";
 import FolderItem from "./FolderItem";
 
 // Styling
-import { List, Spinner, Text } from "native-base";
-import { ButtonGroup } from "react-native-elements";
+import { List, Spinner, Text, View, ListItem } from "native-base";
+import { PageTitle } from "./styles";
 
 // store
 import folderStore from "../../store/FolderStore";
 import authStore from "../../store/authStore";
-import Icon from "react-native-vector-icons/AntDesign";
+
+//Icons
+import AntDesign from "react-native-vector-icons/AntDesign";
 
 const FolderList = ({ navigation }) => {
   if (folderStore.loading) return <Spinner />;
@@ -32,23 +34,16 @@ const FolderList = ({ navigation }) => {
 
   return (
     <>
-      <ButtonGroup
-        buttons={[
-          <Text onPress={() => navigation.navigate("CreateFolderForm")}>
-            Add Folder
-          </Text>,
-          <Text>
-            <Icon
-              onPress={() => navigation.navigate("Search")}
-              name="search1"
-              color="grey"
-              size={25}
-            />
-          </Text>,
-        ]}
-        containerStyle={{ height: 30, marginTop: 10 }}
-        selectedButtonStyle={{ backgroundColor: "grey" }}
-      />
+      <View style={{ flexDirection: "row" }}>
+        <PageTitle>My Folders</PageTitle>
+        <AntDesign
+          onPress={() => navigation.navigate("CreateFolderForm")}
+          name='addfolder'
+          size={25}
+          color='#ffbf00'
+          style={{ marginTop: 20, marginBottom: 20, marginLeft: 170 }}
+        />
+      </View>
 
       <List>{PinList}</List>
       <List>{UnPinList}</List>

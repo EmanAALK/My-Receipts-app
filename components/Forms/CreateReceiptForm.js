@@ -48,7 +48,7 @@ const CreateReceiptForm = ({ route, navigation }) => {
 
       image: { uri: localUri, name: filename, type },
     });
-    navigation.replace("ReceiptList", { name }); //What key to give it?
+    navigation.navigate("Home"); //What key to give it?
   };
 
   const folder = folderStore.folders

@@ -7,7 +7,17 @@ import authStore from "../../store/authStore";
 
 //Styling
 
-import { View, Text, Right, Body, Left, Card, CardItem } from "native-base";
+import {
+  View,
+  Text,
+  Right,
+  Body,
+  Left,
+  Card,
+  List,
+  CardItem,
+  ListItem,
+} from "native-base";
 import { TextStyle } from "./styles";
 
 //Pickers
@@ -53,70 +63,76 @@ const CalculateByDate = ({ navigation }) => {
 
   return (
     <>
-      <View
-        style={{
-          padding: 5,
-          flexDirection: "row",
-          marginTop: 5,
-          alignSelf: "center",
-        }}
-      >
-        <TextStyle>From : </TextStyle>
-        <DatePicker
-          showIcon={false}
-          style={{ width: 255, marginTop: 5 }}
-          date={fromDate}
-          mode="date"
-          placeholder="select date"
-          format="YYYY-MM-DD"
-          confirmBtnText="Confirm"
-          cancelBtnText="Cancel"
-          customStyles={{
-            dateInput: {
-              marginLeft: 5,
-              borderWidth: 0.25,
-            },
+      <List style={{ backgroundColor: "white" }}>
+        <View
+          style={{
+            padding: 5,
+            flexDirection: "row",
+            marginTop: 16,
           }}
-          onDateChange={(date) => {
-            setFromDate(date);
-          }}
-        />
-      </View>
+        >
+          <TextStyle>From : </TextStyle>
+          <DatePicker
+            showIcon={false}
+            style={{ width: 255, marginTop: 5 }}
+            date={fromDate}
+            mode='date'
+            placeholder='select date'
+            format='YYYY-MM-DD'
+            confirmBtnText='Confirm'
+            cancelBtnText='Cancel'
+            customStyles={{
+              dateInput: {
+                marginLeft: 5,
+                borderWidth: 0.25,
+              },
+            }}
+            onDateChange={(date) => {
+              setFromDate(date);
+            }}
+          />
+        </View>
 
-      <View
-        style={{
-          padding: 5,
-          flexDirection: "row",
-          alignSelf: "center",
-        }}
-      >
-        <TextStyle> To : </TextStyle>
+        <View
+          style={{
+            padding: 5,
+            marginTop: 14,
+            flexDirection: "row",
+          }}
+        >
+          <TextStyle> To : </TextStyle>
 
-        <DatePicker
-          showIcon={false}
-          style={{ width: 255, textAlign: "left", marginLeft: 10 }}
-          date={toDate}
-          mode="date"
-          placeholder="select date"
-          format="YYYY-MM-DD"
-          confirmBtnText="Confirm"
-          cancelBtnText="Cancel"
-          mode="date"
-          placeholder="select date"
-          format="YYYY-MM-DD"
-          confirmBtnText="Confirm"
-          cancelBtnText="Cancel"
-          customStyles={{
-            dateInput: {
-              marginLeft: 5,
-              borderWidth: 0.25,
-            },
-          }}
-          onDateChange={(date) => {
-            setToDate(date);
-          }}
-        />
-      </View>
+          <DatePicker
+            showIcon={false}
+            style={{
+              width: 255,
+              textAlign: "left",
+              marginBottom: 15,
+              marginLeft: 18,
+            }}
+            date={toDate}
+            mode='date'
+            placeholder='select date'
+            format='YYYY-MM-DD'
+            confirmBtnText='Confirm'
+            cancelBtnText='Cancel'
+            mode='date'
+            placeholder='select date'
+            format='YYYY-MM-DD'
+            confirmBtnText='Confirm'
+            cancelBtnText='Cancel'
+            customStyles={{
+              dateInput: {
+                marginLeft: 5,
+                borderWidth: 0.25,
+              },
+            }}
+            onDateChange={(date) => {
+              setToDate(date);
+            }}
+          />
+        </View>
+      </List>
       {receiptList}
       {toDate && (
         <Card>

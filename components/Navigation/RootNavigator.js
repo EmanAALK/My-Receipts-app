@@ -4,8 +4,8 @@ import { createMaterialBottomTabNavigator } from "@react-navigation/material-bot
 import { observer } from "mobx-react";
 
 // styles
-import Icon from "react-native-vector-icons/Ionicons";
 import { Badge } from "react-native-elements";
+import { StyleSheet } from "react-native";
 import { LinearGradient } from "expo-linear-gradient";
 
 // component
@@ -16,14 +16,22 @@ import HomeStackScreen from "./HomeStackScreen";
 import NotificationStackscreen from "./NotificationStackscreen";
 import AddReceiptStackScreen from "./AddReceiptStackscreen";
 import receiptStore from "../../store/ReceiptStore";
+import Search from "../Search/index";
+
+//Icons
+import SimpleLineIcons from "react-native-vector-icons/SimpleLineIcons";
+import MaterialCommunityIcons from "react-native-vector-icons/MaterialCommunityIcons";
+import AntDesign from "react-native-vector-icons/AntDesign";
+import Ionicons from "react-native-vector-icons/Ionicons";
 
 const Drawer = createDrawerNavigator();
 const Tab = createMaterialBottomTabNavigator();
-const color = "#427aa1";
+const color = "#C2C2C2";
 
 const TabScreen = observer(() => (
   <Tab.Navigator
     initialRouteName='Home'
+    color='#C3C3C3'
     activeColor='#ffbf00'
     barStyle={{ backgroundColor: "white", height: 70 }}
     initialRouteName='Home'
@@ -34,23 +42,49 @@ const TabScreen = observer(() => (
       options={{
         backgroundColor: "white",
         showLabel: false,
-        title: false,
+        title: "Home",
 
         tabBarIcon: ({ color }) => (
-          <Icon name='ios-home' color={"#C2C2C2"} size={26} />
+          // <Icon name='ios-home' activeColor='#ffbf00' color={color} size={26} />
+          <SimpleLineIcons
+            name='home'
+            activeColor='#ffbf00'
+            color={color}
+            size={23}
+          />
         ),
       }}
     />
+
+    <Tab.Screen
+      name='Search'
+      component={Search}
+      options={{
+        backgroundColor: "white",
+        showLabel: "Search",
+        title: "Search",
+        tabBarIcon: ({ color }) => (
+          <>
+            <AntDesign name='search1' color={color} size={23} />
+          </>
+        ),
+      }}
+    />
+
     <Tab.Screen
       name='AddReceipt'
       component={AddReceiptStackScreen}
       options={{
         backgroundColor: "white",
-        showLabel: false,
-        title: false,
+        showLabel: "New Receipt",
+        title: "New Receipt",
         backgroundColor: color,
         tabBarIcon: ({ color }) => (
-          <Icon name='md-camera' color={"#C2C2C2"} size={26} />
+          <MaterialCommunityIcons
+            name='camera-plus-outline'
+            color={color}
+            size={23}
+          />
         ),
       }}
     />
@@ -59,12 +93,20 @@ const TabScreen = observer(() => (
       component={NotificationStackscreen}
       options={{
         backgroundColor: "white",
-        showLabel: false,
-        title: false,
+        showLabel: "Notifications",
+        title: "Notifications",
         tabBarIcon: ({ color }) => (
           <>
-            <Badge value={receiptStore.totalExpiredReceipt} status='error' />
-            <Icon name='ios-notifications' color={"#C2C2C2"} size={26} />
+            <Badge
+              value={receiptStore.totalExpiredReceipt}
+              status='error'
+              badgeStyle={styles.badge}
+            />
+            <Ionicons
+              name='ios-notifications-outline'
+              color={color}
+              size={23}
+            />
           </>
         ),
       }}
@@ -72,7 +114,6 @@ const TabScreen = observer(() => (
   </Tab.Navigator>
 ));
 const RootNavigator = () => {
-  // console.log("laila", receiptStore.totalExpiredReceipt);
   return (
     <>
       {authStore.user ? (
@@ -88,3 +129,19 @@ const RootNavigator = () => {
   );
 };
 export default observer(RootNavigator);
+
+const styles = StyleSheet.create({
+  badge: {
+    borderRadius: 9,
+    height: 18,
+    minWidth: 0,
+    width: 18,
+  },
+  badgeContainer: {
+    position: "absolute",
+  },
+  badgeText: {
+    fontSize: 10,
+    paddingHorizontal: 0,
+  },
+});
