@@ -13,7 +13,6 @@ class FolderStore {
       console.log("FolderStore -> fetchFolder -> error", response); // test to see where data come from
       this.folders = response.data;
       this.loading = false;
-
       this.folders = this.folders.sort((a, b) =>
         a.defaultFolder < b.defaultFolder ? 1 : -1
       );
