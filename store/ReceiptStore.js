@@ -22,16 +22,14 @@ class ReceiptStore {
 
   createReceipt = async (newReceipt) => {
     try {
-      // const formData = new FormData();
-      // for (const key in newReceipt) formData.append(key, newReceipt[key]);
-      // console.log(",,,,,,,newReceipt", formData);
-
+      console.log("check new receipt", newReceipt);
+      const formData = new FormData();
+      for (const key in newReceipt) formData.append(key, newReceipt[key]);
       const res = await instance.post(
-
         `/folders/${newReceipt.folderId}/receipts`,
-        newReceipt
-
+        formData
       );
+
       this.receipts.push(res.data);
     } catch (error) {
       console.log("ReceiptStore -> createReceipt -> error ", error);
@@ -44,10 +42,8 @@ class ReceiptStore {
       for (const key in updatedReceipt)
         formData.append(key, updatedReceipt[key]);
 
-
       await instance.put(`/receipts/${updatedReceipt.id}`, updatedReceipt);
       const receipt = this.receipts.find(
-
         (receipt) => receipt.id === updatedReceipt.id
       );
       for (const key in updatedReceipt) receipt[key] = updatedReceipt[key];
@@ -77,8 +73,14 @@ class ReceiptStore {
       .filter((receipt) => receipt.folder.userId === authStore.user.id) //get receipt of this user
       .filter((receipt) => receipt.expDate < dateBeforeWeek); //get receipt that is less than dateBeforeWeek
     const totalExpiredLength = totalExpired.length;
-
-    return totalExpiredLength;
+    let a;
+    let b;
+    {
+      totalExpiredLength == 0
+        ? (a = totalExpiredLength) //no notofication
+        : (b = totalExpiredLength); // notofication
+    }
+    return b;
   }
 }
 

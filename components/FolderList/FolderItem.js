@@ -29,7 +29,7 @@ const FolderItem = ({ folder, navigation, multipul }) => {
   const PinList = folderStore.folders
     .filter((folder) => folder.userId === authStore.user.id)
     .filter((folder) => folder.pin == true);
-  console.log("length", PinList.length);
+
   const handleChecked = () => {
     setIsChecked(!isChecked);
     if (!isChecked) {

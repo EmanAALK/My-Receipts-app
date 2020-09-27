@@ -17,8 +17,7 @@ import { Alert } from "react-native";
 const FolderList = ({ navigation }) => {
   if (folderStore.loading) return <Spinner />;
 
-  const [multipul, setMultipul] = useState(false);
-
+  // const [multipul, setMultipul] = useState(false);
 
   const PinList = folderStore.folders
     .filter((folder) => folder.userId === authStore.user.id)
@@ -27,8 +26,6 @@ const FolderList = ({ navigation }) => {
       <FolderItem folder={folder} key={folder.id} navigation={navigation} />
     ));
 
-  // console.log("list", PinList);
-  // console.log("length", PinList.length);
   const UnPinList = folderStore.folders
     .filter((folder) => folder.userId === authStore.user.id)
     .filter((folder) => folder.pin == false && !folder.defaultFolder)
@@ -37,7 +34,7 @@ const FolderList = ({ navigation }) => {
         folder={folder}
         key={folder.id}
         navigation={navigation}
-        multipul={multipul}
+        // multipul={multipul}
       />
     ));
   const deleteReceipt = () => {
@@ -45,32 +42,32 @@ const FolderList = ({ navigation }) => {
       folderStore.deleteFolder(folder.id);
     });
   };
-  const handleDelete = () => {
-    setMultipul(!multipul);
+  // const handleDelete = () => {
+  //   setMultipul(!multipul);
 
-    if (multipul && folderStore.selectedFolders.length !== 0) {
-      Alert.alert("Delete", "Are you sure you want to delete this folder?", [
-        {
-          text: "Cancel",
-          style: "cancel",
-        },
-        {
-          text: "OK",
-          onPress: () => {
-            deleteReceipt();
-          },
-        },
-      ]);
-    } else folderStore.selectedFolders = [];
-  };
+  //   if (multipul && folderStore.selectedFolders.length !== 0) {
+  //     Alert.alert("Delete", "Are you sure you want to delete this folder?", [
+  //       {
+  //         text: "Cancel",
+  //         style: "cancel",
+  //       },
+  //       {
+  //         text: "OK",
+  //         onPress: () => {
+  //           deleteReceipt();
+  //         },
+  //       },
+  //     ]);
+  //   } else folderStore.selectedFolders = [];
+  // };
 
   return (
     <>
-      <Text style={{ marginLeft: 300 }} onPress={handleDelete}>
+      {/* <Text style={{ marginLeft: 300 }} onPress={handleDelete}>
         {multipul && folderStore.selectedFolders.length > 0
           ? "Delete"
           : "Select"}
-      </Text>
+      </Text> */}
       <ButtonGroup
         buttons={[
           <Text onPress={() => navigation.navigate("CreateFolderForm")}>
