@@ -48,7 +48,9 @@ const CreateReceiptForm = ({ route, navigation }) => {
 
       image: { uri: localUri, name: filename, type },
     });
+
     navigation.replace("ReceiptList", { name }); //What key to give it?
+
   };
 
   const folder = folderStore.folders
@@ -79,12 +81,14 @@ const CreateReceiptForm = ({ route, navigation }) => {
           onChangeText={(name) => setReceipt({ ...receipt, name })}
           placeholder='Receipt Name'
           placeholderTextColor='#A6AEC1'
+
         />
 
         <FormTextInput
           onChangeText={(price) => setReceipt({ ...receipt, price })}
           placeholder='Receipt Price'
           placeholderTextColor='#A6AEC1'
+
         />
 
         {/* Date */}
@@ -97,6 +101,7 @@ const CreateReceiptForm = ({ route, navigation }) => {
             format='YYYY-MM-DD'
             confirmBtnText='Confirm'
             cancelBtnText='Cancel'
+
             customStyles={{
               dateIcon: {
                 position: "absolute",
@@ -119,6 +124,7 @@ const CreateReceiptForm = ({ route, navigation }) => {
           <DatePicker
             style={{ width: 255 }}
             date={receipt.Expdate}
+
             mode='Expiration date'
             placeholder='select expiration date'
             format='YYYY-MM-DD'
@@ -169,3 +175,4 @@ const CreateReceiptForm = ({ route, navigation }) => {
 };
 
 export default observer(CreateReceiptForm);
+

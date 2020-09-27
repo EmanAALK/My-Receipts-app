@@ -25,6 +25,10 @@ const FolderItem = ({ folder, navigation, multipul }) => {
   const [edit, setEdit] = useState(false);
   const [updatedFolder, setUpdatedFolder] = useState(folder);
 
+    const PinList = folderStore.folders
+    .filter((folder) => folder.userId === authStore.user.id)
+    .filter((folder) => folder.pin == true);
+  
   const handleChecked = () => {
     setIsChecked(!isChecked);
     if (!isChecked) {
@@ -71,6 +75,20 @@ const FolderItem = ({ folder, navigation, multipul }) => {
       },
     ]);
   };
+  
+    const maxAlert = () => {
+    {
+      folder.pin === false
+        ? Alert.alert("Alert", "You can pin 2 folders only", [
+            {
+              text: "Ok",
+              style: "ok",
+            },
+          ])
+        : folderStore.updateFolder({ ...folder, pin: !folder.pin });
+    }
+  };
+
 
   const handleChange = async () => {
     await folderStore.updateFolder({ ...folder, pin: !folder.pin });
