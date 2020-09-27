@@ -7,12 +7,17 @@ import { DrawerContentScrollView, DrawerItem } from "@react-navigation/drawer";
 
 //Styling
 import { View, StyleSheet } from "react-native";
+
+//Icons
 import Icon from "react-native-vector-icons/MaterialCommunityIcons";
-import IconBack from "react-native-vector-icons/Ionicons";
-import Entypo from "react-native-vector-icons/Entypo";
+import AntDesign from "react-native-vector-icons/AntDesign";
+import EvilIcons from "react-native-vector-icons/EvilIcons";
 
 //Stores
 import authStore from "../../store/authStore";
+
+//Theme
+const IconColor = "#5C5C5C";
 
 const DrawerContent = ({ navigation }) => {
   user = authStore.user;
@@ -23,17 +28,19 @@ const DrawerContent = ({ navigation }) => {
         <DrawerContentScrollView>
           <View style={styles.drawerContent}>
             <Drawer.Section
-              style={
-                (styles.drawerSection,
-                { height: 90, backgroundColor: "#ffbf00" })
-              }
+              style={(styles.drawerSection, { backgroundColor: "white" })}
             >
               <View style={styles.userInfoSection}>
                 <View style={{ flexDirection: "column", marginLeft: 15 }}>
                   <Title
                     style={
                       (styles.title,
-                      { color: "white", marginTop: 20, marginBottom: 20 })
+                      {
+                        color: "black",
+                        marginTop: 20,
+                        marginBottom: 20,
+                        alignContent: "flex-end",
+                      })
                     }
                   >
                     {user.username}
@@ -45,9 +52,9 @@ const DrawerContent = ({ navigation }) => {
             <Drawer.Section style={styles.drawerSection}>
               <DrawerItem
                 icon={() => (
-                  <Icon name="account-outline" color="grey" size={25} />
+                  <Icon name='account-outline' color='#5C5C5C' size={25} />
                 )}
-                label="Profile"
+                label='Profile'
                 onPress={() => {
                   navigation.navigate("Profile");
                 }}
@@ -55,8 +62,8 @@ const DrawerContent = ({ navigation }) => {
             </Drawer.Section>
             <Drawer.Section style={styles.drawerSection}>
               <DrawerItem
-                icon={() => <Icon name="receipt" color="grey" size={25} />}
-                label="Receipts Calculator"
+                icon={() => <Icon name='receipt' color='#5C5C5C' size={25} />}
+                label='Expenses Calculator'
                 onPress={() => {
                   navigation.navigate("Calculation");
                 }}
@@ -64,8 +71,10 @@ const DrawerContent = ({ navigation }) => {
             </Drawer.Section>
             <Drawer.Section style={styles.drawerSection}>
               <DrawerItem
-                icon={() => <Entypo name="folder" size={20} color="grey" />}
-                label="Archive Folder"
+                icon={() => (
+                  <EvilIcons name='archive' size={30} color='#5C5C5C' />
+                )}
+                label='Archived Receipts'
                 onPress={() => {
                   navigation.navigate("ArchiveReceipt");
                 }}
@@ -74,10 +83,12 @@ const DrawerContent = ({ navigation }) => {
           </View>
         </DrawerContentScrollView>
 
-        <Drawer.Section style={styles.bottomDrawerSection}>
+        <Drawer.Section
+          style={(styles.bottomDrawerSection, { paddingTop: 50 })}
+        >
           <DrawerItem
-            icon={() => <Icon name="exit-to-app" size={25} />}
-            label="Sign Out"
+            icon={() => <Icon name='exit-to-app' size={25} color='#5C5C5C' />}
+            label='Sign Out'
             onPress={() => {
               authStore.signout();
             }}

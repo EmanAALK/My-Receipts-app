@@ -2,12 +2,15 @@ import React, { useState } from "react";
 import { observer } from "mobx-react";
 
 //Styling
-import { InputContainer, TextStyle, PageTitle } from "./styles";
+import { InputContainer, TextStyle, PageTitle, SelectButton } from "./styles";
+import { View } from "native-base";
+
 import { ButtonGroup } from "react-native-elements";
 import { Text, View } from "native-base";
 //Calculater
 import CalculateByFolder from "./CalculateByFolder";
 import CalculateByDate from "./CalculateByDate";
+// import { View } from "react-native-animatable";
 
 const selectColor = "#ffbf00";
 const unSelectColor = "black";
@@ -35,14 +38,17 @@ const Calculation = ({ navigation }) => {
 
   return (
     <>
+      <PageTitle> My Expenses </PageTitle>
       <InputContainer>
+
         <PageTitle> Calculate Your Receipts </PageTitle>
 
         {/* <ButtonGroup
+
           onPress={updateIndex}
           selectedIndex={selectedIndex}
           buttons={[`By Date`, `By Folder`]}
-          containerStyle={{ height: 30, marginTop: 10 }}
+          containerStyle={{ height: 30, width: 220, marginTop: 10 }}
           selectedButtonStyle={{ backgroundColor: "#ffbf00" }}
         /> */}
 

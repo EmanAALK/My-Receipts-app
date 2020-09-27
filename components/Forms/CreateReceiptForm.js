@@ -53,6 +53,8 @@ const CreateReceiptForm = ({ route, navigation }) => {
     });
 
     navigation.navigate("Home"); //What key to give it?
+
+
   };
 
   const folder = folderStore.folders.filter(
@@ -170,4 +172,6 @@ const CreateReceiptForm = ({ route, navigation }) => {
   );
 };
 
+
 export default observer(CreateReceiptForm);
+

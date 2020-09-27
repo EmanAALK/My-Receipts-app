@@ -22,14 +22,15 @@ class ReceiptStore {
 
   createReceipt = async (newReceipt) => {
     try {
+
       console.log(",,,,,,,newReceipt", newReceipt);
       const formData = new FormData();
       for (const key in newReceipt) formData.append(key, newReceipt[key]);
-      console.log(",,,,,,,formData", formData);
+     
 
       const res = await instance.post(
         `/folders/${newReceipt.folderId}/receipts`,
-        formData
+
       );
       const newreceipt = { ...res.data, folder: { userId: authStore.user.id } };
       this.receipts.push(newreceipt);
