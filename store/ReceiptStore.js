@@ -76,11 +76,16 @@ class ReceiptStore {
       .filter((receipt) => receipt.folder.userId === authStore.user.id) //get receipt of this user
       .filter((receipt) => receipt.expDate < dateBeforeWeek); //get receipt that is less than dateBeforeWeek
     const totalExpiredLength = totalExpired.length;
-
-    return totalExpiredLength;
+    let a;
+    let b;
+    {
+      totalExpiredLength == 0
+        ? (a = totalExpiredLength) //no notofication
+        : (b = totalExpiredLength); // notofication
+    }
+    return b;
   }
 }
-
 decorate(ReceiptStore, {
   receipts: observable,
   loading: observable,
