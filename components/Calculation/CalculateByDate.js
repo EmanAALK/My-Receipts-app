@@ -1,38 +1,29 @@
 import React, { useState } from "react";
-
 //Stores
 import receiptStore from "../../store/ReceiptStore";
 import folderStore from "../../store/FolderStore";
 import authStore from "../../store/authStore";
-
 //Styling
-
 import { View, Text, Right, Body, Left, Card, CardItem } from "native-base";
 import { TextStyle } from "./styles";
-
 //Pickers
 import DatePicker from "react-native-datepicker";
 import { ScrollView } from "react-native";
 
 const CalculateByDate = ({ navigation }) => {
-
   if (receiptStore.loading) return <Spinner />;
   if (folderStore.loading) return <Spinner />;
-
 
   const [fromDate, setFromDate] = useState();
   const [toDate, setToDate] = useState();
 
   let total = 0;
-
   const folder = folderStore.folders.filter(
     (folder) => folder.userId === authStore.user.id
   );
-
   const receipt = receiptStore.receipts.filter((receipt) =>
     folder.find((filter) => receipt.folder.id === filter.id)
   );
-
   const receiptList = receipt
     .filter((receipt) => receipt.date >= fromDate && receipt.date <= toDate)
     .map(
@@ -47,7 +38,6 @@ const CalculateByDate = ({ navigation }) => {
               <Body>
                 <Text note>{receipt.date}</Text>
               </Body>
-
               <Right>
                 <Text>{receipt.price}</Text>
               </Right>
@@ -56,7 +46,6 @@ const CalculateByDate = ({ navigation }) => {
         )
       )
     );
-
   return (
     <>
       <ScrollView>
@@ -97,7 +86,6 @@ const CalculateByDate = ({ navigation }) => {
             }}
           />
         </View>
-
         <View
           style={{
             padding: 5,
@@ -148,7 +136,6 @@ const CalculateByDate = ({ navigation }) => {
                 <Text style={{ color: "red" }}>Total Amount</Text>
               </Left>
               <Body></Body>
-
               <Right>
                 <Text style={{ color: "red" }}>{total}</Text>
               </Right>
@@ -159,5 +146,4 @@ const CalculateByDate = ({ navigation }) => {
     </>
   );
 };
-
 export default CalculateByDate;

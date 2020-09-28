@@ -2,7 +2,6 @@ import React, { useState } from "react";
 import { observer } from "mobx-react";
 // component
 import FolderItem from "./FolderItem";
-
 // Styling
 import { ButtonGroup } from "react-native-elements";
 import { List, Spinner, Text, View, ListItem } from "native-base";
@@ -15,6 +14,7 @@ import authStore from "../../store/authStore";
 
 //Icons
 import Icon from "react-native-vector-icons/AntDesign";
+
 import AntDesign from "react-native-vector-icons/AntDesign";
 
 const FolderList = ({ navigation }) => {
@@ -70,7 +70,6 @@ const FolderList = ({ navigation }) => {
       ]);
     } else folderStore.selectedFolders = [];
   };
-
   return (
     <>
       <View style={{ flexDirection: "row" }}>
@@ -83,15 +82,17 @@ const FolderList = ({ navigation }) => {
           style={{ marginTop: 20, marginBottom: 20, marginLeft: 170 }}
         />
       </View>
+
       <Text style={{ marginLeft: 300 }} onPress={handleDelete}>
         {multipul && folderStore.selectedFolders.length > 0
           ? "Delete"
           : "Select"}
       </Text>
+
       {/* <ButtonGroup
-        buttons={[
-          <Text onPress={() => navigation.navigate("CreateFolderForm")}>
-            Add Folder
+         buttons={[
+           <Text onPress={() => navigation.navigate("CreateFolderForm")}>
+             Add Folder
           </Text>,
           <Text>
             <Icon
@@ -101,10 +102,10 @@ const FolderList = ({ navigation }) => {
               size={25}
             />
           </Text>,
-        ]}
-        containerStyle={{ height: 30, marginTop: 10 }}
-        selectedButtonStyle={{ backgroundColor: "grey" }}
-      /> */}
+         ]}
+         containerStyle={{ height: 30, marginTop: 10 }}
+         selectedButtonStyle={{ backgroundColor: "grey" }}
+       /> */}
       <List>{PinList}</List>
       <List>{UnPinList}</List>
     </>

@@ -31,6 +31,7 @@ class ReceiptStore {
         `/folders/${newReceipt.folderId}/receipts`,
         formData
       );
+
       const newreceipt = { ...res.data, folder: { userId: authStore.user.id } };
       this.receipts.push(newreceipt);
       console.log(",,,,,,,res.data", res.data);
@@ -44,7 +45,6 @@ class ReceiptStore {
       const formData = new FormData();
       for (const key in updatedReceipt)
         formData.append(key, updatedReceipt[key]);
-
       await instance.put(`/receipts/${updatedReceipt.id}`, updatedReceipt);
       const receipt = this.receipts.find(
         (receipt) => receipt.id === updatedReceipt.id

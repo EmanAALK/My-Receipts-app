@@ -51,7 +51,6 @@ const CreateReceiptForm = ({ route, navigation }) => {
       ...receipt,
       image: { uri: localUri, name: filename, type },
     });
-
     navigation.navigate("Home"); //What key to give it?
   };
 
