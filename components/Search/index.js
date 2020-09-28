@@ -1,12 +1,10 @@
 import React, { useState } from "react";
 import { observer } from "mobx-react";
 import { SearchBar } from "react-native-elements";
-
 //Stores
 import folderStore from "../../store/FolderStore";
 import authStore from "../../store/authStore";
 import ReceiptStore from "../../store/ReceiptStore";
-
 // Styling
 import PageTitle from "./styles";
 import { View } from "react-native-animatable";
@@ -16,7 +14,6 @@ import SearchByFolder from "./SearchByFolder";
 import SearchByReceipt from "./SearchByReceipt";
 import { Left, Right, Row, Content, Text } from "native-base";
 import DropDownPicker from "react-native-dropdown-picker";
-
 const Search = ({ navigation }) => {
   const [query, setQuery] = useState();
   const [filter, setFilter] = useState(0);
@@ -27,7 +24,6 @@ const Search = ({ navigation }) => {
     { label: "Receipt", value: 2 },
     { label: "Date", value: 3 },
   ];
-
   const searchDate = ReceiptStore.receipts.filter(
     (receipt) => receipt.date === date || receipt.expDate === date
   );
@@ -37,13 +33,11 @@ const Search = ({ navigation }) => {
   const searchFolder = folder.filter((folder) =>
     folder.name.toLowerCase().includes(query)
   );
-
   const searchReceipt = ReceiptStore.receipts.filter((receipt) =>
     receipt.name.toLowerCase().includes(query)
   );
   const handleSearch = (text) => {
     const formatQuery = text.toLowerCase();
-
     setQuery(formatQuery);
   };
 
@@ -89,7 +83,6 @@ const Search = ({ navigation }) => {
             </View>
           )}
         </View>
-
         <DropDownPicker
           automaticallyAdjustContentInsets={false}
           style={{
@@ -124,14 +117,12 @@ const Search = ({ navigation }) => {
                     navigation={navigation}
                   />
                 )}
-
                 {(filter === 0 || filter === 2) && (
                   <SearchByReceipt
                     searchReceipt={searchReceipt}
                     navigation={navigation}
                   />
                 )}
-
                 {filter === 3 && (
                   <SearchByReceipt
                     searchReceipt={searchDate}
@@ -146,5 +137,4 @@ const Search = ({ navigation }) => {
     </>
   );
 };
-
 export default observer(Search);

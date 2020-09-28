@@ -25,7 +25,6 @@ import DropDownPicker from "react-native-dropdown-picker";
 import { Alert } from "react-native";
 import Menu, { MenuItem, MenuDivider } from "react-native-material-menu";
 import RNPickerSelect from "react-native-picker-select";
-
 const ReceiptItem = ({ receipt, navigation, multipul }) => {
   const [isChecked, setIsChecked] = useState(multipul);
   const [updatedReceipt, setUpdatedReceipt] = useState(receipt);

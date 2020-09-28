@@ -1,18 +1,26 @@
 import React, { useState } from "react";
 import { observer } from "mobx-react";
-
 //Stores
 import folderStore from "../../store/FolderStore";
 import authStore from "../../store/authStore";
 
-//Styling
-
 import { View } from "react-native-animatable";
+
 import { Alert, ShadowStyleIOS } from "react-native";
 import { IconStyled, BorderView } from "./styles";
 import { Card, List, TextInput } from "react-native-paper";
 import Menu, { MenuItem, MenuDivider } from "react-native-material-menu";
-import { Body, CardItem, Left, Right, Row, Text, ListItem ,Thumbnail} from "native-base";
+
+import {
+  Body,
+  CardItem,
+  Left,
+  Right,
+  Row,
+  Text,
+  ListItem,
+  Thumbnail,
+} from "native-base";
 import defaultimage from "../../assets/defaultimageFolder2.png";
 import { CheckBox } from "react-native-elements";
 import Icon from "react-native-vector-icons/AntDesign";
@@ -21,8 +29,6 @@ import Icon from "react-native-vector-icons/AntDesign";
 import Entypo from "react-native-vector-icons/Entypo";
 import AntDesign from "react-native-vector-icons/AntDesign";
 
-
-
 const color = "#ffbf00";
 
 const FolderItem = ({ folder, navigation, multipul }) => {
@@ -30,11 +36,9 @@ const FolderItem = ({ folder, navigation, multipul }) => {
   const [pin, setPin] = useState(pin);
   const [edit, setEdit] = useState(false);
   const [updatedFolder, setUpdatedFolder] = useState(folder);
-
   const PinList = folderStore.folders
     .filter((folder) => folder.userId === authStore.user.id)
     .filter((folder) => folder.pin == true);
-
   const handleChecked = () => {
     setIsChecked(!isChecked);
     if (!isChecked) {
@@ -44,16 +48,13 @@ const FolderItem = ({ folder, navigation, multipul }) => {
         (item) => item.id !== folder.id
       );
   };
-
   let menu = null;
-
   const setMenuRef = (ref) => {
     menu = ref;
   };
   const showMenu = () => {
     menu.show();
   };
-
   const handleSubmit = async () => {
     menu.hide();
     await folderStore.updateFolder(updatedFolder);
@@ -121,7 +122,6 @@ const FolderItem = ({ folder, navigation, multipul }) => {
           ) : (
             <AntDesign name="folderopen" size={20} color="#ffbf00" />
           )}
-
           {edit ? (
             <>
               <TextInput
@@ -154,6 +154,7 @@ const FolderItem = ({ folder, navigation, multipul }) => {
             </Text>
           )}
         </Left>
+
         {folder.pin && (
           <Icon
             type="pushpin"
@@ -163,7 +164,6 @@ const FolderItem = ({ folder, navigation, multipul }) => {
             onPress={handleChange}
           />
         )}
-
         {!folder.defaultFolder && (
           <Menu
             ref={setMenuRef}
@@ -183,6 +183,7 @@ const FolderItem = ({ folder, navigation, multipul }) => {
                 {folder.pin ? "Unpin" : "Pin"}
               </MenuItem>
             )}
+
             <MenuItem onPress={handleEdit}>Rename</MenuItem>
 
             <MenuItem onPress={deleteAlert}>Delete</MenuItem>
@@ -192,5 +193,4 @@ const FolderItem = ({ folder, navigation, multipul }) => {
     </Card>
   );
 };
-
 export default observer(FolderItem);

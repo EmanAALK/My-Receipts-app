@@ -22,7 +22,6 @@ import {
 import { View } from "react-native-animatable";
 import Icon from "react-native-vector-icons/Feather";
 import { Alert } from "react-native";
-
 const ReceiptList = ({ navigation, route }) => {
   if (receiptStore.loading) return <Spinner />;
 
