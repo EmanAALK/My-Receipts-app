@@ -18,7 +18,10 @@ const ReceiptItem = ({ folder, navigation }) => {
 
   const renderItem = ({ item }) => {
     return (
-      <Table borderStyle={{ borderWidth: 1, borderColor: "lightgrey" }}>
+      <Table
+        borderStyle={{ borderWidth: 1, borderColor: "lightgrey" }}
+        style={{ width: 350 }}
+      >
         <Row
           data={[item.name, item.price]}
           style={{
@@ -34,7 +37,10 @@ const ReceiptItem = ({ folder, navigation }) => {
   return (
     <>
       <Text style={{ margin: 10 }}>Folder: {folder.name}</Text>
-      <Table borderStyle={{ borderWidth: 1, borderColor: "lightgrey" }}>
+      <Table
+        borderStyle={{ borderWidth: 1, borderColor: "lightgrey" }}
+        style={{ width: 350 }}
+      >
         <Row
           data={["Store", "price"]}
           style={{

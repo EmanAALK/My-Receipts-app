@@ -6,18 +6,23 @@ import folderStore from "../../store/FolderStore";
 import authStore from "../../store/authStore";
 
 //Styling
-import { Card, List, TextInput } from "react-native-paper";
-import { IconStyled } from "./styles";
-import { Body, CardItem, Left, Right, Row, Text, Thumbnail } from "native-base";
+
 import { View } from "react-native-animatable";
-import Icon from "react-native-vector-icons/AntDesign";
-import Entypo from "react-native-vector-icons/Entypo";
+import { Alert, ShadowStyleIOS } from "react-native";
+import { IconStyled, BorderView } from "./styles";
+import { Card, List, TextInput } from "react-native-paper";
 import Menu, { MenuItem, MenuDivider } from "react-native-material-menu";
-import { Alert } from "react-native";
+import { Body, CardItem, Left, Right, Row, Text, ListItem ,Thumbnail} from "native-base";
 import defaultimage from "../../assets/defaultimageFolder2.png";
 import { CheckBox } from "react-native-elements";
+import Icon from "react-native-vector-icons/AntDesign";
 
+//Icons
+import Entypo from "react-native-vector-icons/Entypo";
 import AntDesign from "react-native-vector-icons/AntDesign";
+
+
+
 const color = "#ffbf00";
 
 const FolderItem = ({ folder, navigation, multipul }) => {
@@ -79,7 +84,7 @@ const FolderItem = ({ folder, navigation, multipul }) => {
 
   const maxAlert = () => {
     {
-      folder.pin === false
+      !folder.pin
         ? Alert.alert("Alert", "You can pin 2 folders only", [
             {
               text: "Ok",
@@ -91,6 +96,8 @@ const FolderItem = ({ folder, navigation, multipul }) => {
   };
 
   const handleChange = async () => {
+    menu.hide();
+
     await folderStore.updateFolder({ ...folder, pin: !folder.pin });
   };
 
@@ -98,7 +105,7 @@ const FolderItem = ({ folder, navigation, multipul }) => {
     <Card style={{ marginTop: 5, width: "94%", alignSelf: "center" }}>
       <CardItem>
         <Left>
-          {multipul && (
+          {multipul && !folder.defaultFolder && (
             <CheckBox
               checkedIcon="dot-circle-o"
               checkedColor="grey"
@@ -128,8 +135,7 @@ const FolderItem = ({ folder, navigation, multipul }) => {
                 }
                 placeholder={folder.name}
               />
-              {/* {folder.name} */}
-              {/* </TextInput> */}
+
               <AntDesign
                 name="edit"
                 size={20}
@@ -148,7 +154,6 @@ const FolderItem = ({ folder, navigation, multipul }) => {
             </Text>
           )}
         </Left>
-        {/* <Body></Body> */}
         {folder.pin && (
           <Icon
             type="pushpin"
@@ -178,7 +183,7 @@ const FolderItem = ({ folder, navigation, multipul }) => {
                 {folder.pin ? "Unpin" : "Pin"}
               </MenuItem>
             )}
-            <MenuItem onPress={handleEdit}>rename</MenuItem>
+            <MenuItem onPress={handleEdit}>Rename</MenuItem>
 
             <MenuItem onPress={deleteAlert}>Delete</MenuItem>
           </Menu>

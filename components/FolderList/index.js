@@ -6,6 +6,7 @@ import FolderItem from "./FolderItem";
 // Styling
 import { ButtonGroup } from "react-native-elements";
 import { List, Spinner, Text, View, ListItem } from "native-base";
+import { Alert } from "react-native";
 import { PageTitle } from "./styles";
 
 // store
@@ -14,23 +15,30 @@ import authStore from "../../store/authStore";
 
 //Icons
 import Icon from "react-native-vector-icons/AntDesign";
-import { Alert } from "react-native";
 import AntDesign from "react-native-vector-icons/AntDesign";
 
 const FolderList = ({ navigation }) => {
   if (folderStore.loading) return <Spinner />;
+
   const [multipul, setMultipul] = useState(false);
+
   const PinList = folderStore.folders
     .filter((folder) => folder.userId === authStore.user.id)
-    .filter((folder) => folder.pin == true || folder.defaultFolder === true)
+    .filter((folder) => folder.pin || folder.defaultFolder)
     .map((folder) => (
-      <FolderItem folder={folder} key={folder.id} navigation={navigation} />
+      <FolderItem
+        folder={folder}
+        key={folder.id}
+        navigation={navigation}
+        multipul={multipul}
+      />
     ));
+
   // console.log("list", PinList);
   // console.log("length", PinList.length);
   const UnPinList = folderStore.folders
     .filter((folder) => folder.userId === authStore.user.id)
-    .filter((folder) => folder.pin == false && !folder.defaultFolder)
+    .filter((folder) => !folder.pin && !folder.defaultFolder)
     .map((folder) => (
       <FolderItem
         folder={folder}
@@ -46,6 +54,7 @@ const FolderList = ({ navigation }) => {
   };
   const handleDelete = () => {
     setMultipul(!multipul);
+
     if (multipul && folderStore.selectedFolders.length !== 0) {
       Alert.alert("Delete", "Are you sure you want to delete this folder?", [
         {
@@ -74,13 +83,12 @@ const FolderList = ({ navigation }) => {
           style={{ marginTop: 20, marginBottom: 20, marginLeft: 170 }}
         />
       </View>
-
       <Text style={{ marginLeft: 300 }} onPress={handleDelete}>
         {multipul && folderStore.selectedFolders.length > 0
           ? "Delete"
           : "Select"}
       </Text>
-      <ButtonGroup
+      {/* <ButtonGroup
         buttons={[
           <Text onPress={() => navigation.navigate("CreateFolderForm")}>
             Add Folder
@@ -96,7 +104,7 @@ const FolderList = ({ navigation }) => {
         ]}
         containerStyle={{ height: 30, marginTop: 10 }}
         selectedButtonStyle={{ backgroundColor: "grey" }}
-      />
+      /> */}
       <List>{PinList}</List>
       <List>{UnPinList}</List>
     </>

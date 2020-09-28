@@ -13,11 +13,9 @@ const MyTheme = {
 
 const App = () => {
   return (
-
     <NavigationContainer theme={MyTheme}>
       <RootNavigator style={{ backgroundColor: "red" }} />
     </NavigationContainer>
-
   );
 };
 export default App;

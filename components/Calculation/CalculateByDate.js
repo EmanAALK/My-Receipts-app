@@ -15,6 +15,11 @@ import DatePicker from "react-native-datepicker";
 import { ScrollView } from "react-native";
 
 const CalculateByDate = ({ navigation }) => {
+
+  if (receiptStore.loading) return <Spinner />;
+  if (folderStore.loading) return <Spinner />;
+
+
   const [fromDate, setFromDate] = useState();
   const [toDate, setToDate] = useState();
 

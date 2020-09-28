@@ -10,10 +10,10 @@ import { Text, View } from "native-base";
 //Calculater
 import CalculateByFolder from "./CalculateByFolder";
 import CalculateByDate from "./CalculateByDate";
-// import { View } from "react-native-animatable";
 
 const selectColor = "#ffbf00";
 const unSelectColor = "black";
+
 const Calculation = ({ navigation }) => {
   const [dateColor, setDateColor] = useState(selectColor);
   const [folderColor, setFolderColor] = useState(unSelectColor);
@@ -33,11 +33,10 @@ const Calculation = ({ navigation }) => {
   };
 
   return (
-    <>
+    <View style={{ alignItems: "center" }}>
       <PageTitle> My Expenses </PageTitle>
       <InputContainer>
         <PageTitle> Calculate Your Receipts </PageTitle>
-
         {/* <ButtonGroup
 
            onPress={updateIndex}
@@ -75,7 +74,7 @@ const Calculation = ({ navigation }) => {
       </InputContainer>
       {selectedIndex === 0 && <CalculateByDate navigation={navigation} />}
       {selectedIndex === 1 && <CalculateByFolder navigation={navigation} />}
-    </>
+    </View>
   );
 };
 export default observer(Calculation);
