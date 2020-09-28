@@ -1,14 +1,11 @@
 import React, { useState } from "react";
 import { observer } from "mobx-react";
-
 //Components
 import ReceiptItem from "./ReceiptItem";
-
 //Stores
 import folderStore from "../../store/FolderStore";
 import receiptStore from "../../store/ReceiptStore";
 import authStore from "../../store/authStore";
-
 //Styles
 import {
   Content,
@@ -28,9 +25,11 @@ const ReceiptList = ({ navigation, route }) => {
 
   const [multipul, setMultipul] = useState(false);
 
+  if (receiptStore.loading) return <Spinner />;
   const { folder } = route.params;
 
   const receiptList = receiptStore.receipts
+    .filter((receipt) => receipt.folder.id === folder.id)
     .filter((receipt) => receipt.folderId === folder.id)
     .filter((item) => !item.archive)
     .map((receipt) => (
@@ -43,16 +42,13 @@ const ReceiptList = ({ navigation, route }) => {
         />
       </>
     ));
-
   const deleteReceipt = () => {
     receiptStore.selectedReceipts.map((receipt) => {
       receiptStore.deleteReceipt(receipt.id);
     });
   };
-
   const handleDelete = () => {
     setMultipul(!multipul);
-
     if (multipul && receiptStore.selectedReceipts.length !== 0) {
       Alert.alert("Delete", "Are you sure you want to delete this receipt?", [
         {
@@ -68,7 +64,6 @@ const ReceiptList = ({ navigation, route }) => {
       ]);
     } else receiptStore.selectedReceipts = [];
   };
-
   return (
     <>
       <Text style={{ marginLeft: 300 }} onPress={handleDelete}>
@@ -76,12 +71,10 @@ const ReceiptList = ({ navigation, route }) => {
           ? "Delete"
           : "Select"}
       </Text>
-
       <Content style={{ backgroundColor: "white" }}>
         <List>{receiptList}</List>
       </Content>
     </>
   );
 };
-
 export default observer(ReceiptList);

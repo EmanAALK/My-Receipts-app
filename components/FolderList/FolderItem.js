@@ -6,12 +6,13 @@ import folderStore from "../../store/FolderStore";
 import authStore from "../../store/authStore";
 
 //Styling
+
 import { View } from "react-native-animatable";
 import { Alert, ShadowStyleIOS } from "react-native";
 import { IconStyled, BorderView } from "./styles";
 import { Card, List, TextInput } from "react-native-paper";
 import Menu, { MenuItem, MenuDivider } from "react-native-material-menu";
-import { Body, CardItem, Left, Right, Row, Text, ListItem } from "native-base";
+import { Body, CardItem, Left, Right, Row, Text, ListItem ,Thumbnail} from "native-base";
 import defaultimage from "../../assets/defaultimageFolder2.png";
 import { CheckBox } from "react-native-elements";
 import Icon from "react-native-vector-icons/AntDesign";
@@ -19,6 +20,8 @@ import Icon from "react-native-vector-icons/AntDesign";
 //Icons
 import Entypo from "react-native-vector-icons/Entypo";
 import AntDesign from "react-native-vector-icons/AntDesign";
+
+
 
 const color = "#ffbf00";
 
