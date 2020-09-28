@@ -50,9 +50,19 @@ const Notifications = ({ navigation }) => {
     ));
   return (
     <View style={{ marginTop: 30, marginBottom: 30 }}>
-      <Text> Warranty/ies that will expire within 7 days: </Text>
-
-      <List>{isExpired}</List>
+      <Text
+        style={{
+          alignItems: "center",
+        }}
+      >
+        {" "}
+        Receipts Expiring in Seven Days:{" "}
+      </Text>
+      {isExpired.length === 0 ? (
+        <Text> No receipts</Text>
+      ) : (
+        <List>{isExpired}</List>
+      )}
     </View>
   );
 };

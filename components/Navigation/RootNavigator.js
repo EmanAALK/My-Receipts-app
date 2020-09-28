@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { createDrawerNavigator } from "@react-navigation/drawer";
 import { createMaterialBottomTabNavigator } from "@react-navigation/material-bottom-tabs";
 import { observer } from "mobx-react";
@@ -30,11 +30,6 @@ const Drawer = createDrawerNavigator();
 const Tab = createMaterialBottomTabNavigator();
 // const color = "#427aa1";
 const a = 1;
-// const [count, setCount] = useState(0);
-// const handleCancel = async () => {
-//   setCount(count + 1);
-// };
-
 const color = "#C2C2C2";
 
 const TabScreen = observer(() => (
@@ -105,51 +100,26 @@ const TabScreen = observer(() => (
       }}
     />
 
-    {a == 1 ? (
-      <Tab.Screen
-        name="Notifications"
-        component={NotificationStackscreen}
-        options={{
-          backgroundColor: "white",
-          showLabel: false,
-          title: false,
-          tabBarIcon: ({ color }) => (
-            <>
-              <Badge
-                badgeStyle={{ marginLeft: 25 }}
-                value={receiptStore.totalExpiredReceipt}
-                status="error"
-                containerStyle={{ position: "absolute", top: -3, right: -12 }}
-              />
-              <Icon
-                // onPress={handleCancel}
-                name="ios-notifications"
-                color={color}
-                size={26}
-              />
-            </>
-          ),
-        }}
-      />
-    ) : (
-      <Tab.Screen
-        name="Notifications"
-        component={NotificationStackscreen}
-        options={{
-          backgroundColor: "white",
-          showLabel: false,
-          title: false,
-          tabBarIcon: ({ color }) => (
-            <Icon
-              // onPress={handleCancel}
-              name="ios-notifications"
-              color={"#C2C2C2"}
-              size={26}
+    <Tab.Screen
+      name="Notifications"
+      component={NotificationStackscreen}
+      options={{
+        backgroundColor: "white",
+        showLabel: false,
+        title: false,
+        tabBarIcon: ({ color }) => (
+          <>
+            <Badge
+              badgeStyle={{ marginLeft: 25 }}
+              value={receiptStore.totalExpiredReceipt}
+              status="error"
+              containerStyle={{ position: "absolute", top: -3, right: -12 }}
             />
-          ),
-        }}
-      />
-    )}
+            <Icon name="ios-notifications" color={color} size={26} />
+          </>
+        ),
+      }}
+    />
   </Tab.Navigator>
 ));
 const RootNavigator = () => {

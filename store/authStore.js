@@ -1,4 +1,4 @@
-import { decorate, observable } from "mobx";
+import { decorate, observable, computed } from "mobx";
 import instance from "./instance";
 import decode from "jwt-decode";
 import Axios from "axios";
@@ -42,6 +42,12 @@ class AuthStore {
     AsyncStorage.removeItem("myToken");
   };
 
+  get getTime() {
+    const time = new Date();
+    const curHr = time.getHours();
+    return curHr;
+  }
+
   checkForToken = async () => {
     const token = await AsyncStorage.getItem("myToken");
     if (token) {
@@ -71,6 +77,7 @@ class AuthStore {
 decorate(AuthStore, {
   user: observable,
   loading: observable,
+  getTime: computed,
 });
 const authStore = new AuthStore();
 authStore.checkForToken();

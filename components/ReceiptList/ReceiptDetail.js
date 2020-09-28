@@ -15,14 +15,20 @@ const ReceiptDetail = ({ route, navigation }) => {
   const folder = folderStore.folders.find(
     (folder) => folder.id === receipt.folderId
   );
+
+  // console.log("receipt check", receipt);
+  console.log("folder check", folder);
   return (
     <>
       <Card>
         <Card.Title>{receipt.name}</Card.Title>
         <Card.Divider />
         <Card.Image source={{ uri: receipt.image }} />
-        <Text style={{ marginBottom: 10 }}>
-          Created at: {receipt.createdAt}
+        <Text
+          style={{ marginBottom: 10 }}
+          onPress={() => navigation.navigate("ReceiptList", { folder: folder })}
+        >
+          At Folder: {folder.name}
         </Text>
         <Text style={{ marginBottom: 10 }}>
           Date of purchase: {receipt.date}
