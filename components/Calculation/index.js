@@ -2,8 +2,8 @@ import React, { useState } from "react";
 import { observer } from "mobx-react";
 
 //Styling
+
 import { InputContainer, TextStyle, PageTitle, SelectButton } from "./styles";
-import { View } from "native-base";
 
 import { ButtonGroup } from "react-native-elements";
 import { Text, View } from "native-base";
@@ -17,19 +17,15 @@ const unSelectColor = "black";
 const Calculation = ({ navigation }) => {
   const [dateColor, setDateColor] = useState(selectColor);
   const [folderColor, setFolderColor] = useState(unSelectColor);
-
   const [selectedIndex, setSelectedIndex] = useState(0);
-
   const updateIndex = (selectedIndex) => {
     setSelectedIndex(selectedIndex);
   };
-
   const handleDateChange = () => {
     setDateColor(selectColor);
     setFolderColor(unSelectColor);
     setSelectedIndex(0);
   };
-
   const handleFolderChange = () => {
     setDateColor(unSelectColor);
     setFolderColor(selectColor);
@@ -40,17 +36,17 @@ const Calculation = ({ navigation }) => {
     <>
       <PageTitle> My Expenses </PageTitle>
       <InputContainer>
-
         <PageTitle> Calculate Your Receipts </PageTitle>
 
         {/* <ButtonGroup
 
-          onPress={updateIndex}
-          selectedIndex={selectedIndex}
-          buttons={[`By Date`, `By Folder`]}
-          containerStyle={{ height: 30, width: 220, marginTop: 10 }}
-          selectedButtonStyle={{ backgroundColor: "#ffbf00" }}
-        /> */}
+           onPress={updateIndex}
+           selectedIndex={selectedIndex}
+           buttons={[`By Date`, `By Folder`]}
+           containerStyle={{ height: 30, marginTop: 10 }}
+           containerStyle={{ height: 30, width: 220, marginTop: 10 }}
+           selectedButtonStyle={{ backgroundColor: "#ffbf00" }}
+         /> */}
 
         <View style={{ flexDirection: "row", marginTop: 20, marginBottom: 10 }}>
           <Text
@@ -78,10 +74,8 @@ const Calculation = ({ navigation }) => {
         </View>
       </InputContainer>
       {selectedIndex === 0 && <CalculateByDate navigation={navigation} />}
-
       {selectedIndex === 1 && <CalculateByFolder navigation={navigation} />}
     </>
   );
 };
-
 export default observer(Calculation);
