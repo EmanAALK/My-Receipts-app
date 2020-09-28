@@ -19,6 +19,7 @@ export const InputContainer = styled.View`
   align-self: stretch;
   padding-left: 14px;
   margin-bottom: 18px;
+  align-self: center;
 `;
 
 export const Total = styled.Text`

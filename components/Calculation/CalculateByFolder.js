@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { observer } from "mobx-react";
 
-import { Text } from "native-base";
+import { Text, View } from "native-base";
 
 import receiptStore from "../../store/ReceiptStore";
 import folderStore from "../../store/FolderStore";
@@ -10,6 +10,7 @@ import DropDownPicker from "react-native-dropdown-picker";
 import FolderItem from "./FolderItem";
 import { ScrollView } from "react-native";
 import { Table, Row } from "react-native-table-component";
+// import { View } from "react-native-animatable";
 
 const CalculateByFolder = ({ navigation }) => {
   const [filter, setFilter] = useState([]);
@@ -38,40 +39,45 @@ const CalculateByFolder = ({ navigation }) => {
   const amount = receipt.map((receipt) => (total = total + receipt.price));
   return (
     <>
+      <Text style={{ marginTop: 0, marginLeft: 30 }}> Folder :</Text>
+      <DropDownPicker
+        multiple={true}
+        items={items}
+        labelStyle={{
+          fontSize: 14,
+          textAlign: "left",
+          color: "#000",
+        }}
+        containerStyle={{
+          height: 35,
+          marginTop: -25,
+          // marginLeft: 15,
+          width: 200,
+          marginBottom: 5,
+          alignSelf: "center",
+        }}
+        style={{
+          backgroundColor: "white",
+          paddingVertical: 0,
+        }}
+        itemStyle={{
+          justifyContent: "flex-start",
+        }}
+        multiple={true}
+        multipleText="%d items have been selected."
+        dropDownStyle={{ backgroundColor: "#fafafa" }}
+        onChangeItem={(item) => setFilter(item)}
+      ></DropDownPicker>
+
       <ScrollView>
-        <Text style={{ marginTop: 10, marginLeft: 30 }}>Folder :</Text>
-
-        <DropDownPicker
-          multiple={true}
-          items={items}
-          labelStyle={{
-            fontSize: 14,
-            textAlign: "left",
-            color: "#000",
-          }}
-          containerStyle={{
-            height: 35,
-            marginTop: -25,
-            marginLeft: 15,
-            width: 200,
-            alignSelf: "center",
-          }}
-          style={{
-            backgroundColor: "white",
-            paddingVertical: 0,
-          }}
-          itemStyle={{
-            justifyContent: "flex-start",
-          }}
-          multiple={true}
-          multipleText="%d items have been selected."
-          dropDownStyle={{ backgroundColor: "#fafafa" }}
-          onChangeItem={(item) => setFilter(item)}
-        ></DropDownPicker>
-
         {folderList}
         {filter !== [] && (
-          <Table borderStyle={{ borderWidth: 1, borderColor: "lightgrey" }}>
+          <Table
+            borderStyle={{
+              borderWidth: 1,
+              borderColor: "lightgrey",
+            }}
+          >
             <Row
               data={["Total Amount", total]}
               style={{

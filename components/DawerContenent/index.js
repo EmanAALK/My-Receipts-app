@@ -2,7 +2,13 @@ import React from "react";
 import { observer } from "mobx-react";
 
 //Drawer
-import { Title, Drawer } from "react-native-paper";
+import {
+  Title,
+  Drawer,
+  Switch,
+  TouchableRipple,
+  Text,
+} from "react-native-paper";
 import { DrawerContentScrollView, DrawerItem } from "@react-navigation/drawer";
 
 //Styling
@@ -52,9 +58,9 @@ const DrawerContent = ({ navigation }) => {
             <Drawer.Section style={styles.drawerSection}>
               <DrawerItem
                 icon={() => (
-                  <Icon name='account-outline' color='#5C5C5C' size={25} />
+                  <Icon name="account-outline" color="#5C5C5C" size={25} />
                 )}
-                label='Profile'
+                label="Profile"
                 onPress={() => {
                   navigation.navigate("Profile");
                 }}
@@ -62,8 +68,8 @@ const DrawerContent = ({ navigation }) => {
             </Drawer.Section>
             <Drawer.Section style={styles.drawerSection}>
               <DrawerItem
-                icon={() => <Icon name='receipt' color='#5C5C5C' size={25} />}
-                label='Expenses Calculator'
+                icon={() => <Icon name="receipt" color="#5C5C5C" size={25} />}
+                label="Expenses Calculator"
                 onPress={() => {
                   navigation.navigate("Calculation");
                 }}
@@ -72,9 +78,9 @@ const DrawerContent = ({ navigation }) => {
             <Drawer.Section style={styles.drawerSection}>
               <DrawerItem
                 icon={() => (
-                  <EvilIcons name='archive' size={30} color='#5C5C5C' />
+                  <EvilIcons name="archive" size={30} color="#5C5C5C" />
                 )}
-                label='Archived Receipts'
+                label="Archived Receipts"
                 onPress={() => {
                   navigation.navigate("ArchiveReceipt");
                 }}
@@ -87,8 +93,8 @@ const DrawerContent = ({ navigation }) => {
           style={(styles.bottomDrawerSection, { paddingTop: 50 })}
         >
           <DrawerItem
-            icon={() => <Icon name='exit-to-app' size={25} color='#5C5C5C' />}
-            label='Sign Out'
+            icon={() => <Icon name="exit-to-app" size={25} color="#5C5C5C" />}
+            label="Sign Out"
             onPress={() => {
               authStore.signout();
             }}

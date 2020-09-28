@@ -9,20 +9,16 @@ import authStore from "../../store/authStore";
 import { View } from "react-native-animatable";
 import { Alert, ShadowStyleIOS } from "react-native";
 import { IconStyled, BorderView } from "./styles";
-import { Body, Left, Right, Text, ListItem } from "native-base";
 import { Card, List, TextInput } from "react-native-paper";
 import Menu, { MenuItem, MenuDivider } from "react-native-material-menu";
-import { Body, CardItem, Left, Right, Row, Text, Thumbnail } from "native-base";
+import { Body, CardItem, Left, Right, Row, Text, ListItem } from "native-base";
 import defaultimage from "../../assets/defaultimageFolder2.png";
 import { CheckBox } from "react-native-elements";
-
+import Icon from "react-native-vector-icons/AntDesign";
 
 //Icons
-import Icon from "react-native-vector-icons/Feather";
-import Icon from "react-native-vector-icons/AntDesign";
 import Entypo from "react-native-vector-icons/Entypo";
 import AntDesign from "react-native-vector-icons/AntDesign";
-
 
 const color = "#ffbf00";
 
@@ -83,10 +79,9 @@ const FolderItem = ({ folder, navigation, multipul }) => {
     ]);
   };
 
-
   const maxAlert = () => {
     {
-      folder.pin === false
+      !folder.pin
         ? Alert.alert("Alert", "You can pin 2 folders only", [
             {
               text: "Ok",
@@ -97,67 +92,17 @@ const FolderItem = ({ folder, navigation, multipul }) => {
     }
   };
 
-
   const handleChange = async () => {
+    menu.hide();
+
     await folderStore.updateFolder({ ...folder, pin: !folder.pin });
   };
 
   return (
-
-    <ListItem
-      style={{ backgroundColor: "white", marginRight: 14, marginLeft: 14 }}
-    >
-      <Left>
-        {folder.defaultFolder ? (
-          <AntDesign
-            name='folder1'
-            size={20}
-            color='#ffbf00'
-            style={{ marginLeft: 10 }}
-          />
-        ) : (
-          <AntDesign
-            name='folder1'
-            size={20}
-            color='#ffbf00'
-            style={{ marginLeft: 10 }}
-          />
-        )}
-        <Text
-          style={{ marginLeft: 10 }}
-          onPress={() => navigation.navigate("ReceiptList", { folder: folder })}
-        >
-          {folder.name}
-        </Text>
-      </Left>
-
-      {!folder.defaultFolder && (
-        <Right style={{ flexDirection: "row" }}>
-          <Icon
-            onPress={deleteAlert}
-            name='trash-2'
-            fontSize={15}
-            color='red'
-          />
-
-          <Icon
-            onPress={() =>
-              navigation.navigate("UpdateFolderForm", { oldFolder: folder })
-            }
-            name='edit-2'
-            fontSize={15}
-          />
-          <IconStyled onPress={handleChange}>
-            <IconStyled type='AntDesign' name='pushpino' size='5' />
-          </IconStyled>
-        </Right>
-      )}
-    </ListItem>
-
     <Card style={{ marginTop: 5, width: "94%", alignSelf: "center" }}>
       <CardItem>
         <Left>
-          {multipul && (
+          {multipul && !folder.defaultFolder && (
             <CheckBox
               checkedIcon="dot-circle-o"
               checkedColor="grey"
@@ -187,8 +132,7 @@ const FolderItem = ({ folder, navigation, multipul }) => {
                 }
                 placeholder={folder.name}
               />
-              {/* {folder.name} */}
-              {/* </TextInput> */}
+
               <AntDesign
                 name="edit"
                 size={20}
@@ -207,7 +151,6 @@ const FolderItem = ({ folder, navigation, multipul }) => {
             </Text>
           )}
         </Left>
-        {/* <Body></Body> */}
         {folder.pin && (
           <Icon
             type="pushpin"
@@ -237,14 +180,13 @@ const FolderItem = ({ folder, navigation, multipul }) => {
                 {folder.pin ? "Unpin" : "Pin"}
               </MenuItem>
             )}
-            <MenuItem onPress={handleEdit}>rename</MenuItem>
+            <MenuItem onPress={handleEdit}>Rename</MenuItem>
 
             <MenuItem onPress={deleteAlert}>Delete</MenuItem>
           </Menu>
         )}
       </CardItem>
     </Card>
-
   );
 };
 

@@ -26,7 +26,6 @@ import { Alert } from "react-native";
 import Menu, { MenuItem, MenuDivider } from "react-native-material-menu";
 import RNPickerSelect from "react-native-picker-select";
 
-
 const ReceiptItem = ({ receipt, navigation, multipul }) => {
   const [isChecked, setIsChecked] = useState(multipul);
   const [updatedReceipt, setUpdatedReceipt] = useState(receipt);
@@ -74,17 +73,6 @@ const ReceiptItem = ({ receipt, navigation, multipul }) => {
     ]);
   };
   return (
-    <>
-      <ListItem
-        onPress={() =>
-          navigation.navigate("ReceiptDetail", { receipt: receipt })
-        }
-      >
-        <>
-          <Left>
-            <Icon name='receipt' size={25} color='lightgrey' />
-            <Text style={{ paddingLeft: 20 }}>{receipt.name}</Text>
-          </Left>
     <ListItem
       onPress={() => navigation.navigate("ReceiptDetail", { receipt: receipt })}
     >

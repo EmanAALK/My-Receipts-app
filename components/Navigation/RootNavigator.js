@@ -18,12 +18,13 @@ import HomeStackScreen from "./HomeStackScreen";
 import NotificationStackscreen from "./NotificationStackscreen";
 import AddReceiptStackScreen from "./AddReceiptStackscreen";
 import receiptStore from "../../store/ReceiptStore";
-
+import SearchStackScreen from "./SearchStackscreen";
 //Icons
 import SimpleLineIcons from "react-native-vector-icons/SimpleLineIcons";
 import MaterialCommunityIcons from "react-native-vector-icons/MaterialCommunityIcons";
 import AntDesign from "react-native-vector-icons/AntDesign";
 import Ionicons from "react-native-vector-icons/Ionicons";
+import Icon from "react-native-vector-icons/Ionicons";
 
 const Drawer = createDrawerNavigator();
 const Tab = createMaterialBottomTabNavigator();
@@ -36,12 +37,11 @@ const a = 1;
 
 const color = "#C2C2C2";
 
-
 const TabScreen = observer(() => (
   <Tab.Navigator
-    initialRouteName='Home'
-    color='#C3C3C3'
-    activeColor='#ffbf00'
+    initialRouteName="Home"
+    color="#C3C3C3"
+    activeColor="#ffbf00"
     barStyle={{ backgroundColor: "white", height: 70 }}
     initialRouteName="Home"
   >
@@ -55,27 +55,29 @@ const TabScreen = observer(() => (
 
         tabBarIcon: ({ color }) => (
           // <Icon name='ios-home' activeColor='#ffbf00' color={color} size={26} />
-          <SimpleLineIcons
-            name='home'
-            activeColor='#ffbf00'
-            color={color}
-            size={23}
-          />
-          <Icon name="ios-home" color={"#C2C2C2"} size={26} />
+          <>
+            <SimpleLineIcons
+              name="home"
+              activeColor="#ffbf00"
+              color={color}
+              size={23}
+            />
+            {/* <Icon name="ios-home" color={"#C2C2C2"} size={26} /> */}
+          </>
         ),
       }}
     />
 
     <Tab.Screen
-      name='Search'
-      component={Search}
+      name="Search"
+      component={SearchStackScreen}
       options={{
         backgroundColor: "white",
         showLabel: "Search",
         title: "Search",
         tabBarIcon: ({ color }) => (
           <>
-            <AntDesign name='search1' color={color} size={23} />
+            <AntDesign name="search1" color={color} size={23} />
           </>
         ),
       }}
@@ -91,17 +93,17 @@ const TabScreen = observer(() => (
         backgroundColor: color,
 
         tabBarIcon: ({ color }) => (
-          <MaterialCommunityIcons
-            name='camera-plus-outline'
-            color={color}
-            size={23}
-          />
-          <Icon name="md-camera" color={"#C2C2C2"} size={26} />
-
+          <>
+            <MaterialCommunityIcons
+              name="camera-plus-outline"
+              color={color}
+              size={23}
+            />
+            {/* <Icon name="md-camera" color={"#C2C2C2"} size={26} /> */}
+          </>
         ),
       }}
     />
-
 
     {a == 1 ? (
       <Tab.Screen
@@ -122,7 +124,7 @@ const TabScreen = observer(() => (
               <Icon
                 // onPress={handleCancel}
                 name="ios-notifications"
-                color={"#C2C2C2"}
+                color={color}
                 size={26}
               />
             </>
@@ -143,7 +145,6 @@ const TabScreen = observer(() => (
               name="ios-notifications"
               color={"#C2C2C2"}
               size={26}
-
             />
           ),
         }}
