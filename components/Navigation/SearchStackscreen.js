@@ -19,13 +19,13 @@ const iconsColor = "#C2C2C2";
 
 const SearchStackScreen = ({ navigation }) => (
   <SearchStack.Navigator
-    initialRouteName="Search"
+    initialRouteName='Search'
     title={false}
     screenOptions={{
       headerTintColor: "white",
       backgroundColor: "white",
       headerStyle: {
-        backgroundColor: "white",
+        backgroundColor: "transparent",
         height: 80,
       },
       headerTitleStyle: {
@@ -35,18 +35,29 @@ const SearchStackScreen = ({ navigation }) => (
     }}
   >
     <SearchStack.Screen
-      name="search"
+      name='search'
       component={Search}
       options={{
         title: false,
 
-        headerLeft: () => (
-          <Icon.Button
-            name="ios-menu"
+        headerRight: () => (
+          <Icon
+            style={{ paddingRight: 10 }}
+            name='md-arrow-back'
             size={25}
             color={iconsColor}
-            backgroundColor="transparent"
-            activeColor="transparent"
+            onPress={() => navigation.goBack()}
+          ></Icon>
+        ),
+
+        headerLeft: () => (
+          <Icon.Button
+            name='ios-menu'
+            style={{ marginLeft: 2 }}
+            size={25}
+            color={iconsColor}
+            backgroundColor='transparent'
+            activeColor='transparent'
             onPress={() => navigation.openDrawer()}
           ></Icon.Button>
         ),

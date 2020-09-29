@@ -7,7 +7,8 @@ const MyTheme = {
   colors: {
     ...DefaultTheme.colors,
     // primary: "rgb(255, 45, 85)",
-    background: "#F7F7F7",
+    // background: "#F7F7F7",
+    background: "white",
   },
 };
 

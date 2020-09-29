@@ -1,12 +1,4 @@
 import styled from "styled-components/native";
-import { Icon } from "native-base";
-
-export const FolderItemStyled = styled.Text`
-  color: #000000;
-  font-size: 18px;
-  margin-top: 10px;
-  margin-bottom: 10px;
-`;
 
 export const PageTitle = styled.Text`
   color: #000000;
@@ -16,6 +8,11 @@ export const PageTitle = styled.Text`
   margin-left: 35px;
 `;
 
-export const IconStyled = styled(Icon)`
+export const NoteTitle = styled.Text`
   color: #000000;
+  opacity: 0.5;
+  font-size: 16px;
+  margin-top: 8px;
+  margin-bottom: 10px;
+  margin-left: 35px;
 `;

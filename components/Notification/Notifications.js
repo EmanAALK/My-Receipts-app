@@ -4,13 +4,15 @@ import moment from "moment";
 
 // Styling
 import { Card } from "react-native-paper";
-import { List, Spinner, Text } from "native-base";
+import { List, ListItem, Spinner, Text } from "native-base";
 import { CardItem, Left, Right } from "native-base";
 import { View } from "react-native-animatable";
+import { PageTitle, NoteTitle } from "./styles";
+import { ScrollView } from "react-native";
 
 // store
-import receiptStore from "../store/ReceiptStore";
-import authStore from "../store/authStore";
+import receiptStore from "../../store/ReceiptStore";
+import authStore from "../../store/authStore";
 
 const Notifications = ({ navigation }) => {
   if (receiptStore.loading) return <Spinner />;
@@ -30,7 +32,15 @@ const Notifications = ({ navigation }) => {
     .filter((receipt) => receipt.expDate < dateBeforeWeek)
     .map((receipt) => (
       <>
-        <Card style={{ marginTop: 5, width: "94%", alignSelf: "center" }}>
+        {/* <Card style={{ marginTop: 5, width: "94%", alignSelf: "center" }}> */}
+        {/* <ScrollView> */}
+        <ListItem
+          style={{
+            backgroundColor: "white",
+            marginRight: 14,
+            marginLeft: 14,
+          }}
+        >
           <CardItem>
             <Left>
               <Text
@@ -40,12 +50,14 @@ const Notifications = ({ navigation }) => {
               >
                 {receipt.name}
               </Text>
-              <Right>
+              <Right style={{ marginLeft: 10 }}>
                 <Text note>{receipt.expDate}</Text>
               </Right>
             </Left>
           </CardItem>
-        </Card>
+          {/* </Card> */}
+        </ListItem>
+        {/* </ScrollView> */}
       </>
     ));
   return (
@@ -55,8 +67,7 @@ const Notifications = ({ navigation }) => {
           alignItems: "center",
         }}
       >
-        {" "}
-        Receipts Expiring in Seven Days:{" "}
+        Receipts Expiring in Seven Days:
       </Text>
       {isExpired.length === 0 ? (
         <Text> No receipts</Text>

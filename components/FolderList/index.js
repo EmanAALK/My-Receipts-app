@@ -83,43 +83,30 @@ const FolderList = ({ navigation }) => {
 
   return (
     <>
-      <View style={{ flexDirection: "row" }}>
-        <PageTitle>My Folders</PageTitle>
-        <AntDesign
-          onPress={() => navigation.navigate("CreateFolderForm")}
-          name="addfolder"
-          size={25}
-          color="#ffbf00"
-          style={{ marginTop: 20, marginBottom: 20, marginLeft: 170 }}
-        />
-      </View>
+      <PageTitle>My Folders</PageTitle>
+      {/* <View style={{ flexDirection: "row" }}> */}
+      <AntDesign
+        onPress={() => navigation.navigate("CreateFolderForm")}
+        name='addfolder'
+        size={22}
+        color='#ffbf00'
+        style={{ marginTop: 18, marginBottom: -1, marginLeft: 313 }}
+      />
+      {/* </View> */}
+      <Text
+        style={{
+          fontSize: 16,
+          marginTop: -20,
+          marginBottom: 10,
+          marginLeft: 40,
 
-      <Text style={{ marginLeft: 300 }} onPress={handleDelete}>
-        {multipul && folderStore.selectedFolders.length > 0
-          ? "Delete"
-          : "Select"}
+          color: "#ffbf00",
+        }}
+        onPress={handleDelete}
+      >
+        {multipul && folderStore.selectedFolders.length > 0 ? "Delete" : "Edit"}
       </Text>
 
-      {/* { <ButtonGroup
-         buttons={[
-           <Text onPress={() => navigation.navigate("CreateFolderForm")}>
-             Add Folder
-          </Text>,
-          <Text>
-            <Icon
-              onPress={() => navigation.navigate("Search")}
-              name="search1"
-              color="grey"
-              size={25}
-            />
-          </Text>,
-         ]}
-         containerStyle={{ height: 30, marginTop: 10 }}
-         selectedButtonStyle={{ backgroundColor: "grey" }}
-       />  */}
-
-      <List>{defualtFolderList}</List>
-      <Text>--------------</Text>
       <List>{PinList}</List>
       <Text>--------------</Text>
       <List>{UnPinList}</List>
