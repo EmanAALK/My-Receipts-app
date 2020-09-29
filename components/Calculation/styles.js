@@ -8,6 +8,15 @@ export const PageTitle = styled.Text`
   margin-left: 20px;
 `;
 
+export const NoteTitle = styled.Text`
+  color: #000000;
+  opacity: 0.5;
+  font-size: 16px;
+  margin-top: 8px;
+  margin-bottom: 10px;
+  margin-left: 20px;
+`;
+
 export const TextStyle = styled.Text`
   color: #3d5a80;
   font-size: 18;
@@ -19,7 +28,6 @@ export const InputContainer = styled.View`
   align-self: stretch;
   padding-left: 14px;
   margin-bottom: 18px;
-  align-self: center;
 `;
 
 export const Total = styled.Text`

@@ -16,15 +16,14 @@ const color = "#ffbf00";
 
 const AddReceiptStackScreen = ({ navigation }) => (
   <AddReceiptStack.Navigator
-    initialRouteName="AddReceipt"
+    initialRouteName='AddReceipt'
     title={false}
     screenOptions={{
       headerTintColor: "white",
       backgroundColor: "white",
       headerStyle: {
-        backgroundColor: "white",
+        backgroundColor: "transparent",
         height: 80,
-    
       },
       headerTitleStyle: {
         fontWeight: "bold",
@@ -41,6 +40,7 @@ const AddReceiptStackScreen = ({ navigation }) => (
         headerLeft: () => (
           <Icon.Button
             name='ios-menu'
+            style={{ marginLeft: 2 }}
             size={25}
             color={"#E0E0E0"}
             backgroundColor='transparent'

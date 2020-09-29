@@ -103,14 +103,16 @@ const FolderItem = ({ folder, navigation, multipul }) => {
   };
 
   return (
-    <Card style={{ marginTop: 5, width: "94%", alignSelf: "center" }}>
+    <ListItem
+      style={{ backgroundColor: "white", marginRight: 14, marginLeft: 14 }}
+    >
       <CardItem>
         <Left>
           {multipul && !folder.defaultFolder && (
             <CheckBox
-              checkedIcon="dot-circle-o"
-              checkedColor="grey"
-              uncheckedIcon="circle-o"
+              checkedIcon='dot-circle-o'
+              checkedColor='grey'
+              uncheckedIcon='circle-o'
               size={15}
               checked={isChecked}
               onPress={handleChecked}
@@ -118,9 +120,19 @@ const FolderItem = ({ folder, navigation, multipul }) => {
             />
           )}
           {folder.defaultFolder ? (
-            <Entypo name="folder" size={20} color="#ffbf00" />
+            <AntDesign
+              name='folder1'
+              size={20}
+              color='#ffbf00'
+              style={{ marginLeft: 10 }}
+            />
           ) : (
-            <AntDesign name="folderopen" size={20} color="#ffbf00" />
+            <AntDesign
+              name='folder1'
+              size={20}
+              color='#ffbf00'
+              style={{ marginLeft: 10 }}
+            />
           )}
           {edit ? (
             <>
@@ -137,9 +149,9 @@ const FolderItem = ({ folder, navigation, multipul }) => {
               />
 
               <AntDesign
-                name="edit"
+                name='edit'
                 size={20}
-                color="lightgrey"
+                color='lightgrey'
                 style={{ marginTop: 23 }}
                 onPress={handleSubmit}
               />
@@ -157,8 +169,8 @@ const FolderItem = ({ folder, navigation, multipul }) => {
 
         {folder.pin && (
           <Icon
-            type="pushpin"
-            name="pushpino"
+            type='pushpin'
+            name='pushpino'
             size={17}
             color={color}
             onPress={handleChange}
@@ -190,7 +202,7 @@ const FolderItem = ({ folder, navigation, multipul }) => {
           </Menu>
         )}
       </CardItem>
-    </Card>
+    </ListItem>
   );
 };
 export default observer(FolderItem);

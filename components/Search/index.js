@@ -43,18 +43,29 @@ const Search = ({ navigation }) => {
 
   return (
     <>
+      <Text
+        style={{
+          color: "#000000",
+          fontSize: 25,
+          marginTop: 14,
+          marginBottom: 10,
+          marginLeft: 35,
+        }}
+      >
+        Search
+      </Text>
       <View style={{ marginTop: 10 }}>
         <View style={{ width: "74%", height: 15 }}>
           {filter === 3 ? (
             <DatePicker
               style={{ width: 255 }}
               date={date}
-              mode="date"
-              placeholder="select date"
-              format="YYYY-MM-DD"
-              confirmBtnText="Confirm"
-              cancelBtnText="Cancel"
-              confirmBtnText="search"
+              mode='date'
+              placeholder='select date'
+              format='YYYY-MM-DD'
+              confirmBtnText='Confirm'
+              cancelBtnText='Cancel'
+              confirmBtnText='search'
               customStyles={{
                 dateIcon: {
                   position: "absolute",
@@ -75,8 +86,8 @@ const Search = ({ navigation }) => {
           ) : (
             <View style={{ width: "95%", height: 15 }}>
               <SearchBar
-                placeholder="Search"
-                platform="ios"
+                placeholder='Search'
+                platform='ios'
                 onChangeText={handleSearch}
                 value={query}
               />
