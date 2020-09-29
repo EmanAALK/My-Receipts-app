@@ -61,13 +61,20 @@ const Notifications = ({ navigation }) => {
       </>
     ));
   return (
-    <>
-      <PageTitle>Reminders</PageTitle>
-
-      <NoteTitle>These receipts will expire within seven days. </NoteTitle>
-
-      <List>{isExpired}</List>
-    </>
+    <View style={{ marginTop: 30, marginBottom: 30 }}>
+      <Text
+        style={{
+          alignItems: "center",
+        }}
+      >
+        Receipts Expiring in Seven Days:
+      </Text>
+      {isExpired.length === 0 ? (
+        <Text> No receipts</Text>
+      ) : (
+        <List>{isExpired}</List>
+      )}
+    </View>
   );
 };
 

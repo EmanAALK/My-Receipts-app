@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { createDrawerNavigator } from "@react-navigation/drawer";
 import { createMaterialBottomTabNavigator } from "@react-navigation/material-bottom-tabs";
 import { observer } from "mobx-react";
@@ -30,11 +30,6 @@ const Drawer = createDrawerNavigator();
 const Tab = createMaterialBottomTabNavigator();
 // const color = "#427aa1";
 const a = 1;
-// const [count, setCount] = useState(0);
-// const handleCancel = async () => {
-//   setCount(count + 1);
-// };
-
 const color = "#C2C2C2";
 
 const TabScreen = observer(() => (
@@ -105,7 +100,7 @@ const TabScreen = observer(() => (
       }}
     />
 
-    {a == 1 ? (
+    {a === 1 ? (
       <Tab.Screen
         name='Notifications'
         component={NotificationStackscreen}
@@ -145,10 +140,11 @@ const TabScreen = observer(() => (
               color={"#C2C2C2"}
               size={26}
             />
-          ),
-        }}
-      />
-    )}
+            <Icon name="ios-notifications" color={color} size={26} />
+          </>
+        ),
+      }}
+    />
   </Tab.Navigator>
 ));
 const RootNavigator = () => {

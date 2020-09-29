@@ -5,7 +5,7 @@ import FolderItem from "./FolderItem";
 // Styling
 import { ButtonGroup } from "react-native-elements";
 import { List, Spinner, Text, View, ListItem } from "native-base";
-import { Alert } from "react-native";
+import { Alert, Modal, StyleSheet, TouchableHighlight } from "react-native";
 import { PageTitle } from "./styles";
 
 // store
@@ -24,7 +24,7 @@ const FolderList = ({ navigation }) => {
 
   const PinList = folderStore.folders
     .filter((folder) => folder.userId === authStore.user.id)
-    .filter((folder) => folder.pin || folder.defaultFolder)
+    .filter((folder) => folder.pin)
     .map((folder) => (
       <FolderItem
         folder={folder}
@@ -34,8 +34,18 @@ const FolderList = ({ navigation }) => {
       />
     ));
 
-  // console.log("list", PinList);
-  // console.log("length", PinList.length);
+  const defualtFolderList = folderStore.folders
+    .filter((folder) => folder.userId === authStore.user.id)
+    .filter((folder) => folder.defaultFolder)
+    .map((folder) => (
+      <FolderItem
+        folder={folder}
+        key={folder.id}
+        navigation={navigation}
+        multipul={multipul}
+      />
+    ));
+
   const UnPinList = folderStore.folders
     .filter((folder) => folder.userId === authStore.user.id)
     .filter((folder) => !folder.pin && !folder.defaultFolder)
@@ -70,6 +80,7 @@ const FolderList = ({ navigation }) => {
       ]);
     } else folderStore.selectedFolders = [];
   };
+
   return (
     <>
       <PageTitle>My Folders</PageTitle>
@@ -97,6 +108,7 @@ const FolderList = ({ navigation }) => {
       </Text>
 
       <List>{PinList}</List>
+      <Text>--------------</Text>
       <List>{UnPinList}</List>
     </>
   );

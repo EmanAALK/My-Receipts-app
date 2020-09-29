@@ -42,7 +42,13 @@ const CalculateByDate = ({ navigation }) => {
           <Card>
             <CardItem>
               <Left>
-                <Text>{receipt.name}</Text>
+                <Text
+                  onPress={() =>
+                    navigation.navigate("ReceiptDetail", { receipt: receipt })
+                  }
+                >
+                  {receipt.name}
+                </Text>
               </Left>
               <Body>
                 <Text note>{receipt.date}</Text>

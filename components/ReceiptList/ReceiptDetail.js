@@ -16,6 +16,9 @@ const ReceiptDetail = ({ route, navigation }) => {
   const folder = folderStore.folders.find(
     (folder) => folder.id === receipt.folderId
   );
+
+  // console.log("receipt check", receipt);
+  console.log("folder check", folder);
   return (
     <>
       <PageTitle>{folder.name}</PageTitle>
@@ -31,6 +34,12 @@ const ReceiptDetail = ({ route, navigation }) => {
           marginLeft: 100,
         }}
       > */}
+      <Text
+        style={{ marginBottom: 10 }}
+        onPress={() => navigation.navigate("ReceiptList", { folder: folder })}
+      >
+        At Folder: {folder.name}
+      </Text>
       <Text style={{ marginLeft: 105, marginTop: 30, marginBottom: 10 }}>
         Creation Date: {receipt.createdAt}
       </Text>
@@ -41,7 +50,6 @@ const ReceiptDetail = ({ route, navigation }) => {
         Expiration Date: {receipt.expDate}
       </Text>
       <Text style={{ marginLeft: 105, marginTop: 10, marginBottom: 10 }}>
-        {" "}
         Price: {receipt.price}
       </Text>
       {/* </Card> */}
