@@ -125,9 +125,7 @@ const CameraScreen = ({ navigation }) => {
         {isPreview && renderCancelPreviewButton()}
         {!isPreview && renderCaptureControl()}
       </View>
-      <View style={{ marginTop: 565, marginLeft: 280 }}>
-        <PhotoPicker navigation={navigation} />
-      </View>
+      <PhotoPicker navigation={navigation} />
     </SafeAreaView>
   );
 };

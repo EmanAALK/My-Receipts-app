@@ -5,6 +5,7 @@ import moment from "moment";
 // Styling
 import { List, Spinner, Text } from "native-base";
 import { View } from "react-native-animatable";
+import { ScrollView } from "react-native";
 
 // Store
 import receiptStore from "../store/ReceiptStore";
@@ -41,8 +42,9 @@ const NotificationList = ({ navigation }) => {
   return (
     <View style={{ marginTop: 30, marginBottom: 30 }}>
       <Text> Warranty/ies that will expire within 7 days: </Text>
-
-      <List>{isExpired}</List>
+      <ScrollView>
+        <List>{isExpired}</List>
+      </ScrollView>
     </View>
   );
 };

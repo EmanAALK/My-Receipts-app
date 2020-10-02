@@ -18,15 +18,21 @@ const CalculateByFolder = ({ navigation }) => {
   const folder = folderStore.folders.filter(
     (folder) => folder.userId === authStore.user.id
   );
+
   let items = folder.map((item) => ({ label: item.name, value: item.id }));
   items.push({ label: "All Folders", value: 0 });
+
   let filterFolder = folder.filter((folder) =>
     filter.find((filter) => folder.id === filter)
   );
+
   if (filter.includes(0)) filterFolder = folder;
+
   const folderList = filterFolder.map((folder) => (
     <FolderItem folder={folder} key={folder.id} navigation={navigation} />
   ));
+  console.log(",,,,,folderList", folderList.length);
+
   const receipt = receiptStore.receipts.filter((receipt) =>
     filterFolder.find((filter) => receipt.folder.id === filter.id)
   );
