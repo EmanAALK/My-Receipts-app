@@ -5,7 +5,13 @@ import FolderItem from "./FolderItem";
 // Styling
 import { ButtonGroup } from "react-native-elements";
 import { List, Spinner, Text, View, ListItem } from "native-base";
-import { Alert, Modal, StyleSheet, TouchableHighlight } from "react-native";
+import {
+  Alert,
+  Modal,
+  StyleSheet,
+  TouchableHighlight,
+  ScrollView,
+} from "react-native";
 import { PageTitle } from "./styles";
 
 // store
@@ -84,35 +90,30 @@ const FolderList = ({ navigation }) => {
   return (
     <>
       <PageTitle>My Folders</PageTitle>
-      {/* <View style={{ flexDirection: "row" }}> */}
-      <AntDesign
-        onPress={() => navigation.navigate("CreateFolderForm")}
+      <View style={{ flexDirection: "row" }}>
+        <Text
+          style={{ marginLeft: 30, color: "#ffbf00" }}
+          onPress={handleDelete}
+        >
+          {multipul && folderStore.selectedFolders.length > 0
+            ? "Delete"
+            : "Edit"}
+        </Text>
+        <AntDesign
+          onPress={() => navigation.navigate("CreateFolderForm")}
+          name="addfolder"
+          size={25}
+          color="#ffbf00"
+          style={{ marginBottom: 20, marginLeft: 250 }}
+        />
+      </View>
+      <ScrollView>
+        <List>{defualtFolderList}</List>
 
-        name="addfolder"
-        size={22}
-        color="#ffbf00"
+        <List>{PinList}</List>
 
-        style={{ marginTop: 18, marginBottom: -1, marginLeft: 313 }}
-      />
-      {/* </View> */}
-      <Text
-        style={{
-          fontSize: 16,
-          marginTop: -20,
-          marginBottom: 10,
-          marginLeft: 40,
-
-          color: "#ffbf00",
-        }}
-        onPress={handleDelete}
-      >
-        {multipul && folderStore.selectedFolders.length > 0 ? "Delete" : "Edit"}
-      </Text>
-
-      <List>{defualtFolderList}</List>
-      <List style={{ marginTop: 20 }}>{PinList}</List>
-      <List style={{ marginTop: 20 }}>{UnPinList}</List>
-
+        <List>{UnPinList}</List>
+      </ScrollView>
     </>
   );
 };
