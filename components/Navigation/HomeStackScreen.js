@@ -10,7 +10,7 @@ import FontAwesome5 from "react-native-vector-icons/FontAwesome5";
 // component
 import EditProfile from "../Profile";
 import FolderList from "../FolderList";
-import Notification from "../Notifications";
+import Notifications from "../Notification/Notifications";
 import CreateReceiptForm from "../Forms/CreateReceiptForm";
 import UpdateFolderForm from "../Forms/UpdateFolderForm";
 import CreateFolderForm from "../Forms/CreateFolderForm";
@@ -36,10 +36,12 @@ const HomeStackScreen = ({ navigation }) => (
     Title="Home"
     screenOptions={{
       headerTintColor: "black",
-      backgroundColor: "white",
+
+      backgroundColor: "transparent",
+
       headerStyle: {
-        height: 85,
-        backgroundColor: color,
+        height: 80,
+        backgroundColor: "transparent",
       },
       headerTitleStyle: {
         fontWeight: "bold",
@@ -55,10 +57,13 @@ const HomeStackScreen = ({ navigation }) => (
       // }}
       options={{
         backgroundColor: "white",
+
         title: "My Folders",
+
         headerLeft: () => (
           <Icon.Button
             name="ios-menu"
+            style={{ marginLeft: 2 }}
             size={25}
             color={iconsColor}
             backgroundColor="transparent"
@@ -66,16 +71,6 @@ const HomeStackScreen = ({ navigation }) => (
             onPress={() => navigation.openDrawer()}
           ></Icon.Button>
         ),
-        // headerRight: () => (
-        //   <AntDesign.Button
-        //     name='addfolder'
-        //     size={25}
-        //     color='#ffbf00'
-        //     backgroundColor='transparent'
-        //     activeColor='transparent'
-        //     onPress={() => navigation.navigate("CreateFolderForm")}
-        //   ></AntDesign.Button>
-        // ),
       }}
     />
 
@@ -91,6 +86,7 @@ const HomeStackScreen = ({ navigation }) => (
         headerLeft: () => (
           <Icon.Button
             name="ios-menu"
+            style={{ marginLeft: 2 }}
             size={25}
             color={iconsColor}
             backgroundColor="transparent"
@@ -117,6 +113,7 @@ const HomeStackScreen = ({ navigation }) => (
         headerLeft: () => (
           <Icon.Button
             name="ios-menu"
+            style={{ marginLeft: 2 }}
             size={25}
             color={iconsColor}
             backgroundColor="white"
@@ -126,16 +123,16 @@ const HomeStackScreen = ({ navigation }) => (
       }}
     />
     <HomeStack.Screen
-      name="Notification"
-      component={Notification}
+      name="Notifications"
+      component={Notifications}
       options={{
         title: false,
         headerRight: () => (
           <Icon
-            style={{ paddingRight: 10 }}
+            // style={{ paddingRight: 10 }}
             name="md-arrow-back"
             size={25}
-            color="#E0E0E0"
+            color={iconsColor}
             backgroundColor="transparent"
             onPress={() => navigation.goBack()}
           ></Icon>
@@ -143,6 +140,7 @@ const HomeStackScreen = ({ navigation }) => (
         headerLeft: () => (
           <Icon.Button
             name="ios-menu"
+            style={{ marginLeft: 2 }}
             size={25}
             color={iconsColor}
             backgroundColor="transparent"
@@ -169,6 +167,7 @@ const HomeStackScreen = ({ navigation }) => (
         headerLeft: () => (
           <Icon.Button
             name="ios-menu"
+            style={{ marginLeft: 2 }}
             size={25}
             color={iconsColor}
             backgroundColor="transparent"
@@ -195,6 +194,7 @@ const HomeStackScreen = ({ navigation }) => (
         headerLeft: () => (
           <Icon.Button
             name="ios-menu"
+            style={{ marginLeft: 2 }}
             size={25}
             color={iconsColor}
             backgroundColor="transparent"
@@ -221,6 +221,7 @@ const HomeStackScreen = ({ navigation }) => (
         headerLeft: () => (
           <Icon.Button
             name="ios-menu"
+            style={{ marginLeft: 2 }}
             size={25}
             color={iconsColor}
             backgroundColor="transparent"
@@ -247,6 +248,7 @@ const HomeStackScreen = ({ navigation }) => (
         headerLeft: () => (
           <Icon.Button
             name="ios-menu"
+            style={{ marginLeft: 2 }}
             size={25}
             color={iconsColor}
             backgroundColor="transparent"
@@ -264,6 +266,7 @@ const HomeStackScreen = ({ navigation }) => (
         headerLeft: () => (
           <Icon.Button
             name="ios-menu"
+            style={{ marginLeft: 2 }}
             size={25}
             color={"#EBEBEB"}
             backgroundColor="transparent"
@@ -281,7 +284,7 @@ const HomeStackScreen = ({ navigation }) => (
         headerRight: () => (
           <Icon
             style={{ paddingRight: 10 }}
-            name="ios-arrow-back-circle"
+            name="md-arrow-back"
             size={25}
             color={"#EBEBEB"}
             onPress={() => navigation.goBack()}
@@ -290,6 +293,7 @@ const HomeStackScreen = ({ navigation }) => (
         headerLeft: () => (
           <Icon.Button
             name="ios-menu"
+            style={{ marginLeft: 2 }}
             size={25}
             color={"#EBEBEB"}
             backgroundColor="transparent"
@@ -316,6 +320,7 @@ const HomeStackScreen = ({ navigation }) => (
         headerLeft: () => (
           <Icon.Button
             name="ios-menu"
+            style={{ marginLeft: 2 }}
             size={25}
             color={"#EBEBEB"}
             backgroundColor="transparent"
@@ -342,6 +347,7 @@ const HomeStackScreen = ({ navigation }) => (
         headerLeft: () => (
           <Icon.Button
             name="ios-menu"
+            style={{ marginLeft: 2 }}
             size={25}
             color={"#E0E0E0"}
             backgroundColor="transparent"
@@ -367,6 +373,7 @@ const HomeStackScreen = ({ navigation }) => (
         headerLeft: () => (
           <Icon.Button
             name="ios-menu"
+            style={{ marginLeft: 2 }}
             size={25}
             backgroundColor="transparent"
             onPress={() => navigation.openDrawer()}
@@ -391,6 +398,7 @@ const HomeStackScreen = ({ navigation }) => (
         headerLeft: () => (
           <Icon.Button
             name="ios-menu"
+            style={{ marginLeft: 2 }}
             size={25}
             color={"#E0E0E0"}
             backgroundColor="transparent"

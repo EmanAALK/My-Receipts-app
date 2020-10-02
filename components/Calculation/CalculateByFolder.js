@@ -30,7 +30,7 @@ const CalculateByFolder = ({ navigation }) => {
   const receipt = receiptStore.receipts.filter((receipt) =>
     filterFolder.find((filter) => receipt.folder.id === filter.id)
   );
-  const amount = receipt.map((receipt) => (total = total + receipt.price));
+  const amount = receipt.map((receipt) => (total = total + +receipt.price));
   return (
     <>
       <Text style={{ marginTop: 0, marginLeft: 30 }}> Folder :</Text>
@@ -71,12 +71,12 @@ const CalculateByFolder = ({ navigation }) => {
               borderWidth: 1,
               borderColor: "lightgrey",
             }}
+            style={{ width: 350, alignSelf: "center" }}
           >
             <Row
               data={["Total Amount", total]}
               style={{
                 height: 30,
-                // backgroundColor: "#FFCC22 ",
                 marginTop: 20,
               }}
               textStyle={{ marginLeft: 30, color: "red" }}

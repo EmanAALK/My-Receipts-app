@@ -16,15 +16,13 @@ import {
   // Button,
   Thumbnail,
 } from "native-base";
-
+import { PageTitle } from "./styles";
 import { CheckBox } from "react-native-elements";
-import { Card, Divider, Button } from "react-native-paper";
-import defaultimage from "../../assets/defaultimage.png";
 import Icon from "react-native-vector-icons/MaterialCommunityIcons";
-import DropDownPicker from "react-native-dropdown-picker";
 import { Alert } from "react-native";
 import Menu, { MenuItem, MenuDivider } from "react-native-material-menu";
 import RNPickerSelect from "react-native-picker-select";
+
 const ReceiptItem = ({ receipt, navigation, multipul }) => {
   const [isChecked, setIsChecked] = useState(multipul);
   const [updatedReceipt, setUpdatedReceipt] = useState(receipt);
@@ -72,40 +70,45 @@ const ReceiptItem = ({ receipt, navigation, multipul }) => {
     ]);
   };
   return (
-    <ListItem
-      onPress={() => navigation.navigate("ReceiptDetail", { receipt: receipt })}
-    >
-      {multipul && (
-        <CheckBox
-          checkedIcon="dot-circle-o"
-          checkedColor="grey"
-          uncheckedIcon="circle-o"
-          size={15}
-          checked={isChecked}
-          onPress={handleChecked}
-          value={false}
-        />
-      )}
-      <Left>
-        <Icon name="receipt" size={25} color="lightgrey" />
-        <Text style={{ paddingLeft: 20 }}>{receipt.name}</Text>
-      </Left>
-
-      <Menu
-        ref={setMenuRef}
-        button={
-          <Text style={{ fontWeight: "bold" }} onPress={showMenu}>
-            ...
-          </Text>
+    <>
+      <PageTitle>{folder.name}</PageTitle>
+      <ListItem
+        onPress={() =>
+          navigation.navigate("ReceiptDetail", { receipt: receipt })
         }
       >
-        <MenuItem onPress={handleSubmit}>
-          {receipt.archive ? "unArchive" : "Archive"}
-        </MenuItem>
+        {multipul && (
+          <CheckBox
+            checkedIcon='dot-circle-o'
+            checkedColor='grey'
+            uncheckedIcon='circle-o'
+            size={15}
+            checked={isChecked}
+            onPress={handleChecked}
+            value={false}
+          />
+        )}
+        <Left>
+          <Icon name='receipt' size={25} color='lightgrey' />
+          <Text style={{ paddingLeft: 20 }}>{receipt.name}</Text>
+        </Left>
 
-        <MenuItem onPress={deleteAlert}>Delete</MenuItem>
-      </Menu>
-    </ListItem>
+        <Menu
+          ref={setMenuRef}
+          button={
+            <Text style={{ fontWeight: "bold" }} onPress={showMenu}>
+              ...
+            </Text>
+          }
+        >
+          <MenuItem onPress={handleSubmit}>
+            {receipt.archive ? "unArchive" : "Archive"}
+          </MenuItem>
+
+          <MenuItem onPress={deleteAlert}>Delete</MenuItem>
+        </Menu>
+      </ListItem>
+    </>
   );
 };
 
