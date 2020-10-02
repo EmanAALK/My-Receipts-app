@@ -87,9 +87,11 @@ const FolderList = ({ navigation }) => {
       {/* <View style={{ flexDirection: "row" }}> */}
       <AntDesign
         onPress={() => navigation.navigate("CreateFolderForm")}
+
         name="addfolder"
         size={22}
         color="#ffbf00"
+
         style={{ marginTop: 18, marginBottom: -1, marginLeft: 313 }}
       />
       {/* </View> */}
@@ -110,6 +112,7 @@ const FolderList = ({ navigation }) => {
       <List>{defualtFolderList}</List>
       <List style={{ marginTop: 20 }}>{PinList}</List>
       <List style={{ marginTop: 20 }}>{UnPinList}</List>
+
     </>
   );
 };

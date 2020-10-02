@@ -3,9 +3,11 @@ import { observer } from "mobx-react";
 
 //Styles
 
+
 import { View, Text, Driver, Title, Image, ScrollView } from "react-native";
 import { Content, Card, ListItem, Button } from "react-native-elements";
 import Icon from "react-native-vector-icons/Feather";
+
 
 //Store
 import folderStore from "../../store/FolderStore";
@@ -23,7 +25,9 @@ const ReceiptDetail = ({ route, navigation }) => {
     (folder) => folder.id === receipt.folderId
   );
   return (
+
     <ScrollView>
+    
       <Card>
         <Card.Title>{receipt.name}</Card.Title>
 
@@ -32,10 +36,13 @@ const ReceiptDetail = ({ route, navigation }) => {
           source={{ uri: receipt.image }}
           style={{ width: 300, height: 240 }}
         />
-
-        {/* <Text style={{ marginBottom: 10 }}>
-          Created at: {receipt.createdAt}
-        </Text> */}
+ <Text
+        style={{ marginBottom: 10 }}
+        onPress={() => navigation.navigate("ReceiptList", { folder: folder })}
+      >
+        At Folder: {folder.name}
+      </Text>
+      
         <View style={{ flexDirection: "row", marginTop: 9, marginBottom: 20 }}>
           <Text style={{ fontWeight: "bold", fontSize: 18 }}>
             Date of purchase:
@@ -69,42 +76,8 @@ const ReceiptDetail = ({ route, navigation }) => {
         />
       </Card>
     </ScrollView>
-    // =======
-    //     <>
-    //       <PageTitle>{folder.name}</PageTitle>
-    //       <NoteTitle>{receipt.name}</NoteTitle>
-    //       {/* <Card.Title>{receipt.name}</Card.Title> */}
-    //       <Card.Image
-    //         source={{ uri: receipt.image }}
-    //         style={{ marginTop: 35, marginLeft: 105, width: 180, height: 260 }}
-    //       />
-    //       {/* <Card
-    //         style={{
-    //           marginRight: 100,
-    //           marginLeft: 100,
-    //         }}
-    //       > */}
-    //       <Text
-    //         style={{ marginBottom: 10 }}
-    //         onPress={() => navigation.navigate("ReceiptList", { folder: folder })}
-    //       >
-    //         At Folder: {folder.name}
-    //       </Text>
-    //       <Text style={{ marginLeft: 105, marginTop: 30, marginBottom: 10 }}>
-    //         Creation Date: {receipt.createdAt}
-    //       </Text>
-    //       <Text style={{ marginLeft: 105, marginTop: 10, marginBottom: 10 }}>
-    //         Purchase Date: {receipt.date}
-    //       </Text>
-    //       <Text style={{ marginLeft: 105, marginTop: 10, marginBottom: 10 }}>
-    //         Expiration Date: {receipt.expDate}
-    //       </Text>
-    //       <Text style={{ marginLeft: 105, marginTop: 10, marginBottom: 10 }}>
-    //         Price: {receipt.price}
-    //       </Text>
-    //       {/* </Card> */}
-    //       <Image source={receipt.image} />
-    //     </>
+   
+
   );
 };
 
