@@ -87,9 +87,11 @@ const FolderList = ({ navigation }) => {
       {/* <View style={{ flexDirection: "row" }}> */}
       <AntDesign
         onPress={() => navigation.navigate("CreateFolderForm")}
-        name='addfolder'
+
+        name="addfolder"
         size={22}
-        color='#ffbf00'
+        color="#ffbf00"
+
         style={{ marginTop: 18, marginBottom: -1, marginLeft: 313 }}
       />
       {/* </View> */}
@@ -107,9 +109,10 @@ const FolderList = ({ navigation }) => {
         {multipul && folderStore.selectedFolders.length > 0 ? "Delete" : "Edit"}
       </Text>
 
-      <List>{PinList}</List>
-      <Text>--------------</Text>
-      <List>{UnPinList}</List>
+      <List>{defualtFolderList}</List>
+      <List style={{ marginTop: 20 }}>{PinList}</List>
+      <List style={{ marginTop: 20 }}>{UnPinList}</List>
+
     </>
   );
 };

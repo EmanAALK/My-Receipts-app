@@ -15,12 +15,12 @@ import {
 } from "./styles";
 import { View } from "react-native-animatable";
 import { Text } from "native-base";
-
 // images
 
 const EditProfile = ({ navigation }) => {
   const user = authStore.user;
   const [_user, setUser] = useState(user);
+  const [edit, setEdit] = useState(false);
 
   const handleSubmit = async () => {
     await authStore.updateUser(_user);
@@ -28,56 +28,61 @@ const EditProfile = ({ navigation }) => {
   };
 
   return (
-    <AuthContainer>
-      <AuthTitle>Edit Your Profile</AuthTitle>
-      <EditContainer>
-        <Text note>Username </Text>
-        <View style={{ flexDirection: "row" }}>
-          <AuthTextInput
-            onChangeText={(username) => setUser({ ..._user, username })}
-            // placeholder="username"
-            placeholderTextColor='#A6AEC1'
-            value={_user.username}
-          />
+    <>
+      <AuthContainer>
+        <View
+          style={{ flexDirection: "row", marginTop: 100, marginBottom: 50 }}
+        >
+          <Text style={{ fontSize: 18 }} note>
+            Username
+          </Text>
+          {edit ? (
+            <AuthTextInput
+              onChangeText={(username) => setUser({ ..._user, username })}
+              // placeholder="username"
+              placeholderTextColor="#A6AEC1"
+              value={_user.username}
+              style={{ width: 180, marginLeft: 30 }}
+            />
+          ) : (
+            <Text style={{ marginLeft: 30 }}>{_user.username}</Text>
+          )}
         </View>
-        <Text note>First Name </Text>
-        <View style={{ flexDirection: "row" }}>
-          <AuthTextInput
-            onChangeText={(firstName) => setUser({ ..._user, firstName })}
-            // placeholder="firstName"
-            placeholderTextColor='#A6AEC1'
-            value={_user.firstName}
-          />
-        </View>
-        <Text note>Last Name </Text>
-        <View style={{ flexDirection: "row" }}>
-          <AuthTextInput
-            onChangeText={(lastName) => setUser({ ..._user, lastName })}
-            // placeholder="lastName"
-            placeholderTextColor='#A6AEC1'
-            value={_user.lastName}
-          />
-        </View>
-        <Text note>Email </Text>
-        <View style={{ flexDirection: "row" }}>
-          <AuthTextInput
-            onChangeText={(email) => setUser({ ..._user, email })}
-            // placeholder="email"
-            placeholderTextColor='#A6AEC1'
-            value={_user.email}
-          />
-        </View>
-      </EditContainer>
 
-      <View style={{ flexDirection: "row" }}>
-        <AuthButton onPress={handleSubmit}>
-          <AuthButtonText>Edit</AuthButtonText>
-        </AuthButton>
-        <AuthButton onPress={navigation.goBack}>
-          <AuthButtonText>Cancel</AuthButtonText>
-        </AuthButton>
-      </View>
-    </AuthContainer>
+        <View style={{ flexDirection: "row", marginTop: 5, marginBottom: 5 }}>
+          <Text style={{ fontSize: 18 }} note>
+            Email
+          </Text>
+          {edit ? (
+            <AuthTextInput
+              onChangeText={(email) => setUser({ ..._user, email })}
+              placeholder="email"
+              placeholderTextColor="#A6AEC1"
+              value={_user.email}
+              style={{ width: 180, marginLeft: 70 }}
+            />
+          ) : (
+            <Text style={{ marginLeft: 68 }}>{_user.email}</Text>
+          )}
+        </View>
+        <EditContainer>
+          {edit ? (
+            <View style={{ flexDirection: "row", alignSelf: "center" }}>
+              <AuthButton onPress={handleSubmit}>
+                <AuthButtonText>Edit</AuthButtonText>
+              </AuthButton>
+              <AuthButton onPress={() => setEdit(!edit)}>
+                <AuthButtonText>Cancel</AuthButtonText>
+              </AuthButton>
+            </View>
+          ) : (
+            <AuthButton onPress={() => setEdit(!edit)}>
+              <AuthButtonText>Edit</AuthButtonText>
+            </AuthButton>
+          )}
+        </EditContainer>
+      </AuthContainer>
+    </>
   );
 };
 

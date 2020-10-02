@@ -14,13 +14,13 @@ const ReceiptItem = ({ folder, navigation }) => {
   const receipt = receiptStore.receipts.filter(
     (receipt) => receipt.folder.id === folder.id
   );
-  const amount = receipt.map((receipt) => (total = total + receipt.price));
+  const amount = receipt.map((receipt) => (total = total + +receipt.price));
 
   const renderItem = ({ item }) => {
     return (
       <Table
         borderStyle={{ borderWidth: 1, borderColor: "lightgrey" }}
-        style={{ width: 350 }}
+        style={{ width: 350, alignSelf: "center" }}
       >
         <Row
           data={[item.name, item.price]}
@@ -39,7 +39,7 @@ const ReceiptItem = ({ folder, navigation }) => {
       <Text style={{ margin: 10 }}>Folder: {folder.name}</Text>
       <Table
         borderStyle={{ borderWidth: 1, borderColor: "lightgrey" }}
-        style={{ width: 350 }}
+        style={{ width: 350, alignSelf: "center" }}
       >
         <Row
           data={["Store", "price"]}
@@ -56,12 +56,17 @@ const ReceiptItem = ({ folder, navigation }) => {
         renderItem={renderItem}
         numColumns={1}
       />
-      <Table borderStyle={{ borderWidth: 1, borderColor: "lightgrey" }}>
+      <Table
+        borderStyle={{ borderWidth: 1, borderColor: "lightgrey" }}
+        style={{ width: 350, alignSelf: "center" }}
+      >
         <Row
           data={["Total", total]}
           style={{
             height: 30,
             backgroundColor: "white",
+            width: 350,
+            alignSelf: "center",
           }}
           textStyle={{ marginLeft: 30, color: "blue" }}
         />

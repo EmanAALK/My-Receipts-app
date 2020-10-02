@@ -134,7 +134,7 @@ const Signup = ({ navigation }) => {
         placeholderTextColor="#A6AEC1"
         secureTextEntry={true}
       />
-      {authStore.getTime < 12 && (
+      {authStore.getTime <= 12 && (
         <AuthButton onPress={handleSubmitM}>
           <LinearGradient
             onPress={handleSubmitM}
@@ -179,7 +179,7 @@ const Signup = ({ navigation }) => {
         </AuthButton>
       )}
 
-      {authStore.getTime > 18 && (
+      {authStore.getTime >= 18 && (
         <AuthButton onPress={handleSubmitN}>
           <LinearGradient
             onPress={handleSubmitN}
