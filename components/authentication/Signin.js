@@ -164,7 +164,7 @@ const Signin = ({ navigation }) => {
           <Feather name="eye-off" color="grey" size={15} />
         )}
       </TouchableOpacity>
-      {authStore.getTime < 12 && (
+      {authStore.getTime <= 12 && (
         <AuthButton onPress={handleSubmitM}>
           <LinearGradient
             onPress={handleSubmitM}
@@ -204,7 +204,7 @@ const Signin = ({ navigation }) => {
           </LinearGradient>
         </AuthButton>
       )}
-      {authStore.getTime > 18 && (
+      {authStore.getTime >= 18 && (
         <AuthButton onPress={handleSubmitN}>
           <LinearGradient
             onPress={handleSubmitN}

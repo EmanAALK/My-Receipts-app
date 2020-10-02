@@ -19,7 +19,7 @@ import ReceiptDetail from "../ReceiptList/ReceiptDetail";
 import Calculation from "../Calculation";
 import Search from "../Search";
 import ArchiveReceipt from "../ReceiptList/ArchiveReceipt";
-
+import UpdateReceiptForm from "../Forms/UpdateReceiptForm";
 //Camera Feature
 import CameraScreen from "../CameraFeature/CameraScreen";
 import CameraPhoto from "../CameraFeature/CameraPhoto";
@@ -35,7 +35,7 @@ const HomeStackScreen = ({ navigation }) => (
     initialRouteName="Home"
     Title="Home"
     screenOptions={{
-      headerTintColor: "white",
+      headerTintColor: "black",
       backgroundColor: "white",
       headerStyle: {
         height: 85,
@@ -43,18 +43,19 @@ const HomeStackScreen = ({ navigation }) => (
       },
       headerTitleStyle: {
         fontWeight: "bold",
+        fontSize: 18,
       },
     }}
   >
     <HomeStack.Screen
       name="Home"
       component={FolderList}
-      screenOptions={{
-        backgroundColor: "white",
-      }}
+      // screenOptions={{
+      //   backgroundColor: "red",
+      // }}
       options={{
         backgroundColor: "white",
-        title: true,
+        title: "My Folders",
         headerLeft: () => (
           <Icon.Button
             name="ios-menu"
@@ -81,6 +82,9 @@ const HomeStackScreen = ({ navigation }) => (
     <HomeStack.Screen
       name="ReceiptDetail"
       component={ReceiptDetail}
+      screenOptions={{
+        backgroundColor: "white",
+      }}
       options={{
         title: false,
 
@@ -100,7 +104,7 @@ const HomeStackScreen = ({ navigation }) => (
       name="Profile"
       component={EditProfile}
       options={{
-        title: false,
+        title: " Profile",
         headerRight: () => (
           <Icon
             style={{ paddingRight: 10 }}
@@ -373,6 +377,31 @@ const HomeStackScreen = ({ navigation }) => (
     <HomeStack.Screen
       name="ArchiveReceipt"
       component={ArchiveReceipt}
+      options={{
+        title: false,
+        headerRight: () => (
+          <Icon
+            style={{ paddingRight: 10 }}
+            name="md-arrow-back"
+            size={25}
+            color={"#E0E0E0"}
+            onPress={() => navigation.goBack()}
+          ></Icon>
+        ),
+        headerLeft: () => (
+          <Icon.Button
+            name="ios-menu"
+            size={25}
+            color={"#E0E0E0"}
+            backgroundColor="transparent"
+            onPress={() => navigation.openDrawer()}
+          ></Icon.Button>
+        ),
+      }}
+    />
+    <HomeStack.Screen
+      name="UpdateReceiptForm"
+      component={UpdateReceiptForm}
       options={{
         title: false,
         headerRight: () => (

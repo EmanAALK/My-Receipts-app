@@ -119,10 +119,9 @@ const FolderList = ({ navigation }) => {
        />  */}
 
       <List>{defualtFolderList}</List>
-      <Text>--------------</Text>
-      <List>{PinList}</List>
-      <Text>--------------</Text>
-      <List>{UnPinList}</List>
+      <List style={{ marginTop: 20 }}>{PinList}</List>
+
+      <List style={{ marginTop: 20 }}>{UnPinList}</List>
     </>
   );
 };
