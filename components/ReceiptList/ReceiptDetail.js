@@ -3,11 +3,9 @@ import { observer } from "mobx-react";
 
 //Styles
 
-
 import { View, Text, Driver, Title, Image, ScrollView } from "react-native";
 import { Content, Card, ListItem, Button } from "react-native-elements";
 import Icon from "react-native-vector-icons/Feather";
-
 
 //Store
 import folderStore from "../../store/FolderStore";
@@ -25,9 +23,7 @@ const ReceiptDetail = ({ route, navigation }) => {
     (folder) => folder.id === receipt.folderId
   );
   return (
-
     <ScrollView>
-    
       <Card>
         <Card.Title>{receipt.name}</Card.Title>
 
@@ -36,13 +32,13 @@ const ReceiptDetail = ({ route, navigation }) => {
           source={{ uri: receipt.image }}
           style={{ width: 300, height: 240 }}
         />
- <Text
-        style={{ marginBottom: 10 }}
-        onPress={() => navigation.navigate("ReceiptList", { folder: folder })}
-      >
-        At Folder: {folder.name}
-      </Text>
-      
+        <Text
+          style={{ marginBottom: 10 }}
+          onPress={() => navigation.navigate("ReceiptList", { folder: folder })}
+        >
+          At Folder: {folder.name}
+        </Text>
+
         <View style={{ flexDirection: "row", marginTop: 9, marginBottom: 20 }}>
           <Text style={{ fontWeight: "bold", fontSize: 18 }}>
             Date of purchase:
@@ -62,8 +58,10 @@ const ReceiptDetail = ({ route, navigation }) => {
         </View>
 
         <View style={{ flexDirection: "row", marginTop: 9, marginBottom: 20 }}>
-          <Text style={{ fontWeight: "bold", fontSize: 18 }}>Price:</Text>
-          <Text style={{ marginLeft: 110, fontSize: 18 }}>{receipt.price}</Text>
+          <Text style={{ fontWeight: "bold", fontSize: 18 }}>Price: </Text>
+          <Text style={{ marginLeft: 110, fontSize: 18 }}>
+            {receipt.price} K.D
+          </Text>
         </View>
         <Icon
           style={{ left: "90%" }}
@@ -76,8 +74,6 @@ const ReceiptDetail = ({ route, navigation }) => {
         />
       </Card>
     </ScrollView>
-   
-
   );
 };
 
