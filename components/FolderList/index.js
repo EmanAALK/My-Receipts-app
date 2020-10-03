@@ -7,20 +7,68 @@ import { ButtonGroup } from "react-native-elements";
 import { List, Spinner, Text, View, ListItem } from "native-base";
 import { Alert, Modal, StyleSheet, TouchableHighlight } from "react-native";
 import { PageTitle } from "./styles";
+import {
+  FormContainer,
+  FormTitle,
+  FormTextInput,
+  FormButtonText,
+  FormButton,
+} from "../Forms/styles";
+import * as Animatable from "react-native-animatable";
 
 // store
 import folderStore from "../../store/FolderStore";
 import authStore from "../../store/authStore";
-
 //Icons
 import Icon from "react-native-vector-icons/AntDesign";
-
 import AntDesign from "react-native-vector-icons/AntDesign";
 
 const FolderList = ({ navigation }) => {
-  if (folderStore.loading) return <Spinner />;
+  // if (folderStore.loading) return <Spinner />;
 
   const [multipul, setMultipul] = useState(false);
+  const [modalVisible, setModalVisible] = useState(false);
+  const [isValid, setIsValid] = useState(true);
+  const [msg, setMsg] = useState("");
+  const [folder, setFolder] = useState({
+    name: "",
+  });
+
+  const handleCancel = async () => {
+    setModalVisible(!modalVisible);
+    navigation.replace("Home");
+  };
+
+  const ShowModal = async () => {
+    setModalVisible(!modalVisible);
+  };
+
+  // const handleSubmit = async () => {
+  //   setModalVisible(!modalVisible);
+  //   await folderStore.createFolder(folder);
+  //   navigation.replace("Home");
+  // };
+
+  const handleSubmit = async () => {
+    const folderName = folderStore.folders.filter(
+      (_folder) => _folder.name.toLowerCase() === folder.name.toLowerCase()
+    );
+
+    console.log(",,,,,foldername", folderName.length);
+    if (folderName.length === 0) {
+      if (folder.name === "") {
+        setMsg("Invalid folder name ");
+        setIsValid(false);
+      } else {
+        setModalVisible(!modalVisible);
+        await folderStore.createFolder(folder);
+        navigation.replace("Home");
+      }
+    } else {
+      setMsg("Folder name already exists");
+      setIsValid(false);
+    }
+  };
 
   const PinList = folderStore.folders
     .filter((folder) => folder.userId === authStore.user.id)
@@ -33,7 +81,6 @@ const FolderList = ({ navigation }) => {
         multipul={multipul}
       />
     ));
-
   const defualtFolderList = folderStore.folders
     .filter((folder) => folder.userId === authStore.user.id)
     .filter((folder) => folder.defaultFolder)
@@ -45,7 +92,6 @@ const FolderList = ({ navigation }) => {
         multipul={multipul}
       />
     ));
-
   const UnPinList = folderStore.folders
     .filter((folder) => folder.userId === authStore.user.id)
     .filter((folder) => !folder.pin && !folder.defaultFolder)
@@ -64,7 +110,6 @@ const FolderList = ({ navigation }) => {
   };
   const handleDelete = () => {
     setMultipul(!multipul);
-
     if (multipul && folderStore.selectedFolders.length !== 0) {
       Alert.alert("Delete", "Are you sure you want to delete this folder?", [
         {
@@ -80,37 +125,82 @@ const FolderList = ({ navigation }) => {
       ]);
     } else folderStore.selectedFolders = [];
   };
-
   return (
     <>
-      <PageTitle>My Folders</PageTitle>
-      {/* <View style={{ flexDirection: "row" }}> */}
-      <AntDesign
-        onPress={() => navigation.navigate("CreateFolderForm")}
-        name="addfolder"
-        size={22}
-        color="#ffbf00"
-        style={{ marginTop: 18, marginBottom: -1, marginLeft: 313 }}
-      />
-      {/* </View> */}
-      <Text
-        style={{
-          fontSize: 16,
-          marginTop: -20,
-          marginBottom: 10,
-          marginLeft: 40,
+      <View style={{ flexDirection: "row" }}>
+        <PageTitle>My Folders</PageTitle>
+        <AntDesign
+          onPress={ShowModal}
+          name="addfolder"
+          size={25}
+          color="#ffbf00"
+          style={{ marginTop: 20, marginBottom: 20, marginLeft: 170 }}
+        />
+      </View>
 
-          color: "#ffbf00",
-        }}
-        onPress={handleDelete}
-      >
-        {multipul && folderStore.selectedFolders.length > 0 ? "Delete" : "Edit"}
+      <Modal animationType="slide" transparent={true} visible={modalVisible}>
+        <View style={styles.centeredView}>
+          <View style={styles.modalView}>
+            <FormTextInput
+              onChangeText={(name) => setFolder({ ...folder, name })}
+              placeholder="Folder Name"
+              placeholderTextColor="#A6AEC1"
+            />
+            {!isValid && (
+              <Animatable.View animation="fadeInLeft" duration={400}>
+                <Text style={{ color: "red" }}>{msg}</Text>
+              </Animatable.View>
+            )}
+            <FormButton onPress={handleSubmit}>
+              <FormButtonText>Save Changes</FormButtonText>
+            </FormButton>
+            <FormButton onPress={handleCancel}>
+              <FormButtonText>Cancel</FormButtonText>
+            </FormButton>
+          </View>
+        </View>
+      </Modal>
+
+      <Text style={{ marginLeft: 300 }} onPress={handleDelete}>
+        {multipul && folderStore.selectedFolders.length > 0
+          ? "Delete"
+          : "Select"}
       </Text>
 
       <List>{defualtFolderList}</List>
-      <List style={{ marginTop: 20 }}>{PinList}</List>
-      <List style={{ marginTop: 20 }}>{UnPinList}</List>
+      <List>{PinList}</List>
+      <Text>{"\n"}</Text>
+      <List>{UnPinList}</List>
     </>
   );
 };
 export default observer(FolderList);
+
+const styles = StyleSheet.create({
+  centeredView: {
+    flex: 1,
+    justifyContent: "center",
+    alignItems: "center",
+    marginTop: 22,
+  },
+  modalView: {
+    margin: 20,
+    backgroundColor: "white",
+    borderRadius: 20,
+    padding: 35,
+    alignItems: "center",
+    shadowColor: "#000",
+    shadowOffset: {
+      width: 0,
+      height: 2,
+    },
+    shadowOpacity: 0.25,
+    shadowRadius: 3.84,
+    elevation: 5,
+  },
+
+  modalText: {
+    marginBottom: 15,
+    textAlign: "center",
+  },
+});

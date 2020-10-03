@@ -109,12 +109,14 @@ const TabScreen = observer(() => (
         title: false,
         tabBarIcon: ({ color }) => (
           <>
-            <Badge
-              badgeStyle={{ marginLeft: 25 }}
-              value={receiptStore.totalExpiredReceipt}
-              status="error"
-              containerStyle={{ position: "absolute", top: -3, right: -12 }}
-            />
+            {receiptStore.Badge && (
+              <Badge
+                badgeStyle={{ marginLeft: 25 }}
+                value={receiptStore.totalExpiredReceipt}
+                status="error"
+                containerStyle={{ position: "absolute", top: -3, right: -12 }}
+              />
+            )}
             <Icon name="ios-notifications" color={color} size={26} />
           </>
         ),

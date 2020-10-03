@@ -10,7 +10,7 @@ export const TextStyle = styled.Text`
 export const AuthContainer = styled.View`
   flex: 1;
   align-self: stretch;
-  justify-content: center;
+  /* justify-content: center; */
   align-items: center;
   background-color: white;
   padding-right: 60px;

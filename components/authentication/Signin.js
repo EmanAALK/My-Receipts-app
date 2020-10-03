@@ -24,7 +24,7 @@ import { Text } from "native-base";
 import { Alert, Image } from "react-native";
 import receiptStore from "../../store/ReceiptStore";
 import { Button } from "react-native-paper";
-import Logo from "../../assets/logo3.png";
+import Logo from "../../assets/logo2.png";
 
 const Signin = ({ navigation }) => {
   const [user, setUser] = useState({
@@ -145,7 +145,7 @@ const Signin = ({ navigation }) => {
     <AuthContainer>
       <Image
         source={Logo}
-        style={{ width: 170, height: 150, marginBottom: 5 }}
+        style={{ width: 140, height: 150, marginBottom: 5 }}
       />
       <AuthTitle>My Receipt</AuthTitle>
       <AuthTextInput
