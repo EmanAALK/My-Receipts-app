@@ -99,53 +99,33 @@ const TabScreen = observer(() => (
         ),
       }}
     />
-    {a === 1 ? (
-      <Tab.Screen
-        name="Notifications"
-        component={NotificationStackscreen}
-        options={{
-          backgroundColor: "white",
-          showLabel: "Reminders",
-          title: "Reminders",
-          tabBarIcon: ({ color }) => (
-            <>
+
+
+    <Tab.Screen
+      name="Notifications"
+      component={NotificationStackscreen}
+      options={{
+        backgroundColor: "white",
+        showLabel: false,
+        title: false,
+        tabBarIcon: ({ color }) => (
+          <>
+            {receiptStore.Badge && (
+
               <Badge
                 badgeStyle={{ marginLeft: 25 }}
                 value={receiptStore.totalExpiredReceipt}
                 status="error"
                 containerStyle={{ position: "absolute", top: -3, right: -12 }}
               />
-              <Ionicons
-                name="ios-notifications-outline"
-                color={color}
-                size={23}
-              />
-            </>
-          ),
-        }}
-      />
-    ) : (
-      <Tab.Screen
-        name="Notifications"
-        component={NotificationStackscreen}
-        options={{
-          backgroundColor: "white",
-          showLabel: false,
-          title: false,
-          tabBarIcon: ({ color }) => (
-            <>
-              <Icon
-                // onPress={handleCancel}
-                name="ios-notifications"
-                color={"#C2C2C2"}
-                size={26}
-              />
-              <Icon name="ios-notifications" color={color} size={26} />
-            </>
-          ),
-        }}
-      />
-    )}
+
+            )}
+            <Icon name="ios-notifications" color={color} size={26} />
+          </>
+        ),
+      }}
+    />
+
   </Tab.Navigator>
 ));
 

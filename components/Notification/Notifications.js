@@ -16,6 +16,7 @@ import authStore from "../../store/authStore";
 
 const Notifications = ({ navigation }) => {
   if (receiptStore.loading) return <Spinner />;
+  receiptStore.Badge = false;
 
   // get all expiration dates of receipts (objects)
   const receiptList = receiptStore.receipts.filter(
@@ -69,11 +70,13 @@ const Notifications = ({ navigation }) => {
       >
         Receipts Expiring in Seven Days:
       </Text>
-      {isExpired.length === 0 ? (
-        <Text> No receipts</Text>
-      ) : (
-        <List>{isExpired}</List>
-      )}
+      <ScrollView>
+        {isExpired.length === 0 ? (
+          <Text> No receipts</Text>
+        ) : (
+          <List>{isExpired}</List>
+        )}
+      </ScrollView>
     </View>
   );
 };

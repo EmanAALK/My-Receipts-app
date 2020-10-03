@@ -23,6 +23,7 @@ const EditProfile = ({ navigation }) => {
   const [edit, setEdit] = useState(false);
 
   const handleSubmit = async () => {
+    console.log("..._user", _user);
     await authStore.updateUser(_user);
     navigation.goBack();
   };
@@ -47,7 +48,7 @@ const EditProfile = ({ navigation }) => {
               style={{ width: 180, marginLeft: 30 }}
             />
           ) : (
-            <Text style={{ marginLeft: 30 }}>{_user.username}</Text>
+            <Text style={{ marginLeft: 30, width: 180 }}>{_user.username}</Text>
           )}
         </View>
 
@@ -64,7 +65,7 @@ const EditProfile = ({ navigation }) => {
               style={{ width: 180, marginLeft: 70 }}
             />
           ) : (
-            <Text style={{ marginLeft: 68 }}>{_user.email}</Text>
+            <Text style={{ marginLeft: 68, width: 180 }}>{_user.email}</Text>
           )}
         </View>
         <EditContainer>
