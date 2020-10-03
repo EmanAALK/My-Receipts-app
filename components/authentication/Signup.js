@@ -14,10 +14,13 @@ import {
   AuthOther,
 } from "./styles";
 import { LinearGradient } from "expo-linear-gradient";
-import { Alert } from "react-native";
+import { Alert, Image } from "react-native";
+import { Text } from "native-base";
+import Logo from "../../assets/logo3.png";
 
 const Signup = ({ navigation }) => {
   const [user, setUser] = useState({});
+  const [isValid, setIsValid] = useState(true);
 
   const handleSubmit = async () => {
     await authStore.signup(user);
@@ -28,7 +31,7 @@ const Signup = ({ navigation }) => {
     await authStore.signup(user);
     if (authStore.user) {
       navigation.replace("Home");
-    }
+    } else setIsValid(false);
     Alert.alert("Mood", "Good Evening, How Are You Feeling Today?", [
       {
         text: "Skip",
@@ -49,7 +52,7 @@ const Signup = ({ navigation }) => {
     await authStore.signup(user);
     if (authStore.user) {
       navigation.replace("Home");
-    }
+    } else setIsValid(false);
     Alert.alert("Mood", "Good Morning, How Are You Feeling Today?", [
       {
         text: "Skip",
@@ -70,8 +73,7 @@ const Signup = ({ navigation }) => {
     await authStore.signup(user);
     if (authStore.user) {
       navigation.replace("Home");
-    }
-
+    } else setIsValid(false);
     Alert.alert("Mood", "Good Afternoon, How Are You Feeling Today?", [
       {
         text: "Skip",
@@ -106,6 +108,10 @@ const Signup = ({ navigation }) => {
 
   return (
     <AuthContainer>
+      <Image
+        source={Logo}
+        style={{ width: 150, height: 100, marginBottom: 20 }}
+      />
       <AuthTitle>Sign up</AuthTitle>
       <AuthTextInput
         onChangeText={(username) => setUser({ ...user, username })}
@@ -113,16 +119,7 @@ const Signup = ({ navigation }) => {
         placeholderTextColor="#A6AEC1"
         autoCapitalize="none"
       />
-      <AuthTextInput
-        onChangeText={(firstName) => setUser({ ...user, firstName })}
-        placeholder="First name"
-        placeholderTextColor="#A6AEC1"
-      />
-      <AuthTextInput
-        onChangeText={(lastName) => setUser({ ...user, lastName })}
-        placeholder="Last Name"
-        placeholderTextColor="#A6AEC1"
-      />
+
       <AuthTextInput
         onChangeText={(email) => setUser({ ...user, email })}
         placeholder="Email"
@@ -134,6 +131,7 @@ const Signup = ({ navigation }) => {
         placeholderTextColor="#A6AEC1"
         secureTextEntry={true}
       />
+      {!isValid && <Text style={{ color: "red" }}>Invalid Fields </Text>}
       {authStore.getTime <= 12 && (
         <AuthButton onPress={handleSubmitM}>
           <LinearGradient

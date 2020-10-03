@@ -21,9 +21,10 @@ import { TouchableOpacity } from "react-native-gesture-handler";
 import { LinearGradient } from "expo-linear-gradient";
 import * as Animatable from "react-native-animatable";
 import { Text } from "native-base";
-import { Alert } from "react-native";
+import { Alert, Image } from "react-native";
 import receiptStore from "../../store/ReceiptStore";
 import { Button } from "react-native-paper";
+import Logo from "../../assets/logo3.png";
 
 const Signin = ({ navigation }) => {
   const [user, setUser] = useState({
@@ -142,7 +143,11 @@ const Signin = ({ navigation }) => {
   };
   return (
     <AuthContainer>
-      <AuthTitle>Welcome!</AuthTitle>
+      <Image
+        source={Logo}
+        style={{ width: 170, height: 150, marginBottom: 5 }}
+      />
+      <AuthTitle>My Receipt</AuthTitle>
       <AuthTextInput
         onChangeText={(username) => setUser({ ...user, username })}
         placeholder="Username"
