@@ -35,7 +35,9 @@ const EditProfile = ({ navigation }) => {
           style={{ flexDirection: "row", marginTop: 100, marginBottom: 50 }}
         >
           <Text style={{ fontSize: 18 }} note>
-            Username
+            {/* Username */}
+            {/* should be display name */}
+            Displayname
           </Text>
           {edit ? (
             <AuthTextInput

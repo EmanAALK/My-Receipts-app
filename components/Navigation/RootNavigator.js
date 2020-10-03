@@ -41,12 +41,12 @@ const TabScreen = observer(() => (
     initialRouteName="Home"
   >
     <Tab.Screen
-      name="Home"
+      name="My Folders"
       component={HomeStackScreen}
       options={{
         backgroundColor: "white",
         showLabel: false,
-        title: "Home",
+        title: "My Folders",
 
         tabBarIcon: ({ color }) => (
           // <Icon name='ios-home' activeColor='#ffbf00' color={color} size={26} />
@@ -100,6 +100,7 @@ const TabScreen = observer(() => (
       }}
     />
 
+
     <Tab.Screen
       name="Notifications"
       component={NotificationStackscreen}
@@ -110,20 +111,24 @@ const TabScreen = observer(() => (
         tabBarIcon: ({ color }) => (
           <>
             {receiptStore.Badge && (
+
               <Badge
                 badgeStyle={{ marginLeft: 25 }}
                 value={receiptStore.totalExpiredReceipt}
                 status="error"
                 containerStyle={{ position: "absolute", top: -3, right: -12 }}
               />
+
             )}
             <Icon name="ios-notifications" color={color} size={26} />
           </>
         ),
       }}
     />
+
   </Tab.Navigator>
 ));
+
 const RootNavigator = () => {
   return (
     <>

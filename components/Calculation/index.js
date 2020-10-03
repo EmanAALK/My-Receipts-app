@@ -24,9 +24,9 @@ const Calculation = ({ navigation }) => {
   const [dateColor, setDateColor] = useState(selectColor);
   const [folderColor, setFolderColor] = useState(unSelectColor);
   const [selectedIndex, setSelectedIndex] = useState(0);
-  const updateIndex = (selectedIndex) => {
-    setSelectedIndex(selectedIndex);
-  };
+  // const updateIndex = (selectedIndex) => {
+  //   setSelectedIndex(selectedIndex);
+  // };
   const handleDateChange = () => {
     setDateColor(selectColor);
     setFolderColor(unSelectColor);
@@ -44,15 +44,6 @@ const Calculation = ({ navigation }) => {
       <NoteTitle> Calculate your expenses. </NoteTitle>
 
       <InputContainer>
-        {/* <ButtonGroup
-
-          onPress={updateIndex}
-          selectedIndex={selectedIndex}
-          buttons={[`By Date`, `By Folder`]}
-          containerStyle={{ height: 30, width: 220, marginTop: 10 }}
-          selectedButtonStyle={{ backgroundColor: "#ffbf00" }}
-        /> */}
-
         <View
           style={{
             flexDirection: "row",

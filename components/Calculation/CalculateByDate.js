@@ -77,11 +77,13 @@ const CalculateByDate = ({ navigation }) => {
               showIcon={false}
               style={{ width: 255, marginTop: 5 }}
               date={fromDate}
+
               mode="date"
               placeholder="select date"
               format="YYYY-MM-DD"
               confirmBtnText="Confirm"
               cancelBtnText="Cancel"
+
               customStyles={{
                 dateInput: {
                   marginLeft: 5,
@@ -112,6 +114,7 @@ const CalculateByDate = ({ navigation }) => {
                 marginLeft: 18,
               }}
               date={toDate}
+
               mode="date"
               placeholder="select date"
               format="YYYY-MM-DD"
@@ -122,6 +125,7 @@ const CalculateByDate = ({ navigation }) => {
               format="YYYY-MM-DD"
               confirmBtnText="Confirm"
               cancelBtnText="Cancel"
+
               customStyles={{
                 dateInput: {
                   marginLeft: 5,

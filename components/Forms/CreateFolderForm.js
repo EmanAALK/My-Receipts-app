@@ -12,17 +12,36 @@ import {
   FormButtonText,
   FormButton,
 } from "./styles";
+import * as Animatable from "react-native-animatable";
 
 import { Text, View } from "react-native";
 
 const CreateFolderForm = ({ navigation }) => {
+  const [isValid, setIsValid] = useState(true);
+  const [msg, setMsg] = useState("");
+
   const [folder, setFolder] = useState({
     name: "",
   });
 
   const handleSubmit = async () => {
-    await folderStore.createFolder(folder);
-    navigation.replace("Home");
+    const folderName = folderStore.folders.filter(
+      (_folder) => _folder.name.toLowerCase() === folder.name.toLowerCase()
+    );
+
+    console.log(",,,,,foldername", folderName.length);
+    if (folderName.length === 0) {
+      if (folder.name === "") {
+        setMsg("Invalid folder name ");
+        setIsValid(false);
+      } else {
+        await folderStore.createFolder(folder);
+        navigation.replace("Home");
+      }
+    } else {
+      setMsg("Folder name already exists");
+      setIsValid(false);
+    }
   };
 
   const handleCancel = async () => {
@@ -45,6 +64,11 @@ const CreateFolderForm = ({ navigation }) => {
             placeholder="Folder Name"
             placeholderTextColor="#A6AEC1"
           />
+          {!isValid && (
+            <Animatable.View animation="fadeInLeft" duration={400}>
+              <Text style={{ color: "red" }}>{msg}</Text>
+            </Animatable.View>
+          )}
           <View style={{ flexDirection: "row" }}>
             <FormButton onPress={handleSubmit}>
               <FormButtonText>Save Changes</FormButtonText>
@@ -63,6 +87,7 @@ const CreateFolderForm = ({ navigation }) => {
             placeholder="Folder Name"
             placeholderTextColor="#A6AEC1"
           />
+
           <View style={{ flexDirection: "row" }}>
             <FormButton onPress={handleSubmit}>
               <FormButtonText>Save Changes</FormButtonText>

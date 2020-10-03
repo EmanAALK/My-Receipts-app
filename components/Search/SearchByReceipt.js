@@ -14,10 +14,8 @@ const Search = ({ navigation, searchReceipt }) => {
       <Card
         style={{
           alignSelf: "center",
-
-          marginBottom: 5,
           width: "89%",
-          height: 50,
+          height: 90,
         }}
       >
         <CardItem
@@ -40,6 +38,15 @@ const Search = ({ navigation, searchReceipt }) => {
           >
             {item.name}
           </Text>
+
+          <View style={{ padding: 20 }}>
+            <Text style={{ fontSize: 12 }} note>
+              Date of purchase: {item.date}
+            </Text>
+            <Text style={{ fontSize: 12 }} note>
+              Expiration Date: {item.expDate}
+            </Text>
+          </View>
         </CardItem>
       </Card>
     );

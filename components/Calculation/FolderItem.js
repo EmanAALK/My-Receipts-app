@@ -9,13 +9,12 @@ import { Table, Row } from "react-native-table-component";
 //Styling
 import { Text } from "native-base";
 
-const ReceiptItem = ({ folder, navigation }) => {
+const FolderItem = ({ folder, navigation }) => {
   let total = 0;
   const receipt = receiptStore.receipts.filter(
-    (receipt) => receipt.folder.id === folder.id
+    (receipt) => receipt.folderId === folder.id
   );
-  const amount = receipt.map((receipt) => (total = total + +receipt.price));
-
+  receipt.map((receipt) => (total = total + +receipt.price));
   const renderItem = ({ item }) => {
     return (
       <Table
@@ -75,4 +74,4 @@ const ReceiptItem = ({ folder, navigation }) => {
   );
 };
 
-export default observer(ReceiptItem);
+export default observer(FolderItem);
