@@ -13,6 +13,7 @@ const MyTheme = {
 };
 
 const App = () => {
+  console.disableYellowBox = true;
   return (
     <NavigationContainer theme={MyTheme}>
       <RootNavigator style={{ backgroundColor: "red" }} />
