@@ -14,6 +14,7 @@ import {
   FormButtonText,
   FormButton,
 } from "../Forms/styles";
+import * as Animatable from "react-native-animatable";
 
 // store
 import folderStore from "../../store/FolderStore";
@@ -27,6 +28,8 @@ const FolderList = ({ navigation }) => {
 
   const [multipul, setMultipul] = useState(false);
   const [modalVisible, setModalVisible] = useState(false);
+  const [isValid, setIsValid] = useState(true);
+  const [msg, setMsg] = useState("");
   const [folder, setFolder] = useState({
     name: "",
   });
@@ -40,11 +43,33 @@ const FolderList = ({ navigation }) => {
     setModalVisible(!modalVisible);
   };
 
+  // const handleSubmit = async () => {
+  //   setModalVisible(!modalVisible);
+  //   await folderStore.createFolder(folder);
+  //   navigation.replace("Home");
+  // };
+
   const handleSubmit = async () => {
-    setModalVisible(!modalVisible);
-    await folderStore.createFolder(folder);
-    navigation.replace("Home");
+    const folderName = folderStore.folders.filter(
+      (_folder) => _folder.name.toLowerCase() === folder.name.toLowerCase()
+    );
+
+    console.log(",,,,,foldername", folderName.length);
+    if (folderName.length === 0) {
+      if (folder.name === "") {
+        setMsg("Invalid folder name ");
+        setIsValid(false);
+      } else {
+        setModalVisible(!modalVisible);
+        await folderStore.createFolder(folder);
+        navigation.replace("Home");
+      }
+    } else {
+      setMsg("Folder name already exists");
+      setIsValid(false);
+    }
   };
+
   const PinList = folderStore.folders
     .filter((folder) => folder.userId === authStore.user.id)
     .filter((folder) => folder.pin)
@@ -121,7 +146,11 @@ const FolderList = ({ navigation }) => {
               placeholder="Folder Name"
               placeholderTextColor="#A6AEC1"
             />
-
+            {!isValid && (
+              <Animatable.View animation="fadeInLeft" duration={400}>
+                <Text style={{ color: "red" }}>{msg}</Text>
+              </Animatable.View>
+            )}
             <FormButton onPress={handleSubmit}>
               <FormButtonText>Save Changes</FormButtonText>
             </FormButton>
@@ -137,23 +166,6 @@ const FolderList = ({ navigation }) => {
           ? "Delete"
           : "Select"}
       </Text>
-      {/* { <ButtonGroup
-         buttons={[
-           <Text onPress={() => navigation.navigate("CreateFolderForm")}>
-             Add Folder
-          </Text>,
-          <Text>
-            <Icon
-              onPress={() => navigation.navigate("Search")}
-              name="search1"
-              color="grey"
-              size={25}
-            />
-          </Text>,
-         ]}
-         containerStyle={{ height: 30, marginTop: 10 }}
-         selectedButtonStyle={{ backgroundColor: "grey" }}
-       />  */}
 
       <List>{defualtFolderList}</List>
       <List>{PinList}</List>
