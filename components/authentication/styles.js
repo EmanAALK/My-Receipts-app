@@ -11,10 +11,11 @@ export const AuthContainer = styled.View`
 `;
 
 export const AuthTitle = styled.Text`
-  color: #000000;
+  color: #ffbf00;
   font-size: 24px;
   margin-bottom: 20px;
   border-bottom-color: black;
+  font-weight: bold;
 `;
 
 export const AuthTextInput = styled.TextInput`
