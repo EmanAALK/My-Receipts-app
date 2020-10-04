@@ -10,6 +10,13 @@ export const AuthContainer = styled.View`
   padding-left: 60px;
 `;
 
+export const MyTitle = styled.Text`
+  color: #ffbf00;
+  font-size: 24px;
+  margin-bottom: 45px;
+  border-bottom-color: black;
+  font-weight: bold;
+`;
 export const AuthTitle = styled.Text`
   color: #000000;
   font-size: 24px;

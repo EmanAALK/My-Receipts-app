@@ -5,69 +5,73 @@ import { observer } from "mobx-react";
 import receiptStore from "../../store/ReceiptStore";
 import { FlatList } from "react-native";
 import { Table, Row } from "react-native-table-component";
+import { View, Card, CardItem, Left, Body, Right } from "native-base";
 
 //Styling
 import { Text } from "native-base";
 
-const ReceiptItem = ({ folder, navigation }) => {
+const FolderItem = ({ folder, navigation }) => {
   let total = 0;
   const receipt = receiptStore.receipts.filter(
-    (receipt) => receipt.folder.id === folder.id
+    (receipt) => receipt.folderId === folder.id
   );
-  const amount = receipt.map((receipt) => (total = total + receipt.price));
-
+  receipt.map((receipt) => (total = total + +receipt.price));
   const renderItem = ({ item }) => {
     return (
-      <Table
-        borderStyle={{ borderWidth: 1, borderColor: "lightgrey" }}
-        style={{ width: 350 }}
-      >
-        <Row
-          data={[item.name, item.price]}
-          style={{
-            height: 30,
-            backgroundColor: "white",
-          }}
-          textStyle={{ marginLeft: 30 }}
-        />
-      </Table>
+      <Card style={{ width: 300, alignSelf: "center" }}>
+        <CardItem>
+          <Left>
+            <Text>{item.name}</Text>
+          </Left>
+          <Body></Body>
+
+          <Right>
+            <Text>{item.price}</Text>
+          </Right>
+        </CardItem>
+      </Card>
     );
   };
 
   return (
     <>
-      <Text style={{ margin: 10 }}>Folder: {folder.name}</Text>
-      <Table
-        borderStyle={{ borderWidth: 1, borderColor: "lightgrey" }}
-        style={{ width: 350 }}
+      <Text style={{ margin: 5, marginLeft: 40 }}>Folder: {folder.name}</Text>
+      <Card
+        style={{ width: 300, alignSelf: "center", backgroundColor: "#ffbf00" }}
       >
-        <Row
-          data={["Store", "price"]}
-          style={{
-            height: 30,
-            backgroundColor: "white",
-          }}
-          textStyle={{ marginLeft: 30, color: "blue" }}
-        />
-      </Table>
+        <CardItem style={{ backgroundColor: "#ffbf00" }}>
+          <Left>
+            <Text>Store</Text>
+          </Left>
+          <Body></Body>
+
+          <Right>
+            <Text>price</Text>
+          </Right>
+        </CardItem>
+      </Card>
+
       <FlatList
         data={receipt}
         style={{ flex: 1 }}
         renderItem={renderItem}
         numColumns={1}
       />
-      <Table borderStyle={{ borderWidth: 1, borderColor: "lightgrey" }}>
-        <Row
-          data={["Total", total]}
-          style={{
-            height: 30,
-            backgroundColor: "white",
-          }}
-          textStyle={{ marginLeft: 30, color: "blue" }}
-        />
-      </Table>
+
+      <Card style={{ width: 300, alignSelf: "center" }}>
+        <CardItem>
+          <Left>
+            <Text style={{ color: "blue" }}>total</Text>
+          </Left>
+          <Body></Body>
+
+          <Right>
+            <Text style={{ color: "blue" }}>{total}</Text>
+          </Right>
+        </CardItem>
+      </Card>
     </>
   );
 };
 
-export default observer(ReceiptItem);
+export default observer(FolderItem);

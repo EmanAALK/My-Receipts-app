@@ -11,6 +11,8 @@ import authStore from "../../store/authStore";
 
 //Styles
 import { Content, Spinner, List, Text, Image, Button } from "native-base";
+import { ScrollView } from "react-native";
+import { PageTitle, NoteTitle } from "./styles";
 
 const ReceiptList = ({ navigation }) => {
   if (receiptStore.loading) return <Spinner />;
@@ -27,9 +29,18 @@ const ReceiptList = ({ navigation }) => {
     ));
 
   return (
-    <Content style={{ backgroundColor: "white" }}>
-      <List>{receiptList}</List>
-    </Content>
+    <>
+      <PageTitle>Archived Receipts</PageTitle>
+      <Content style={{ backgroundColor: "white" }}>
+        <ScrollView>
+          {receiptList.length === 0 ? (
+            <NoteTitle>No receipts</NoteTitle>
+          ) : (
+            <List>{receiptList}</List>
+          )}
+        </ScrollView>
+      </Content>
+    </>
   );
 };
 

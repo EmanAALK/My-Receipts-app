@@ -7,8 +7,8 @@ import { Card } from "react-native-paper";
 import { List, ListItem, Spinner, Text } from "native-base";
 import { CardItem, Left, Right } from "native-base";
 import { View } from "react-native-animatable";
-import { PageTitle, NoteTitle } from "./styles";
-import { ScrollView } from "react-native";
+import { PageTitle, NoteTitle, EmptyTitle } from "./styles";
+import { ScrollView, StyleSheet } from "react-native";
 
 // store
 import receiptStore from "../../store/ReceiptStore";
@@ -16,6 +16,7 @@ import authStore from "../../store/authStore";
 
 const Notifications = ({ navigation }) => {
   if (receiptStore.loading) return <Spinner />;
+  receiptStore.Badge = false;
 
   // get all expiration dates of receipts (objects)
   const receiptList = receiptStore.receipts.filter(
@@ -61,21 +62,38 @@ const Notifications = ({ navigation }) => {
       </>
     ));
   return (
-    <View style={{ marginTop: 30, marginBottom: 30 }}>
-      <Text
-        style={{
-          alignItems: "center",
-        }}
-      >
-        Receipts Expiring in Seven Days:
-      </Text>
-      {isExpired.length === 0 ? (
-        <Text> No receipts</Text>
-      ) : (
-        <List>{isExpired}</List>
-      )}
-    </View>
+    <>
+      <PageTitle>Reminder</PageTitle>
+
+      <NoteTitle>These receipts will expire within seven days.</NoteTitle>
+      <ScrollView>
+        <View style={{ marginTop: 30, marginBottom: 30 }}>
+          {isExpired.length === 0 ? (
+            <List>
+              <EmptyTitle>No receipts</EmptyTitle>
+            </List>
+          ) : (
+            <List>{isExpired}</List>
+          )}
+        </View>
+      </ScrollView>
+    </>
   );
 };
 
 export default observer(Notifications);
+
+const styles = StyleSheet.create({
+  scrollView: {
+    backgroundColor: "#ffbf00",
+    marginHorizontal: 20,
+  },
+  text: {
+    fontSize: 42,
+  },
+  indicatorStyle: {
+    color: "#ffbf00",
+  },
+});
+
+// style={styles.scrollView}

@@ -16,7 +16,7 @@ import {
   // Button,
   Thumbnail,
 } from "native-base";
-import { PageTitle } from "./styles";
+import { PageTitle, ThreeDots, RList } from "./styles";
 import { CheckBox } from "react-native-elements";
 import Icon from "react-native-vector-icons/MaterialCommunityIcons";
 import { Alert } from "react-native";
@@ -89,19 +89,24 @@ const ReceiptItem = ({ receipt, navigation, multipul }) => {
           />
         )}
         <Left>
-          <Icon name='receipt' size={25} color='lightgrey' />
-          <Text style={{ paddingLeft: 20 }}>{receipt.name}</Text>
+          <Icon
+            name='receipt'
+            size={25}
+            color='lightgrey'
+            style={{ marginLeft: 20, marginRight: 18 }}
+          />
+          <Text>{receipt.name}</Text>
         </Left>
 
         <Menu
           ref={setMenuRef}
-          button={
-            <Text style={{ fontWeight: "bold" }} onPress={showMenu}>
-              ...
-            </Text>
-          }
+          button={<ThreeDots onPress={showMenu}>...</ThreeDots>}
+          style={{ width: 80, marginRight: 20, marginTop: 20 }}
         >
-          <MenuItem onPress={handleSubmit}>
+          <MenuItem
+            style={{ marginRight: 2, marginLeft: -8, marginBottom: -3 }}
+            onPress={handleSubmit}
+          >
             {receipt.archive ? "unArchive" : "Archive"}
           </MenuItem>
 

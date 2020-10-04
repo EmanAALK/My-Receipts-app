@@ -15,4 +15,15 @@ export const NoteTitle = styled.Text`
   margin-top: 8px;
   margin-bottom: 10px;
   margin-left: 35px;
+  margin-right: 10px;
+`;
+
+export const EmptyTitle = styled.Text`
+  color: #000000;
+  opacity: 0.5;
+  font-size: 16px;
+  margin-top: 10px;
+  margin-bottom: 10px;
+  margin-left: 35px;
+  margin-right: 10px;
 `;

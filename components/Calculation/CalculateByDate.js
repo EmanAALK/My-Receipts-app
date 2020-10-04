@@ -37,7 +37,7 @@ const CalculateByDate = ({ navigation }) => {
     .filter((receipt) => receipt.date >= fromDate && receipt.date <= toDate)
     .map(
       (receipt) => (
-        (total = total + receipt.price),
+        (total = total + +receipt.price),
         (
           <Card>
             <CardItem>
@@ -141,7 +141,6 @@ const CalculateByDate = ({ navigation }) => {
               <Left>
                 <Text style={{ color: "red" }}>Total Amount</Text>
               </Left>
-              <Body></Body>
 
               <Right>
                 <Text style={{ color: "red" }}>{total}</Text>

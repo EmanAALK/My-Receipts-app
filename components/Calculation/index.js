@@ -13,7 +13,8 @@ import {
 
 import { ButtonGroup } from "react-native-elements";
 import { Text, View } from "native-base";
-//Calculater
+
+//Calculator
 import CalculateByFolder from "./CalculateByFolder";
 import CalculateByDate from "./CalculateByDate";
 
@@ -44,15 +45,6 @@ const Calculation = ({ navigation }) => {
       <NoteTitle> Calculate your expenses. </NoteTitle>
 
       <InputContainer>
-        {/* <ButtonGroup
-
-          onPress={updateIndex}
-          selectedIndex={selectedIndex}
-          buttons={[`By Date`, `By Folder`]}
-          containerStyle={{ height: 30, width: 220, marginTop: 10 }}
-          selectedButtonStyle={{ backgroundColor: "#ffbf00" }}
-        /> */}
-
         <View
           style={{
             flexDirection: "row",

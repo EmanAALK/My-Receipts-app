@@ -22,6 +22,7 @@ import {
 import { View } from "react-native-animatable";
 import Icon from "react-native-vector-icons/Feather";
 import { Alert } from "react-native";
+import { EmptyTitle, EditButtonText, PageTitle } from "./styles";
 
 const ReceiptList = ({ navigation, route }) => {
   if (receiptStore.loading) return <Spinner />;
@@ -71,14 +72,24 @@ const ReceiptList = ({ navigation, route }) => {
 
   return (
     <>
-      <Text style={{ marginLeft: 300 }} onPress={handleDelete}>
-        {multipul && receiptStore.selectedReceipts.length > 0
-          ? "Delete"
-          : "Select"}
-      </Text>
-
-      <Content style={{ backgroundColor: "white" }}>
-        <List>{receiptList}</List>
+      <PageTitle>{folder.name}</PageTitle>
+      <View style={{ flexDirection: "row" }}>
+        <EditButtonText onPress={handleDelete}>
+          {multipul && receiptStore.selectedReceipts.length > 0
+            ? "Delete"
+            : "Edit"}
+        </EditButtonText>
+      </View>
+      <Content>
+        {receiptList.length === 0 ? (
+          <View style={{ flexDirection: "row" }}>
+            <List>
+              <EmptyTitle>No receipts</EmptyTitle>
+            </List>
+          </View>
+        ) : (
+          <List>{receiptList}</List>
+        )}
       </Content>
     </>
   );

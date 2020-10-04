@@ -66,7 +66,7 @@ class AuthStore {
 
       for (const key in updatedUser) formData.append(key, updatedUser[key]);
 
-      const res = await instance.put(`/`, formData);
+      const res = await instance.put(`/`, updatedUser);
 
       this.user = updatedUser;
     } catch (error) {

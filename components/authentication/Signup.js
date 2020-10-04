@@ -12,6 +12,7 @@ import {
   AuthButton,
   AuthButtonText,
   AuthOther,
+  MyTitle,
 } from "./styles";
 import { LinearGradient } from "expo-linear-gradient";
 import { Alert } from "react-native";
@@ -74,16 +75,16 @@ const Signup = ({ navigation }) => {
 
     Alert.alert("Mood", "Good Afternoon, How Are You Feeling Today?", [
       {
-        text: "Skip",
-        style: "Skip",
-      },
-      {
         text: "Happy",
         onPress: GoodAlert,
       },
       {
         text: "Sad",
         onPress: BadAlert,
+      },
+      {
+        text: "Skip",
+        style: "Skip",
       },
     ]);
   };
@@ -106,35 +107,26 @@ const Signup = ({ navigation }) => {
 
   return (
     <AuthContainer>
-      <AuthTitle>Sign up</AuthTitle>
+      <MyTitle>Sign up</MyTitle>
       <AuthTextInput
         onChangeText={(username) => setUser({ ...user, username })}
-        placeholder="Username"
-        placeholderTextColor="#A6AEC1"
-        autoCapitalize="none"
+        placeholder='Username'
+        placeholderTextColor='#A6AEC1'
+        autoCapitalize='none'
       />
-      <AuthTextInput
-        onChangeText={(firstName) => setUser({ ...user, firstName })}
-        placeholder="First name"
-        placeholderTextColor="#A6AEC1"
-      />
-      <AuthTextInput
-        onChangeText={(lastName) => setUser({ ...user, lastName })}
-        placeholder="Last Name"
-        placeholderTextColor="#A6AEC1"
-      />
+
       <AuthTextInput
         onChangeText={(email) => setUser({ ...user, email })}
-        placeholder="Email"
-        placeholderTextColor="#A6AEC1"
+        placeholder='Email'
+        placeholderTextColor='#A6AEC1'
       />
       <AuthTextInput
         onChangeText={(password) => setUser({ ...user, password })}
-        placeholder="Password"
-        placeholderTextColor="#A6AEC1"
+        placeholder='Password'
+        placeholderTextColor='#A6AEC1'
         secureTextEntry={true}
       />
-      {authStore.getTime < 12 && (
+      {authStore.getTime <= 12 && (
         <AuthButton onPress={handleSubmitM}>
           <LinearGradient
             onPress={handleSubmitM}
@@ -179,7 +171,7 @@ const Signup = ({ navigation }) => {
         </AuthButton>
       )}
 
-      {authStore.getTime > 18 && (
+      {authStore.getTime >= 18 && (
         <AuthButton onPress={handleSubmitN}>
           <LinearGradient
             onPress={handleSubmitN}

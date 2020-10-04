@@ -12,14 +12,9 @@ import {
   FormButtonText,
   FormButton,
 } from "./styles";
-import {
-  Alert,
-  Modal,
-  StyleSheet,
-  Text,
-  TouchableHighlight,
-  View,
-} from "react-native";
+
+import { CancelModalButton, SaveModalButton, FormButtonText } from "./styels";
+import { View } from "react-native";
 import { Text, View } from "react-native";
 
 const CreateFolderModal = ({ navigation, route }) => {
@@ -45,15 +40,13 @@ const CreateFolderModal = ({ navigation, route }) => {
         placeholderTextColor='#A6AEC1'
       />
 
-      <View style={{ flexDirection: "row" }}>
-        <FormButton onPress={handleSubmit}>
-          <FormButtonText>Save Changes</FormButtonText>
-        </FormButton>
+      <SaveModalButton onPress={handleSubmit}>
+        <FormButtonText>Save Changes</FormButtonText>
+      </SaveModalButton>
 
-        <FormButton onPress={handleCancel}>
-          <FormButtonText>Cancel</FormButtonText>
-        </FormButton>
-      </View>
+      <CancelModalButton onPress={handleCancel}>
+        <FormButtonText>Hello</FormButtonText>
+      </CancelModalButton>
     </FormContainer>
   );
 };

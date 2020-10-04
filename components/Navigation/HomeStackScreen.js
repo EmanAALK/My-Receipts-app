@@ -13,11 +13,11 @@ import FolderList from "../FolderList";
 import Notifications from "../Notification/Notifications";
 import CreateReceiptForm from "../Forms/CreateReceiptForm";
 import UpdateFolderForm from "../Forms/UpdateFolderForm";
-import CreateFolderForm from "../Forms/CreateFolderForm";
 import ReceiptList from "../ReceiptList";
 import ReceiptDetail from "../ReceiptList/ReceiptDetail";
 import Calculation from "../Calculation";
 import Search from "../Search";
+import UpdateReceiptForm from "../Forms/UpdateReceiptForm";
 import ArchiveReceipt from "../ReceiptList/ArchiveReceipt";
 
 //Camera Feature
@@ -74,7 +74,16 @@ const HomeStackScreen = ({ navigation }) => (
       component={ReceiptDetail}
       options={{
         title: false,
-
+        headerRight: () => (
+          <Icon
+            style={{ paddingRight: 10 }}
+            name='md-arrow-back'
+            style={{ marginRight: 10 }}
+            size={25}
+            color={"#C2C2C2"}
+            onPress={() => navigation.goBack()}
+          ></Icon>
+        ),
         headerLeft: () => (
           <Icon.Button
             name='ios-menu'
@@ -95,7 +104,7 @@ const HomeStackScreen = ({ navigation }) => (
         title: false,
         headerRight: () => (
           <Icon
-            style={{ paddingRight: 10 }}
+            style={{ marginRight: 10 }}
             name='md-arrow-back'
             size={25}
             color='#E0E0E0'
@@ -121,8 +130,8 @@ const HomeStackScreen = ({ navigation }) => (
         title: false,
         headerRight: () => (
           <Icon
-            // style={{ paddingRight: 10 }}
             name='md-arrow-back'
+            style={{ marginRight: 10 }}
             size={25}
             color={iconsColor}
             backgroundColor='transparent'
@@ -148,7 +157,7 @@ const HomeStackScreen = ({ navigation }) => (
         title: false,
         headerRight: () => (
           <Icon
-            style={{ paddingRight: 10 }}
+            style={{ marginRight: 10 }}
             name='md-arrow-back'
             size={25}
             backgroundColor='transparent'
@@ -176,7 +185,7 @@ const HomeStackScreen = ({ navigation }) => (
         title: false,
         headerRight: () => (
           <Icon
-            style={{ paddingRight: 10 }}
+            style={{ marginRight: 10 }}
             name='md-arrow-back'
             size={25}
             color={iconsColor}
@@ -195,33 +204,7 @@ const HomeStackScreen = ({ navigation }) => (
         ),
       }}
     />
-    <HomeStack.Screen
-      name='CreateFolderForm'
-      component={CreateFolderForm}
-      options={{
-        title: false,
-        headerRight: () => (
-          <Icon
-            style={{ paddingRight: 10 }}
-            name='md-arrow-back'
-            size={25}
-            color={iconsColor}
-            backgroundColor='transparent'
-            onPress={() => navigation.goBack()}
-          ></Icon>
-        ),
-        headerLeft: () => (
-          <Icon.Button
-            name='ios-menu'
-            style={{ marginLeft: 2 }}
-            size={25}
-            color={iconsColor}
-            backgroundColor='transparent'
-            onPress={() => navigation.openDrawer()}
-          ></Icon.Button>
-        ),
-      }}
-    />
+
     <HomeStack.Screen
       name='ReceiptList'
       component={ReceiptList}
@@ -229,7 +212,7 @@ const HomeStackScreen = ({ navigation }) => (
         title: false,
         headerRight: () => (
           <Icon
-            style={{ paddingRight: 10 }}
+            style={{ marginRight: 10 }}
             name='md-arrow-back'
             size={25}
             color={iconsColor}
@@ -254,13 +237,21 @@ const HomeStackScreen = ({ navigation }) => (
       component={Calculation}
       options={{
         title: false,
-
+        headerRight: () => (
+          <Icon
+            style={{ marginRight: 10 }}
+            name='md-arrow-back'
+            size={25}
+            color={"#C2C2C2"}
+            onPress={() => navigation.goBack()}
+          ></Icon>
+        ),
         headerLeft: () => (
           <Icon.Button
             name='ios-menu'
             style={{ marginLeft: 2 }}
             size={25}
-            color={"#EBEBEB"}
+            color={"#C2C2C2"}
             backgroundColor='transparent'
             onPress={() => navigation.openDrawer()}
           ></Icon.Button>
@@ -275,10 +266,11 @@ const HomeStackScreen = ({ navigation }) => (
         title: false,
         headerRight: () => (
           <Icon
-            style={{ paddingRight: 10 }}
+            style={{ marginRight: 10 }}
             name='md-arrow-back'
+            style={{ marginRigh: 2 }}
             size={25}
-            color={"#EBEBEB"}
+            color={"#C2C2C2"}
             onPress={() => navigation.goBack()}
           ></Icon>
         ),
@@ -287,7 +279,7 @@ const HomeStackScreen = ({ navigation }) => (
             name='ios-menu'
             style={{ marginLeft: 2 }}
             size={25}
-            color={"#EBEBEB"}
+            color={"#C2C2C2"}
             backgroundColor='transparent'
             onPress={() => navigation.openDrawer()}
           ></Icon.Button>
@@ -302,7 +294,7 @@ const HomeStackScreen = ({ navigation }) => (
         title: false,
         headerRight: () => (
           <Icon
-            style={{ paddingRight: 10 }}
+            style={{ marginRight: 10 }}
             name='md-arrow-back'
             size={25}
             color={"#EBEBEB"}
@@ -329,7 +321,7 @@ const HomeStackScreen = ({ navigation }) => (
         title: false,
         headerRight: () => (
           <Icon
-            style={{ paddingRight: 10 }}
+            style={{ marginRight: 10 }}
             name='md-arrow-back'
             size={25}
             color={"#E0E0E0"}
@@ -355,7 +347,7 @@ const HomeStackScreen = ({ navigation }) => (
         title: false,
         headerRight: () => (
           <Icon
-            style={{ paddingRight: 10 }}
+            style={{ marginRight: 10 }}
             name='md-arrow-back'
             size={25}
             color='#fff'
@@ -380,7 +372,7 @@ const HomeStackScreen = ({ navigation }) => (
         title: false,
         headerRight: () => (
           <Icon
-            style={{ paddingRight: 10 }}
+            style={{ marginRight: 10 }}
             name='md-arrow-back'
             size={25}
             color={"#E0E0E0"}
@@ -391,6 +383,32 @@ const HomeStackScreen = ({ navigation }) => (
           <Icon.Button
             name='ios-menu'
             style={{ marginLeft: 2 }}
+            size={25}
+            color={"#E0E0E0"}
+            backgroundColor='transparent'
+            onPress={() => navigation.openDrawer()}
+          ></Icon.Button>
+        ),
+      }}
+    />
+
+    <HomeStack.Screen
+      name='UpdateReceiptForm'
+      component={UpdateReceiptForm}
+      options={{
+        title: false,
+        headerRight: () => (
+          <Icon
+            style={{ marginRight: 10 }}
+            name='md-arrow-back'
+            size={25}
+            color={"#E0E0E0"}
+            onPress={() => navigation.goBack()}
+          ></Icon>
+        ),
+        headerLeft: () => (
+          <Icon.Button
+            name='ios-menu'
             size={25}
             color={"#E0E0E0"}
             backgroundColor='transparent'

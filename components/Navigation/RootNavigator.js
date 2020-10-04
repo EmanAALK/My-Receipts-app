@@ -19,6 +19,7 @@ import NotificationStackscreen from "./NotificationStackscreen";
 import AddReceiptStackScreen from "./AddReceiptStackscreen";
 import receiptStore from "../../store/ReceiptStore";
 import SearchStackScreen from "./SearchStackscreen";
+import index from "../FolderList/index";
 //Icons
 import SimpleLineIcons from "react-native-vector-icons/SimpleLineIcons";
 import MaterialCommunityIcons from "react-native-vector-icons/MaterialCommunityIcons";
@@ -49,15 +50,14 @@ const TabScreen = observer(() => (
         title: "My Folders",
 
         tabBarIcon: ({ color }) => (
-          // <Icon name='ios-home' activeColor='#ffbf00' color={color} size={26} />
           <>
             <SimpleLineIcons
               name='home'
               activeColor='#ffbf00'
               color={color}
               size={23}
+              onPress={() => navigation.navigate("index")}
             />
-            {/* <Icon name="ios-home" color={"#C2C2C2"} size={26} /> */}
           </>
         ),
       }}
@@ -100,53 +100,31 @@ const TabScreen = observer(() => (
       }}
     />
 
-    {a === 1 ? (
-      <Tab.Screen
-        name='Notifications'
-        component={NotificationStackscreen}
-        options={{
-          backgroundColor: "white",
-          showLabel: "Reminders",
-          title: "Reminders",
-          tabBarIcon: ({ color }) => (
-            <>
+    <Tab.Screen
+      name='Notifications'
+      component={NotificationStackscreen}
+      options={{
+        backgroundColor: "white",
+        showLabel: "Reminders",
+        title: "Reminders",
+        tabBarIcon: ({ color }) => (
+          <>
+            {receiptStore.Badge && (
               <Badge
                 badgeStyle={{ marginLeft: 25 }}
                 value={receiptStore.totalExpiredReceipt}
                 status='error'
                 containerStyle={{ position: "absolute", top: -3, right: -12 }}
               />
-              <Ionicons
-                name='ios-notifications-outline'
-                color={color}
-                size={23}
-              />
-            </>
-          ),
-        }}
-      />
-    ) : (
-      <Tab.Screen
-        name='Notifications'
-        component={NotificationStackscreen}
-        options={{
-          backgroundColor: "white",
-          showLabel: false,
-          title: false,
-          tabBarIcon: ({ color }) => (
-            <Icon
-              // onPress={handleCancel}
-              name='ios-notifications'
-              color={"#C2C2C2"}
-              size={26}
-            />
-            <Icon name="ios-notifications" color={color} size={26} />
+            )}
+            <Icon name='ios-notifications-outline' color={color} size={26} />
           </>
         ),
       }}
     />
   </Tab.Navigator>
 ));
+
 const RootNavigator = () => {
   return (
     <>

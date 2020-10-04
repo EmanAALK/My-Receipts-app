@@ -7,3 +7,9 @@ export const PageTitle = styled.Text`
   margin-bottom: 10px;
   margin-left: 20px;
 `;
+
+export const BarStyle = styled.View`
+  margin-left: 28px;
+  width: 85%;
+  height: 15px;
+`;

@@ -1,16 +1,19 @@
 import React, { useState } from "react";
 import { observer } from "mobx-react";
 
-import { Text, View } from "native-base";
-
+//Stores
 import receiptStore from "../../store/ReceiptStore";
 import folderStore from "../../store/FolderStore";
 import authStore from "../../store/authStore";
-import DropDownPicker from "react-native-dropdown-picker";
+
+//Components
 import FolderItem from "./FolderItem";
-import { ScrollView } from "react-native";
+
+//Styling
+import { Text, View, Card, CardItem, Left, Right } from "native-base";
 import { Table, Row } from "react-native-table-component";
-// import { View } from "react-native-animatable";
+import { ScrollView } from "react-native";
+import DropDownPicker from "react-native-dropdown-picker";
 
 const CalculateByFolder = ({ navigation }) => {
   const [filter, setFilter] = useState([]);
@@ -18,22 +21,27 @@ const CalculateByFolder = ({ navigation }) => {
   const folder = folderStore.folders.filter(
     (folder) => folder.userId === authStore.user.id
   );
+
   let items = folder.map((item) => ({ label: item.name, value: item.id }));
   items.push({ label: "All Folders", value: 0 });
+
   let filterFolder = folder.filter((folder) =>
     filter.find((filter) => folder.id === filter)
   );
+
   if (filter.includes(0)) filterFolder = folder;
+
   const folderList = filterFolder.map((folder) => (
     <FolderItem folder={folder} key={folder.id} navigation={navigation} />
   ));
+  console.log(",,,,,folderList", folderList.length);
+
   const receipt = receiptStore.receipts.filter((receipt) =>
     filterFolder.find((filter) => receipt.folder.id === filter.id)
   );
-  const amount = receipt.map((receipt) => (total = total + receipt.price));
+  const amount = receipt.map((receipt) => (total = total + +receipt.price));
   return (
     <>
-      <Text style={{ marginTop: 0, marginLeft: 30 }}> Folder :</Text>
       <DropDownPicker
         multiple={true}
         items={items}
@@ -44,10 +52,10 @@ const CalculateByFolder = ({ navigation }) => {
         }}
         containerStyle={{
           height: 35,
-          marginTop: -25,
-          // marginLeft: 15,
-          width: 200,
-          marginBottom: 5,
+          marginTop: 25,
+          marginLeft: 38,
+          width: 220,
+          marginBottom: 20,
           alignSelf: "center",
         }}
         style={{
@@ -58,30 +66,27 @@ const CalculateByFolder = ({ navigation }) => {
           justifyContent: "flex-start",
         }}
         multiple={true}
-        multipleText="%d items have been selected."
+        multipleText='%d folder has been selected'
         dropDownStyle={{ backgroundColor: "#fafafa" }}
         onChangeItem={(item) => setFilter(item)}
       ></DropDownPicker>
 
       <ScrollView>
         {folderList}
-        {filter !== [] && (
-          <Table
-            borderStyle={{
-              borderWidth: 1,
-              borderColor: "lightgrey",
-            }}
-          >
-            <Row
-              data={["Total Amount", total]}
-              style={{
-                height: 30,
-                // backgroundColor: "#FFCC22 ",
-                marginTop: 20,
-              }}
-              textStyle={{ marginLeft: 30, color: "red" }}
-            />
-          </Table>
+        {filter.length !== 0 && (
+          <>
+            <Card style={{ width: 300, alignSelf: "center" }}>
+              <CardItem>
+                <Left>
+                  <Text style={{ color: "red" }}>Total Amount</Text>
+                </Left>
+
+                <Right>
+                  <Text style={{ color: "red" }}>{total}</Text>
+                </Right>
+              </CardItem>
+            </Card>
+          </>
         )}
       </ScrollView>
     </>

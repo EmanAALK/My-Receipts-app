@@ -7,6 +7,7 @@ class ReceiptStore {
   receipts = [];
   selectedReceipts = [];
   loading = true;
+  Badge = true;
 
   fetchReceipts = async () => {
     try {
@@ -89,6 +90,7 @@ class ReceiptStore {
 decorate(ReceiptStore, {
   receipts: observable,
   loading: observable,
+  Badge: observable,
   selectedReceipts: observable,
   totalExpiredReceipt: computed,
 });

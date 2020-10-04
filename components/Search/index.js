@@ -6,7 +6,7 @@ import folderStore from "../../store/FolderStore";
 import authStore from "../../store/authStore";
 import ReceiptStore from "../../store/ReceiptStore";
 // Styling
-import PageTitle from "./styles";
+import { PageTitle, BarStyle } from "./styles";
 import { View } from "react-native-animatable";
 import { ScrollView } from "react-native";
 import DatePicker from "react-native-datepicker";
@@ -14,6 +14,7 @@ import SearchByFolder from "./SearchByFolder";
 import SearchByReceipt from "./SearchByReceipt";
 import { Left, Right, Row, Content, Text } from "native-base";
 import DropDownPicker from "react-native-dropdown-picker";
+
 const Search = ({ navigation }) => {
   const [query, setQuery] = useState();
   const [filter, setFilter] = useState(0);
@@ -55,45 +56,48 @@ const Search = ({ navigation }) => {
         Search
       </Text>
       <View style={{ marginTop: 10 }}>
-        <View style={{ width: "74%", height: 15 }}>
-          {filter === 3 ? (
+        {filter === 3 ? (
+          <View style={{ width: "74%", height: 15 }}>
             <DatePicker
-              style={{ width: 255 }}
+              style={{ width: 280, height: 20 }}
               date={date}
               mode='date'
               placeholder='select date'
               format='YYYY-MM-DD'
               confirmBtnText='Confirm'
               cancelBtnText='Cancel'
-              confirmBtnText='search'
+              showIcon={false}
               customStyles={{
-                dateIcon: {
-                  position: "absolute",
-                  left: 0,
-                  top: 4,
-                  marginRight: 4,
-                  marginLeft: 0,
-                  borderColor: "#cea146",
-                },
                 dateInput: {
+                  height: 30,
+                  marginTop: -14,
+                  marginRight: 30,
                   marginLeft: 36,
+                  borderRadius: 4,
                 },
               }}
               onDateChange={(date) => {
                 return setDate(date);
               }}
             />
-          ) : (
-            <View style={{ width: "95%", height: 15 }}>
+          </View>
+        ) : (
+          <View style={{ width: "72%", height: 15 }}>
+            <BarStyle>
               <SearchBar
                 placeholder='Search'
                 platform='ios'
                 onChangeText={handleSearch}
                 value={query}
+                customStyles={{
+                  searchInput: {
+                    height: 40,
+                  },
+                }}
               />
-            </View>
-          )}
-        </View>
+            </BarStyle>
+          </View>
+        )}
         <DropDownPicker
           automaticallyAdjustContentInsets={false}
           style={{
@@ -108,13 +112,13 @@ const Search = ({ navigation }) => {
           containerStyle={{
             height: 32,
             marginTop: -18,
-            width: 100,
+            width: 85,
             marginLeft: "70%",
           }}
           itemStyle={{
             justifyContent: "flex-start",
           }}
-          dropDownStyle={{ backgroundColor: "#fafafa" }}
+          dropDownStyle={{ backgroundColor: "#ffffff" }}
           onChangeItem={(item) => setFilter(item.value)}
         />
         <ScrollView>

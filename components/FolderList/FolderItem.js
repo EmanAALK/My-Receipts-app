@@ -86,7 +86,7 @@ const FolderItem = ({ folder, navigation, multipul }) => {
   const maxAlert = () => {
     {
       !folder.pin
-        ? Alert.alert("Alert", "You can pin 2 folders only", [
+        ? Alert.alert("Alert", "You can pin two folders only", [
             {
               text: "Ok",
               style: "ok",
@@ -124,14 +124,14 @@ const FolderItem = ({ folder, navigation, multipul }) => {
               name='folder1'
               size={20}
               color='#ffbf00'
-              style={{ marginLeft: 10 }}
+              style={{ marginLeft: -5 }}
             />
           ) : (
             <AntDesign
               name='folder1'
               size={20}
               color='#ffbf00'
-              style={{ marginLeft: 10 }}
+              style={{ marginLeft: -5 }}
             />
           )}
           {edit ? (
@@ -169,19 +169,23 @@ const FolderItem = ({ folder, navigation, multipul }) => {
 
         {folder.pin && (
           <Icon
+            style={{ marginTop: -35, marginRight: -14 }}
             type='pushpin'
             name='pushpino'
             size={17}
-            color={color}
+            color={"gray"}
             onPress={handleChange}
           />
         )}
         {!folder.defaultFolder && (
           <Menu
             ref={setMenuRef}
-            style={{ width: 90, marginLeft: 15 }}
+            style={{ width: 90, marginLeft: 15, marginTop: 22 }}
             button={
-              <Text style={{ fontWeight: "bold" }} onPress={showMenu}>
+              <Text
+                style={{ fontWeight: "bold", marginRight: -14 }}
+                onPress={showMenu}
+              >
                 ...
               </Text>
             }

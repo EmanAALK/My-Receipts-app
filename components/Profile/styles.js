@@ -26,8 +26,8 @@ export const AuthTitle = styled.Text`
   color: black;
   font-size: 18px;
   border-bottom-color: black;
-  margin-top: 0px;
-  margin-bottom: 50px;
+  margin-top: -18px;
+  margin-bottom: 60px;
 `;
 export const AuthTextInput = styled.TextInput`
   align-self: stretch;
@@ -41,13 +41,26 @@ export const AuthTextInput = styled.TextInput`
   margin-top: 8px;
 `;
 export const AuthButton = styled.TouchableOpacity`
-  padding: 10px;
+  padding-top: 9px;
+  padding-bottom: 9px;
   background-color: #fff;
   border: lightgray;
-  border-radius: 25px;
-  width: 150px;
-  margin-top: 40px;
+  border-radius: 13px;
+  width: 138px;
+  margin-top: 48px;
   margin-right: 2px;
+  align-items: center;
+`;
+
+export const EditAuthButton = styled.TouchableOpacity`
+  padding-top: 9px;
+  padding-bottom: 9px;
+  background-color: #fff;
+  border: lightgray;
+  border-radius: 13px;
+  width: 138px;
+  margin-top: 48px;
+  margin-right: 10px;
   align-items: center;
 `;
 
@@ -75,4 +88,16 @@ export const LabelTitle = styled.Text`
   border-bottom-color: black;
   padding-left: 50px;
   /* width: 100; */
+`;
+
+export const BottomLine = styled.View`
+  border-bottom-width: 0.25px;
+  width: 300;
+  border-bottom-color: black;
+  /* padding-bottom: 20px; */
+  margin-top: 1px;
+  margin-bottom: 28px;
+  margin-right: 4px;
+  margin-left: 0px;
+  align-content: center;
 `;

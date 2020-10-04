@@ -15,15 +15,17 @@ import {
   AuthButton,
   AuthButtonText,
   AuthOther,
+  MyTitle,
 } from "./styles";
 import Feather from "react-native-vector-icons/Feather";
 import { TouchableOpacity } from "react-native-gesture-handler";
 import { LinearGradient } from "expo-linear-gradient";
 import * as Animatable from "react-native-animatable";
 import { Text } from "native-base";
-import { Alert } from "react-native";
+import { Alert, Image } from "react-native";
 import receiptStore from "../../store/ReceiptStore";
 import { Button } from "react-native-paper";
+import Logo from "../../assets/logo2.png";
 
 const Signin = ({ navigation }) => {
   const [user, setUser] = useState({
@@ -107,16 +109,16 @@ const Signin = ({ navigation }) => {
         "Good Afternoon," + " " + res + " " + " How Are You Feeling Today?",
         [
           {
-            text: "Skip",
-            style: "Skip",
-          },
-          {
             text: "Happy",
             onPress: GoodAlert,
           },
           {
             text: "Sad",
             onPress: BadAlert,
+          },
+          {
+            text: "Skip",
+            style: "Skip",
           },
         ]
       );
@@ -125,7 +127,7 @@ const Signin = ({ navigation }) => {
     }
   };
   const BadAlert = () => {
-    Alert.alert("Mood", "Hope it get better", [
+    Alert.alert("Mood", "Hope you get better", [
       {
         text: "ok",
         style: "ok",
@@ -142,29 +144,33 @@ const Signin = ({ navigation }) => {
   };
   return (
     <AuthContainer>
-      <AuthTitle>Welcome!</AuthTitle>
+      <Image
+        source={Logo}
+        style={{ width: 140, height: 150, marginBottom: 5 }}
+      />
+      <MyTitle>My Receipt</MyTitle>
       <AuthTextInput
         onChangeText={(username) => setUser({ ...user, username })}
-        placeholder="Username"
-        placeholderTextColor="#A6AEC1"
-        autoCapitalize="none"
+        placeholder='Username'
+        placeholderTextColor='#A6AEC1'
+        autoCapitalize='none'
         value={user.username}
       />
       <AuthTextInput
         onChangeText={(password) => setUser({ ...user, password })}
-        placeholder="Password"
-        placeholderTextColor="#A6AEC1"
+        placeholder='Password'
+        placeholderTextColor='#A6AEC1'
         secureTextEntry={showPass ? false : true}
         value={user.password}
       />
       <TouchableOpacity onPress={toggleShowPass}>
         {showPass ? (
-          <Feather name="eye" color="grey" size={15} />
+          <Feather name='eye' color='grey' size={15} />
         ) : (
-          <Feather name="eye-off" color="grey" size={15} />
+          <Feather name='eye-off' color='grey' size={15} />
         )}
       </TouchableOpacity>
-      {authStore.getTime < 12 && (
+      {authStore.getTime <= 12 && (
         <AuthButton onPress={handleSubmitM}>
           <LinearGradient
             onPress={handleSubmitM}
@@ -204,7 +210,7 @@ const Signin = ({ navigation }) => {
           </LinearGradient>
         </AuthButton>
       )}
-      {authStore.getTime > 18 && (
+      {authStore.getTime >= 18 && (
         <AuthButton onPress={handleSubmitN}>
           <LinearGradient
             onPress={handleSubmitN}
@@ -226,7 +232,7 @@ const Signin = ({ navigation }) => {
       )}
       {/* <Text style={{ color: "green" }}> forget password </Text> */}
       {!isValidUser && (
-        <Animatable.View animation="fadeInLeft" duration={400}>
+        <Animatable.View animation='fadeInLeft' duration={400}>
           <Text style={{ color: "red" }}>Invalid username or password </Text>
         </Animatable.View>
       )}
